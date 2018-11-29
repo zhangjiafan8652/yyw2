@@ -132,20 +132,23 @@ public class Yayapaymain_jf extends BaseView {
 		rl_mlDaijinjuan = mThisview.getRl_mDaijinjuan();
 		
 		
-		//如果是 千果sdk  隐藏 代金券和Y币支付
-		
-		if (CommonData.sdkid.contains("qianqi")) {
-			
-		}else {
-			rl_mlYaya.setVisibility(View.GONE);
-			rl_mlDaijinjuan.setVisibility(View.GONE);
-		}
 		
 		if (ViewConstants.ISKGAME) {
 			rl_mlYaya.setVisibility(View.VISIBLE);
 		}else{
 			rl_mlYaya.setVisibility(View.GONE);
 		}
+		
+		
+		//如果是 千果sdk  隐藏 代金券和Y币支付
+		
+				if (CommonData.sdkid.contains("qianqi")) {
+					
+				}else {
+					rl_mlYaya.setVisibility(View.GONE);
+					rl_mlDaijinjuan.setVisibility(View.GONE);
+				}
+				
 		
 		// 微信插件支付
 	//	rl_mWxpluin = mThisview.getRl_mWxpluin();
