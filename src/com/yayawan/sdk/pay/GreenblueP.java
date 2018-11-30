@@ -162,11 +162,15 @@ public class GreenblueP {
 								return true;
 							} catch (Exception e) {
 								e.printStackTrace();
+								return true;
 							}
 						} else if (url.contains("success=0")) {
 							onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
-						} 
-						return super.shouldOverrideUrlLoading(view, url);
+							return true;
+						} else {
+							return super.shouldOverrideUrlLoading(view, url);
+						}
+						
 					}
 
 					@Override

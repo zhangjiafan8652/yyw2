@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.bean.Question;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
 import com.yayawan.sdk.utils.Basedialogview;
@@ -165,7 +166,8 @@ public class Exit_dialog extends Basedialogview {
 		Yayalog.loger("ni..."+html);
 		//lv_helpcontent.loadUrl("http://danjiyou.duapp.com/Home/Blog/index");
 		settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
-		lv_helpcontent.loadUrl("https://d.apps.yayawan.com/static/sdk/exit.html");
+		
+		lv_helpcontent.loadUrl(CommonData.exiturl);
 		//lv_helpcontent.loadData(html, "text/html; charset=UTF-8", null);
 	}
 	
