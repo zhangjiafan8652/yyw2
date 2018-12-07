@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
@@ -341,7 +342,8 @@ public class YYprotocol_ho_dialog extends Basedialogview {
 			}
 
 		});
-		mContent.loadUrl("http://www.yayawan.com/wap/agreement");// 加载协议页面
+		
+		mContent.loadUrl(CommonData.YONGHUXIEYIURL);// 加载协议页面
 
 	}
 }

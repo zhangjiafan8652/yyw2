@@ -42,8 +42,7 @@ public class GreenblueP {
 	
 	public static boolean isselectxiaomipay=false;
 	
-	private static final int WXPAY_NEWFIRSTRESULT = 35;// x宝通新支付方式
-	private static final int NETERROR = 18;
+
 	public Activity mContext;
 	public Activity mActivity;
 	private KgameSdkPaymentCallback mPaymentCallback;
@@ -67,152 +66,8 @@ public class GreenblueP {
 		// mContext
 	}
 
-	@SuppressLint("HandlerLeak")
-	private Handler mHandler = new Handler() {
 
-		@SuppressLint("Registered")
-		@Override
-		public void handleMessage(Message msg) {
-
-			switch (msg.what) {
-
-			case WXPAY_NEWFIRSTRESULT:
-
-				// TODO
-				Utilsjf.stopDialog();
-				if (mWFirstResult.success == 0) {
-
-					String greenpaction = mWFirstResult.action;
-					AgentApp.mPayOrder.id = mWFirstResult.params
-							.get("sdcustomno");
-					// 进行支付
-					PullWX(greenpaction);
-
-				} else {
-					// onError(0);
-				}
-				break;
-
-			case NETERROR:
-				 Utilsjf.stopDialog();
-				Toast.makeText(mContext, "网络连接错误,请重新连接", Toast.LENGTH_SHORT)
-						.show();
-				mActivity.finish();
-
-				break;
-
-			default:
-				break;
-			}
-		}
-
-	};
-
-	/**
-	 * 调起微信方法
-	 * 
-	 * @param pay_str
-	 *            调起串
-	 */
-
-	private void PullWX(String pay_str) {
-		// Yayalog.loger(pay_str);
-		if (isGreenAvilible()) {
-			try {
-				System.out.println(pay_str);
-
-				GreenP_dialog greenp_dialog = new GreenP_dialog(
-						mActivity);
-				greenp_dialog.dialogShow();
-				greenp_dialog.dialog.setOnDismissListener(new OnDismissListener() {
-					
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						// TODO Auto-generated method stub
-						mActivity.finish();
-					}
-				});
-				WebView webView = greenp_dialog.getWebview();
-				webView.loadUrl(pay_str);
-				webView.setWebViewClient(new WebViewClient() {
-
-					@Override
-					public boolean shouldOverrideUrlLoading(WebView view,
-							String url) {
-						Yayalog.loger("重复的url:" + url);
-
-						if (url.startsWith("weixin://wap/pay?")) {
-							Intent intent = new Intent();
-							intent.setAction(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse(url));
-							mActivity.startActivity(intent);
-
-							return true;
-						} else if (parseScheme(url)) {
-							try {
-
-								Intent intent;
-								intent = Intent.parseUri(url,
-										Intent.URI_INTENT_SCHEME);
-								intent.addCategory("android.intent.category.BROWSABLE");
-								intent.setComponent(null);
-								// intent.setSelector(null);
-								mActivity.startActivity(intent);
-								//
-								return true;
-							} catch (Exception e) {
-								e.printStackTrace();
-								return true;
-							}
-						} else if (url.contains("success=0")) {
-							onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
-							return true;
-						} else {
-							return super.shouldOverrideUrlLoading(view, url);
-						}
-						
-					}
-
-					@Override
-					public void onPageStarted(WebView view, String url,
-							Bitmap favicon) {
-						// TODO Auto-generated method stub
-						// Yayalog.loger("onPageStarted重复的url:"+url);
-						super.onPageStarted(view, url, favicon);
-					}
-
-					public void onPageFinished(WebView view, String url) {
-						// Yayalog.loger("onPageFinished重复的url:"+url);
-					};
-
-				});
-
-			} catch (Exception e) {
-				System.out.println(e.toString());
-				mActivity.runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Toast.makeText(mActivity.getApplicationContext(),
-								"网络出错，请重新支付", Toast.LENGTH_LONG).show();
-					}
-				});
-			}
-		} else {
-			mActivity.runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					Toast.makeText(mActivity.getApplicationContext(), "微信未安装",
-							Toast.LENGTH_LONG).show();
-				}
-			});
-
-		}
-
-	}
+	
 
 	// 是否安装微信
 	public boolean isGreenAvilible() {
@@ -272,6 +127,7 @@ public class GreenblueP {
 		rps.addBodyParameter("token", AgentApp.mUser.token);
 		rps.addBodyParameter("amount", DgameSdk.mPayOrder.money + "");
 		rps.addBodyParameter("pay_type", paytype + "");
+		rps.addBodyParameter("appversion", 100 + "");
 		rps.addBodyParameter("ext", AgentApp.mPayOrder.ext);
 		rps.addBodyParameter("orderid", AgentApp.mPayOrder.orderId);
 		
@@ -374,7 +230,7 @@ public class GreenblueP {
 						
 						@Override
 						public boolean shouldOverrideUrlLoading(WebView view, String url) {
-							Yayalog.loger("重复的url:"+url);
+							Yayalog.loger("greenblenurl:"+url);
 							
 							if (url.startsWith("weixin://wap/pay?")) {
 			                    try {
@@ -386,6 +242,7 @@ public class GreenblueP {
 									// TODO Auto-generated catch block
 									Yayalog.loger("未安装微信");
 									e.printStackTrace();
+									 return true;
 								}
 
 			                    return true;
@@ -403,13 +260,15 @@ public class GreenblueP {
 			                        return true;
 			                    } catch (Exception e) {
 			                        e.printStackTrace();
+			                        return true;
 			                    }
 			                }else if (url.contains("paysuccess")) {
 			                	onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
+			                	 return true;
 			                }else {
-			                	view.loadUrl(url);
+			                	return super.shouldOverrideUrlLoading(view, url);
 							}
-						    return super.shouldOverrideUrlLoading(view, url);
+						   
 						    }
 						
 						@Override
