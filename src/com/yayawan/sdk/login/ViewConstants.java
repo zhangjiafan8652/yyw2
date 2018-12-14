@@ -14,12 +14,13 @@ import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
 
+//	5.6 统一了千果千其代码
 //	5.5 修改了调试模式  增加了两个适配接口
 //	5.0 加入空白sdk  在配置文件sdktype中配置
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "5.5";
+	public static final String SDKVERSION = "5.6";
 	public static final int LOGIN_VIEW = 1;
 	public static final int REGISTER_VIEW = 2;
 	public static final int REGISTERACCOUNT_VIEW = 3;
@@ -64,7 +65,7 @@ public class ViewConstants {
 	
 	public static String WEIBOLOGINURL = baseurl + "/web/oauth/?type=sina&forward_url=sdk";//第三方微博登陆
 	
-	public static String QQLOGINURL = baseurl + "/web/oauth/?type=testqq&forward_url=sdk";//第三方qq登陆
+	public static String QQLOGINURL = baseurl + "/web/oauth/?type=qq&forward_url=sdk";//第三方qq登陆
 	
 	//https://rest.yayawan.com/web/oauth/?type=testqq&forward_url=sdk
 	

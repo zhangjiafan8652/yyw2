@@ -625,6 +625,8 @@ public class Login_ho_dialog extends Basedialogview {
 		
 		if (CommonData.sdkid.contains("qianqi")) {
 			
+			tv_QQlogin.setVisibility(View.GONE);
+		
 		}else {
 			tv_QQlogin.setVisibility(View.GONE);
 		}
@@ -633,9 +635,9 @@ public class Login_ho_dialog extends Basedialogview {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				iv_qqlogin.setImageDrawable(GetAssetsutils
+			/*	iv_qqlogin.setImageDrawable(GetAssetsutils
 						.getDrawableFromAssetsFile("yaya_qqlogin.png",
-								mActivity));
+								mActivity));*/
 				// Log.e("舍不得离我而去", "111");
 				Intent intent = new Intent(mActivity,
 						BaseLogin_Activity.class);
