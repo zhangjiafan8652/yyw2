@@ -13,7 +13,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -24,6 +26,7 @@ import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.Sputils;
 import com.yayawan.utils.Yayalog;
 
 public class Announcement_dialog extends Basedialogview {
@@ -34,6 +37,9 @@ public class Announcement_dialog extends Basedialogview {
 	private ProgressBar pb_mPb;
 	private ArrayList<Question> mQuestionList;
 	private String html;
+	private ImageButton ib_mAgreedbox;
+	private ImageButton ib_mNotAgreedbox;
+	private ImageButton ib_mClosebutton;
 	protected static final int SHOWCONTENT = 3;
 
 	public Announcement_dialog(Activity activity) {
@@ -49,7 +55,7 @@ public class Announcement_dialog extends Basedialogview {
 	}
 
 	@Override
-	public void createDialog(Activity mActivity) {
+	public void createDialog(final Activity mActivity) {
 		dialog = new Dialog(mContext);
 
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -79,16 +85,16 @@ public class Announcement_dialog extends Basedialogview {
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
 		machineFactory.MachineView(baselin, with, height, "LinearLayout");
-		baselin.setBackgroundColor(Color.BLUE);
+		baselin.setBackgroundColor(Color.TRANSPARENT);
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 
 		// 中间内容
-		LinearLayout ll_content = new LinearLayout(mContext);
+		RelativeLayout ll_content = new RelativeLayout(mContext);
 		machineFactory.MachineView(ll_content, with, height, mLinearLayout, 2,
 				0);
 		ll_content.setBackgroundColor(Color.WHITE);
 		ll_content.setGravity(Gravity.CENTER_HORIZONTAL);
-		ll_content.setOrientation(LinearLayout.VERTICAL);
+		//ll_content.setOrientation(LinearLayout.VERTICAL);
 
 		// 标题栏
 		RelativeLayout rl_title = new RelativeLayout(mContext);
@@ -142,11 +148,99 @@ public class Announcement_dialog extends Basedialogview {
 				0, mLinearLayout, 0, 0, 0, 0, 100);
 		
 
+		
+		// 下次不提示
+		LinearLayout ll_clause = new LinearLayout(mActivity);
+		machineFactory.MachineView(ll_clause, MATCH_PARENT, 40, mLinearLayout,
+				0, 0);
+		ll_clause.setGravity(Gravity.CENTER_VERTICAL);
+		
+		ll_clause.setBackgroundColor(Color.parseColor("#11FFFFFF"));
+		//ll_clause.setBackground(null);
+
+		//new ImageView(context)
+		
+		// 关闭按钮
+				ib_mClosebutton = new ImageButton(mActivity);
+				machineFactory.MachineView(ib_mClosebutton, 40, 40, mLinearLayout, 2, 5);
+				//ib_mClosebutton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+				ib_mClosebutton.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+						"yaya_xsishi.png", mActivity));
+				ib_mClosebutton.setBackgroundDrawable(null);
+			
+				ib_mClosebutton.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
+		
+		
+		// 不再提示
+		ib_mAgreedbox = new ImageButton(mActivity);
+		machineFactory.MachineView(ib_mAgreedbox,  38, 38, 0, mLinearLayout, 10,
+				5,0,0, 0);
+		ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+				"yaya_checkedbox.png", mActivity));
+		ib_mAgreedbox.setBackgroundDrawable(null);
+		ib_mAgreedbox.setVisibility(View.GONE);
+		Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);
+		//ib_mAgreedbox.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+		// 不再提示
+		ib_mNotAgreedbox = new ImageButton(mActivity);
+		machineFactory.MachineView(ib_mNotAgreedbox, 38, 38, 0, mLinearLayout, 10,
+				5,0,0, 0);
+		ib_mNotAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+				"yaya_checkbox.png", mActivity));
+		ib_mNotAgreedbox.setBackgroundDrawable(null);
+		//ib_mNotAgreedbox.setVisibility(View.GONE);
+
+		TextView tv_agree = new TextView(mActivity);
+		machineFactory.MachineTextView(tv_agree, WRAP_CONTENT, MATCH_PARENT, 0,
+				"不再提示", 22, mLinearLayout, 4, 0, 0, 2);
+		tv_agree.setTextColor(Color.parseColor("#b4b4b4"));
+		tv_agree.setGravity(Gravity.CENTER_VERTICAL);
+		
+		// TODO
+		ll_clause.addView(ib_mClosebutton);
+		ll_clause.addView(ib_mAgreedbox);
+		ll_clause.addView(ib_mNotAgreedbox);
+		ll_clause.addView(tv_agree);
+		ib_mAgreedbox.setClickable(true);
+		ib_mAgreedbox.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ib_mAgreedbox.setVisibility(View.GONE);
+				ib_mNotAgreedbox.setVisibility(View.VISIBLE);
+				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 0, mActivity);
+			}
+		});
+		ib_mNotAgreedbox.setClickable(true);
+		ib_mNotAgreedbox.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ib_mNotAgreedbox.setVisibility(View.GONE);
+				ib_mAgreedbox.setVisibility(View.VISIBLE);
+				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);
+			}
+		});
+		
+		
+		
+		
 		//ll_content.addView(rl_title);
-		ll_content.addView(lv_helpcontent);
 		ll_content.addView(pb_mPb);
+		ll_content.addView(lv_helpcontent);
+		
+		ll_content.addView(ll_clause);
 
 		// baselin.addView(rl_title);
+		//baselin.addView(ll_clause);
 		baselin.addView(ll_content);
 
 		dialog.setContentView(baselin);

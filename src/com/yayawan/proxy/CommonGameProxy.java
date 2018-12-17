@@ -291,11 +291,11 @@ public class CommonGameProxy implements YYWGameProxy {
 		requestParams.addBodyParameter("token", YYWMain.mUser.yywtoken);
 		requestParams.addBodyParameter("app_ver", DeviceUtil.getVersionCode(paramActivity));
 		requestParams.addBodyParameter("role_level", templevel+"");
-		System.out.println("app_id"+DeviceUtil.getAppid(paramActivity));
+		/*System.out.println("app_id"+DeviceUtil.getAppid(paramActivity));
 		System.out.println("uid"+YYWMain.mUser.yywuid);
 		System.out.println("app_ver"+DeviceUtil.getVersionCode(paramActivity));
 		System.out.println("token"+YYWMain.mUser.yywtoken);
-		System.out.println("role_level"+templevel);
+		System.out.println("role_level"+templevel);*/
 		httpUtils.send(HttpMethod.POST, ViewConstants.paytype,requestParams, new RequestCallBack<String>() {
 
 			@Override

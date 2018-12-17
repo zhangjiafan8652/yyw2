@@ -14,19 +14,23 @@ import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
 
+//	5.7 丫丫玩盒子公告延迟3分钟显示
 //	5.6 统一了千果千其代码
 //	5.5 修改了调试模式  增加了两个适配接口
 //	5.0 加入空白sdk  在配置文件sdktype中配置
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "5.6";
+	public static final String SDKVERSION = "5.7";
 	public static final int LOGIN_VIEW = 1;
 	public static final int REGISTER_VIEW = 2;
 	public static final int REGISTERACCOUNT_VIEW = 3;
 	public static final int WEIBOLOGIN_VIEW = 4;
 	public static final int QQLOGIN_VIEW = 5;
 	public static final int YAYAPAYMAIN = 6;
+	
+	public static final String SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE = "isviewyayawandownloadnotice";
+	
 	public static boolean ISKGAME = false;
 	public static String  dbpath = CommonData.Dbpath;
 
