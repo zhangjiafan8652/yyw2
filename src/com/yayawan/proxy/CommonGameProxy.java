@@ -5,7 +5,27 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
+import android.view.ActionMode;
+import android.view.GestureDetector;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ActionMode.Callback;
+import android.view.View.OnTouchListener;
+import android.view.WindowManager.LayoutParams;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.ViewGroup;
+import android.view.Window;
 
+import com.lidroid.jxutils.HttpUtils;
+import com.lidroid.jxutils.exception.HttpException;
+import com.lidroid.jxutils.http.RequestParams;
+import com.lidroid.jxutils.http.ResponseInfo;
+import com.lidroid.jxutils.http.callback.RequestCallBack;
+import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.callback.YYWAnimCallBack;
 import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWLoginHandleCallback;
@@ -22,23 +42,15 @@ import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.implyy.ChargerImplyylianhe;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.login.ViewConstants;
-import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
 import com.yayawan.utils.DeviceUtil;
-import com.yayawan.utils.GameTestUtils;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.JSONUtil;
 import com.yayawan.utils.Sputils;
 import com.yayawan.utils.Yayalog;
-import com.lidroid.jxutils.HttpUtils;
-import com.lidroid.jxutils.exception.HttpException;
-import com.lidroid.jxutils.http.RequestParams;
-import com.lidroid.jxutils.http.ResponseInfo;
-import com.lidroid.jxutils.http.callback.RequestCallBack;
-import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 
 public class CommonGameProxy implements YYWGameProxy {
 
@@ -291,11 +303,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		requestParams.addBodyParameter("token", YYWMain.mUser.yywtoken);
 		requestParams.addBodyParameter("app_ver", DeviceUtil.getVersionCode(paramActivity));
 		requestParams.addBodyParameter("role_level", templevel+"");
-		/*System.out.println("app_id"+DeviceUtil.getAppid(paramActivity));
-		System.out.println("uid"+YYWMain.mUser.yywuid);
-		System.out.println("app_ver"+DeviceUtil.getVersionCode(paramActivity));
-		System.out.println("token"+YYWMain.mUser.yywtoken);
-		System.out.println("role_level"+templevel);*/
+		
 		httpUtils.send(HttpMethod.POST, ViewConstants.paytype,requestParams, new RequestCallBack<String>() {
 
 			@Override
@@ -435,6 +443,10 @@ public class CommonGameProxy implements YYWGameProxy {
 	
 		
 		mActivity = paramActivity;
+		
+		
+		//recordPoint(paramActivity);
+		
 		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));//设置是否打log
 		System.out.println("是否可以打印yayalog："+Yayalog.canlog);
 		
@@ -517,8 +529,8 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void initSdk(Activity paramActivity) {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("initSdk");
-		// TODO Auto-generated method stub
-		// Class.forName("ActivityStubImpl").
+
+		
 		// 为了兼容老sdk判断是否有初始化方法再执行
 		this.mStub.initSdk(paramActivity);
 	}
@@ -574,6 +586,10 @@ public class CommonGameProxy implements YYWGameProxy {
 		this.mStub.onRequestPermissionsResult(requestCode,permissions,grantResults);
 	}
 
-	
+	 public void onTouchEvent(MotionEvent event){
+
+		 Yayalog.loger("按下了"+event.getX());
+		
+	 }
 	
 }

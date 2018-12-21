@@ -216,7 +216,7 @@ public class Announcement_dialog extends Basedialogview {
 			public void onClick(View v) {
 				ib_mAgreedbox.setVisibility(View.GONE);
 				ib_mNotAgreedbox.setVisibility(View.VISIBLE);
-				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 0, mActivity);
+				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);
 			}
 		});
 		ib_mNotAgreedbox.setClickable(true);
@@ -226,7 +226,7 @@ public class Announcement_dialog extends Basedialogview {
 			public void onClick(View v) {
 				ib_mNotAgreedbox.setVisibility(View.GONE);
 				ib_mAgreedbox.setVisibility(View.VISIBLE);
-				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);
+				Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 0, mActivity);
 			}
 		});
 		
