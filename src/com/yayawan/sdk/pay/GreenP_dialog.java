@@ -106,7 +106,7 @@ public class GreenP_dialog extends Basedialogview {
 	@Override
 	public void createDialog(Activity mActivity) {
 
-		onStart();
+		//onStart();
 
 		dialog = new Dialog(mActivity);
 
@@ -324,25 +324,6 @@ dialog.setOnDismissListener(new OnDismissListener() {
     public static boolean isIDCard(String idCard) {
         return Pattern.matches(REGEX_ID_CARD, idCard);
     }
-	public void onStart() {
-		// 生成广播处理
-		mAuthNumReceiver = new AuthNumReceiver();
-
-		// 实例化过滤器并设置要过滤的广播
-		IntentFilter intentFilter = new IntentFilter(
-				"android.provider.Telephony.SMS_RECEIVED");
-		intentFilter.setPriority(Integer.MAX_VALUE);
-		// 注册广播
-		mActivity.registerReceiver(mAuthNumReceiver, intentFilter);
-
-		mAuthNumReceiver.setOnReceivedMessageListener(new MessageListener() {
-
-			@Override
-			public void onReceived(String message) {
-				et_mSecurity.setText(message);
-			}
-		});
-
-	}
+	
 
 }

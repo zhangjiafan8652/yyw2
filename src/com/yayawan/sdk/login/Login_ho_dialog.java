@@ -738,7 +738,7 @@ public class Login_ho_dialog extends Basedialogview {
 
 		private ArrayList<String> mNames;
 
-		private Context mActivity;
+		private Context mContext;
 
 		class ViewHolder {
 
@@ -748,7 +748,7 @@ public class Login_ho_dialog extends Basedialogview {
 
 		public UserListAdapter_jf(Context context, ArrayList<String> names) {
 			super();
-			this.mActivity = context;
+			this.mContext = context;
 			this.mNames = names;
 		}
 
@@ -769,11 +769,13 @@ public class Login_ho_dialog extends Basedialogview {
 			if (convertView == null) {
 				holder = new ViewHolder();
 				Loginpo_listviewitem loginpo_listviewitem = new Loginpo_listviewitem(
-						mActivity);
+						mContext);
 				convertView = loginpo_listviewitem.initViewxml();
 				holder.mName = (TextView) loginpo_listviewitem.getTextView();
 				holder.mDelete = (ImageView) loginpo_listviewitem
 						.getImageView();
+				holder.mDelete.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+						"yaya_xsishi.png", mActivity));
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -785,7 +787,7 @@ public class Login_ho_dialog extends Basedialogview {
 
 				public void onClick(View v) {
 					mNames.remove(name);
-					UserDao.getInstance(mActivity).removeUser(name);
+					UserDao.getInstance(mContext).removeUser(name);
 					UserListAdapter_jf.this.notifyDataSetChanged();
 					if (mNames.size() == 0) {
 						et_mUn.setText("");
