@@ -414,7 +414,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName, roleCTime, ext);
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("setData"+ext+":"+YYWMain.mRole.toString());
-		DgameSdk.setRoleData(paramActivity, roleId, roleName, roleLevel, zoneId, zoneName,YYWMain.mUser.yywtoken,YYWMain.mUser.yywuid);
+		
 		this.mUserManager.setData(paramActivity, roleId, roleName, roleLevel,
 				zoneId, zoneName, roleCTime, ext);
 

@@ -363,6 +363,7 @@ public class DgameSdk {
 				}). create();
 
 		dialog.show();
+		
 	}
 	/**
 	 * 退出登录

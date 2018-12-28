@@ -48,6 +48,8 @@ public class LoginImpl implements YYWLoginer {
 			                    yywUser.token = user.token;
 			                    yywUser.userName = user.userName;
 			                    YYWMain.mUser=yywUser;
+			                    YYWMain.mUser.token=user.token;
+			                    Yayalog.loger("dgame登陆成功："+YYWMain.mUser.token+"  USER:"+user.token+"yywuser："+yywUser.token);
 			                    YYWMain.mUserCallBack.onLoginSuccess(yywUser, "success");
 			                    Handle.login_handler(paramActivity, yywUser.uid,  yywUser.userName);
 			                }

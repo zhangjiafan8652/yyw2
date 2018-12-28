@@ -92,6 +92,10 @@ public class GameApitest {
 	 */
 	public void sendTest(String type) {
 
+		if (!YYcontants.ISDEBUG) {
+			return;
+		}
+		
 		if (type.equals("YYApplicationoncreate")) {
 			
 			
