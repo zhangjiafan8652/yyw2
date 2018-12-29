@@ -50,7 +50,7 @@ public class UserManagerImpl implements YYWUserManager {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				DgameSdk.ExitgameShowDialog(paramActivity, new KgameSdkCallback() {
+				DgameSdk.Exitgame(paramActivity, new KgameSdkCallback() {
 
 					@Override
 					public void onSuccess(User paramUser, int paramInt) {
