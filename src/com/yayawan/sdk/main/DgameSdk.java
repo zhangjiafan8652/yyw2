@@ -340,6 +340,11 @@ public class DgameSdk {
 	 */
 	public static void ExitgameShowDialog(Activity activitiy, final KgameSdkCallback onexit) {
 
+		if (DeviceUtil.isDebug(activitiy)) {
+			Exitgame(activitiy, onexit);
+			return;
+		}
+		
 		Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
 
 		.setMessage("是否退出游戏？")

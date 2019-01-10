@@ -1,6 +1,7 @@
 package com.yayawan.sdk.pay;
 
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -455,6 +456,11 @@ mActivity.runOnUiThread(new Runnable() {
 		}
 		int err_code=jsonstr.optInt("err_code");
 		String pay_str=jsonstr.optString("url");
+		
+		
+        
+		
+	
 		if(err_code==0){
 			try {
 				System.out.println(pay_str);
@@ -499,7 +505,7 @@ mActivity.runOnUiThread(new Runnable() {
 		                    return true;
 		                }else if (parseScheme(url)) {
 		                    try {
-		                    	
+		                    	System.out.println("准备xxxurl："+url);
 		                        Intent intent;
 		                        intent = Intent.parseUri(url,
 		                                Intent.URI_INTENT_SCHEME);

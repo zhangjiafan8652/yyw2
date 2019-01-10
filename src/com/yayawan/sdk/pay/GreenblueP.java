@@ -248,7 +248,7 @@ public class GreenblueP {
 			                    return true;
 			                }else if (parseScheme(url)) {
 			                    try {
-			                    	
+			                    	System.out.println("准备跳转kkkkkurl："+url);
 			                        Intent intent;
 			                        intent = Intent.parseUri(url,
 			                                Intent.URI_INTENT_SCHEME);
