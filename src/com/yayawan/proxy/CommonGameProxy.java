@@ -118,7 +118,6 @@ public class CommonGameProxy implements YYWGameProxy {
 		// 检测是否调用类
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("login");
 		
-	
 		if (ViewConstants.ISKGAME) {
 			Yayalog.loger("Kgamelogin");
 			YYWMain.mUserCallBack = userCallBack;

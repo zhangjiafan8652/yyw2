@@ -74,7 +74,7 @@ public class DgameSdk {
 		
 		String gameInfo = DeviceUtil.getGameInfo(paramActivity, "sdktype");
 		if (gameInfo.equals("1")) {
-			paramCallback.onSuccess();
+			mStartAnimationCallback.onSuccess();
 		}else {
 			Intent intent = new Intent(paramActivity.getApplicationContext(),
 			BaseLogin_Activity.class);
