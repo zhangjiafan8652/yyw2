@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWUserManagerCallBack;
+import com.yayawan.common.CommonData;
 import com.yayawan.main.YYWMain;
 import com.yayawan.proxy.YYWUserManager;
 import com.yayawan.sdk.bean.User;
@@ -50,33 +51,70 @@ public class UserManagerImpl implements YYWUserManager {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				DgameSdk.ExitgameShowDialog(paramActivity, new KgameSdkCallback() {
+				
+				if (CommonData.sdkid.equals("qianqi_app_id")) {
+					DgameSdk.Exitgame(paramActivity, new KgameSdkCallback() {
 
-					@Override
-					public void onSuccess(User paramUser, int paramInt) {
-						// TODO Auto-generated method stub
-						callback.onExit();
-					}
+						@Override
+						public void onSuccess(User paramUser, int paramInt) {
+							// TODO Auto-generated method stub
+							callback.onExit();
+						}
 
-					@Override
-					public void onError(int paramInt) {
-						// TODO Auto-generated method stub
+						@Override
+						public void onError(int paramInt) {
+							// TODO Auto-generated method stub
 
-					}
+						}
 
-					@Override
-					public void onCancel() {
-						// TODO Auto-generated method stub
-						
-					}
+						@Override
+						public void onCancel() {
+							// TODO Auto-generated method stub
+							
+						}
 
-					@Override
-					public void onLogout() {
-						// TODO Auto-generated method stub
+						@Override
+						public void onLogout() {
+							// TODO Auto-generated method stub
 
-					}
+						}
 
-				});
+					});
+					
+					
+				}else {
+					DgameSdk.ExitgameShowDialog(paramActivity, new KgameSdkCallback() {
+
+						@Override
+						public void onSuccess(User paramUser, int paramInt) {
+							// TODO Auto-generated method stub
+							callback.onExit();
+						}
+
+						@Override
+						public void onError(int paramInt) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onCancel() {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onLogout() {
+							// TODO Auto-generated method stub
+
+						}
+
+					});
+					
+					
+				}
+				
+				
 			}
 		});
 
