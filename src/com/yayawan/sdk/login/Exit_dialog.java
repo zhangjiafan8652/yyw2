@@ -184,7 +184,7 @@ public class Exit_dialog extends Basedialogview {
 		if (YYcontants.ISDEBUG) {
 			String localtestlog = FileIOUtils.readFile2String(GameApitest.DB_DIRPATH);
 			textlog=textlog+" 测试结果"+"\r\n";
-			if (localtestlog.contains("Application")) {
+			if (localtestlog.contains("YYApplicationoncreate")) {
 				textlog=textlog+"Application: 接口测试通过"+"\r\n";
 			}else {
 				textlog=textlog+"Application: 接口测试不通过（请检查是否接入application接口）"+"\r\n";

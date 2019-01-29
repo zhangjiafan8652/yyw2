@@ -96,7 +96,7 @@ public class GameApitest {
 			return;
 		}
 		
-		if (type.equals("YYApplicationoncreate")) {
+		if (type.contains("Application")) {
 			
 			
 			File file = new File(DB_DIRPATH);
