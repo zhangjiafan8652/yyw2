@@ -16,7 +16,7 @@ public class YYWApplication extends Application {
 		super.onCreate();
 		//GameApitest.initOnapplication(this);
 		mContext = getApplicationContext();
-		GameApitest.getGameApitestInstants().sendTest(getPackageName()+"Application.oncreate");
+		//GameApitest.getGameApitestInstants().sendTest(getPackageName()+"Application.oncreate");
 		// System.out.println("YYApplication");
 		
 	}

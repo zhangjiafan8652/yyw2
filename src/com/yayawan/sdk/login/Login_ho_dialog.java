@@ -602,7 +602,7 @@ public class Login_ho_dialog extends Basedialogview {
 
 			@Override
 			public void onClick(View v) {
-				
+				ViewConstants.logintype=2;
 				//如果是空sdk 则没有手机注册
 				if (DgameSdk.sdktype==1) {
 					
