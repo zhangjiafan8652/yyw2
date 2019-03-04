@@ -64,17 +64,8 @@ public class Yayapaymain_jf extends BaseView {
 	private RelativeLayout rl_mlDaijinjuan;
 	
 
-	//private static int BLUEP = 5;
-	
-	//private static int WEIXINH5PAY = 4;
-	
-	private static int BLUEP = CommonData.BLUEP;
-	
- private static   int GREENH5 = CommonData.GREENP;
-	public static final int DAIJINJUANPAY = 40;
-	private static int GREENP = 2;
-	private static int YINLIANPAY = 3;
-	private static int YAYABIPAY = 38;
+
+
 	
 
 	public Yayapaymain_jf(Activity mContext) {
@@ -185,7 +176,7 @@ public class Yayapaymain_jf extends BaseView {
 				Utilsjf.safePaydialog(mActivity, "初始化安全支付...");
 
 				//创建订单
-				makeOrder(BLUEP);
+				makeOrder(CommonData.BLUEP);
 			}
 
 		});
@@ -203,7 +194,7 @@ public class Yayapaymain_jf extends BaseView {
 				Yayalog.loger("微信支付开始");
 				Utilsjf.safePaydialog(mActivity, "初始化安全支付...");
 				//创建订单
-				makeOrder(GREENH5);
+				makeOrder(CommonData.GREENP);
 
 			}
 		});
@@ -221,7 +212,7 @@ public class Yayapaymain_jf extends BaseView {
 				Utilsjf.safePaydialog(mActivity, "初始化安全支付...");
 
 				//创建订单
-				makeOrder(YAYABIPAY);
+				makeOrder(CommonData.YAYABIPAY);
 			}
 
 		});
@@ -239,7 +230,7 @@ public class Yayapaymain_jf extends BaseView {
 						Utilsjf.safePaydialog(mActivity, "初始化安全支付...");
 
 						//创建订单
-						makeOrder(DAIJINJUANPAY);
+						makeOrder(CommonData.DAIJINJUANPAY);
 					}
 
 				});
@@ -338,49 +329,21 @@ public class Yayapaymain_jf extends BaseView {
 						// TODO Auto-generated method stub
 						Utilsjf.stopDialog();
 						payclickcontrol=false;
-						
-						switch (paytype) {
-						case 1:
-							//解析支付宝下单结果
-							Yayalog.loger("下单结果" + result.result);
+						if (paytype==CommonData.GREENP) {
+							
+							Yayalog.loger("sdk下单结果" + result.result);
 							bluepayResult(result.result);
-							break;
-						case 2:
-							Yayalog.loger("下单结果" + result.result);	
+						}else if(paytype==CommonData.BLUEP) {
+							Yayalog.loger("sdk下单结果" + result.result);
 							bluepayResult(result.result);
-							break;
-						case 3:
-
-							break;
-						case 4:
-							Yayalog.loger("下单结果" + result.result);
-							bluepayResult(result.result);
-							break;
-						case 5:
-							//解析支付宝下单结果
-							bluepayResult(result.result);
-							//bluepayResult(result.result);
-							break;
-						case CommonData.GREENP:
-							Yayalog.loger("下单结果" + result.result);
-							bluepayResult(result.result);
-							break;
-						case CommonData.BLUEP:
-							Yayalog.loger("下单结果" + result.result);
-							bluepayResult(result.result);
-							break;
-						case DAIJINJUANPAY:
-							Yayalog.loger("代金券下单结果" + result.result);
-							//bluepayResult(result.result);
+						}else if(paytype==CommonData.DAIJINJUANPAY) {
+							Yayalog.loger("DAIJINJUANPAY下单结果" + result.result);
 							daijinjuanpayResult(result.result);
-							break;
-						case 38:
-							Yayalog.loger("丫丫玩支付结果" + result.result);
+						}else if(paytype==CommonData.YAYABIPAY) {
+							Yayalog.loger("YAYABIPAY支付结果" + result.result);
 							yayapayResult(result.result);
-							break;
-						default:
-							break;
 						}
+					
 					}
 
 				});

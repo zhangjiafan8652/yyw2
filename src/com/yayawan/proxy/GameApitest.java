@@ -92,6 +92,8 @@ public class GameApitest {
 	 */
 	public void sendTest(String type) {
 
+		
+		Yayalog.loger("测试："+type);
 		if (!YYcontants.ISDEBUG) {
 			return;
 		}

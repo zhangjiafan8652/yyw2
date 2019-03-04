@@ -207,7 +207,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 				DeviceUtil.YINLIAN);
 
 
-		rl_mYaya = createItemView("Y币支付", "yaya_yayabi.png",
+		rl_mYaya = createyayabiItemView("Y币支付", "yaya_yayabi.png",
 				DeviceUtil.YAYABICODE);
 		rl_mWxpay = createItemView("微信支付", "yaya_greenp.png",
 				DeviceUtil.WXPAYCODE);
@@ -350,7 +350,13 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
 		TextView tv_bluepay = new TextView(mContext);
 	
-		name = name + "      ";
+		if (paytype==DeviceUtil.YAYABICODE) {
+			name = name + "      \n丫丫币支付赠送积分";
+		}else {
+			name = name + "      ";
+		}
+		
+	
 		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
 				0, name, 22, mRelativeLayout, 90, 0, 0, 0);
 		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
@@ -363,6 +369,60 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		return relativeLayout;
 
 	}
+	
+	/**
+	 * 创建一个丫丫币支付item布局
+	 * 
+	 * @param name
+	 *            支付名字
+	 * @param iconname
+	 *            icon名字
+	 * @param paytype
+	 *            支付方式id 用来判断是否九五折
+	 * @return
+	 */
+	private RelativeLayout createyayabiItemView(String name, String iconname,
+			int paytype) {
+		RelativeLayout relativeLayout = new RelativeLayout(mContext);
+
+		machineFactory.MachineView(relativeLayout, 300, 100, 0, "GridLayout",
+				15, 15, 0, 0, 0);
+		relativeLayout.setGravity(Gravity_CENTER);
+
+		ImageView iv_payicon = new ImageView(mContext);
+		machineFactory.MachineView(iv_payicon, 60, MATCH_PARENT, 0,
+				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_LEFT);
+		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+				iconname, mActivity));
+
+		TextView tv_bluepay = new TextView(mContext);
+		name = name + "      ";
+	
+		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
+				0, name, 22, mRelativeLayout, 90, 0, 0, 0);
+		
+		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
+		
+		
+		TextView tv_tip = new TextView(mContext);
+		
+		String nametip =  "可获得丫丫玩盒子积分";
+		machineFactory.MachineTextView(tv_tip, WRAP_CONTENT, MATCH_PARENT,
+				0, nametip, 12, mRelativeLayout, 40, 75, 0, 0);
+		
+		tv_tip.setGravity(Gravity.CENTER_VERTICAL);
+		tv_tip.setTextColor(Color.parseColor("#2B2B2B"));
+		// TODO
+		relativeLayout.addView(iv_payicon);
+		relativeLayout.addView(tv_bluepay);
+		relativeLayout.addView(tv_tip);
+
+		relativeLayout.setBackground(GetAssetsutils.get9DrawableFromAssetsFile(
+				"yaya_paynormal_bg.9.png", mContext));
+		return relativeLayout;
+
+	}
+
 
 	private TextView markView(String name) {
 		TextView textview = new TextView(mContext);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.pay.XiaomiPayxml.XiaomiPayListener;
@@ -22,7 +23,7 @@ public class XiaoMipayActivity extends Activity {
 			StartYingBaoPay();
 		}else{
 		
-		 xiaomiPayxml = new XiaomiPayxml(this);
+		xiaomiPayxml = new XiaomiPayxml(this);
 		//View initViewxml = new XiaomiPayxml(this).initViewxml();
 		setContentView(xiaomiPayxml.initViewxml());
 		xiaomiPayxml.setPrice(Integer.parseInt(AgentApp.mPayOrder.money/100+""));
@@ -37,10 +38,10 @@ public class XiaoMipayActivity extends Activity {
 				// TODO Auto-generated method stub
 				System.out.println(selectpaytype);
 				if (selectpaytype==xiaomiPayxml.BLUEP) {
-					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,GreenblueP.BLUEP , DgameSdk.mPaymentCallback);
+					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.BLUEP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();
 				}else if(selectpaytype==xiaomiPayxml.GREENP){
-					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,GreenblueP.GREENP , DgameSdk.mPaymentCallback);
+					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.GREENP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();
 				}else {
 					//选择了小米支付，就把界面关闭，以后都不会打开了
@@ -77,10 +78,10 @@ public class XiaoMipayActivity extends Activity {
 				// TODO Auto-generated method stub
 				System.out.println(selectpaytype);
 				if (selectpaytype==yingyongbaoPayxml.BLUEP) {
-					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,GreenblueP.BLUEP , DgameSdk.mPaymentCallback);
+					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.BLUEP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();
 				}else if(selectpaytype==yingyongbaoPayxml.GREENP){
-					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,GreenblueP.GREENP , DgameSdk.mPaymentCallback);
+					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.GREENP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();
 				}else {
 					//选择了小米支付，就把界面关闭，以后都不会打开了

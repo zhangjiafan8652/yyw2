@@ -21,6 +21,7 @@ public class Yayalog {
 		
 		
 	}
+
 	public static void  loger(String msg,String value){
 		
 		//DeviceUtil.isDebug(paramContext)

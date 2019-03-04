@@ -1,5 +1,9 @@
 package com.yayawan.sdk.main;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +21,8 @@ import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
+import com.yayawan.common.CommonData;
+import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
@@ -31,6 +37,7 @@ import com.yayawan.sdk.login.Startlogin_dialog;
 import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.pay.XiaoMipayActivity;
 import com.yayawan.sdk.utils.LogoWindow;
+import com.yayawan.sdk.utils.MD5;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
@@ -133,9 +140,8 @@ public class DgameSdk {
 		mPaymentCallback = paramCallback;
 		mPayOrder = paramOrder;
 		AgentApp.mPayOrder = paramOrder;
-		intent = new Intent(paramActivity, BaseLogin_Activity.class);
-		intent.putExtra("type", ViewConstants.YAYAPAYMAIN);
-		paramActivity.startActivity(intent);
+		
+		initSdkpaytype(paramActivity);
 
 	}
 
@@ -188,13 +194,21 @@ public class DgameSdk {
 		requestParams.addBodyParameter("role_level",roleLevel);
 		requestParams.addBodyParameter("zone_id",zoneId);
 		requestParams.addBodyParameter("zone_name", zoneName);
-		
+		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
+		Yayalog.loger("token", AgentApp.mUser.token+"");
+		Yayalog.loger("uid", AgentApp.mUser.uid+"");
+		Yayalog.loger("role_id", roleId);
+		Yayalog.loger("role_name",roleName);
+		Yayalog.loger("role_level",roleLevel);
+		Yayalog.loger("zone_id",zoneId);
+		Yayalog.loger("zone_name", zoneName);
+		Yayalog.loger("zone_name", ViewConstants.SETROLEDATAURL);
 		httpUtils.send(HttpMethod.POST, ViewConstants.SETROLEDATAURL, requestParams, new RequestCallBack<String>() {
 
 			@Override
 			public void onFailure(HttpException arg0, String arg1) {
 				// TODO Auto-generated method stub
-				
+				Yayalog.loger("kgamesdk上傳游戏数据失败:"+arg1);
 			}
 
 			@Override
@@ -233,12 +247,22 @@ public class DgameSdk {
 		requestParams.addBodyParameter("zone_id",zoneId);
 		requestParams.addBodyParameter("zone_name", zoneName);
 		
+		
+		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
+		Yayalog.loger("token", token+"");
+		Yayalog.loger("uid", uid+"");
+		Yayalog.loger("role_id", roleId);
+		Yayalog.loger("role_name",roleName);
+		Yayalog.loger("role_level",roleLevel);
+		Yayalog.loger("zone_id",zoneId);
+		Yayalog.loger("zone_name", zoneName);
+		Yayalog.loger("zone_name", ViewConstants.SETROLEDATAURL);
 		httpUtils.send(HttpMethod.POST, ViewConstants.SETROLEDATAURL, requestParams, new RequestCallBack<String>() {
 
 			@Override
 			public void onFailure(HttpException arg0, String arg1) {
 				// TODO Auto-generated method stub
-				
+				Yayalog.loger("kgamesdk上傳游戏数据失败:"+arg1);
 			}
 
 			@Override
@@ -263,6 +287,83 @@ public class DgameSdk {
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
+		
+		
+	}
+
+	//初始化sdk支付方式
+	private static void initSdkpaytype(final Activity activity) {
+		// TODO Auto-generated method stub
+		HttpUtils httpUtils = new HttpUtils();
+		RequestParams requestParams = new RequestParams();
+		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(activity));
+		requestParams.addBodyParameter("uid", YYWMain.mUser.uid);
+		requestParams.addBodyParameter("token", YYWMain.mUser.token);
+	
+		Yayalog.loger("app_id", DeviceUtil.getAppid(activity));
+		Yayalog.loger("uid", YYWMain.mUser.uid);
+		Yayalog.loger("token", YYWMain.mUser.token);
+	
+		httpUtils.send(HttpMethod.POST, ViewConstants.paytype,requestParams, new RequestCallBack<String>() {
+
+			@Override
+			public void onFailure(HttpException arg0, String result) {
+				// TODO Auto-generated method stub
+				
+				YYWMain.mPayCallBack.onPayFailed("1", "");
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> result) {
+				// TODO Auto-generated method stub
+			Yayalog.loger("初始化支付方式："+result.result);
+				try {
+					JSONObject jsonObject = new JSONObject(result.result);
+					int optInt = jsonObject.optInt("err_code");
+					if (optInt==0) {
+						JSONObject data=jsonObject.getJSONObject("data");
+						int toggleint =data.optInt("toggle");
+						JSONArray allpaytypearray =data.optJSONArray("all_paytype");
+						for (int i = 0; i < allpaytypearray.length(); i++) {
+							JSONObject paytyp=allpaytypearray.getJSONObject(i);
+						    String paylib=	MD5.MD5(paytyp.optString("lib"));
+						    String payid=	paytyp.optString("id");
+						//	System.out.println(paylib+":"+MD5.MD5(paylib));
+							//System.out.println("CommonData.bluepmd5string:"+CommonData.bluepmd5string);
+						    if (paylib.equals(CommonData.bluepmd5string)) {
+						    	CommonData.BLUEP=Integer.parseInt(payid);
+						    	Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+						    }else if(paylib.equals(CommonData.greenpmd5string)) {
+								
+						    	CommonData.GREENP=Integer.parseInt(payid);
+						    	Yayalog.loger("设置支付方式CommonData.greenpmd5string："+payid);
+							}else if(paylib.equals(CommonData.yayabipaymd5string)) {
+								CommonData.YAYABIPAY=Integer.parseInt(payid);
+								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+							}else if(paylib.equals(CommonData.daijinjuanpaymd5string)) {
+								CommonData.DAIJINJUANPAY=Integer.parseInt(payid);
+								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+							}
+						}
+						
+					}else {
+					
+						
+					}
+					intent = new Intent(activity, BaseLogin_Activity.class);
+					intent.putExtra("type", ViewConstants.YAYAPAYMAIN);
+					activity.startActivity(intent);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					YYWMain.mPayCallBack.onPayFailed("1", "");
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		
+
 	}
 
 	/**
@@ -381,6 +482,7 @@ public class DgameSdk {
 		
 		if (DgameSdk.sdktype==1) {
 			onexit.onSuccess(null, 1);
+			
 		}else {
 			 Exit_dialog exit_dialog = new Exit_dialog(activitiy, "这个废弃",new ExitdialogCallBack() {
 					

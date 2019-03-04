@@ -179,7 +179,7 @@ public class Login_ho_dialog extends Basedialogview {
 		// username的edtext
 		et_mUn = new EditText(mActivity);
 		et_mUn = machineFactory.MachineEditText(et_mUn, 0, 70, 1,
-				"请输入用户名", 24, mLinearLayout, 0, 6, 0, 0);
+				"请输入用户名", 25, mLinearLayout, 0, 6, 0, 0);
 		et_mUn.setTextColor(Color.BLACK);
 		et_mUn.setBackgroundColor(Color.TRANSPARENT);
 

@@ -187,7 +187,7 @@ public class Register_ho_dialog extends Basedialogview {
 		// 手机号码输入列
 		LinearLayout ll_phone = new LinearLayout(mActivity);
 		ll_phone = (LinearLayout) machineFactory.MachineView(ll_phone,
-				MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+				MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 		ll_phone.setBackgroundDrawable(GetAssetsutils
 						.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -203,7 +203,7 @@ public class Register_ho_dialog extends Basedialogview {
 
 				// username的edtext
 				et_mPhone = new EditText(mActivity);
-				et_mPhone = machineFactory.MachineEditText(et_mPhone, 0, MATCH_PARENT, 1,
+				et_mPhone = machineFactory.MachineEditText(et_mPhone, 0, 70, 1,
 						"请输入手机号", 22, mLinearLayout, 0, 4, 0, 0);
 				et_mPhone.setTextColor(Color.BLACK);
 				et_mPhone.setHintTextColor(Color.parseColor("#b4b4b4"));
@@ -219,12 +219,12 @@ public class Register_ho_dialog extends Basedialogview {
 				//验证码输入列	
 				LinearLayout ll_mSecurityandbutton = new LinearLayout(mActivity);
 				ll_mSecurityandbutton = (LinearLayout) machineFactory.MachineView(ll_mSecurityandbutton,
-						MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+						MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 				// 设置验证码输入框和获取验证码button
 				LinearLayout ll_mSecurity = new LinearLayout(mActivity);
 				ll_mSecurity = (LinearLayout) machineFactory.MachineView(ll_mSecurity,
-						270, 65, 0, "LinearLayout", 0, 0, 0, 0, 100);
+						270, 70, 0, "LinearLayout", 0, 0, 0, 0, 100);
 				ll_mSecurity.setOrientation(LinearLayout.HORIZONTAL);
 				
 				ll_mSecurity.setBackgroundDrawable(GetAssetsutils
@@ -241,7 +241,7 @@ public class Register_ho_dialog extends Basedialogview {
 
 						// username的edtext
 						et_mSecurity = new EditText(mActivity);
-						et_mSecurity = machineFactory.MachineEditText(et_mSecurity, 0, MATCH_PARENT, 1,
+						et_mSecurity = machineFactory.MachineEditText(et_mSecurity, 0, 70, 1,
 								"请输入验证码", 22, mLinearLayout, 0, 4, 0, 0);
 						et_mSecurity.setTextColor(Color.BLACK);
 						et_mSecurity.setHintTextColor(Color.parseColor("#b4b4b4"));
@@ -271,7 +271,7 @@ public class Register_ho_dialog extends Basedialogview {
 						// 密码输入列
 						LinearLayout ll_mPassword = new LinearLayout(mActivity);
 						ll_mPassword = (LinearLayout) machineFactory.MachineView(ll_mPassword,
-								MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+								MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 						ll_mPassword.setBackgroundDrawable(GetAssetsutils
 										.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -287,7 +287,7 @@ public class Register_ho_dialog extends Basedialogview {
 
 								// username的edtext
 								et_mPassword = new EditText(mActivity);
-								et_mPassword = machineFactory.MachineEditText(et_mPassword, 0, MATCH_PARENT, 1,
+								et_mPassword = machineFactory.MachineEditText(et_mPassword, 0, 70, 1,
 										"请设置密码（6-20位字母或者数字）", 22, mLinearLayout, 0, 4, 0, 0);
 								et_mPassword.setTextColor(Color.BLACK);
 								et_mPassword.setHintTextColor(Color.parseColor("#b4b4b4"));
@@ -367,17 +367,12 @@ public class Register_ho_dialog extends Basedialogview {
 		// 确定按钮
 		bt_mOk = new Button(mActivity);
 		machineFactory.MachineButton(bt_mOk, MATCH_PARENT, 78, 0, "注册", 36,
-				mLinearLayout, 0, 15, 0, 0);
+				mLinearLayout, 0, 5, 0, 0);
 		bt_mOk.setTextColor(Color.WHITE);
 		bt_mOk.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
 				"yaya1_loginbutton.9.png", "yaya1_loginbutton.9.png",
 				mActivity));
 		bt_mOk.setGravity(Gravity_CENTER);
-
-		
-		
-
-		
 
 	
 		// TODO

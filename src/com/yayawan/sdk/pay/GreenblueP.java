@@ -46,8 +46,7 @@ public class GreenblueP {
 	public Activity mContext;
 	public Activity mActivity;
 	private KgameSdkPaymentCallback mPaymentCallback;
-	public static  int BLUEP=37;
-	public static  int GREENP=36;
+
 	public int mPaytype=1;
 	/**
 	 * 

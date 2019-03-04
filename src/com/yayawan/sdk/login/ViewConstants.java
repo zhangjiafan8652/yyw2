@@ -13,7 +13,7 @@ import com.yayawan.sdk.bean.PayResult;
 import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
-
+//	5.9 微调了界面，改变了支付获取方式
 //	5.8 增加测试流程
 //	5.7 丫丫玩盒子公告延迟3分钟显示
 //	5.6 统一了千果千其代码
@@ -22,7 +22,7 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "5.8";
+	public static final String SDKVERSION = "5.9";
 	public static final int LOGIN_VIEW = 1;
 	public static final int REGISTER_VIEW = 2;
 	public static final int REGISTERACCOUNT_VIEW = 3;

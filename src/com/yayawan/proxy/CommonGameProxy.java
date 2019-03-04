@@ -1,5 +1,6 @@
 package com.yayawan.proxy;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +32,7 @@ import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWLoginHandleCallback;
 import com.yayawan.callback.YYWPayCallBack;
 import com.yayawan.callback.YYWUserCallBack;
+import com.yayawan.common.CommonData;
 import com.yayawan.domain.YYWOrder;
 import com.yayawan.domain.YYWRole;
 import com.yayawan.domain.YYWUser;
@@ -46,6 +48,7 @@ import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
+import com.yayawan.sdk.utils.MD5;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.JSONUtil;
@@ -304,6 +307,11 @@ public class CommonGameProxy implements YYWGameProxy {
 		requestParams.addBodyParameter("app_ver", DeviceUtil.getVersionCode(paramActivity));
 		requestParams.addBodyParameter("role_level", templevel+"");
 		
+		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
+		Yayalog.loger("uid", YYWMain.mUser.yywuid);
+		Yayalog.loger("token", YYWMain.mUser.yywtoken);
+		Yayalog.loger("app_ver", DeviceUtil.getVersionCode(paramActivity));
+		Yayalog.loger("role_level", templevel+"");
 		httpUtils.send(HttpMethod.POST, ViewConstants.paytype,requestParams, new RequestCallBack<String>() {
 
 			@Override
@@ -323,13 +331,36 @@ public class CommonGameProxy implements YYWGameProxy {
 					if (optInt==0) {
 						JSONObject data=jsonObject.getJSONObject("data");
 						int toggleint =data.optInt("toggle");
+						JSONArray allpaytypearray =data.optJSONArray("all_paytype");
+						for (int i = 0; i < allpaytypearray.length(); i++) {
+							JSONObject paytyp=allpaytypearray.getJSONObject(i);
+						    String paylib=	MD5.MD5(paytyp.optString("lib"));
+						    String payid=	paytyp.optString("id");
+						//	System.out.println(paylib+":"+MD5.MD5(paylib));
+							//System.out.println("CommonData.bluepmd5string:"+CommonData.bluepmd5string);
+						    if (paylib.equals(CommonData.bluepmd5string)) {
+						    	CommonData.BLUEP=Integer.parseInt(payid);
+						    	Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+						    }else if(paylib.equals(CommonData.greenpmd5string)) {
+								
+						    	CommonData.GREENP=Integer.parseInt(payid);
+						    	Yayalog.loger("设置支付方式CommonData.greenpmd5string："+payid);
+							}else if(paylib.equals(CommonData.yayabipaymd5string)) {
+								CommonData.YAYABIPAY=Integer.parseInt(payid);
+								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+							}else if(paylib.equals(CommonData.daijinjuanpaymd5string)) {
+								CommonData.DAIJINJUANPAY=Integer.parseInt(payid);
+								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+							}
+						
+						}
 						gotoPay(paramActivity, toggleint);
 					}else {
 						gotoPay(paramActivity, 0);
 						
 					}
 					
-				} catch (JSONException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					YYWMain.mPayCallBack.onPayFailed("1", "");
 					e.printStackTrace();
@@ -342,6 +373,10 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 	}
 
+	
+	public static void sys(String name,String val){
+		System.out.println(name+":"+val);
+	}
 	
 	public void gotoPay(Activity paramActivity,int login_type){
 		switch (login_type) {
@@ -413,10 +448,14 @@ public class CommonGameProxy implements YYWGameProxy {
 		templevel = Integer.parseInt(roleLevel);
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName, roleCTime, ext);
-		GameApitest.getGameApitestInstants(paramActivity).sendTest("setData"+ext+":"+YYWMain.mRole.toString());
-		
+
 		this.mUserManager.setData(paramActivity, roleId, roleName, roleLevel,
 				zoneId, zoneName, roleCTime, ext);
+		GameApitest.getGameApitestInstants(paramActivity).sendTest(
+				"setData玩家数据："+YYWMain.mRole.toString());
+		
+	
+		
 
 	}
 
@@ -435,6 +474,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	public void onCreate(final Activity paramActivity) {
 		// 进行检查更新
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(paramActivity);
+		
 		try {
 			GameApitest.sendTest2(paramActivity);
 		} catch (Exception e) {
@@ -449,6 +489,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));//设置是否打log
 		System.out.println("是否可以打印yayalog："+Yayalog.canlog);
+		Yayalog.loger("当前sdk版本："+CommonData.SDKVERSION);
 		
 		
 		

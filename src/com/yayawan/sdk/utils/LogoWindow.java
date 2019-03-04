@@ -47,6 +47,8 @@ public class LogoWindow {
 	private int screenHeigh;
 
 	private static LogoWindow mLogowindow;
+	
+	private static boolean iscanyingcang =true;
 
 	public static LogoWindow getInstants(Activity mactivity) {
 		if (mLogowindow == null) {
@@ -83,6 +85,34 @@ public class LogoWindow {
 							.getImageFromAssetsFile("yaya1_acountmanagericon.png",
 									mactivity));
 				}
+			case 523:
+				
+				
+				if (iscanyingcang) {
+					
+					
+					params.x = 0;
+
+					params.y = 100;
+
+					// myview.setX(-machSize(30));
+					// myview.setRotation(50);
+					// myview.setAlpha(100);
+					Yayalog.loger("我要更新ui去隐藏了" +
+							"");
+					wm.updateViewLayout(myview, params);
+					//myview.setBackgroundColor(Color.GRAY);
+					//半透明隐藏图标
+					myviewicon.setImageBitmap(GetAssetsutils
+							.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
+									mactivity));
+					myviewiconmanager.setVisibility(View.GONE);
+					
+				}
+				
+			
+				
+				
 			case 521:
 				// createView();
 				Yayalog.loger("我在接到了消息：hasWindowFocus"
@@ -178,6 +208,9 @@ public class LogoWindow {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					// TODO Auto-generated method stub
+					
+					iscanyingcang=false;
+					
 					x = event.getRawX();
 					y = event.getRawY(); // statusBarHeight是系统状态栏的高度
 
@@ -226,6 +259,9 @@ public class LogoWindow {
 
 					case MotionEvent.ACTION_UP: // 捕获手指触摸离开动作
 
+						iscanyingcang=true;
+						
+						
 						distance_x = (int) event.getRawX() - (int) mdownTempX;
 						distance_y = (int) event.getRawY() - (int) mdownTempY;
 						if (Math.abs(distance_x) <= 40
@@ -244,8 +280,11 @@ public class LogoWindow {
 
 							
 						} else {
+							
 							if (event.getRawX() < machSize(150)) {
 								updateViewPosition1();
+							}else {
+								mhandler.sendEmptyMessageDelayed(523, 5000);
 							}
 							
 						}

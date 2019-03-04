@@ -191,7 +191,7 @@ public class AcountRegister_ho_dialog extends Basedialogview {
 		// 用户名输入列
 				LinearLayout ll_mUser = new LinearLayout(mActivity);
 				ll_mUser = (LinearLayout) machineFactory.MachineView(ll_mUser,
-						MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+						MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 				ll_mUser.setBackgroundDrawable(GetAssetsutils
 								.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -222,7 +222,7 @@ public class AcountRegister_ho_dialog extends Basedialogview {
 				// 密码输入列
 				LinearLayout ll_mPassword = new LinearLayout(mActivity);
 				ll_mPassword = (LinearLayout) machineFactory.MachineView(ll_mPassword,
-								MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+								MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 				ll_mPassword.setBackgroundDrawable(GetAssetsutils
 										.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -253,7 +253,7 @@ public class AcountRegister_ho_dialog extends Basedialogview {
 				// 重复密码输入列
 				LinearLayout ll_mRePassword = new LinearLayout(mActivity);
 				ll_mRePassword = (LinearLayout) machineFactory.MachineView(ll_mRePassword,
-								MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+								MATCH_PARENT, 70, 0, "LinearLayout", 0, 30, 0, 0, 100);
 
 				ll_mRePassword.setBackgroundDrawable(GetAssetsutils
 										.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -348,7 +348,7 @@ public class AcountRegister_ho_dialog extends Basedialogview {
 		// 确定按钮
 		bt_mOk = new Button(mActivity);
 		machineFactory.MachineButton(bt_mOk, MATCH_PARENT, 78, 0, "注册", 36,
-				mLinearLayout, 0, 15, 0, 0);
+				mLinearLayout, 0, 5, 0, 0);
 		bt_mOk.setTextColor(Color.WHITE);
 		bt_mOk.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
 				"yaya1_loginbutton.9.png", "yaya1_loginbutton.png",
