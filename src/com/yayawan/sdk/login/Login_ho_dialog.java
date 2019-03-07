@@ -91,13 +91,14 @@ public class Login_ho_dialog extends Basedialogview {
 	private TextView tv_clouse;
 	private TextView tv_contactcustomerservice;
 	private RelativeLayout rl_contactcustomerservice;
-
+	public static boolean isshowdialog;
 	String qqhao;
 	
 	@SuppressLint("NewApi") @SuppressWarnings("deprecation")
 	@Override
 	public void createDialog(final Activity mActivity) {
 
+		
 		dialog = new Dialog(mActivity);
 
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
