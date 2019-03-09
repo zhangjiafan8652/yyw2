@@ -30,6 +30,7 @@ import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.callback.KgameSdkStartAnimationCallback;
 import com.yayawan.sdk.callback.KgameSdkUpdateCallback;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
+import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.login.BaseLogin_Activity;
 import com.yayawan.sdk.login.Exit_dialog;
 import com.yayawan.sdk.login.SmallHelpActivity;
@@ -287,7 +288,8 @@ public class DgameSdk {
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
-		
+		//更新数据库表
+		UserDao.getInstance(activity).upDateclume();
 		
 	}
 
