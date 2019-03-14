@@ -172,6 +172,7 @@ public class Exit_dialog extends Basedialogview {
 				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT,
 				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 
+		
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setBackgroundDrawable(new BitmapDrawable());
 
@@ -248,7 +249,7 @@ public class Exit_dialog extends Basedialogview {
 			}else {
 				textlog=textlog+"logout: 接口测试不通过（非必要接口。游戏内自己的切换账号按钮，如果游戏内没有，则无需接入）"+"\r\n";
 			}
-			if (localtestlog.contains("setData1")) {
+			if (localtestlog.contains("setData")) {
 				textlog=textlog+"玩家数据: "+YYWMain.mRole.toString();
 			}else {
 				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口）"+"\r\n";

@@ -22,7 +22,7 @@ public class YYApplication extends YYWApplication {
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
 		mContext = getApplicationContext();
 		Jxutilsinit.init(getApplicationContext());
-		// System.out.println("YYApplication");
+		 System.out.println("YYApplication");
 		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate="+Util.getPackageName(getApplicationContext()));
 	}
 
