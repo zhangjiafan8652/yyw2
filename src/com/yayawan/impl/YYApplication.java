@@ -5,6 +5,7 @@ import com.lidroid.jxutils.http.Jxutilsinit;
 import com.yayawan.proxy.GameApitest;
 import com.yayawan.proxy.YYWApplication;
 import com.yayawan.proxy.YYcontants;
+import com.yayawan.sdk.utils.Util;
 import com.yayawan.utils.DeviceUtil;
 
 import android.app.Application;
@@ -22,7 +23,7 @@ public class YYApplication extends YYWApplication {
 		mContext = getApplicationContext();
 		Jxutilsinit.init(getApplicationContext());
 		// System.out.println("YYApplication");
-		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate");
+		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate="+Util.getPackageName(getApplicationContext()));
 	}
 
 	public static Context getmContext() {

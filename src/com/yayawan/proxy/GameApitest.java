@@ -49,7 +49,7 @@ public class GameApitest {
 			+ TestFilePath + ".txt";
 
 	public static GameApitest getGameApitestInstants(Context mcontext) {
-		
+		mContext=mcontext;
 		if (mGameapitest != null) {
 			return mGameapitest;
 		} else {

@@ -29,6 +29,7 @@ import com.yayawan.proxy.YYcontants;
 import com.yayawan.sdk.bean.Question;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.utils.Util;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.FileIOUtils;
@@ -184,8 +185,8 @@ public class Exit_dialog extends Basedialogview {
 		if (YYcontants.ISDEBUG) {
 			String localtestlog = FileIOUtils.readFile2String(GameApitest.DB_DIRPATH);
 			textlog=textlog+" 测试结果"+"\r\n";
-			if (localtestlog.contains("YYApplicationoncreate")) {
-				textlog=textlog+"Application: 接口测试通过"+"\r\n";
+			if (localtestlog.contains("YYApplicationoncreate="+Util.getPackageName(mActivity))) {
+				textlog=textlog+"Application="+Util.getPackageName(mActivity)+": 接口测试通过"+"\r\n";
 			}else {
 				textlog=textlog+"Application: 接口测试不通过（请检查是否接入application接口）"+"\r\n";
 			}
