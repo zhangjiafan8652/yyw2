@@ -4,8 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.GestureDetector;
@@ -469,38 +472,60 @@ public class CommonGameProxy implements YYWGameProxy {
 	private int loca_login_type;
 	
 
+	public static int REQUEST_CODE_ASK_READ_PHONE_STATE=3301;
 	
-	@Override
+	@SuppressLint("NewApi") @Override
 	public void onCreate(final Activity paramActivity) {
-		// 进行检查更新
-		YYcontants.ISDEBUG=DeviceUtil.isDebug(paramActivity);
-		
-		try {
-			GameApitest.sendTest2(paramActivity);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	
 		
 		mActivity = paramActivity;
-		
-		
-		//recordPoint(paramActivity);
+		// 进行检查更新
+		YYcontants.ISDEBUG=DeviceUtil.isDebug(paramActivity);
 		
 		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));//设置是否打log
 		System.out.println("是否可以打印yayalog："+Yayalog.canlog);
 		Yayalog.loger("当前sdk版本："+CommonData.SDKVERSION);
-		
-		
-		
-		// 获取公告
-		new JFnoticeUtils().getNotice(paramActivity);
-		// 获取更新
-		new JFupdateUtils(paramActivity).startUpdate();
+		//手机信息权限
+		String permission = Manifest.permission.READ_PHONE_STATE;
+		//检查权限是否已授权
+		int hasPermission = paramActivity.checkSelfPermission(permission);
 
+		
+		//如果没有授权
+		if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+		    //请求权限，此方法会弹出权限请求对话框，让用户授权，并回调 onRequestPermissionsResult 来告知授权结果
+			
+			
+			paramActivity.requestPermissions(new String[]{permission}, REQUEST_CODE_ASK_READ_PHONE_STATE);
+		}else {//已经授权过
+		    //做一些你想做的事情，即原来不需要动态授权时做的操作
+		   // doSomething();
+			
+			try {
+				GameApitest.sendTest2(paramActivity);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			// 获取公告
+			new JFnoticeUtils().getNotice(paramActivity);
+			// 获取更新
+			new JFupdateUtils(paramActivity).startUpdate();
+			
+			
+		}
+	
+		GameApitest.getGameApitestInstants(paramActivity).sendTest("onCreate");
+
+		//recordPoint(paramActivity);
+		
+		
+		
+		
+		
+		
 		mStub.onCreate(paramActivity);
 		
-		GameApitest.getGameApitestInstants(paramActivity).sendTest("onCreate");
+		
 	}
 
 	@Override
@@ -624,6 +649,10 @@ public class CommonGameProxy implements YYWGameProxy {
 			String[] permissions, int[] grantResults) {
 		// TODO Auto-generated method stub
 		GameApitest.getGameApitestInstants().sendTest("onRequestPermissionsResult");
+		
+		
+	
+		
 		this.mStub.onRequestPermissionsResult(requestCode,permissions,grantResults);
 	}
 

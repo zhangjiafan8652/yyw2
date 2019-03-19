@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -142,6 +143,18 @@ public class SimpleWinCallback implements Window.Callback{
 	public void onActionModeFinished(ActionMode mode) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean onSearchRequested(SearchEvent searchEvent) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ActionMode onWindowStartingActionMode(Callback callback, int type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
