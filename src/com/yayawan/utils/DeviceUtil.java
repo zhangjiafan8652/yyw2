@@ -2,6 +2,7 @@ package com.yayawan.utils;
 
 import java.util.ArrayList;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -259,6 +260,11 @@ public class DeviceUtil {
 	 * @return
 	 */
 	public static String getIMEI(Context paramContext) {
+		
+		if (PermissionUtils.checkAndRequestPermission(paramContext, Manifest.permission.READ_PHONE_STATE,PermissionUtils.READ_PHONE_STATE)) {
+			Yayalog.loger("无READ_PHONE_STATE授权");
+			return "";
+		}
 		// 获取设备的imei号
 		String deviceId = ((TelephonyManager) paramContext
 				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();

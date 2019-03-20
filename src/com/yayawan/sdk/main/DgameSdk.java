@@ -102,6 +102,10 @@ public class DgameSdk {
 	public static void login(Activity paramActivity,
 			KgameSdkUserCallback paramCallback) {
 
+		
+		//更新数据库表
+		UserDao.getInstance(paramActivity).upDateclume();
+		
 		Yayalog.loger("kgamesdklogin");
 		mUserCallback = paramCallback;
 		ViewConstants.mMainActivity = paramActivity;
@@ -288,8 +292,7 @@ public class DgameSdk {
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
-		//更新数据库表
-		UserDao.getInstance(activity).upDateclume();
+		
 		
 	}
 

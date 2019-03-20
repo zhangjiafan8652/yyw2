@@ -123,13 +123,13 @@ public class CommonGameProxy implements YYWGameProxy {
 		// YYWMain.mUserCallBack=userCallBack;
 		// 检测是否调用类
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("login");
-		
+
 		if (ViewConstants.ISKGAME) {
 			Yayalog.loger("Kgamelogin");
 			YYWMain.mUserCallBack = userCallBack;
 			this.mLogin.login(paramActivity, YYWMain.mUserCallBack, "login");
 		} else {
-			
+
 			Yayalog.loger("UNIONlogin");
 			YYWMain.mUserCallBack = new YYWUserCallBack() {
 
@@ -142,7 +142,7 @@ public class CommonGameProxy implements YYWGameProxy {
 				@Override
 				public void onLoginSuccess(final YYWUser paramUser,
 						Object paramObject) {
-					Yayalog.loger("联合渠道登陆成功："+paramUser.toString());
+					Yayalog.loger("联合渠道登陆成功：" + paramUser.toString());
 					// TODO Auto-generated method stub
 					Handle.login_handler(mActivity, YYWMain.mUser.uid,
 							YYWMain.mUser.userName,
@@ -154,7 +154,7 @@ public class CommonGameProxy implements YYWGameProxy {
 								public void onSuccess(String response,
 										String temp) {
 									// TODO Auto-generated method stub
-									Yayalog.loger("联合渠道登陆丫丫玩后返回数据："+response);
+									Yayalog.loger("联合渠道登陆丫丫玩后返回数据：" + response);
 									try {
 										JSONObject resjson = new JSONObject(
 												response);
@@ -169,14 +169,15 @@ public class CommonGameProxy implements YYWGameProxy {
 													.optString("username");
 											String kgametoken = data
 													.optString("token");
-											Yayalog.loger("kgameuid："+kgameuid);
+											Yayalog.loger("kgameuid："
+													+ kgameuid);
 											// 拼接返回给cp的user开始
 											yywUser = new YYWUser();
 											yywUser.uid = kgameuid;
 											yywUser.userName = kgameusername;
-											//丫丫玩平台的token
+											// 丫丫玩平台的token
 											yywUser.yywtoken = kgametoken;
-											//给研发的token
+											// 给研发的token
 											yywUser.token = JSONUtil
 													.formatToken(paramActivity,
 															paramUser.token,
@@ -184,37 +185,39 @@ public class CommonGameProxy implements YYWGameProxy {
 															paramUser.userName,
 															yywUser.userName);
 											// 拼接给cp的user结束
-											Yayalog.loger("yywUser.uid："+yywUser.uid);
+											Yayalog.loger("yywUser.uid："
+													+ yywUser.uid);
 											// 拼接渠道的user，当调用渠道的支付，一定使用到渠道的YYWMain.mUser.uid
 											YYWMain.mUser.uid = paramUser.uid;
-											//渠道的username
+											// 渠道的username
 											YYWMain.mUser.userName = paramUser.userName;
-											//丫丫玩的uid
+											// 丫丫玩的uid
 											YYWMain.mUser.yywuid = yywUser.uid;
-											
-											Yayalog.loger("YYWMain.mUser.yywuid："+YYWMain.mUser.yywuid);
+
+											Yayalog.loger("YYWMain.mUser.yywuid："
+													+ YYWMain.mUser.yywuid);
 											YYWMain.mUser.yywusername = yywUser.userName;
-											
+
 											YYWMain.mUser.yywtoken = yywUser.yywtoken;
 											Yayalog.loger("+++++++++++++token"
 													+ YYWMain.mUser.token);
 											Yayalog.loger("+++++++++++++联合渠道登陆："
 													+ YYWMain.mUser.toString());
-											
-											
-											
+
 											mActivity
 													.runOnUiThread(new Runnable() {
 
 														@Override
 														public void run() {
 															// TODO
-															Yayalog.loger("联合渠道登陆成功："+yywUser.toString());
+															Yayalog.loger("联合渠道登陆成功："
+																	+ yywUser
+																			.toString());
 															userCallBack
 																	.onLoginSuccess(
 																			yywUser,
 																			"onLoginSuccess");
-															
+
 														}
 													});
 
@@ -229,7 +232,8 @@ public class CommonGameProxy implements YYWGameProxy {
 								@Override
 								public void onFail(String erro, String temp) {
 									// TODO Auto-generated method stub
-									userCallBack.onLoginFailed("登陆失败", "onFail");
+									userCallBack
+											.onLoginFailed("登陆失败", "onFail");
 								}
 							});
 				}
@@ -258,7 +262,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	public void logout(Activity paramActivity, YYWUserCallBack userCallBack) {
 		YYWMain.mUserCallBack = userCallBack;
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("logout");
-		//this.mLogin.relogin(paramActivity, userCallBack, "relogin");
+		// this.mLogin.relogin(paramActivity, userCallBack, "relogin");
 	}
 
 	public void logout(Activity paramActivity) {
@@ -286,102 +290,119 @@ public class CommonGameProxy implements YYWGameProxy {
 			gotoPay(paramActivity, 0);
 			Yayalog.logerlife("ISKGAMEpay");
 			return;
-		} 
-		//判断是否小米渠道
-				if (DeviceUtil.isXiaomi(paramActivity)) {
-					//判断是否选择过小米支付
-					if (GreenblueP.isselectxiaomipay) {
-						this.mCharger = new ChargerImpl();
-						this.mCharger.pay(paramActivity, order, payCallBack);
-						return;
-					}
-				}
-		
+		}
+		// 判断是否小米渠道
+		if (DeviceUtil.isXiaomi(paramActivity)) {
+			// 判断是否选择过小米支付
+			if (GreenblueP.isselectxiaomipay) {
+				this.mCharger = new ChargerImpl();
+				this.mCharger.pay(paramActivity, order, payCallBack);
+				return;
+			}
+		}
+
 		int login_type = Sputils.getSPint("login_type", 0, paramActivity);
 		int login_pay_level = Sputils.getSPint("login_pay_level", 0,
 				paramActivity);
-		Yayalog.loger("CommonGameProxy：login_pay_level:" + "" + login_pay_level+"CommonGameProxy：login_type"+login_type+":::templevel:"+templevel);
-		
+		Yayalog.loger("CommonGameProxy：login_pay_level:" + "" + login_pay_level
+				+ "CommonGameProxy：login_type" + login_type + ":::templevel:"
+				+ templevel);
+
 		HttpUtils httpUtils = new HttpUtils();
 		RequestParams requestParams = new RequestParams();
-		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(paramActivity));
+		requestParams.addBodyParameter("app_id",
+				DeviceUtil.getAppid(paramActivity));
 		requestParams.addBodyParameter("uid", YYWMain.mUser.yywuid);
 		requestParams.addBodyParameter("token", YYWMain.mUser.yywtoken);
-		requestParams.addBodyParameter("app_ver", DeviceUtil.getVersionCode(paramActivity));
-		requestParams.addBodyParameter("role_level", templevel+"");
-		
+		requestParams.addBodyParameter("app_ver",
+				DeviceUtil.getVersionCode(paramActivity));
+		requestParams.addBodyParameter("role_level", templevel + "");
+
 		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
 		Yayalog.loger("uid", YYWMain.mUser.yywuid);
 		Yayalog.loger("token", YYWMain.mUser.yywtoken);
 		Yayalog.loger("app_ver", DeviceUtil.getVersionCode(paramActivity));
-		Yayalog.loger("role_level", templevel+"");
-		httpUtils.send(HttpMethod.POST, ViewConstants.paytype,requestParams, new RequestCallBack<String>() {
+		Yayalog.loger("role_level", templevel + "");
+		httpUtils.send(HttpMethod.POST, ViewConstants.paytype, requestParams,
+				new RequestCallBack<String>() {
 
-			@Override
-			public void onFailure(HttpException arg0, String result) {
-				// TODO Auto-generated method stub
-				System.out.println("支付请求失败："+result);
-				YYWMain.mPayCallBack.onPayFailed("1", "");
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> result) {
-				// TODO Auto-generated method stub
-				System.out.println("支付请求成功："+result.result);
-				try {
-					JSONObject jsonObject = new JSONObject(result.result);
-					int optInt = jsonObject.optInt("err_code");
-					if (optInt==0) {
-						JSONObject data=jsonObject.getJSONObject("data");
-						int toggleint =data.optInt("toggle");
-						JSONArray allpaytypearray =data.optJSONArray("all_paytype");
-						for (int i = 0; i < allpaytypearray.length(); i++) {
-							JSONObject paytyp=allpaytypearray.getJSONObject(i);
-						    String paylib=	MD5.MD5(paytyp.optString("lib"));
-						    String payid=	paytyp.optString("id");
-						//	System.out.println(paylib+":"+MD5.MD5(paylib));
-							//System.out.println("CommonData.bluepmd5string:"+CommonData.bluepmd5string);
-						    if (paylib.equals(CommonData.bluepmd5string)) {
-						    	CommonData.BLUEP=Integer.parseInt(payid);
-						    	Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
-						    }else if(paylib.equals(CommonData.greenpmd5string)) {
-								
-						    	CommonData.GREENP=Integer.parseInt(payid);
-						    	Yayalog.loger("设置支付方式CommonData.greenpmd5string："+payid);
-							}else if(paylib.equals(CommonData.yayabipaymd5string)) {
-								CommonData.YAYABIPAY=Integer.parseInt(payid);
-								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
-							}else if(paylib.equals(CommonData.daijinjuanpaymd5string)) {
-								CommonData.DAIJINJUANPAY=Integer.parseInt(payid);
-								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
-							}
-						
-						}
-						gotoPay(paramActivity, toggleint);
-					}else {
-						gotoPay(paramActivity, 0);
-						
+					@Override
+					public void onFailure(HttpException arg0, String result) {
+						// TODO Auto-generated method stub
+						System.out.println("支付请求失败：" + result);
+						YYWMain.mPayCallBack.onPayFailed("1", "");
 					}
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					YYWMain.mPayCallBack.onPayFailed("1", "");
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
 
-		
+					@Override
+					public void onSuccess(ResponseInfo<String> result) {
+						// TODO Auto-generated method stub
+						System.out.println("支付请求成功：" + result.result);
+						try {
+							JSONObject jsonObject = new JSONObject(
+									result.result);
+							int optInt = jsonObject.optInt("err_code");
+							if (optInt == 0) {
+								JSONObject data = jsonObject
+										.getJSONObject("data");
+								int toggleint = data.optInt("toggle");
+								JSONArray allpaytypearray = data
+										.optJSONArray("all_paytype");
+								for (int i = 0; i < allpaytypearray.length(); i++) {
+									JSONObject paytyp = allpaytypearray
+											.getJSONObject(i);
+									String paylib = MD5.MD5(paytyp
+											.optString("lib"));
+									String payid = paytyp.optString("id");
+									// System.out.println(paylib+":"+MD5.MD5(paylib));
+									// System.out.println("CommonData.bluepmd5string:"+CommonData.bluepmd5string);
+									if (paylib
+											.equals(CommonData.bluepmd5string)) {
+										CommonData.BLUEP = Integer
+												.parseInt(payid);
+										Yayalog.loger("设置支付方式CommonData.bluepmd5string："
+												+ payid);
+									} else if (paylib
+											.equals(CommonData.greenpmd5string)) {
+
+										CommonData.GREENP = Integer
+												.parseInt(payid);
+										Yayalog.loger("设置支付方式CommonData.greenpmd5string："
+												+ payid);
+									} else if (paylib
+											.equals(CommonData.yayabipaymd5string)) {
+										CommonData.YAYABIPAY = Integer
+												.parseInt(payid);
+										// Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+									} else if (paylib
+											.equals(CommonData.daijinjuanpaymd5string)) {
+										CommonData.DAIJINJUANPAY = Integer
+												.parseInt(payid);
+										// Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
+									}
+
+								}
+								gotoPay(paramActivity, toggleint);
+							} else {
+								gotoPay(paramActivity, 0);
+
+							}
+
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							YYWMain.mPayCallBack.onPayFailed("1", "");
+							e.printStackTrace();
+						}
+
+					}
+				});
+
 	}
 
-	
-	public static void sys(String name,String val){
-		System.out.println(name+":"+val);
+	public static void sys(String name, String val) {
+		System.out.println(name + ":" + val);
 	}
-	
-	public void gotoPay(Activity paramActivity,int login_type){
+
+	public void gotoPay(Activity paramActivity, int login_type) {
 		switch (login_type) {
 		case 0:
 			Yayalog.loger("CommonGameProxy:" + "kgame支付");
@@ -395,7 +416,7 @@ public class CommonGameProxy implements YYWGameProxy {
 			this.mCharger = new ChargerImplyylianhe();
 			this.mCharger.pay(paramActivity, YYWMain.mOrder,
 					YYWMain.mPayCallBack);
-			
+
 			break;
 		case 2:
 
@@ -405,6 +426,7 @@ public class CommonGameProxy implements YYWGameProxy {
 			break;
 		}
 	}
+
 	@Override
 	public void manager(Activity paramActivity) {
 		Yayalog.logerlife("manager");
@@ -445,8 +467,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	public void setData(Activity paramActivity, String roleId, String roleName,
 			String roleLevel, String zoneId, String zoneName, String roleCTime,
 			String ext) {
-		
-		
+
 		// 设置临时的角色等级。用作支付时候判断是否切换支付
 		templevel = Integer.parseInt(roleLevel);
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
@@ -455,10 +476,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		this.mUserManager.setData(paramActivity, roleId, roleName, roleLevel,
 				zoneId, zoneName, roleCTime, ext);
 		GameApitest.getGameApitestInstants(paramActivity).sendTest(
-				"setData玩家数据："+YYWMain.mRole.toString());
-		
-	
-		
+				"setData玩家数据：" + YYWMain.mRole.toString());
 
 	}
 
@@ -470,69 +488,45 @@ public class CommonGameProxy implements YYWGameProxy {
 	boolean newactive = true;
 
 	private int loca_login_type;
-	
 
-	public static int REQUEST_CODE_ASK_READ_PHONE_STATE=3301;
-	
-	@SuppressLint("NewApi") @Override
+	public static int REQUEST_CODE_ASK_READ_PHONE_STATE = 3301;
+
+	@SuppressLint("NewApi")
+	@Override
 	public void onCreate(final Activity paramActivity) {
-		
+
 		mActivity = paramActivity;
 		// 进行检查更新
-		YYcontants.ISDEBUG=DeviceUtil.isDebug(paramActivity);
-		
-		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));//设置是否打log
-		System.out.println("是否可以打印yayalog："+Yayalog.canlog);
-		Yayalog.loger("当前sdk版本："+CommonData.SDKVERSION);
-		//手机信息权限
-		String permission = Manifest.permission.READ_PHONE_STATE;
-		//检查权限是否已授权
-		int hasPermission = paramActivity.checkSelfPermission(permission);
+		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
 
-		
-		//如果没有授权
-		if (hasPermission != PackageManager.PERMISSION_GRANTED) {
-		    //请求权限，此方法会弹出权限请求对话框，让用户授权，并回调 onRequestPermissionsResult 来告知授权结果
-			
-			
-			paramActivity.requestPermissions(new String[]{permission}, REQUEST_CODE_ASK_READ_PHONE_STATE);
-		}else {//已经授权过
-		    //做一些你想做的事情，即原来不需要动态授权时做的操作
-		   // doSomething();
-			
-			try {
-				GameApitest.sendTest2(paramActivity);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-			// 获取公告
-			new JFnoticeUtils().getNotice(paramActivity);
-			// 获取更新
-			new JFupdateUtils(paramActivity).startUpdate();
-			
-			
+		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
+		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
+		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
+
+		try {
+			GameApitest.sendTest2(paramActivity);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-	
+
+		// 获取公告
+		new JFnoticeUtils().getNotice(paramActivity);
+		// 获取更新
+		new JFupdateUtils(paramActivity).startUpdate();
+
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("onCreate");
 
-		//recordPoint(paramActivity);
-		
-		
-		
-		
-		
-		
+		// recordPoint(paramActivity);
+
 		mStub.onCreate(paramActivity);
-		
-		
+
 	}
 
 	@Override
 	public void onStop(Activity paramActivity) {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("onStop");
 		this.mStub.onStop(paramActivity);
-		
+
 	}
 
 	@Override
@@ -545,9 +539,8 @@ public class CommonGameProxy implements YYWGameProxy {
 
 	@Override
 	public void onPause(Activity paramActivity) {
-	
-		GameApitest.getGameApitestInstants(paramActivity).sendTest("onPause");
 
+		GameApitest.getGameApitestInstants(paramActivity).sendTest("onPause");
 
 		this.mStub.onPause(paramActivity);
 
@@ -596,7 +589,6 @@ public class CommonGameProxy implements YYWGameProxy {
 	public void initSdk(Activity paramActivity) {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("initSdk");
 
-		
 		// 为了兼容老sdk判断是否有初始化方法再执行
 		this.mStub.initSdk(paramActivity);
 	}
@@ -630,36 +622,34 @@ public class CommonGameProxy implements YYWGameProxy {
 		return false;
 	}
 
-	
 	public void launchActivityOnCreate(Activity paramActivity) {
 		// TODO Auto-generated method stub
-		GameApitest.getGameApitestInstants(paramActivity).sendTest("launchActivityOnCreate");
+		GameApitest.getGameApitestInstants(paramActivity).sendTest(
+				"launchActivityOnCreate");
 		this.mStub.launchActivityOnCreate(paramActivity);
 	}
 
-	
 	public void launchActivityonOnNewIntent(Intent paramIntent) {
 		// TODO Auto-generated method stub
-		GameApitest.getGameApitestInstants().sendTest("launchActivityonOnNewIntent");
+		GameApitest.getGameApitestInstants().sendTest(
+				"launchActivityonOnNewIntent");
 		this.mStub.launchActivityonOnNewIntent(paramIntent);
 	}
-
 
 	public void onRequestPermissionsResult(int requestCode,
 			String[] permissions, int[] grantResults) {
 		// TODO Auto-generated method stub
-		GameApitest.getGameApitestInstants().sendTest("onRequestPermissionsResult");
-		
-		
-	
-		
-		this.mStub.onRequestPermissionsResult(requestCode,permissions,grantResults);
+		GameApitest.getGameApitestInstants().sendTest(
+				"onRequestPermissionsResult");
+
+		this.mStub.onRequestPermissionsResult(requestCode, permissions,
+				grantResults);
 	}
 
-	 public void onTouchEvent(MotionEvent event){
+	public void onTouchEvent(MotionEvent event) {
 
-		 Yayalog.loger("按下了"+event.getX());
-		
-	 }
-	
+		Yayalog.loger("按下了" + event.getX());
+
+	}
+
 }

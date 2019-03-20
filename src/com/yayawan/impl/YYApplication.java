@@ -7,7 +7,10 @@ import com.yayawan.proxy.YYWApplication;
 import com.yayawan.proxy.YYcontants;
 import com.yayawan.sdk.utils.Util;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.PermissionUtils;
+import com.yayawan.utils.Yayalog;
 
+import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 
@@ -21,7 +24,13 @@ public class YYApplication extends YYWApplication {
 		super.onCreate();
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
 		mContext = getApplicationContext();
-		Jxutilsinit.init(getApplicationContext());
+		
+		if (PermissionUtils.checkAndRequestPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE,PermissionUtils.READ_PHONE_STATE)) {
+			Jxutilsinit.init(getApplicationContext());
+		}
+		
+		
+		
 		System.out.println("YYApplication");
 		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate="+Util.getPackageName(getApplicationContext()));
 	}
