@@ -8,6 +8,7 @@ import com.yayawan.proxy.YYcontants;
 import com.yayawan.sdk.utils.Util;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.PermissionUtils;
+import com.yayawan.utils.Sputils;
 import com.yayawan.utils.Yayalog;
 
 import android.Manifest;
@@ -25,9 +26,15 @@ public class YYApplication extends YYWApplication {
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
 		mContext = getApplicationContext();
 		
-		if (PermissionUtils.checkAndRequestPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE,PermissionUtils.READ_PHONE_STATE)) {
-			Jxutilsinit.init(getApplicationContext());
-		}
+		
+		
+			
+			if (PermissionUtils.checkPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
+				Jxutilsinit.init(getApplicationContext());
+			}
+			
+		
+		
 		
 		
 		

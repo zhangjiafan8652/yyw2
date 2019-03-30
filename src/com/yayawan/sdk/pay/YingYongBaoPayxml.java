@@ -26,6 +26,8 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 	private ImageView iv_xiaomipay;
 	private ImageView iv_greenp;
 	private ImageView iv_buttonicon;
+	
+
 
 	public YingYongBaoPayxml(Activity activity) {
 		super(activity);

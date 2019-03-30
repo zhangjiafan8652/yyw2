@@ -134,6 +134,13 @@ case 3:
 		default:
 			break;
 		}
+		
+		if (DgameSdk.sdktype==1) {
+			url=url+"&nocompayinfo=1";
+		}else {
+		
+		}
+		
 		wv_mWeiboview.loadUrl(url);
 		//rl_mLoading.setVisibility(View.GONE);
 		Yayalog.loger(url);

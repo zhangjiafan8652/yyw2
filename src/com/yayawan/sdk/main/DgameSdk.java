@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,8 +42,12 @@ import com.yayawan.sdk.utils.LogoWindow;
 import com.yayawan.sdk.utils.MD5;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.PermissionUtils;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.SuperDialog;
 import com.yayawan.utils.Yayalog;
+import com.yayawan.utils.PermissionUtils.PermissionCheckCallBack;
+import com.yayawan.utils.SuperDialog.onDialogClickListener;
 
 /**
  * sdk调用入口
@@ -99,12 +104,47 @@ public class DgameSdk {
 	 * @param paramActivity
 	 * @param paramCallback
 	 */
-	public static void login(Activity paramActivity,
+	public static void login(final Activity paramActivity,
 			KgameSdkUserCallback paramCallback) {
-
 		
-		//更新数据库表
-		UserDao.getInstance(paramActivity).upDateclume();
+		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+			SuperDialog superDialog = new SuperDialog(paramActivity);
+			superDialog.setTitle("亲爱的玩家");
+			superDialog.setContent("密码将永久加密保存在sd中\r\n请授予sd卡读写权限").setListener(new onDialogClickListener() {
+				
+				@Override
+				public void click(boolean isButtonClick, int position) {
+					// TODO Auto-generated method stub
+					Yayalog.loger("请求权限对话框按钮按下");
+					PermissionUtils.checkMorePermissions(paramActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
+						
+						@Override
+						public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
+							// TODO Auto-generated method stub
+							// 用户之前已拒绝过权限申请
+							//
+							PermissionUtils.requestMorePermissions(paramActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
+						}
+						
+						@Override
+						public void onUserHasAlreadyTurnedDown(String... permission) {
+							// TODO Auto-generated method stub
+							// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+							PermissionUtils.toAppSetting(paramActivity);
+						}
+						
+						@Override
+						public void onHasPermission() {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+				}
+			}).show();
+		}
+		
+		
+		
 		
 		Yayalog.loger("kgamesdklogin");
 		mUserCallback = paramCallback;
@@ -378,12 +418,10 @@ public class DgameSdk {
 	 */
 	public static void init(Activity activity) {
 
-		if (sdktype==1) {
-			
-		}else {
+		
 			LogoWindow.getInstants(activity).start();
 
-		}
+		
 		
 	}
 

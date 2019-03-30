@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 
+import com.lidroid.jxutils.http.Jxutilsinit;
 import com.yayawan.common.CommonData;
 import com.yayawan.sdk.bean.PayMethod;
 
@@ -261,21 +262,47 @@ public class DeviceUtil {
 	 */
 	public static String getIMEI(Context paramContext) {
 		
-		if (PermissionUtils.checkAndRequestPermission(paramContext, Manifest.permission.READ_PHONE_STATE,PermissionUtils.READ_PHONE_STATE)) {
-			Yayalog.loger("无READ_PHONE_STATE授权");
-			return "";
+		
+		int isfirstin=Sputils.getSPint("isfirstin", 1, paramContext);
+		if (isfirstin==1) {
+			if (!PermissionUtils.checkPermission(paramContext, Manifest.permission.READ_PHONE_STATE)) {
+				Yayalog.loger("无READ_PHONE_STATE授权");
+				return "";
+			}else {
+				// 获取设备的imei号
+				String deviceId = ((TelephonyManager) paramContext
+						.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+				// 如果imei为空,获取mac地址
+				if (deviceId == null || "0".equals(deviceId)) {
+					WifiManager wifi = (WifiManager) paramContext
+							.getSystemService(Context.WIFI_SERVICE);
+					WifiInfo info = wifi.getConnectionInfo();
+					deviceId = getDEC(info.getMacAddress());
+				}
+				return deviceId;
+			}
+			
+		}else {
+			if (!PermissionUtils.checkAndRequestPermission(paramContext, Manifest.permission.READ_PHONE_STATE,PermissionUtils.READ_PHONE_STATE)) {
+				Yayalog.loger("无READ_PHONE_STATE授权");
+				return "";
+			}else {
+				// 获取设备的imei号
+				String deviceId = ((TelephonyManager) paramContext
+						.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+				// 如果imei为空,获取mac地址
+				if (deviceId == null || "0".equals(deviceId)) {
+					WifiManager wifi = (WifiManager) paramContext
+							.getSystemService(Context.WIFI_SERVICE);
+					WifiInfo info = wifi.getConnectionInfo();
+					deviceId = getDEC(info.getMacAddress());
+				}
+				return deviceId;
+			}
+			
 		}
-		// 获取设备的imei号
-		String deviceId = ((TelephonyManager) paramContext
-				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-		// 如果imei为空,获取mac地址
-		if (deviceId == null || "0".equals(deviceId)) {
-			WifiManager wifi = (WifiManager) paramContext
-					.getSystemService(Context.WIFI_SERVICE);
-			WifiInfo info = wifi.getConnectionInfo();
-			deviceId = getDEC(info.getMacAddress());
-		}
-		return deviceId;
+		
+		
 	}
 
 	/**

@@ -1,19 +1,13 @@
 package com.yayawan.sdk.login;
 
 import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.util.Log;
-
-import com.yayawan.sdk.db.DataTransfermationDao;
-import com.yayawan.sdk.db.OldSDBHelper;
-import com.yayawan.sdk.db.UserDao;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
@@ -83,18 +77,7 @@ public class InitSdk {
 	 * 迁移老版本sdk用户数据
 	 */
 	private static void initData(Context mcoContext) {
-		if (Environment.MEDIA_MOUNTED.equals(Environment
-				.getExternalStorageState())) {
-			File dbFolder = new File(OldSDBHelper.DB_DIR);
-			if (dbFolder.exists()) {
-				// 将原数据库中的数据写入新数据库
-				UserDao.getInstance(mcoContext)
-						.writeUsers(
-								DataTransfermationDao.getInstance(mcoContext)
-										.getUsers());
-
-			}
-		}
+		
 
 	}
 

@@ -137,9 +137,11 @@ public class LoginUtils {
 						AgentApp.mUser = user;
 
 						try {
+							
 							UserDao.getInstance(mActivity).writeUser(
 									AgentApp.mUser.userName,
 									AgentApp.mUser.password, AgentApp.mUser.secret);
+							
 							AgentApp.mUser.password = "";
 							AgentApp.mUser.secret = "";
 							//Yayalog.loger("登陆结果" + AgentApp.mUser.toString());

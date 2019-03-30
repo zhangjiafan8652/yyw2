@@ -3,9 +3,11 @@ package com.yayawan.sdk.login;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Service;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.telephony.SmsManager;
@@ -31,7 +33,11 @@ import com.yayawan.sdk.utils.MD5;
 import com.yayawan.sdk.utils.SIMCardUtil;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
+import com.yayawan.utils.PermissionUtils;
+import com.yayawan.utils.PermissionUtils.PermissionCheckCallBack;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.SuperDialog;
+import com.yayawan.utils.SuperDialog.onDialogClickListener;
 import com.yayawan.utils.Yayalog;
 
 public class Startlogin_dialog extends Basedialogview {
@@ -184,49 +190,68 @@ public class Startlogin_dialog extends Basedialogview {
 		Yayalog.loger("初始化数据。。。。");
 		// TODO Auto-generated method stub
 		// 每次从数据库获取数据时都清空下列表,否则会有很多重复的数据
-		if (mNames != null && mNames.size() > 0) {
-			mNames.clear();
-		}
-		// 数据库添加一列
-		UserDao.getInstance(mActivity).upDateclume();
-		mNames = UserDao.getInstance(mActivity).getUsers();
-
-		// 如果数据库里没有任何账号注册过.则进行快速注册
-		if (mNames.size() == 0) {
-			ViewConstants.logintype=2;
-			 startFirstregister();
-			 tv_message.setText("尝试自动登录中...");
-			return;
-		}
-		// 是否把切换账号取消了
-		if (ViewConstants.nochangeacount) {
-			startlogin();
-			return;
-		}
-
-		if (mNames != null && mNames.size() > 0) {
-
-			mSelectUser = mNames.get(0);
-			mPassword = UserDao.getInstance(mActivity).getPassword(mSelectUser);
-
-			
-			if (!TextUtils.isEmpty(mPassword)
-					&& !mPassword.equals("yayawan-zhang")) {
-				Yayalog.loger("正在登陆。。。。");
-				// 选择第一项进行登录
-				LoginUtils loginUtils = new LoginUtils(mActivity, this,
-						LoginUtils.STARTLOGIN);
-				loginUtils.login(mSelectUser, mPassword);
-
-				tv_message.setText("快速登录中...");
-			}else {
-				//Yayalog.loger("快速注册。。。。");
-				
-				startlogin();
+		
+		
+		
+					
+			if (mNames != null && mNames.size() > 0) {
+				mNames.clear();
 			}
-			Yayalog.loger("密码为空。。。。");
+			// 数据库添加一列
+			UserDao.getInstance(mActivity).upDateclume();
+			mNames = UserDao.getInstance(mActivity).getUsers();
 
-		}
+			// 如果数据库里没有任何账号注册过.则进行快速注册
+			if (mNames.size() == 0) {
+				
+				
+			    	//本地账号没有，进行快速注册
+			    	 Yayalog.loger("本地账号没有，进行快速注册");
+			    	 ViewConstants.logintype=2;
+					 startFirstregister();
+					 tv_message.setText("尝试自动登录中...");
+					 return;
+				
+				
+				
+			}
+			// 是否把切换账号取消了
+			if (ViewConstants.nochangeacount) {
+				startlogin();
+				return;
+			}
+
+			if (mNames != null && mNames.size() > 0) {
+
+				mSelectUser = mNames.get(0);
+				mPassword = UserDao.getInstance(mActivity).getPassword(mSelectUser);
+
+				
+				if (!TextUtils.isEmpty(mPassword)
+						&& !mPassword.equals("yayawan-zhang")) {
+					Yayalog.loger("正在登陆。。。。");
+					// 选择第一项进行登录
+					LoginUtils loginUtils = new LoginUtils(mActivity, this,
+							LoginUtils.STARTLOGIN);
+					loginUtils.login(mSelectUser, mPassword);
+
+					tv_message.setText("快速登录中...");
+				}else {
+					//Yayalog.loger("快速注册。。。。");
+					
+					startlogin();
+				}
+				Yayalog.loger("密码为空。。。。");
+
+			}
+			
+			
+		
+		
+		
+		
+		
+	
 
 	}
 	

@@ -22,7 +22,11 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "5.9";
+	public static final String SDKVERSION = "6.0";
+	
+	public static final int localaccountsize = 0; //本地账号数量
+	public static final boolean ishavestoregepermission  = false; //是否有内存卡读写权限
+	
 	public static final int LOGIN_VIEW = 1;
 	public static final int REGISTER_VIEW = 2;
 	public static final int REGISTERACCOUNT_VIEW = 3;
