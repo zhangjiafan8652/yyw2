@@ -1,5 +1,9 @@
 package com.yayawan.sdk.login;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
@@ -145,7 +149,8 @@ case 3:
 		//rl_mLoading.setVisibility(View.GONE);
 		Yayalog.loger(url);
 		
-		
+		//关闭android p的对话框
+		closeAndroidPDialog();
 		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -159,4 +164,25 @@ case 3:
 		});
 		
 	}
+	
+	private void closeAndroidPDialog(){
+        try {
+            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
+            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
+            declaredConstructor.setAccessible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Class cls = Class.forName("android.app.ActivityThread");
+            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
+            declaredMethod.setAccessible(true);
+            Object activityThread = declaredMethod.invoke(null);
+            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
+            mHiddenApiWarningShown.setAccessible(true);
+            mHiddenApiWarningShown.setBoolean(activityThread, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
