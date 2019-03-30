@@ -524,7 +524,31 @@ public class DgameSdk {
 			final KgameSdkCallback onexit) {
 		
 		if (DgameSdk.sdktype==1) {
-			onexit.onSuccess(null, 1);
+			//onexit.onSuccess(null, 1);
+			
+			Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
+
+					.setMessage("是否退出游戏？")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+									onexit.onSuccess(null, 1);
+									
+								}
+							})
+							.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+								}
+							}). create();
+
+					dialog.show();
 			
 		}else {
 			 Exit_dialog exit_dialog = new Exit_dialog(activitiy, "这个废弃",new ExitdialogCallBack() {
