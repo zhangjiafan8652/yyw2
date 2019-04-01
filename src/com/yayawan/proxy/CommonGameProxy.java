@@ -52,6 +52,7 @@ import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
 import com.yayawan.sdk.utils.MD5;
+import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.JSONUtil;
@@ -534,6 +535,9 @@ public class CommonGameProxy implements YYWGameProxy {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("onResume");
 
 		this.mStub.onResume(paramActivity);
+
+		//关闭android p的对话框
+		Utilsjf.closeAndroidPDialog();
 
 	}
 

@@ -80,10 +80,20 @@ public class LogoWindow {
 			switch (msg.what) {
 			case 1:
 				if (myviewicon != null && params.x == 0) {
-					//半透明隐藏图标
-					myviewicon.setImageBitmap(GetAssetsutils
-							.getImageFromAssetsFile("yaya1_acountmanagericon.png",
-									mactivity));
+					
+					
+					if (DgameSdk.sdktype==1) {
+						//半透明隐藏图标
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+										mactivity));
+					}else {
+						//半透明隐藏图标
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericon.png",
+										mactivity));
+					}
+					
 				}
 			case 523:
 				
@@ -102,10 +112,20 @@ public class LogoWindow {
 							"");
 					wm.updateViewLayout(myview, params);
 					//myview.setBackgroundColor(Color.GRAY);
-					//半透明隐藏图标
-					myviewicon.setImageBitmap(GetAssetsutils
-							.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
-									mactivity));
+					
+					if (DgameSdk.sdktype==1) {
+						//半透明隐藏图标
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericontouming_nosdk.png",
+										mactivity));
+					}else {
+						//半透明隐藏图标
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
+										mactivity));
+					}
+					
+					
 					myviewiconmanager.setVisibility(View.GONE);
 					
 				}
@@ -172,9 +192,8 @@ public class LogoWindow {
 			myviewicon.setLayoutParams(new RelativeLayout.LayoutParams(-2,
 					machSize(100)));
 
-			myviewicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-					"yaya1_acountmanagericon.png", mactivity));
 			
+		
 			//整个小助手
 			myviewiconmanager = new ImageView(mactivity);
 			// 创建时设置view的正常参数
@@ -184,8 +203,19 @@ public class LogoWindow {
 			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(346),
 					machSize(100)));
 
-			myviewiconmanager.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-					"yaya1_acountmanager.png", mactivity));
+			
+			
+			if (DgameSdk.sdktype==1) {
+				//半透明隐藏图标
+				myviewicon.setImageBitmap(GetAssetsutils
+						.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+								mactivity));
+			}else {
+				Yayalog.loger("set:yayamanagericon:yaya1_acountmanagericon.png");
+				myviewicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+						"yaya1_acountmanagericon.png", mactivity));
+				
+			}
 			
 			//myview.addView(myviewiconmanager);
 			myview.addView(myviewicon);
@@ -226,9 +256,21 @@ public class LogoWindow {
 						ontouchtime = System.currentTimeMillis();
 						
 
-						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericon.png",
-										mactivity));
+						
+						if (DgameSdk.sdktype==1) {
+							//半透明隐藏图标
+							myviewicon.setImageBitmap(GetAssetsutils
+									.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+											mactivity));
+						}else {
+							//半透明隐藏图标
+							myviewicon.setImageBitmap(GetAssetsutils
+									.getImageFromAssetsFile("yaya1_acountmanagericon.png",
+											mactivity));
+							
+						}
+						
+						
 						break;
 
 					case MotionEvent.ACTION_MOVE: // 捕获手指触摸移动动作
@@ -317,10 +359,22 @@ public class LogoWindow {
 							"");
 					wm.updateViewLayout(myview, params);
 					//myview.setBackgroundColor(Color.GRAY);
-					//半透明隐藏图标
-					myviewicon.setImageBitmap(GetAssetsutils
-							.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
-									mactivity));
+					
+					
+					if (DgameSdk.sdktype==1) {
+						//半透明隐藏图标
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericontouming_nosdk.png",
+										mactivity));
+					}else {
+						//半透明隐藏图标
+						
+						myviewicon.setImageBitmap(GetAssetsutils
+								.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
+										mactivity));
+						
+					}
+					
 					myviewiconmanager.setVisibility(View.GONE);
 					// myview.startAnimation(alphaAnimation);
 
