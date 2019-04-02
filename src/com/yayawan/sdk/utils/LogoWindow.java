@@ -282,8 +282,8 @@ public class LogoWindow {
 						int distance_y = (int) event.getRawY()
 								- (int) mdownTempY;
 
-						if (Math.abs(distance_x) > 40
-								&& Math.abs(distance_y) > 40) {
+						if (Math.abs(distance_x) > 60
+								&& Math.abs(distance_y) > 60) {
 
 							if (!ishelpshow) {
 
@@ -312,7 +312,7 @@ public class LogoWindow {
 							if ((System.currentTimeMillis() - ontouchtime) > 1500) {
 								 DgameSdk.stop(mactivity);
 								// 这里关闭了永久隐藏
-
+								 iscanyingcang=false;
 							} else {
 								int tempx=(int) event.getX();
 								Yayalog.loger("打开账户");
@@ -326,7 +326,7 @@ public class LogoWindow {
 							if (event.getRawX() < machSize(150)) {
 								updateViewPosition1();
 							}else {
-								mhandler.sendEmptyMessageDelayed(523, 10000);
+								mhandler.sendEmptyMessageDelayed(523, 7000);
 							}
 							
 						}
