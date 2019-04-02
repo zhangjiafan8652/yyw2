@@ -306,8 +306,8 @@ public class LogoWindow {
 						
 						distance_x = (int) event.getRawX() - (int) mdownTempX;
 						distance_y = (int) event.getRawY() - (int) mdownTempY;
-						if (Math.abs(distance_x) <= 40
-								&& Math.abs(distance_y) <= 40) {
+						if (Math.abs(distance_x) <= 70
+								&& Math.abs(distance_y) <= 70) {
 
 							if ((System.currentTimeMillis() - ontouchtime) > 1500) {
 								 DgameSdk.stop(mactivity);
@@ -326,7 +326,7 @@ public class LogoWindow {
 							if (event.getRawX() < machSize(150)) {
 								updateViewPosition1();
 							}else {
-								mhandler.sendEmptyMessageDelayed(523, 5000);
+								mhandler.sendEmptyMessageDelayed(523, 10000);
 							}
 							
 						}
