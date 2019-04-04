@@ -161,7 +161,7 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		
 		threelinearLayout.addView(iv_greenp2);
 		threelinearLayout.addView(iv_bluepay);
-		threelinearLayout.addView(iv_shoujipay);
+		//threelinearLayout.addView(iv_shoujipay);
 		threelinearLayout.addView(iv_qqpay);
 		threelinearLayout.addView(iv_qbipay);
 		//threelinearLayout.addView(iv_qbipay);
