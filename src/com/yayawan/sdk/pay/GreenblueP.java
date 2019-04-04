@@ -187,6 +187,13 @@ public class GreenblueP {
 							bluepayResult(result.result);
 
 						default:
+							try {
+								bluepayResult(result.result);
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+							
+
 							break;
 						}
 					}
