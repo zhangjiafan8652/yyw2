@@ -471,11 +471,28 @@ public class CommonGameProxy implements YYWGameProxy {
 
 		// 设置临时的角色等级。用作支付时候判断是否切换支付
 		templevel = Integer.parseInt(roleLevel);
+		
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName, roleCTime, ext);
 
 		this.mUserManager.setData(paramActivity, roleId, roleName, roleLevel,
 				zoneId, zoneName, roleCTime, ext);
+		
+		
+		if (Integer.parseInt(ext)==1) {
+			Yayalog.loger("yingyongbao setdata1");
+			if (ViewConstants.ISKGAME) {
+				
+			}else {
+				DgameSdk.setRoleData(paramActivity, roleId,
+						roleName, roleLevel,
+						zoneId, zoneName,YYWMain.mUser.yywtoken,YYWMain.mUser.yywuid);
+			}
+			
+		}else {
+			Yayalog.loger("yingyongbao setdata false"+Integer.parseInt(ext));
+		}
+		
 		GameApitest.getGameApitestInstants(paramActivity).sendTest(
 				"setData玩家数据：" + YYWMain.mRole.toString());
 

@@ -13,6 +13,7 @@ import com.yayawan.sdk.bean.PayResult;
 import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
+//  6.1 增加了第三方渠道传角色信息
 //	5.9 微调了界面，改变了支付获取方式
 //	5.8 增加测试流程
 //	5.7 丫丫玩盒子公告延迟3分钟显示
