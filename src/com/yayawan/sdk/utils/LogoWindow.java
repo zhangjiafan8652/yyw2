@@ -23,12 +23,16 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import com.yayawan.sdk.login.Help_dissmiss_dialog;
+import com.yayawan.sdk.login.StopManagerWarning_dialog;
+import com.yayawan.sdk.login.StopManagerWarning_dialog.StopManagerWarningLinstener;
+import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.ShakeListener.OnShakeListener;
 import com.yayawan.sdk.xml.DisplayUtils;
 import com.yayawan.sdk.xml.GetAssetsutils;
 
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.Sputils;
 import com.yayawan.utils.Yayalog;
 
 /**
@@ -49,6 +53,13 @@ public class LogoWindow {
 	private static LogoWindow mLogowindow;
 	
 	private static boolean iscanyingcang =true;
+	 public static String img_icon_sdk="yaya1_acountmanagericon.png";
+	
+	public static String img_icon_sdk_ban="yaya1_acountmanagericontouming.png";
+	
+	public static String img_icon_nosdk="yaya1_acountmanagericon_nosdk.png";
+	
+	public static String img_icon_nosdk_ban="yaya1_acountmanagericontouming_nosdk.png";
 
 	public static LogoWindow getInstants(Activity mactivity) {
 		if (mLogowindow == null) {
@@ -81,16 +92,15 @@ public class LogoWindow {
 			case 1:
 				if (myviewicon != null && params.x == 0) {
 					
-					
 					if (DgameSdk.sdktype==1) {
 						//半透明隐藏图标
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+								.getImageFromAssetsFile(img_icon_nosdk,
 										mactivity));
 					}else {
 						//半透明隐藏图标
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericon.png",
+								.getImageFromAssetsFile(img_icon_sdk,
 										mactivity));
 					}
 					
@@ -99,15 +109,8 @@ public class LogoWindow {
 				
 				
 				if (iscanyingcang) {
-					
-					
 					params.x = 0;
-
 					params.y = 100;
-
-					// myview.setX(-machSize(30));
-					// myview.setRotation(50);
-					// myview.setAlpha(100);
 					Yayalog.loger("我要更新ui去隐藏了" +
 							"");
 					wm.updateViewLayout(myview, params);
@@ -116,12 +119,12 @@ public class LogoWindow {
 					if (DgameSdk.sdktype==1) {
 						//半透明隐藏图标
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericontouming_nosdk.png",
+								.getImageFromAssetsFile(img_icon_nosdk_ban,
 										mactivity));
 					}else {
 						//半透明隐藏图标
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
+								.getImageFromAssetsFile(img_icon_sdk_ban,
 										mactivity));
 					}
 					
@@ -163,7 +166,7 @@ public class LogoWindow {
 	private static ImageView myviewiconmanager;
 	private static ImageView myviewicon;
 	private static RelativeLayout myview;
-
+	Help_dissmiss_dialog help_dissmiss_dialog;
 	private void createView() {
 
 		Yayalog.loger("兔子oncreate");
@@ -183,9 +186,7 @@ public class LogoWindow {
 			
 			myviewicon = new ImageView(mactivity);
 			// 创建时设置view的正常参数
-			// myview.setX(-machSize(0));
-			// myview.setRotation(0);
-			// myview.setAlpha(225);
+		
 			
 			//小助手icon
 			
@@ -197,29 +198,23 @@ public class LogoWindow {
 			//整个小助手
 			myviewiconmanager = new ImageView(mactivity);
 			// 创建时设置view的正常参数
-			// myview.setX(-machSize(0));
-			// myview.setRotation(0);
-			// myview.setAlpha(225);
+		
 			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(346),
 					machSize(100)));
 
-			
-			
 			if (DgameSdk.sdktype==1) {
 				//半透明隐藏图标
 				myviewicon.setImageBitmap(GetAssetsutils
-						.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+						.getImageFromAssetsFile(img_icon_nosdk,
 								mactivity));
 			}else {
-				Yayalog.loger("set:yayamanagericon:yaya1_acountmanagericon.png");
+				
 				myviewicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-						"yaya1_acountmanagericon.png", mactivity));
+						img_icon_sdk, mactivity));
 				
 			}
-			
-			//myview.addView(myviewiconmanager);
+		
 			myview.addView(myviewicon);
-			
 			
 			myview.setOnTouchListener(new OnTouchListener() {
 
@@ -260,12 +255,12 @@ public class LogoWindow {
 						if (DgameSdk.sdktype==1) {
 							//半透明隐藏图标
 							myviewicon.setImageBitmap(GetAssetsutils
-									.getImageFromAssetsFile("yaya1_acountmanagericon_nosdk.png",
+									.getImageFromAssetsFile(img_icon_nosdk,
 											mactivity));
 						}else {
 							//半透明隐藏图标
 							myviewicon.setImageBitmap(GetAssetsutils
-									.getImageFromAssetsFile("yaya1_acountmanagericon.png",
+									.getImageFromAssetsFile(img_icon_sdk,
 											mactivity));
 							
 						}
@@ -287,15 +282,13 @@ public class LogoWindow {
 
 							if (!ishelpshow) {
 
-								new Help_dissmiss_dialog(mactivity).dialogShow();
-
+								 help_dissmiss_dialog = new Help_dissmiss_dialog(mactivity);
+								 help_dissmiss_dialog.dialogShow();
+								//ToastUtil.showSuccess(mactivity, "xianshil");
 								ishelpshow = true;
 
 							}
-							
-
-							// YayaWan.stop(mActivity);
-							// return false;
+					
 						}
 						break;
 
@@ -303,33 +296,39 @@ public class LogoWindow {
 
 						iscanyingcang=true;
 						
-						
+						int rawx=(int) event.getRawX();
+						int rawy=(int) event.getRawY();
 						distance_x = (int) event.getRawX() - (int) mdownTempX;
 						distance_y = (int) event.getRawY() - (int) mdownTempY;
+						
+						//System.out.println("rawx:"+rawx);
+						//System.out.println("rawy:"+rawy);
+						//System.out.println("machSize:"+ machSize((DisplayUtils.getHeightPx(mactivity)-150)));
 						if (Math.abs(distance_x) <= 70
 								&& Math.abs(distance_y) <= 70) {
 
-							if ((System.currentTimeMillis() - ontouchtime) > 1500) {
-								 DgameSdk.stop(mactivity);
-								// 这里关闭了永久隐藏
-								 iscanyingcang=false;
-							} else {
+						
 								int tempx=(int) event.getX();
 								Yayalog.loger("打开账户");
 								onClick(1);
 						
-							}
-
 							
+			
 						} else {
 							
-							if (event.getRawX() < machSize(150)) {
+							if ((rawy > (DisplayUtils.getHeightPx(mactivity)-machSize(200)))&&(rawx > machSize(100))) {
+								
+								   //关闭小助手
+									gotoStopManager();
+								
+							} else if (event.getRawX() < machSize(150)) {
 								updateViewPosition1();
 							}else {
-								mhandler.sendEmptyMessageDelayed(523, 7000);
+								mhandler.sendEmptyMessageDelayed(523, 2000);
 							}
 							
 						}
+						help_dissmiss_dialog.dialogDismiss();
 						ishelpshow = false;
 						break;
 					}
@@ -364,13 +363,13 @@ public class LogoWindow {
 					if (DgameSdk.sdktype==1) {
 						//半透明隐藏图标
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericontouming_nosdk.png",
+								.getImageFromAssetsFile(img_icon_nosdk_ban,
 										mactivity));
 					}else {
 						//半透明隐藏图标
 						
 						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile("yaya1_acountmanagericontouming.png",
+								.getImageFromAssetsFile(img_icon_sdk_ban,
 										mactivity));
 						
 					}
@@ -396,8 +395,7 @@ public class LogoWindow {
 		params.alpha = (float) 1;
 
 		params.x = 0;
-		if (DeviceUtil.getGameInfo(mactivity, "yayawan_orientation").equals(
-				"landscape")) {
+		if (DeviceUtil.isLandscape(mactivity)) {
 			params.y = machSize(360);
 		} else {
 			params.y = machSize(600);
@@ -415,6 +413,39 @@ public class LogoWindow {
 			}
 		});
 
+	}
+	StopManagerWarning_dialog mStopManagerWarning_dialog;
+	protected void gotoStopManager() {
+		// TODO Auto-generated method stub
+		System.out.println("gotoStopManager");
+		if (ViewConstants.isshowmanagertip==1) {
+			
+			 mStopManagerWarning_dialog=	new StopManagerWarning_dialog(mactivity);
+			 mStopManagerWarning_dialog.setmStopManagerWarningLinstener(new StopManagerWarningLinstener() {
+				
+				@Override
+				public void sucee() {
+					// TODO Auto-generated method stub
+					 DgameSdk.stop(mactivity);
+						// 这里关闭了永久隐藏
+					 iscanyingcang=false;
+					 mStopManagerWarning_dialog.dialogDismiss();
+				}
+				
+				@Override
+				public void cancel() {
+					// TODO Auto-generated method stub
+					mStopManagerWarning_dialog.dialogDismiss();
+					mhandler.sendEmptyMessageDelayed(523, 7000);
+				}
+			});
+			 mStopManagerWarning_dialog.dialogShow();
+		}else {
+			 DgameSdk.stop(mactivity);
+				// 这里关闭了永久隐藏
+			 iscanyingcang=false;
+		}
+		
 	}
 
 	// 添加

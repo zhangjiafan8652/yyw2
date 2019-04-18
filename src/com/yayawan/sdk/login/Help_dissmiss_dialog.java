@@ -1,5 +1,6 @@
 package com.yayawan.sdk.login;
 
+import android.R.color;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,10 +15,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.utils.ToastUtil;
+import com.yayawan.sdk.xml.DisplayUtils;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
@@ -75,7 +80,7 @@ public class Help_dissmiss_dialog extends Basedialogview {
 				@Override
 				public void run() {
 
-					mHandler.sendEmptyMessageDelayed(CLOSE, 2000);
+					mHandler.sendEmptyMessageDelayed(CLOSE, 3000);
 				}
 			}).start();
 		}
@@ -88,8 +93,8 @@ public class Help_dissmiss_dialog extends Basedialogview {
 	public void createDialog(Activity mActivity) {
 		dialog = new Dialog(mContext);
 
-		int ho_height = 100;
-		int ho_with = 1000;
+		int ho_height = 150;
+		int ho_with = 1280;
 		int po_height = 100;
 		int po_with = 600;
 
@@ -100,76 +105,93 @@ public class Help_dissmiss_dialog extends Basedialogview {
 		int tv_textsize = 0;
 		int maginbut = 0;
 		// 设置横竖屏
+		
 		String orientation = DeviceUtil.getOrientation(mContext);
 		if (orientation == "") {
 
 		} else if ("landscape".equals(orientation)) {
 
-			height = ho_height;
-			with = ho_with;
+			height = machSize(130);
+			with = 1280;
 			bt_with = 200;
 			bt_textsize = 28;
 			tv_textsize = 36;
 			maginbut = 500;
 		} else if ("portrait".equals(orientation)) {
 
-			height = po_height;
-			with = po_with;
+			height = machSize(150);
+			with = 720;
 			bt_with = 200;
 			bt_textsize = 28;
 			tv_textsize = 32;
 			maginbut = 900;
 		}
+		int screenheight=0;
+		if (DeviceUtil.isLandscape(mActivity)) {
+			screenheight = DisplayUtils.getHeightPx(mActivity);
+		} else  {
+			   // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
+			screenheight = DisplayUtils.getHeightPx(mActivity);
 
+		}
+	
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		baselin = new LinearLayout(mContext);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
-		machineFactory.MachineView(baselin, with, height, "LinearLayout");
+		machineFactory.MachineView(baselin, with,MATCH_PARENT , "LinearLayout");
 		baselin.setBackgroundColor(Color.TRANSPARENT);
-
+		//baselin.setBackgroundColor(Color.RED);
 		// 中间内容
+		
+		RelativeLayout Rl_content = new RelativeLayout(mContext);
+		machineFactory.MachineView(Rl_content, with, MATCH_PARENT, 0, mLinearLayout,
+				0, 0, 0, 0, 100);
+		
 		LinearLayout ll_content = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_content, with, height, 0, mLinearLayout,
-				0, 0, 0, maginbut, 100);
-		// ll_content.setBackgroundColor(Color.WHITE);
+		machineFactory.MachineView(ll_content, with, height, 0, mRelativeLayout,
+				0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_BOTTOM);
+		
 		ll_content.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya_loginbut.9.png", mActivity));
 		ll_content.setGravity(Gravity.CENTER_VERTICAL);
+		ll_content.setBackgroundColor(Color.parseColor("#CCffffff"));
+		
+		//ll_content.setBackgroundColor(Color.GREEN);
 
 		LinearLayout ll_textline = new LinearLayout(mActivity);
-		machineFactory.MachineView(ll_textline, 0, MATCH_PARENT, 1,
+		machineFactory.MachineView(ll_textline, with-bt_with, height, 1,
 				mLinearLayout);
 		ll_textline.setGravity(Gravity.CENTER_VERTICAL);
+		//ll_textline.setBackgroundColor(Color.RED);
 
 		tv_message1 = new TextView(mActivity);
-		machineFactory.MachineTextView(tv_message1, WRAP_CONTENT, WRAP_CONTENT,
-				0, "长按3秒小助手隐藏,摇一摇会重新出现哦.", tv_textsize, mLinearLayout, 10, 0, 0,
+		machineFactory.MachineTextView(tv_message1, MATCH_PARENT, height,
+				0, "拖到此处隐藏", tv_textsize, mLinearLayout, 10, 0, 0,
 				0);
-		tv_message1.setTextColor(Color.parseColor("#ec7600"));
-
-		tv_userid = new TextView(mActivity);
-		machineFactory.MachineTextView(tv_userid, WRAP_CONTENT, WRAP_CONTENT,
-				0, "", tv_textsize, mLinearLayout, 0, 0, 0, 0);
-		tv_userid.setTextColor(Color.parseColor("#ec7600"));
+		tv_message1.setTextColor(Color.parseColor("#000000"));
+        tv_message1.setGravity(Gravity_CENTER);
+       // tv_message1.setBackgroundColor(Color.BLUE);
 
 		// TODO
 		ll_textline.addView(tv_message1);
-		ll_textline.addView(tv_userid);
+	
 
 		bt_change = new Button(mActivity);
 		machineFactory.MachineButton(bt_change, bt_with, 80, 0, "不再提示",
-				bt_textsize, mLinearLayout, 0, 0, 10, 0);
+				bt_textsize, mLinearLayout, 20, 0, 0, 0);
 		bt_change.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya_greenbut.9.png", mContext));
 		bt_change.setTextColor(Color.WHITE);
 		
 
 		// TODO
+		//ll_content.addView(bt_change);
 		ll_content.addView(ll_textline);
-		ll_content.addView(bt_change);
-
-		baselin.addView(ll_content);
+		
+		Rl_content.addView(ll_content);
+		baselin.addView(Rl_content);
 		dialog.setContentView(baselin);
 		Window dialogWindow = dialog.getWindow();
 		WindowManager.LayoutParams lp = dialogWindow.getAttributes();

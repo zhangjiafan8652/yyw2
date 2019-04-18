@@ -26,12 +26,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class SmallHelpActivity extends Activity{
 
 	
-	private RelativeLayout rl_mLoading;
+	private LinearLayout rl_mLoading;
 
 	public Activity mActivity;
 	@Override

@@ -551,51 +551,74 @@ public class Login_ho_dialog extends Basedialogview {
 		
 		//联系客服
 		 qqhao = Sputils.getSPstring("service_qq", "暂无", mActivity);
-		if (CommonData.sdkid.contains("qianqi")) {
-			
-			rl_contactcustomerservice.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
+		 
+		//如果是sdktpye为1的话，就隐藏背景
+			if (DgameSdk.sdktype==1) {
+				tv_contactcustomerservice.setText("QQ客服："+qqhao+"(点击复制)");
+				tv_contactcustomerservice.setTextSize(machSize(10));
+				rl_contactcustomerservice.setOnClickListener(new OnClickListener() {
 					
-					
-					
-					//qqhao="3003569760";
-					if (qqhao.equals("4000042115")) {
-						qqhao="938189213";
-					}
-					if (qqhao.equals("暂无")) {
+					@SuppressLint("NewApi") @Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
 						
-					}else {
-						 String url="mqqwpa://im/chat?chat_type=crm&uin="+qqhao+"&version=1&src_type=web&web_src=http:://wpa.b.qq.com";
-
-						//String url="mqqwpa://im/chat?chat_type=wpa&uin="+qqhao;
-						mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						String qqhao1 = Sputils.getSPstring("service_qq", "暂无", mActivity);
+						 // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+				        ClipboardManager cm = (ClipboardManager)mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+				        // 将文本内容放到系统剪贴板里。
+				        cm.setText(qqhao1);
+				        Toast.makeText(mActivity, "复制成功", Toast.LENGTH_LONG).show();
+						
 					}
-				}
-			});
-			
-		}else {
-			tv_contactcustomerservice.setText("QQ客服："+qqhao+"(点击复制)");
-			tv_contactcustomerservice.setTextSize(machSize(10));
-			rl_contactcustomerservice.setOnClickListener(new OnClickListener() {
-				
-				@SuppressLint("NewApi") @Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
+				});
+			}else {
+				if (CommonData.sdkid.contains("qianqi")) {
 					
-					String qqhao1 = Sputils.getSPstring("service_qq", "暂无", mActivity);
-					 // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
-			        ClipboardManager cm = (ClipboardManager)mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-			        // 将文本内容放到系统剪贴板里。
-			        cm.setText(qqhao1);
-			        Toast.makeText(mActivity, "复制成功", Toast.LENGTH_LONG).show();
+					rl_contactcustomerservice.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							
+							
+							
+							//qqhao="3003569760";
+							if (qqhao.equals("4000042115")) {
+								qqhao="938189213";
+							}
+							if (qqhao.equals("暂无")) {
+								
+							}else {
+								 String url="mqqwpa://im/chat?chat_type=crm&uin="+qqhao+"&version=1&src_type=web&web_src=http:://wpa.b.qq.com";
+
+								//String url="mqqwpa://im/chat?chat_type=wpa&uin="+qqhao;
+								mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+							}
+						}
+					});
+					
+				}else {
+					tv_contactcustomerservice.setText("QQ客服："+qqhao+"(点击复制)");
+					tv_contactcustomerservice.setTextSize(machSize(10));
+					rl_contactcustomerservice.setOnClickListener(new OnClickListener() {
+						
+						@SuppressLint("NewApi") @Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							
+							String qqhao1 = Sputils.getSPstring("service_qq", "暂无", mActivity);
+							 // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+					        ClipboardManager cm = (ClipboardManager)mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+					        // 将文本内容放到系统剪贴板里。
+					        cm.setText(qqhao1);
+					        Toast.makeText(mActivity, "复制成功", Toast.LENGTH_LONG).show();
+							
+						}
+					});
 					
 				}
-			});
-			
-		}
+			}
+		
 	
 		
 		// 注册

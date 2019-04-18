@@ -110,12 +110,10 @@ public class DisplayUtils {
 		// 判断屏幕放向
 		String orientation = DeviceUtil.getOrientation(activity);
 		
-		if (orientation == "") {
-
-		} else if ("landscape".equals(orientation)) {
+		if (DeviceUtil.isLandscape(activity)) {
 
 			widthPx = getHeightPx(activity);
-		} else if ("portrait".equals(orientation)) {
+		} else  {
 			   // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			widthPx = getWidthPx(activity);
 

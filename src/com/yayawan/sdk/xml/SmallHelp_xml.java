@@ -16,18 +16,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.sdk.utils.CornersWebView;
 import com.yayawan.utils.DeviceUtil;
 
 public class SmallHelp_xml extends Basexml implements Layoutxml {
 
 	private LinearLayout baseLinearLayout;
 	private ImageButton iv_mPre;
-	private WebView wv_mWeiboview;
+	private CornersWebView wv_mWeiboview;
 	
 
 	private LinearLayout ll_mPre;
 	private TextView tv_zhuce;
-	private RelativeLayout rl_mLoading;
+	private LinearLayout rl_mLoading;
 	private ProgressBar pb_mLoading;
 	private Button bt_mReload;
 	private LinearLayout baselin;
@@ -58,33 +59,36 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		MachineFactory machineFactory = new MachineFactory(mActivity);
 		machineFactory.MachineView(baselin, with, height,
 				mLinearLayout);
-		baselin.setBackgroundDrawable(GetAssetsutils
-				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
+		//baselin.setBackgroundDrawable(GetAssetsutils
+			//	.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
+		//baselin.setPadding(10, 0, 10, 10);
 		baselin.setGravity(Gravity.CENTER);
-		wv_mWeiboview = new WebView(mContext);
-//		if (DeviceUtil.isLandscape(mContext)) {
-			machineFactory.MachineView(wv_mWeiboview, with, height,
+		
+		wv_mWeiboview = new CornersWebView(mContext);
+		
+		wv_mWeiboview.setLayerType(View.
+
+				LAYER_TYPE_SOFTWARE
+				, null);
+		machineFactory.MachineView(wv_mWeiboview, with, height,
 					mLinearLayout);
-//		}else {
-//			baseLinearLayout.setGravity(Gravity.CENTER);
-//			machineFactory.MachineView(wv_mWeiboview, ViewConstants.getHoldActivityWith(mActivity), (ViewConstants.getHoldActivityHeight(mActivity)/4)*3+50,
-//					mLinearLayout);
-//		}
+		//wv_mWeiboview.setRadius(10, 10, 10, 10);
 		//链接状态布局
-				rl_mLoading = new RelativeLayout(mContext);
+				rl_mLoading = new LinearLayout(mContext);
 				rl_mLoading.setBackgroundColor(Color.WHITE);
-				machineFactory.MachineView(rl_mLoading, WRAP_CONTENT, WRAP_CONTENT,
+				machineFactory.MachineView(rl_mLoading, with, height,
 						mLinearLayout);
-
+				rl_mLoading.setGravity(Gravity.CENTER);
 				pb_mLoading = new ProgressBar(mContext);
-				machineFactory.MachineView(pb_mLoading, 80, 80, 0, mRelativeLayout, 0,
-						0, 0, 0, RelativeLayout.CENTER_IN_PARENT);
-
+				machineFactory.MachineView(pb_mLoading, 50, 50, 0, mLinearLayout, 0,
+						250, 0, 0,0);
+				
+				
 				bt_mReload = new Button(mContext);
 				machineFactory.MachineButton(bt_mReload, 350, 96, 0, "连接失败,点击重新连接", 28,
 						mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_IN_PARENT);
 				bt_mReload.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-						"yaya_bulebutton.9.png", "yaya_bulebutton1.9.png", mActivity));
+						"yaya1_loginbutton.9.png", "yaya1_loginbutton.9.png", mActivity));
 				bt_mReload.setTextColor(Color.WHITE);
 				
 				bt_mReload.setVisibility(View.GONE);
@@ -101,11 +105,11 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		return baseLinearLayout;
 	}
 
-	public RelativeLayout getRl_mLoading() {
+	public LinearLayout getRl_mLoading() {
 		return rl_mLoading;
 	}
 
-	public void setRl_mLoading(RelativeLayout rl_mLoading) {
+	public void setRl_mLoading(LinearLayout rl_mLoading) {
 		this.rl_mLoading = rl_mLoading;
 	}
 
@@ -141,11 +145,11 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		this.iv_mPre = iv_mPre;
 	}
 
-	public WebView getWv_mWeiboview() {
+	public CornersWebView getWv_mWeiboview() {
 		return wv_mWeiboview;
 	}
 
-	public void setWv_mWeiboview(WebView wv_mWeiboview) {
+	public void setWv_mWeiboview(CornersWebView wv_mWeiboview) {
 		this.wv_mWeiboview = wv_mWeiboview;
 	}
 

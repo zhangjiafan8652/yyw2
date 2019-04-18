@@ -42,6 +42,7 @@ public class BaseLogin_Activity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+		
 		// 设置横竖屏
 		String orientation = DeviceUtil.getOrientation(mContext);
 
@@ -70,7 +71,7 @@ public class BaseLogin_Activity extends Activity {
 
 		case ViewConstants.YAYAPAYMAIN:
 			mBaseview = new Yayapaymain_jf(this);
-			
+			this.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
 			setContentView(mBaseview.getView());
 			break;
 

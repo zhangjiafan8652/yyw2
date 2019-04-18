@@ -86,6 +86,7 @@ public class Startanim_jf extends BaseView {
 		//把主题换成全屏的
 		Theme theme = mActivity.getTheme();
 		theme.applyStyle(R.style.Theme_Holo_Light, true);
+		
 		iv_loading = mThisview.getIv_loading();
 		iv_text = mThisview.getIv_text();
 		iv_text.setVisibility(View.GONE);

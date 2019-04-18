@@ -21,13 +21,14 @@ import android.widget.TextView;
 import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.utils.CornersLinearLayout;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Yayalog;
 
 @SuppressLint("NewApi")
 public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
-	private LinearLayout baseLinearLayout;
+	private CornersLinearLayout baseLinearLayout;
 	private ImageButton iv_mPre;
 	private TextView tv_mYuanbao;
 	private TextView tv_mMoney;
@@ -94,7 +95,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		// long currentTimeMillis = System.currentTimeMillis();
 
 		// 基类布局
-		baseLinearLayout = new LinearLayout(mContext);
+		baseLinearLayout = new CornersLinearLayout(mContext);
 		baseLinearLayout.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
 
@@ -104,6 +105,10 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		baseLinearLayout.setBackgroundColor(Color.WHITE);
 		baseLinearLayout.setGravity(Gravity.CENTER_VERTICAL);
 
+		baseLinearLayout.setBackgroundDrawable(GetAssetsutils
+				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
+	
+		
 		// 设置长度需要baseliner和relative两个设置
 		// 标题栏
 		RelativeLayout rl_title = new RelativeLayout(mContext);
@@ -259,59 +264,13 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
 		
 		gl_mPlaylist.addView(rl_mYinlianpay);
-		/*
-		 * if (mpaytostring.contains("yaya_qq")) {
-		 * gl_mPlaylist.addView(rl_mQbi); }
-		 * 
-		 * if (mpaytostring.contains("yaya_yinlian")) {
-		 * gl_mPlaylist.addView(rl_mYinlianpay); }
-		 * 
-		 * if (mpaytostring.contains("yaya_visa")) {
-		 * gl_mPlaylist.addView(rl_mXinyongka); }
-		 * 
-		 * if (mpaytostring.contains("yaya_cash")) {
-		 * gl_mPlaylist.addView(rl_mChuxuka); }
-		 */
-
-		// button更多支付按钮
-		/*
-		 * bt_mMorepay = new Button(mActivity); bt_mMorepay =
-		 * machineFactory.MachineButton(bt_mMorepay, 300, 76, 1, "更多支付方式", 30,
-		 * mLinearLayout, 0, 10, 0, 0); bt_mMorepay.setTextColor(Color.WHITE);
-		 * bt_mMorepay.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-		 * "yaya_yellowbutton.9.png", "yaya_yellowbutton1.9.png", mActivity));
-		 * bt_mMorepay.setGravity(Gravity_CENTER);
-		 * 
-		 * bt_mMorepay.setOnClickListener(new OnClickListener() {
-		 * 
-		 * @Override public void onClick(View v) {
-		 * 
-		 * if (mpaytostring.contains("yaya_liantong")) {
-		 * gl_mPlaylist.addView(rl_mLiantong); }
-		 * 
-		 * if (mpaytostring.contains("yaya_dianxin")) {
-		 * gl_mPlaylist.addView(rl_mDianxin); }
-		 * 
-		 * if (mpaytostring.contains("yaya_yidong")) {
-		 * gl_mPlaylist.addView(rl_mYidong); } if
-		 * (mpaytostring.contains("yaya_junwang")) {
-		 * gl_mPlaylist.addView(rl_mJunka); }
-		 * 
-		 * if (mpaytostring.contains("yaya_shengda")) {
-		 * gl_mPlaylist.addView(rl_mShengda); } if
-		 * (mpaytostring.contains("yaya_wxpluin")) {
-		 * gl_mPlaylist.addView(rl_mWxpluin); }
-		 * bt_mMorepay.setVisibility(View.GONE); } });
-		 */
-
+	
 		ll_mContent.addView(gl_mPlaylist);
-		//ll_mContent.addView(bt_mMorepay);
 
 		sv_mContent.addView(ll_mContent);
-
 		baseLinearLayout.addView(rl_title);
 		baseLinearLayout.addView(sv_mContent);
-		// Yayalog.loger("启动时间："+(System.currentTimeMillis()-currentTimeMillis));
+		
 		return baseLinearLayout;
 	}
 
@@ -441,11 +400,11 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		return tv_vline;
 	}
 
-	public LinearLayout getBaseLinearLayout() {
+	public CornersLinearLayout getBaseLinearLayout() {
 		return baseLinearLayout;
 	}
 
-	public void setBaseLinearLayout(LinearLayout baseLinearLayout) {
+	public void setBaseLinearLayout(CornersLinearLayout baseLinearLayout) {
 		this.baseLinearLayout = baseLinearLayout;
 	}
 
