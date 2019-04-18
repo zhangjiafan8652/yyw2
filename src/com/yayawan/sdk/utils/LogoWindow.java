@@ -301,9 +301,7 @@ public class LogoWindow {
 						distance_x = (int) event.getRawX() - (int) mdownTempX;
 						distance_y = (int) event.getRawY() - (int) mdownTempY;
 						
-						//System.out.println("rawx:"+rawx);
-						//System.out.println("rawy:"+rawy);
-						//System.out.println("machSize:"+ machSize((DisplayUtils.getHeightPx(mactivity)-150)));
+						
 						if (Math.abs(distance_x) <= 70
 								&& Math.abs(distance_y) <= 70) {
 
@@ -324,12 +322,15 @@ public class LogoWindow {
 							} else if (event.getRawX() < machSize(150)) {
 								updateViewPosition1();
 							}else {
-								mhandler.sendEmptyMessageDelayed(523, 2000);
+								mhandler.sendEmptyMessageDelayed(523, 500);
 							}
 							
 						}
-						help_dissmiss_dialog.dialogDismiss();
-						ishelpshow = false;
+						if (help_dissmiss_dialog!=null) {
+							help_dissmiss_dialog.dialogDismiss();
+							ishelpshow = false;
+						}
+						
 						break;
 					}
 					return true;
@@ -436,7 +437,7 @@ public class LogoWindow {
 				public void cancel() {
 					// TODO Auto-generated method stub
 					mStopManagerWarning_dialog.dialogDismiss();
-					mhandler.sendEmptyMessageDelayed(523, 7000);
+					mhandler.sendEmptyMessageDelayed(523, 3000);
 				}
 			});
 			 mStopManagerWarning_dialog.dialogShow();
