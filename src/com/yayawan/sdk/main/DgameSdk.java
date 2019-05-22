@@ -23,6 +23,7 @@ import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.common.CommonData;
+import com.yayawan.domain.YYWUser;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
@@ -82,9 +83,7 @@ public class DgameSdk {
 	public static void animation(Activity paramActivity,
 			KgameSdkStartAnimationCallback paramCallback) {
 		mStartAnimationCallback = paramCallback;
-		Yayalog.loger("kgameanim");	
-		
-		
+		Yayalog.loger("kgameanim");		
 		String gameInfo = DeviceUtil.getGameInfo(paramActivity, "sdktype");
 		if (gameInfo.equals("1")) {
 			mStartAnimationCallback.onSuccess();
@@ -106,6 +105,11 @@ public class DgameSdk {
 	 */
 	public static void login(final Activity paramActivity,
 			KgameSdkUserCallback paramCallback) {
+		
+		
+		
+		
+		
 		
 		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
 			SuperDialog superDialog = new SuperDialog(paramActivity);
@@ -156,6 +160,10 @@ public class DgameSdk {
 
 	}
 
+	
+	
+	
+	
 	/**
 	 * demo登陸接口
 	 * 
@@ -319,6 +327,62 @@ public class DgameSdk {
 		
 	}
 
+	
+	/**
+	 * 设置角色id
+	 * 
+	 * @param paramActivity
+	 * @param roleId
+	 * @param roleName
+	 * @param roleLevel
+	 * @param zoneId
+	 * @param zoneName
+	 */
+	public static void setRoleData(Activity paramActivity, String roleId,
+			String roleName, String roleLevel, String zoneId, String zoneName,String token,String uid,String type) {
+		// TODO Auto-generated method stub
+
+		Yayalog.loger("设置角色信息token："+token+"--"+uid);
+		
+		HttpUtils httpUtils = new HttpUtils();
+		RequestParams requestParams = new RequestParams();
+		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(paramActivity));
+		requestParams.addBodyParameter("token", token+"");
+		requestParams.addBodyParameter("uid", uid+"");
+		requestParams.addBodyParameter("role_id", roleId);
+		requestParams.addBodyParameter("role_name",roleName);
+		requestParams.addBodyParameter("role_level",roleLevel);
+		requestParams.addBodyParameter("zone_id",zoneId);
+		requestParams.addBodyParameter("zone_name", zoneName);
+		requestParams.addBodyParameter("type", type);
+		
+		
+		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
+		Yayalog.loger("token", token+"");
+		Yayalog.loger("uid", uid+"");
+		Yayalog.loger("role_id", roleId);
+		Yayalog.loger("role_name",roleName);
+		Yayalog.loger("role_level",roleLevel);
+		Yayalog.loger("zone_id",zoneId);
+		Yayalog.loger("zone_name", zoneName);
+		Yayalog.loger("zone_name", ViewConstants.SETROLEDATAURL);
+		httpUtils.send(HttpMethod.POST, ViewConstants.SETROLEDATAURL, requestParams, new RequestCallBack<String>() {
+
+			@Override
+			public void onFailure(HttpException arg0, String arg1) {
+				// TODO Auto-generated method stub
+				Yayalog.loger("kgamesdk上傳游戏数据失败:"+arg1);
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> arg0) {
+				// TODO Auto-generated method stub
+				Yayalog.loger("kgamesdk上傳遊戲數據成功:"+arg0.result);
+			}
+		});
+		
+	}
+	
 	/**
 	 * 初始化sdk
 	 * 
@@ -327,14 +391,30 @@ public class DgameSdk {
 	public static void initSdk(Activity activity) {
 
 		// 工具类初始化，在支付安装插件时候用到
-		ViewConstants.ISKGAME=true;
 		
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
-		
+		ViewConstants.ISKGAME=true;
 		
 	}
+	
+	/**
+	 * 初始化sdk
+	 * 
+	 * @param activity
+	 */
+	public static void initSdk(Activity activity,int type) {
+
+		// 工具类初始化，在支付安装插件时候用到
+		
+		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
+		
+		sdktype=Integer.parseInt(gameInfo);
+		//ViewConstants.ISKGAME=true;
+		
+	}
+	
 
 	//初始化sdk支付方式
 	private static void initSdkpaytype(final Activity activity) {

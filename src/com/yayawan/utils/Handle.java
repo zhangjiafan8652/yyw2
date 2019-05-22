@@ -30,7 +30,7 @@ public class Handle {
 		RequestParams requestParams = new RequestParams();
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(context));
 		requestParams.addBodyParameter("imei", DeviceUtil.getIMEI(context));
-
+		requestParams.addBodyParameter("uuid", DeviceUtil.getUUID(context));
 		requestParams.addBodyParameter("cur_ver", "1234");
 		mhttp.send(HttpMethod.POST, UrlConstants.active,
 				new RequestCallBack<String>() {
@@ -70,6 +70,7 @@ public class Handle {
 		RequestParams requestParams = new RequestParams();
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(context));
 		requestParams.addBodyParameter("imei", DeviceUtil.getIMEI(context));
+		requestParams.addBodyParameter("uuid", DeviceUtil.getUUID(context));
 		requestParams.addBodyParameter("uid", uid);
 		Yayalog.loger("联合渠道丫丫玩登陆"+"app_id="+DeviceUtil.getAppid(context)+"imei="+DeviceUtil.getIMEI(context)+"uid:"+uid);
 		mhttp.send(HttpMethod.POST, ViewConstants.unionloginurl,requestParams,
@@ -102,6 +103,7 @@ public class Handle {
 		RequestParams requestParams = new RequestParams();
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(context));
 		requestParams.addBodyParameter("imei", DeviceUtil.getIMEI(context));
+		requestParams.addBodyParameter("uuid", DeviceUtil.getUUID(context));
 		requestParams.addBodyParameter("cur_ver",
 				DeviceUtil.getVersionCode(context));
 		Yayalog.loger(DeviceUtil.getAppid(context)+","+DeviceUtil.getIMEI(context)+","+DeviceUtil.getVersionCode(context));

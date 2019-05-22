@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.yayawan.main.Dgame;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
@@ -33,7 +34,7 @@ public class SmallHelpActivity extends Activity{
 
 	
 	private LinearLayout rl_mLoading;
-
+	 WebView wv_mWeiboview;
 	public Activity mActivity;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SmallHelpActivity extends Activity{
 		
 		this.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);  
 		
-		final WebView wv_mWeiboview = smallHelp_xml.getWv_mWeiboview();
+	    wv_mWeiboview = smallHelp_xml.getWv_mWeiboview();
 		mActivity=this;
 		rl_mLoading = smallHelp_xml.getRl_mLoading();
 		String uid=AgentApp.mUser.uid+"";
@@ -84,34 +85,47 @@ public class SmallHelpActivity extends Activity{
 				System.out.println(url);
                 
 				
-				if (url.contains(".apk")) {
-					Intent intent = new Intent();
-					intent.setAction("android.intent.action.VIEW");
-					Uri content_url = Uri.parse(url);   
-					intent.setData(content_url);  
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.setClassName("com.android.browser","com.android.browser.BrowserActivity");
+			
+				//05-16 19:54:08.336: I/System.out(9157): https://rest.yayawan.com/static/chat/?appid=1129901475&uid=720571744573858273&token=a859b26632107c69c2b8b9fce9cd36d6&username=kk483630479
+
+				if (url.contains("rest.yayawan.com/static/chat")) {
+					Intent intent = new Intent(mActivity,AssistantActivity.class);
+					intent.putExtra("mUrl", url);
 					mActivity.startActivity(intent);
-				}
-				
-				if (url.contains("changeuser")) {
-					//切换账号
-					AgentApp.mUser = null;
-					// ViewConstants.HADLOGOUT = true;
-					Sputils.putSPint("ischanageacount", 0,
-							ViewConstants.mMainActivity);
-					if (DgameSdk.mUserCallback!=null) {
-						DgameSdk.mUserCallback.onLogout();
-					}
-					finish();
+					return true;
 				}else {
-					wv_mWeiboview.loadUrl(url);
+					
+					if (url.contains(".apk")) {
+						Intent intent = new Intent();
+						intent.setAction("android.intent.action.VIEW");
+						Uri content_url = Uri.parse(url);   
+						intent.setData(content_url);  
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClassName("com.android.browser","com.android.browser.BrowserActivity");
+						mActivity.startActivity(intent);
+					}
+					
+					if (url.contains("changeuser")) {
+						//切换账号
+						AgentApp.mUser = null;
+						// ViewConstants.HADLOGOUT = true;
+						Sputils.putSPint("ischanageacount", 0,
+								ViewConstants.mMainActivity);
+						if (DgameSdk.mUserCallback!=null) {
+							DgameSdk.mUserCallback.onLogout();
+						}else {
+							Dgame.getInstance().logout(ViewConstants.mMainActivity);
+						}
+						finish();
+					}else {
+						wv_mWeiboview.loadUrl(url);
+					}
+					return super.shouldOverrideUrlLoading(view, url);
 				}
 				
 				
 				
-				
-				 return super.shouldOverrideUrlLoading(view, url);
+				 
 
 			}
 
@@ -166,6 +180,12 @@ case 3:
 			}
 		});
 		
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		wv_mWeiboview.destroy();
 	}
 	
 	

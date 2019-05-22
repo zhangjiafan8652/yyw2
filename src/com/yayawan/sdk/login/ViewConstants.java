@@ -24,7 +24,7 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "6.2";
+	public static final String SDKVERSION = "6.3";
 	public static  int isshowmanagertip = 1;
 	
 	public static final int localaccountsize = 0; //本地账号数量

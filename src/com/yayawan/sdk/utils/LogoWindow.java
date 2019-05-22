@@ -138,13 +138,13 @@ public class LogoWindow {
 				
 			case 521:
 				// createView();
-				Yayalog.loger("我在接到了消息：hasWindowFocus"
-						+ mactivity.hasWindowFocus() + "hasview:" + hasview);
+				//Yayalog.loger("我在接到了消息：hasWindowFocus"
+				//		+ mactivity.hasWindowFocus() + "hasview:" + hasview);
 				if (mactivity.hasWindowFocus() && !hasview) {
 					addView();
 					Yayalog.loger("mactivity.hasWindowFocus()+添加了view");
 				} else {
-					Yayalog.loger("我在发消息");
+					//Yayalog.loger("我在发消息");
 					if (hasview) {
 
 					} else {
@@ -199,7 +199,7 @@ public class LogoWindow {
 			myviewiconmanager = new ImageView(mactivity);
 			// 创建时设置view的正常参数
 		
-			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(346),
+			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(100),
 					machSize(100)));
 
 			if (DgameSdk.sdktype==1) {

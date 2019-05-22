@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 
 import com.yayawan.sdk.login.SmallHelpActivity;
+import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 import org.json.JSONObject;
@@ -37,6 +38,15 @@ public class AndroidDelegate {
         mActivity=mactivity;
     }
    
+    
+    
+    @JavascriptInterface
+    public String getVersion(){
+      
+
+        return  ViewConstants.SDKVERSION;
+    }
+    
     @JavascriptInterface
     public boolean GoToQQ(String qq){
         Yayalog.loger("qq号:"+qq+"...token:");

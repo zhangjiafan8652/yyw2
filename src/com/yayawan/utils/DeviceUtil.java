@@ -1,6 +1,7 @@
 package com.yayawan.utils;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.Manifest;
 import android.app.Activity;
@@ -254,6 +255,17 @@ public class DeviceUtil {
 		return dataInfo.get(GAME_KEY).toString();
 	}
 
+	
+	
+	public static String getUUID(Context paramContext) {
+		String locauuid=Sputils.getSPstring("locauuid", "locauuid", paramContext);
+		if (locauuid.equals("locauuid")) {
+			locauuid=UUID.randomUUID().toString();
+			Sputils.putSPstring("locauuid",locauuid, paramContext);
+		}
+		return locauuid;
+	}
+	
 	/**
 	 * 获取手机IMEI
 	 * 
@@ -263,10 +275,12 @@ public class DeviceUtil {
 	public static String getIMEI(Context paramContext) {
 		
 		
+		
 		int isfirstin=Sputils.getSPint("isfirstin", 1, paramContext);
 		if (isfirstin==1) {
 			if (!PermissionUtils.checkPermission(paramContext, Manifest.permission.READ_PHONE_STATE)) {
 				Yayalog.loger("无READ_PHONE_STATE授权");
+				
 				return "";
 			}else {
 				// 获取设备的imei号

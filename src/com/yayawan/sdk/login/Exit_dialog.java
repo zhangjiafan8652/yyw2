@@ -254,6 +254,7 @@ public class Exit_dialog extends Basedialogview {
 			}else {
 				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口）"+"\r\n";
 			}
+			textlog=textlog+localtestlog;
 			mTextView.setText(textlog);
 		}else {
 			WebSettings settings = lv_helpcontent.getSettings();

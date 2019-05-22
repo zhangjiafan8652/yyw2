@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.xml.Basexml;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.Layoutxml;
 import com.yayawan.sdk.xml.MachineFactory;
+import com.yayawan.utils.DeviceUtil;
 
 
 
@@ -162,8 +164,16 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		threelinearLayout.addView(iv_greenp2);
 		threelinearLayout.addView(iv_bluepay);
 		//threelinearLayout.addView(iv_shoujipay);
-		threelinearLayout.addView(iv_qqpay);
-		threelinearLayout.addView(iv_qbipay);
+		
+		
+        if (DeviceUtil.getGameInfo(mActivity, "qqAppId").equals("1107931151")) {
+			
+			
+		
+		}else {
+			threelinearLayout.addView(iv_qqpay);
+			threelinearLayout.addView(iv_qbipay);
+		}
 		//threelinearLayout.addView(iv_qbipay);
 		
 

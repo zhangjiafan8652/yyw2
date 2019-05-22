@@ -68,6 +68,7 @@ public class Startanim_jf extends BaseView {
 
 	public Startanim_jf(Activity mContext) {
 		super(mContext);
+		
 	}
 
 	@Override

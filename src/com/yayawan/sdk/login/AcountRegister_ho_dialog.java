@@ -449,6 +449,7 @@ public class AcountRegister_ho_dialog extends Basedialogview {
 					rps.addBodyParameter("imei", DeviceUtil.getIMEI(mActivity));
 					rps.addBodyParameter("username", mName);
 					rps.addBodyParameter("password", mPassword);
+					rps.addBodyParameter("uuid", DeviceUtil.getUUID(mActivity));
 					Yayalog.loger("app_id:" + DeviceUtil.getAppid(mActivity)
 							+ "imei" + DeviceUtil.getIMEI(mActivity)
 							+ "username" + mName + "password" + mPassword);

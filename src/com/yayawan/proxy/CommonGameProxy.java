@@ -1,5 +1,7 @@
 package com.yayawan.proxy;
 
+import java.math.BigInteger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.GestureDetector;
@@ -46,12 +49,15 @@ import com.yayawan.impl.LoginImpl;
 import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.implyy.ChargerImplyylianhe;
 import com.yayawan.main.YYWMain;
+import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
 import com.yayawan.sdk.utils.MD5;
+import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
@@ -122,10 +128,12 @@ public class CommonGameProxy implements YYWGameProxy {
 			final YYWUserCallBack userCallBack) {
 		mActivity = paramActivity;
 		// YYWMain.mUserCallBack=userCallBack;
+	//	ToastUtil.showSuccess(paramActivity, paramActivity.getClass().getName());
 		// 检测是否调用类
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("login");
 
 		if (ViewConstants.ISKGAME) {
+			Yayalog.loger("kgame登陆成功不再获取uid" );
 			Yayalog.loger("Kgamelogin");
 			YYWMain.mUserCallBack = userCallBack;
 			this.mLogin.login(paramActivity, YYWMain.mUserCallBack, "login");
@@ -142,7 +150,7 @@ public class CommonGameProxy implements YYWGameProxy {
 
 				@Override
 				public void onLoginSuccess(final YYWUser paramUser,
-						Object paramObject) {
+						final Object paramObject) {
 					Yayalog.loger("联合渠道登陆成功：" + paramUser.toString());
 					// TODO Auto-generated method stub
 					Handle.login_handler(mActivity, YYWMain.mUser.uid,
@@ -170,6 +178,7 @@ public class CommonGameProxy implements YYWGameProxy {
 													.optString("username");
 											String kgametoken = data
 													.optString("token");
+											
 											Yayalog.loger("kgameuid："
 													+ kgameuid);
 											// 拼接返回给cp的user开始
@@ -205,7 +214,38 @@ public class CommonGameProxy implements YYWGameProxy {
 											Yayalog.loger("+++++++++++++联合渠道登陆："
 													+ YYWMain.mUser.toString());
 
-											mActivity
+											//BigInteger.valueOf(Long.parseLong(YYWMain.mUser.yywuid));
+											
+											AgentApp.mUser=new User();
+											BigInteger aauid=new BigInteger(yywUser.uid);
+											AgentApp.mUser.setUid(aauid);
+											AgentApp.mUser.setToken(kgametoken);
+											AgentApp.mUser.setUserName(kgameusername);
+											String loginmesg=(String) paramObject;
+											
+											if (loginmesg!=null) {
+												if (loginmesg.contains("sanfang")) {
+													YYWMain.mUser.userName=kgameusername;
+													YYWMain.mUser.uid=yywUser.uid;
+													YYWMain.mUser.token=kgametoken;
+													Yayalog.loger("三方登陆成功后返回的数据:"
+															+ YYWMain.mUser.toString());
+													mActivity
+													.runOnUiThread(new Runnable() {
+
+														@Override
+														public void run() {
+															// TODO
+														
+															userCallBack
+																	.onLoginSuccess(
+																			YYWMain.mUser,
+																			"onLoginSuccess");
+
+														}
+													});
+												}else {
+													mActivity
 													.runOnUiThread(new Runnable() {
 
 														@Override
@@ -221,6 +261,26 @@ public class CommonGameProxy implements YYWGameProxy {
 
 														}
 													});
+												}
+											}else {
+												mActivity
+												.runOnUiThread(new Runnable() {
+
+													@Override
+													public void run() {
+														// TODO
+														Yayalog.loger("联合渠道登陆成功："
+																+ yywUser
+																		.toString());
+														userCallBack
+																.onLoginSuccess(
+																		yywUser,
+																		"onLoginSuccess");
+
+													}
+												});
+											}
+										
 
 										}
 
@@ -475,23 +535,26 @@ public class CommonGameProxy implements YYWGameProxy {
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName, roleCTime, ext);
 
+		
+		
+			Yayalog.loger("yingyongbao setdata1");
+		if (ViewConstants.ISKGAME) {
+				
+		}else {
+				DgameSdk.setRoleData(paramActivity, roleId,
+						roleName, roleLevel,
+						zoneId, zoneName,YYWMain.mUser.yywtoken,YYWMain.mUser.yywuid,ext);
+		}
+			
+		
+		if (TextUtils.isEmpty(roleName)) {
+			roleName="temprolename";
+		}
+		
 		this.mUserManager.setData(paramActivity, roleId, roleName, roleLevel,
 				zoneId, zoneName, roleCTime, ext);
 		
 		
-		if (Integer.parseInt(ext)==1) {
-			Yayalog.loger("yingyongbao setdata1");
-			if (ViewConstants.ISKGAME) {
-				
-			}else {
-				DgameSdk.setRoleData(paramActivity, roleId,
-						roleName, roleLevel,
-						zoneId, zoneName,YYWMain.mUser.yywtoken,YYWMain.mUser.yywuid);
-			}
-			
-		}else {
-			Yayalog.loger("yingyongbao setdata false"+Integer.parseInt(ext));
-		}
 		
 		GameApitest.getGameApitestInstants(paramActivity).sendTest(
 				"setData玩家数据：" + YYWMain.mRole.toString());
