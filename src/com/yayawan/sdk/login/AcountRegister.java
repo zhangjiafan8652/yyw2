@@ -81,6 +81,7 @@ public class AcountRegister {
 							String arg1) {
 						// TODO Auto-generated method stub
 						Utilsjf.stopDialog();
+						ViewConstants.HADLOGOUT=true;
 						Toast.makeText(mActivity, "注册失败，请检查网络", 0)
 								.show();
 						Yayalog.loger(arg0.toString()+"错误信息"+arg1+"注册失败，请检查网络");
@@ -113,6 +114,8 @@ public class AcountRegister {
 									mActivity);
 							login_success_dialog.dialogShow();
 
+						}else {
+							ViewConstants.HADLOGOUT=true;
 						}
 
 					}
