@@ -91,8 +91,18 @@ public class Startanim_jf extends BaseView {
 		iv_loading = mThisview.getIv_loading();
 		iv_text = mThisview.getIv_text();
 		iv_text.setVisibility(View.GONE);
-		iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_ani.png", mActivity));
+		
+		if (DgameSdk.sdktype==1) {
+			
+			iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+					"yaya_ani_kongbai.png", mActivity));
+		
+		}else {
+			iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+					"yaya_ani.png", mActivity));
+		}
+		
+		
 		
 //		iv_text.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 //				"yaya_logotext.png", mActivity));

@@ -88,14 +88,14 @@ public class DgameSdk {
 		mStartAnimationCallback = paramCallback;
 		Yayalog.loger("kgameanim");		
 		String gameInfo = DeviceUtil.getGameInfo(paramActivity, "sdktype");
-		if (gameInfo.equals("1")) {
-			mStartAnimationCallback.onSuccess();
-		}else {
+		//if (gameInfo.equals("1")) {
+			//mStartAnimationCallback.onSuccess();
+		//}else {
 			Intent intent = new Intent(paramActivity.getApplicationContext(),
 			BaseLogin_Activity.class);
 			intent.putExtra("type", ViewConstants.STARTANIMATION);
 		    paramActivity.startActivityForResult(intent, 10200);
-		}
+	//	}
 		
 
 	}
