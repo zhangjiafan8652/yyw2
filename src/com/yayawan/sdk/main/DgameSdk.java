@@ -88,14 +88,12 @@ public class DgameSdk {
 		mStartAnimationCallback = paramCallback;
 		Yayalog.loger("kgameanim");		
 		String gameInfo = DeviceUtil.getGameInfo(paramActivity, "sdktype");
-		//if (gameInfo.equals("1")) {
-			//mStartAnimationCallback.onSuccess();
-		//}else {
+		
 			Intent intent = new Intent(paramActivity.getApplicationContext(),
 			BaseLogin_Activity.class);
 			intent.putExtra("type", ViewConstants.STARTANIMATION);
 		    paramActivity.startActivityForResult(intent, 10200);
-	//	}
+	
 		
 
 	}
@@ -195,37 +193,71 @@ public class DgameSdk {
 		Yayalog.loger("kgamesdk:payment");
 		//如果没有实名认证，则需要实名认证
 		if (!ViewConstants.relname_valid) {
-			TipDialog tipDialog = new TipDialog(paramActivity);
-			tipDialog.getTv_titile().setText("实名认证");
-			tipDialog.getmMessage().setText("亲爱的玩家，您还没有实名认证哦~！");
-			tipDialog.getmCancel().setText("去认证");
-			tipDialog.getmSubmit().setText("继续支付");
 			
-			
-			tipDialog.setCancle("去认证", new OnClickListener() {
+			if (DeviceUtil.isDebug(paramActivity)) {
 				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					accountManager(paramActivity);
-				}
-			});
-			tipDialog.setSubmit("继续支付", new OnClickListener() {
+				tipDialogShow(paramActivity, paramOrder, issinglepay,
+						paramCallback);
 				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					gotoPayment( paramActivity,  paramOrder,
+			}else {
+				
+				
+			  String istiprenzheng=	Sputils.getSPstring("istiprenzheng", "no", paramActivity);
+			  
+			  if (istiprenzheng.equals("yes")) {
+				  
+				  
+				  gotoPayment( paramActivity,  paramOrder,
 							 issinglepay,  paramCallback);
+				
+			  	}else {
+			  	  Sputils.putSPstring("istiprenzheng", "yes", paramActivity);
+			  	  tipDialogShow(paramActivity, paramOrder, issinglepay,
+							paramCallback);
+				 
 				}
-			});
-			tipDialog.show();
+				
+				
+			}
+			
+			
+			
 		}else {
 			gotoPayment( paramActivity,  paramOrder,
 					 issinglepay,  paramCallback);
 		}
 		
 
+	}
+
+	private static void tipDialogShow(final Activity paramActivity,
+			final Order paramOrder, final Boolean issinglepay,
+			final KgameSdkPaymentCallback paramCallback) {
+		TipDialog tipDialog = new TipDialog(paramActivity);
+		tipDialog.getTv_titile().setText("实名认证");
+		tipDialog.getmMessage().setText("亲爱的玩家，您还没有实名认证哦~！");
+		tipDialog.getmCancel().setText("去认证");
+		tipDialog.getmSubmit().setText("继续支付");
+		
+		
+		tipDialog.setCancle("去认证", new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				accountManager(paramActivity);
+			}
+		});
+		tipDialog.setSubmit("继续支付", new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoPayment( paramActivity,  paramOrder,
+						 issinglepay,  paramCallback);
+			}
+		});
+		tipDialog.show();
 	}
 
 	//支付开始
