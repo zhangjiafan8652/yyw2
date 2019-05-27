@@ -113,8 +113,8 @@ public class Startanim_jf extends BaseView {
 				
 					long end = System.currentTimeMillis();
 
-					if ((end - start) < 4000) {
-						Thread.sleep(4000 - (end - start));
+					if ((end - start) < 200) {
+						Thread.sleep(200 - (end - start));
 					}
 
 					mHandler.sendEmptyMessage(ANIMSTOP);
@@ -130,7 +130,7 @@ public class Startanim_jf extends BaseView {
 							
 						}
 					});
-					mHandler.sendEmptyMessageDelayed(ANIMERROR,1000);
+					mHandler.sendEmptyMessageDelayed(ANIMERROR,200);
 				}
 			}
 		}.start();

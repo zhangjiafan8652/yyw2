@@ -9,9 +9,9 @@ import android.content.SharedPreferences;
 import android.widget.LinearLayout;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.xml.Basexml;
+import com.yayawan.utils.ViewConstants;
 
 public abstract class Basedialogview extends Basexml {
 

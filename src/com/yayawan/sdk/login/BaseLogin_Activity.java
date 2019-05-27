@@ -16,6 +16,7 @@ import com.yayawan.sdk.pay.Yayapaymain_jf;
 import com.yayawan.sdk.pay.Yinlian;
 
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 

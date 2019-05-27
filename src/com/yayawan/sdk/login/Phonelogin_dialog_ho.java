@@ -3,7 +3,7 @@ package com.yayawan.sdk.login;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
+
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,12 +28,12 @@ import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
-import com.yayawan.sdk.utils.AuthNumReceiver;
+
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.CounterDown;
 import com.yayawan.sdk.utils.Utilsjf;
-import com.yayawan.sdk.utils.AuthNumReceiver.MessageListener;
+
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
@@ -125,9 +125,9 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 	private KgameSdkUserCallback mUserCallback;
 	private LinearLayout ll_mPre;
 	private ImageButton iv_mPre;
-	private AuthNumReceiver mAuthNumReceiver;
+
 	private IntentFilter filter2;
-	private BroadcastReceiver smsReceiver;
+
 	private CounterDown mCountDown;
 
 	public Phonelogin_dialog_ho(Activity activity) {
@@ -297,7 +297,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 	private void initlog() {
 		// System.out.println("我进来那短信了");
 		// 设置短信填充
-		onStart();
+		
 
 		mUserCallback = DgameSdk.mUserCallback;
 
@@ -318,22 +318,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 							.show();
 				} else {
 					Utilsjf.creDialogpro(mActivity, "正在获取验证码...");
-				/*	new Thread() {
-						@Override
-						public void run() {
-							try {
-								Result loginCodeResult = ObtainData
-										.getLoginCode(mPhoneNum);
-								Message message = new Message();
-								message.obj = loginCodeResult;
-								message.what = AUTHCODE;
-								mHandler.sendMessage(message);
-							} catch (Exception e) {
-								mHandler.sendEmptyMessage(ERROR);
-								e.printStackTrace();
-							}
-						}
-					}.start();*/
+			
 				}
 			}
 		});
@@ -384,29 +369,6 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 
 	}
 
-	/**
-	 * 注册接收短信广播
-	 */
-	public void onStart() {
-		// 生成广播处理
-		mAuthNumReceiver = new AuthNumReceiver();
 
-		// 实例化过滤器并设置要过滤的广播
-		IntentFilter intentFilter = new IntentFilter(
-				"android.provider.Telephony.SMS_RECEIVED");
-		intentFilter.setPriority(Integer.MAX_VALUE);
-		// 注册广播
-		mActivity.registerReceiver(mAuthNumReceiver, intentFilter);
-
-		mAuthNumReceiver.setOnReceivedMessageListener(new MessageListener() {
-
-			@Override
-			public void onReceived(String message) {
-				// System.out.println("接收到的短信+++++++"+message);
-				et_mSecurity.setText(message);
-			}
-		});
-		// super.onStart();
-	}
 
 }

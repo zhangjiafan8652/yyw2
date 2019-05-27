@@ -8,8 +8,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
+import com.yayawan.utils.ViewConstants;
 
 public class Sensorutils {
 	private static SensorManager sensorManager;

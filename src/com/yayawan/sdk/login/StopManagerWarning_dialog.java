@@ -38,6 +38,7 @@ import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;

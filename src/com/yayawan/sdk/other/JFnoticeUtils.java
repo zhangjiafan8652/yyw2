@@ -15,11 +15,11 @@ import android.os.Handler;
 
 import com.yayawan.sdk.login.Announcement_dialog;
 import com.yayawan.sdk.login.StringConstants;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.utils.AppInfo;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.yayawan.utils.Yibuhttputils;
 

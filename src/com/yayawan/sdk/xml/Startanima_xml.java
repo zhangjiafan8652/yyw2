@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yayawan.utils.DeviceUtil;
 
@@ -68,9 +69,20 @@ public class Startanima_xml extends Basexml implements Layoutxml {
 		iv_text = new ImageView(mContext);
 		machineFactory.MachineView(iv_text, WRAP_CONTENT, WRAP_CONTENT, 0,
 				mLinearLayout, 0, twoheight, 0, 0, 100);
-
+		
+		
+	String banhaoxinxi=	DeviceUtil.getGameInfo(mActivity, "banhaoxinxi");
+		
+		TextView tv_agree = new TextView(mContext);
+		machineFactory.MachineTextView(tv_agree, MATCH_PARENT, MATCH_PARENT, 0,
+				banhaoxinxi, 30, mLinearLayout, 6, 0, 0, 0);
+		tv_agree.setTextColor(Color.GRAY);
+		tv_agree.setGravity(Gravity.CENTER_VERTICAL);
+		
 		rl_comtent.addView(iv_loading);
 		rl_comtent.addView(iv_text);
+		
+		rl_comtent.addView(tv_agree);
 
 		linearLayout.addView(rl_comtent);
 		return linearLayout;

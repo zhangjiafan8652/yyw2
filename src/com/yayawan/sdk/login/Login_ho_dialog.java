@@ -51,6 +51,7 @@ import com.yayawan.sdk.xml.Loginpo_listviewitem;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 
 public class Login_ho_dialog extends Basedialogview {
 

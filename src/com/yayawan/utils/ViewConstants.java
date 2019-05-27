@@ -1,4 +1,4 @@
-package com.yayawan.sdk.login;
+package com.yayawan.utils;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,6 @@ import android.util.SparseArray;
 import com.yayawan.common.CommonData;
 import com.yayawan.sdk.bean.PayMethod;
 import com.yayawan.sdk.bean.PayResult;
-import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
 //  6.2 更改小助手
@@ -26,6 +25,8 @@ public class ViewConstants {
 //	4.7 删除多余小助手代码
 	public static final String SDKVERSION = "6.3";
 	public static  int isshowmanagertip = 1;
+	
+	public static  boolean relname_valid = false;
 	
 	public static final int localaccountsize = 0; //本地账号数量
 	public static final boolean ishavestoregepermission  = false; //是否有内存卡读写权限

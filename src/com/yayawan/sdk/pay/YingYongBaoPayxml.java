@@ -11,12 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.xml.Basexml;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.Layoutxml;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 
 
 

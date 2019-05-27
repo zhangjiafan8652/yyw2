@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 
 import com.yayawan.sdk.login.SmallHelpActivity;
-import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 import org.json.JSONObject;

@@ -30,7 +30,6 @@ import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.login.BaseLogin_Activity;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Basedialogview;
@@ -40,6 +39,7 @@ import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.Toastxml_po;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 
 public class Yayapaystart_dialog extends Basedialogview {
 

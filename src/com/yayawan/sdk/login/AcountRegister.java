@@ -16,6 +16,7 @@ import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.utils.CryptoUtil;
 import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;

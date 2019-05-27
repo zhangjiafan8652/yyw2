@@ -20,11 +20,11 @@ import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.login.Login_ho_dialog;
 import com.yayawan.sdk.login.Login_success_dialog;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
@@ -182,6 +182,11 @@ public class LoginUtils {
 				
 				return null;
 			}
+		    String relname_valid=	datas.optString("relname_valid");
+		    if (!relname_valid.equals("0")) {
+		    	ViewConstants.relname_valid=true;
+			}
+		    
 			user.setUserName(datas.optString("username"));
 			user.setToken(datas.optString("token"));
 			user.setPassword(mPassword);

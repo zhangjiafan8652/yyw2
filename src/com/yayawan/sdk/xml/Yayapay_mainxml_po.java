@@ -18,11 +18,11 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.CornersLinearLayout;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 @SuppressLint("NewApi")

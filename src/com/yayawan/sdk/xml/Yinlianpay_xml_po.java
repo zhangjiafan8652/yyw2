@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.utils.ViewConstants;
 
 public class Yinlianpay_xml_po extends Basexml implements Layoutxml {
 

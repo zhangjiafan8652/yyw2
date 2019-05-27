@@ -1,6 +1,5 @@
 package com.yayawan.utils;
 
-import com.yayawan.sdk.login.ViewConstants;
 
 public class UrlConstants {
 

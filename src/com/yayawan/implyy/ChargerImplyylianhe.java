@@ -22,12 +22,12 @@ import com.yayawan.proxy.YYWCharger;
 import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.CryptoUtil;
 import com.yayawan.sdk.utils.RSACoder;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 import com.lidroid.jxutils.HttpUtils;

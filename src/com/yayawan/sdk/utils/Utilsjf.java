@@ -44,6 +44,7 @@ import com.yayawan.sdk.xml.DisplayUtils;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.sdk.xml.Toastxml_po;
+import com.yayawan.utils.MD5;
 import com.yayawan.utils.Yayalog;
 
 
@@ -59,30 +60,7 @@ public class Utilsjf {
 	private static TextView tv_message;
 
 	
-	/**
-	 * 关闭安卓p弹框
-	 */
-	public static void closeAndroidPDialog(){
-        try {
-            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
-            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
-            declaredConstructor.setAccessible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Class cls = Class.forName("android.app.ActivityThread");
-            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
-            declaredMethod.setAccessible(true);
-            Object activityThread = declaredMethod.invoke(null);
-            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
-            mHiddenApiWarningShown.setAccessible(true);
-            mHiddenApiWarningShown.setBoolean(activityThread, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-	
+
 	/**
 	 * 将720像素转成其他像素值
 	 * 

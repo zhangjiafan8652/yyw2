@@ -6,27 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.Manifest;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.ActionMode;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ActionMode.Callback;
-import android.view.View.OnTouchListener;
-import android.view.WindowManager.LayoutParams;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.ViewGroup;
-import android.view.Window;
-
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
@@ -50,19 +35,18 @@ import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.implyy.ChargerImplyylianhe;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.User;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
-import com.yayawan.sdk.utils.MD5;
-import com.yayawan.sdk.utils.ToastUtil;
-import com.yayawan.sdk.utils.Utilsjf;
+
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.JSONUtil;
+import com.yayawan.utils.MD5;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 public class CommonGameProxy implements YYWGameProxy {
@@ -617,7 +601,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		this.mStub.onResume(paramActivity);
 
 		//关闭android p的对话框
-		Utilsjf.closeAndroidPDialog();
+		DeviceUtil.closeAndroidPDialog();
 
 	}
 

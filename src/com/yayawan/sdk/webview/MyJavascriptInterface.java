@@ -1,4 +1,4 @@
-package com.yayawan.webview;
+package com.yayawan.sdk.webview;
 
 import android.content.Context;
 import android.text.TextUtils;

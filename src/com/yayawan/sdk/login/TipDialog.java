@@ -1,4 +1,4 @@
-package com.yayawan.sdk.utils;
+package com.yayawan.sdk.login;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,10 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.yayawan.sdk.xml.Update_xml;
+import com.yayawan.sdk.xml.Tip_xml;
 
 
 
-public class UpdateDialog extends Dialog {
+public class TipDialog extends Dialog {
 	private Context mContext;
 
 	private LayoutInflater inflater;
@@ -31,7 +32,73 @@ public class UpdateDialog extends Dialog {
 
 	private Activity mActivity;
 
-	public UpdateDialog(Context context) {
+	private TextView tv_titile;
+
+	public Context getmContext() {
+		return mContext;
+	}
+
+	public void setmContext(Context mContext) {
+		this.mContext = mContext;
+	}
+
+	public LayoutInflater getInflater() {
+		return inflater;
+	}
+
+	public void setInflater(LayoutInflater inflater) {
+		this.inflater = inflater;
+	}
+
+	public LayoutParams getLp() {
+		return lp;
+	}
+
+	public void setLp(LayoutParams lp) {
+		this.lp = lp;
+	}
+
+	public TextView getmMessage() {
+		return mMessage;
+	}
+
+	public void setmMessage(TextView mMessage) {
+		this.mMessage = mMessage;
+	}
+
+	public Button getmSubmit() {
+		return mSubmit;
+	}
+
+	public void setmSubmit(Button mSubmit) {
+		this.mSubmit = mSubmit;
+	}
+
+	public Button getmCancel() {
+		return mCancel;
+	}
+
+	public void setmCancel(Button mCancel) {
+		this.mCancel = mCancel;
+	}
+
+	public Activity getmActivity() {
+		return mActivity;
+	}
+
+	public void setmActivity(Activity mActivity) {
+		this.mActivity = mActivity;
+	}
+
+	public TextView getTv_titile() {
+		return tv_titile;
+	}
+
+	public void setTv_titile(TextView tv_titile) {
+		this.tv_titile = tv_titile;
+	}
+
+	public TipDialog(Context context) {
 		// super(context, ResourceUtil.getStyleId(context,
 		// "CustomProgressDialog"));
 		super(context);
@@ -43,9 +110,9 @@ public class UpdateDialog extends Dialog {
 		inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		Update_xml update_xml = new Update_xml(mActivity);
+		Tip_xml update_xml = new Tip_xml(mActivity);
 		View view = update_xml.initViewxml();
-		
+		tv_titile = update_xml.getTv_titile();
 		mMessage = update_xml.getTv_message();
 		mSubmit = update_xml.getBt_mok();
 		mCancel = update_xml.getBt_mCancel();

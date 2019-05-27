@@ -15,9 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.utils.CornersWebView;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 
 public class Assistant_xml extends Basexml implements Layoutxml {
 

@@ -2,7 +2,7 @@ package com.yayawan.sdk.db;
 
 import java.io.File;
 
-import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.utils.ViewConstants;
 
 import android.os.Environment;
 

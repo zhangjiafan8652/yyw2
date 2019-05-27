@@ -31,11 +31,11 @@ import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.bean.PayResult;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 public class GreenblueP {

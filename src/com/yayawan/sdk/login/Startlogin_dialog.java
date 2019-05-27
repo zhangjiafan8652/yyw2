@@ -29,14 +29,15 @@ import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.HorizontalProgressBarWithNumber;
 import com.yayawan.sdk.utils.LoginUtils;
-import com.yayawan.sdk.utils.MD5;
 import com.yayawan.sdk.utils.SIMCardUtil;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.PermissionUtils;
 import com.yayawan.utils.PermissionUtils.PermissionCheckCallBack;
+import com.yayawan.utils.MD5;
 import com.yayawan.utils.Sputils;
 import com.yayawan.utils.SuperDialog;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.SuperDialog.onDialogClickListener;
 import com.yayawan.utils.Yayalog;
 

@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import com.yayawan.sdk.login.Help_dissmiss_dialog;
 import com.yayawan.sdk.login.StopManagerWarning_dialog;
 import com.yayawan.sdk.login.StopManagerWarning_dialog.StopManagerWarningLinstener;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.ShakeListener.OnShakeListener;
 import com.yayawan.sdk.xml.DisplayUtils;
@@ -33,6 +32,7 @@ import com.yayawan.sdk.xml.GetAssetsutils;
 
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 /**

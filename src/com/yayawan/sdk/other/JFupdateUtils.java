@@ -16,11 +16,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.utils.CircleProgressView;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.UpdateDialog;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;

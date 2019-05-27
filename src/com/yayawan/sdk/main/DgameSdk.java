@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,15 +39,16 @@ import com.yayawan.sdk.login.BaseLogin_Activity;
 import com.yayawan.sdk.login.Exit_dialog;
 import com.yayawan.sdk.login.SmallHelpActivity;
 import com.yayawan.sdk.login.Startlogin_dialog;
-import com.yayawan.sdk.login.ViewConstants;
+import com.yayawan.sdk.login.TipDialog;
 import com.yayawan.sdk.pay.XiaoMipayActivity;
 import com.yayawan.sdk.utils.LogoWindow;
-import com.yayawan.sdk.utils.MD5;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.MD5;
 import com.yayawan.utils.PermissionUtils;
 import com.yayawan.utils.Sputils;
 import com.yayawan.utils.SuperDialog;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 import com.yayawan.utils.PermissionUtils.PermissionCheckCallBack;
 import com.yayawan.utils.SuperDialog.onDialogClickListener;
@@ -181,24 +184,70 @@ public class DgameSdk {
 	 * @param paramActivity
 	 * @param paramCallback
 	 */
-	public static void payment(Activity paramActivity, Order paramOrder,
-			Boolean issinglepay, KgameSdkPaymentCallback paramCallback) {
+	public static void payment(final Activity paramActivity, final Order paramOrder,
+			final Boolean issinglepay, final KgameSdkPaymentCallback paramCallback) {
 
-		Yayalog.loger("kgamesdk:payment");
 		if (AgentApp.mUser == null) {
 			Toast.makeText(paramActivity.getApplicationContext(), "请先登录",
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		mPaymentCallback = paramCallback;
-		mPayOrder = paramOrder;
-		AgentApp.mPayOrder = paramOrder;
+		Yayalog.loger("kgamesdk:payment");
+		//如果没有实名认证，则需要实名认证
+		if (!ViewConstants.relname_valid) {
+			TipDialog tipDialog = new TipDialog(paramActivity);
+			tipDialog.getTv_titile().setText("实名认证");
+			tipDialog.getmMessage().setText("亲爱的玩家，您还没有实名认证哦~！");
+			tipDialog.getmCancel().setText("去认证");
+			tipDialog.getmSubmit().setText("继续支付");
+			
+			
+			tipDialog.setCancle("去认证", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					accountManager(paramActivity);
+				}
+			});
+			tipDialog.setSubmit("继续支付", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					gotoPayment( paramActivity,  paramOrder,
+							 issinglepay,  paramCallback);
+				}
+			});
+			tipDialog.show();
+		}else {
+			gotoPayment( paramActivity,  paramOrder,
+					 issinglepay,  paramCallback);
+		}
 		
-		initSdkpaytype(paramActivity);
 
 	}
 
+	//支付开始
+	public static void gotoPayment(Activity paramActivity, Order paramOrder,
+			Boolean issinglepay, KgameSdkPaymentCallback paramCallback) {
 
+		Yayalog.loger("kgamesdk:payment");
+		
+			if (AgentApp.mUser == null) {
+				Toast.makeText(paramActivity.getApplicationContext(), "请先登录",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			mPaymentCallback = paramCallback;
+			mPayOrder = paramOrder;
+			AgentApp.mPayOrder = paramOrder;
+			
+			initSdkpaytype(paramActivity);
+		
+		
+
+	}
 
 	/**
 	 * 个人中心

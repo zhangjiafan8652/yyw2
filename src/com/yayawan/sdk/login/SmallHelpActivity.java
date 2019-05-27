@@ -12,6 +12,7 @@ import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.sdk.xml.SmallHelp_xml;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 
@@ -166,7 +167,7 @@ case 3:
 		Yayalog.loger(url);
 		
 		//关闭android p的对话框
-		Utilsjf.closeAndroidPDialog();
+		DeviceUtil.closeAndroidPDialog();
 		
 		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
 			

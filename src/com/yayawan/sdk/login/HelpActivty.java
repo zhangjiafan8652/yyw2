@@ -17,6 +17,7 @@ import com.yayawan.sdk.utils.ShakeListener;
 import com.yayawan.sdk.utils.ShakeListener.OnShakeListener;
 import com.yayawan.sdk.xml.DisplayUtils;
 import com.yayawan.sdk.xml.GetAssetsutils;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 

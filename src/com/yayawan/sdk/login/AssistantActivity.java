@@ -18,14 +18,14 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.yayawan.sdk.webview.AndroidBug5497Workaround;
+import com.yayawan.sdk.webview.IWebPageView;
+import com.yayawan.sdk.webview.MyJavascriptInterface;
+import com.yayawan.sdk.webview.MyWebChromeClient;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.Assistant_xml;
 import com.yayawan.sdk.xml.SmallHelp_xml;
 import com.yayawan.utils.Yayalog;
-import com.yayawan.webview.AndroidBug5497Workaround;
-import com.yayawan.webview.IWebPageView;
-import com.yayawan.webview.MyJavascriptInterface;
-import com.yayawan.webview.MyWebChromeClient;
-import com.yayawan.webview.MyWebViewClient;
 
 public class AssistantActivity extends Activity implements IWebPageView {
 

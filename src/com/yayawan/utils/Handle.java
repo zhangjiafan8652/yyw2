@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.yayawan.callback.YYWLoginHandleCallback;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.utils.CryptoUtil;
 import com.yayawan.sdk.utils.RSACoder;
 import com.lidroid.jxutils.HttpUtils;

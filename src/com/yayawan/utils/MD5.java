@@ -1,4 +1,4 @@
-package com.yayawan.sdk.utils;
+package com.yayawan.utils;
 import java.security.MessageDigest;
 
 public class MD5 {

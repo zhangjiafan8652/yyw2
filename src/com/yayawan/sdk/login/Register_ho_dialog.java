@@ -41,6 +41,7 @@ import com.yayawan.sdk.utils.AuthNumReceiver.MessageListener;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 import com.lidroid.jxutils.HttpUtils;
@@ -59,7 +60,7 @@ public class Register_ho_dialog extends Basedialogview {
 	private EditText et_mSecurity;
 	private ImageButton ib_mAgreedbox;
 	private Button bt_mOk;
-	private TextView tv_mRegisterclick;
+	
 	private String mPhoneNum;
 	private String mCode;
 
@@ -68,7 +69,7 @@ public class Register_ho_dialog extends Basedialogview {
 	protected static final int LOGINSECURITYRESULT = 8;
 
 	private ImageButton ib_mNotAgreedbox;
-	private AuthNumReceiver mAuthNumReceiver;
+
 	private CounterDown mCountDown;
 	private EditText et_mPassword;
 	private Button bt_mPhoneRegister;
@@ -96,8 +97,7 @@ public class Register_ho_dialog extends Basedialogview {
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
 		
-		//machineFactory.MachineView(baselin, with, height, "LinearLayout");
-		//baselin.setBackgroundColor(Color.TRANSPARENT);
+	
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 		baselin.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
@@ -413,7 +413,7 @@ public class Register_ho_dialog extends Basedialogview {
 
 	private void initLogic() {
 
-		onStart();
+		
 		mCountDown = CounterDown.getInstance(mActivity);
 		
 		mCountDown.setView(bt_mGetsecurity);
@@ -605,25 +605,6 @@ public class Register_ho_dialog extends Basedialogview {
 		return null;
 	}
 
-	public void onStart() {
-		// 生成广播处理
-		mAuthNumReceiver = new AuthNumReceiver();
 
-		// 实例化过滤器并设置要过滤的广播
-		IntentFilter intentFilter = new IntentFilter(
-				"android.provider.Telephony.SMS_RECEIVED");
-		intentFilter.setPriority(Integer.MAX_VALUE);
-		// 注册广播
-		mActivity.registerReceiver(mAuthNumReceiver, intentFilter);
-
-		mAuthNumReceiver.setOnReceivedMessageListener(new MessageListener() {
-
-			@Override
-			public void onReceived(String message) {
-				et_mSecurity.setText(message);
-			}
-		});
-
-	}
 
 }

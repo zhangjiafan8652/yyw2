@@ -7,8 +7,8 @@ import android.os.Looper;
 import com.yayawan.main.YYWMain;
 import com.yayawan.proxy.YYWAnimation;
 import com.yayawan.sdk.callback.KgameSdkStartAnimationCallback;
-import com.yayawan.sdk.login.ViewConstants;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.utils.ViewConstants;
 
 public class AnimationImpl implements YYWAnimation {
 
