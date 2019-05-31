@@ -62,6 +62,7 @@ public abstract class Basedialogview extends Basexml {
 
 	public void allDismiss() {
 		for (int i = 0; i < ViewConstants.mDialogs.size(); i++) {
+			
 			if (ViewConstants.mDialogs.get(i) != null) {
 				ViewConstants.mDialogs.get(i).dismiss();
 			}

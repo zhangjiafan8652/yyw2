@@ -117,6 +117,9 @@ public class SmallHelpActivity extends Activity{
 						}else {
 							Dgame.getInstance().logout(ViewConstants.mMainActivity);
 						}
+						
+						ViewConstants.mDialogs.clear();
+						
 						finish();
 					}else {
 						wv_mWeiboview.loadUrl(url);
