@@ -233,7 +233,7 @@ public class DgameSdk {
 	private static void tipDialogShow(final Activity paramActivity,
 			final Order paramOrder, final Boolean issinglepay,
 			final KgameSdkPaymentCallback paramCallback) {
-		TipDialog tipDialog = new TipDialog(paramActivity);
+		final TipDialog tipDialog = new TipDialog(paramActivity);
 		tipDialog.getTv_titile().setText("实名认证");
 		tipDialog.getmMessage().setText("亲爱的玩家，您还没有实名认证哦~！");
 		tipDialog.getmCancel().setText("去认证");
@@ -246,6 +246,7 @@ public class DgameSdk {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				accountManager(paramActivity);
+				tipDialog.dismiss();
 			}
 		});
 		tipDialog.setSubmit("继续支付", new OnClickListener() {
@@ -255,6 +256,7 @@ public class DgameSdk {
 				// TODO Auto-generated method stub
 				gotoPayment( paramActivity,  paramOrder,
 						 issinglepay,  paramCallback);
+				tipDialog.dismiss();
 			}
 		});
 		tipDialog.show();

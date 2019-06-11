@@ -201,6 +201,28 @@ public class DeviceUtil {
 		
 		
 	}
+	
+	/**
+	 * 获取非必须参数
+	 * 
+	 * @param paramContext
+	 * @return
+	 */
+	public static String getGameInfoNeed(Context paramContext, String name) {
+		
+		
+		
+			Bundle dataInfo = getMetaDataInfo(paramContext);
+			if (((dataInfo = getMetaDataInfo(paramContext)) == null)
+					|| (dataInfo.get(name) == null)) {
+				return "";
+			}
+			return dataInfo.getString(name).replace("string", "");
+		
+		
+		
+	}
+
 
 	/**
 	 * 获取gameid信息

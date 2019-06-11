@@ -71,7 +71,7 @@ public class Startanima_xml extends Basexml implements Layoutxml {
 				mLinearLayout, 0, twoheight, 0, 0, 100);
 		
 		
-		String banhaoxinxi=	DeviceUtil.getGameInfo(mActivity, "banhaoxinxi");
+		String banhaoxinxi=	DeviceUtil.getGameInfoNeed(mActivity, "banhaoxinxi");
 		
 		TextView tv_agree = new TextView(mContext);
 		machineFactory.MachineTextView(tv_agree, MATCH_PARENT, MATCH_PARENT, 0,
