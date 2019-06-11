@@ -29,14 +29,11 @@ public class YYApplication extends YYWApplication {
 		
 		
 			
-			if (PermissionUtils.checkPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
-				Jxutilsinit.init(getApplicationContext());
-			}
+		if (PermissionUtils.checkPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
+			Jxutilsinit.init(getApplicationContext());
+		}
 			
-		
-		
-		
-		
+	
 		
 		System.out.println("YYApplication");
 		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate="+Util.getPackageName(getApplicationContext()));
