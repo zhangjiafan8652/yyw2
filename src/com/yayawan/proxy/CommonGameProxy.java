@@ -567,11 +567,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
 		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
 
-		try {
-			GameApitest.sendTest2(paramActivity);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+	
 
 		// 获取公告
 		new JFnoticeUtils().getNotice(paramActivity);
@@ -581,7 +577,11 @@ public class CommonGameProxy implements YYWGameProxy {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("onCreate");
 
 		// recordPoint(paramActivity);
-
+		try {
+			GameApitest.sendTest2(paramActivity);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		mStub.onCreate(paramActivity);
 
 	}

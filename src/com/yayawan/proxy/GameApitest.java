@@ -95,7 +95,10 @@ public class GameApitest {
 		
 		Yayalog.loger("测试："+type);
 		if (!YYcontants.ISDEBUG) {
+			Yayalog.loger("测试："+"不是调试模式，不能粗存调试状态");
 			return;
+		}else {
+			
 		}
 		
 		if (type.contains("Application")) {
