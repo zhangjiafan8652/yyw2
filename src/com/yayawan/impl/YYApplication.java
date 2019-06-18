@@ -24,6 +24,8 @@ public class YYApplication extends YYWApplication {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
+		
+		
 		mContext = getApplicationContext();
 		
 		

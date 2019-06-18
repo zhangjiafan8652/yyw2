@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.lidroid.jxutils.HttpUtils;
@@ -85,6 +86,8 @@ public class GameApitest {
 	}
 
 	public static String tempstring = "";
+	
+	public static String appPackageName = "";
 
 	/**
 	 * 
@@ -93,7 +96,7 @@ public class GameApitest {
 	public void sendTest(String type) {
 
 		
-		Yayalog.loger("测试："+type);
+		
 		if (!YYcontants.ISDEBUG) {
 			Yayalog.loger("测试："+"不是调试模式，不能粗存调试状态");
 			return;
@@ -102,34 +105,35 @@ public class GameApitest {
 		}
 		
 		if (type.contains("Application")) {
+			appPackageName = getPackageName(mContext);
+			Sputils.putSPstring(appPackageName, "", mContext);
 			
-			
-			File file = new File(DB_DIRPATH);
-			file.delete();
 		}
 		if (tempstring.contains(type)) {
 			return;
 		}
 		tempstring = tempstring + "—temp-" + type;
 
-		File file = new File(DB_DIRPATH);
+			
+		
+		//	FileIOUtils.writeFileFromString(DB_DIRPATH, type + "\r\n", true);
 
-		if (file.exists()) {
-			FileIOUtils.writeFileFromString(DB_DIRPATH, type + "\r\n", true);
-
-		} else {
-			try {
-				Yayalog.loger(file.getAbsolutePath());
-				FileUtils.createOrExistsFile(DB_DIRPATH);
-				//file.createNewFile();
-				FileIOUtils
-						.writeFileFromString(DB_DIRPATH, type + "\r\n", true);
-				Yayalog.loger("创建了测试文件");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if (mContext!=null) {
+			
+			if (!TextUtils.isEmpty(appPackageName)) {
+				Yayalog.loger("测试write："+tempstring+"nowtype:"+type);
+				Sputils.putSPstring(appPackageName, tempstring, mContext);
+				
+				
+			}else {
+				Yayalog.loger("Application 未接入"+"");
 			}
+			
+		}else {
+			Yayalog.loger("Application 未接入"+"");
 		}
+			
+		
 
 	}
 

@@ -33,6 +33,7 @@ import com.yayawan.sdk.utils.Util;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.FileIOUtils;
+import com.yayawan.utils.Sputils;
 import com.yayawan.utils.Yayalog;
 
 public class Exit_dialog extends Basedialogview {
@@ -62,6 +63,23 @@ public class Exit_dialog extends Basedialogview {
 		
 	}
 
+	
+	 /**
+     * [获取应用程序版本名称信息]
+     * @param context
+     * @return 当前应用的版本名称
+     */
+    public static synchronized String getPackageName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), 0);
+            return packageInfo.packageName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 	@Override
 	public void createDialog(Activity mActivity) {
 		dialog = new Dialog(mContext);
@@ -184,7 +202,7 @@ public class Exit_dialog extends Basedialogview {
 	
 	private void initlogic() {
 		if (YYcontants.ISDEBUG) {
-			String localtestlog = FileIOUtils.readFile2String(GameApitest.DB_DIRPATH);
+			String localtestlog =Sputils.getSPstring(getPackageName(mContext), "", mContext);
 			textlog=textlog+" 测试结果"+"\r\n";
 			if (localtestlog.contains("YYApplicationoncreate="+Util.getPackageName(mActivity))) {
 				textlog=textlog+"Application="+Util.getPackageName(mActivity)+": 接口测试通过"+"\r\n";
