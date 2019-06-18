@@ -87,7 +87,7 @@ public class SuperDialog extends Dialog {
     /**
      * 宽高比
      */
-    private float aspectRatio = 0.4f;
+    private float aspectRatio = 0.7f;
 
     public SuperDialog( Context context) {
         super(context);

@@ -3,6 +3,7 @@ package com.yayawan.sdk.login;
 import java.util.ArrayList;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -50,8 +51,13 @@ import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.Loginpo_listviewitem;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.PermissionUtils;
 import com.yayawan.utils.Sputils;
+import com.yayawan.utils.SuperDialog;
 import com.yayawan.utils.ViewConstants;
+import com.yayawan.utils.Yayalog;
+import com.yayawan.utils.PermissionUtils.PermissionCheckCallBack;
+import com.yayawan.utils.SuperDialog.onDialogClickListener;
 
 public class Login_ho_dialog extends Basedialogview {
 
@@ -264,7 +270,7 @@ public class Login_ho_dialog extends Basedialogview {
 						WRAP_CONTENT, 0, mLinearLayout, 20, 15, 20, 0, 100);
 				tv_fogetpassword = new TextView(mActivity);
 				machineFactory.MachineTextView(tv_fogetpassword, WRAP_CONTENT,
-						WRAP_CONTENT, 0, "忘记密码?", 24, mRelativeLayout, 0, 0, 20, 0,
+						WRAP_CONTENT, 0, "找回密码?", 24, mRelativeLayout, 0, 0, 20, 0,
 						RelativeLayout.ALIGN_PARENT_RIGHT);
 				tv_fogetpassword.setTextColor(Color.parseColor("#acacac"));
 
@@ -463,9 +469,52 @@ public class Login_ho_dialog extends Basedialogview {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ResetPassword_ho_dialog resetPassword_ho_dialog = new ResetPassword_ho_dialog(
-						mActivity);
-				resetPassword_ho_dialog.dialogShow();
+				
+				if (!(PermissionUtils.checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+					SuperDialog superDialog = new SuperDialog(mActivity);
+					if (DeviceUtil.isLandscape(mActivity)) {
+						superDialog.setAspectRatio(0.8f);
+					}
+					superDialog.setTitle("亲爱的玩家");
+					superDialog.setContent("请授予储存卡读写权限\r\n 读取储存卡中保存的账号密码\r\n 授权后重新打开游戏").setListener(new onDialogClickListener() {
+						
+						@Override
+						public void click(boolean isButtonClick, int position) {
+							// TODO Auto-generated method stub
+							Yayalog.loger("请求权限对话框按钮按下");
+							PermissionUtils.checkMorePermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
+								
+								@Override
+								public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
+									// TODO Auto-generated method stub
+									// 用户之前已拒绝过权限申请
+									//
+									PermissionUtils.requestMorePermissions(mActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
+								}
+								
+								@Override
+								public void onUserHasAlreadyTurnedDown(String... permission) {
+									// TODO Auto-generated method stub
+									// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+									PermissionUtils.toAppSetting(mActivity);
+								}
+								
+								@Override
+								public void onHasPermission() {
+									// TODO Auto-generated method stub
+									
+								}
+							});
+						}
+					}).show();
+				}else {
+					ResetPassword_ho_dialog resetPassword_ho_dialog = new ResetPassword_ho_dialog(
+							mActivity);
+					resetPassword_ho_dialog.dialogShow();
+				}
+				
+				
+				
 
 			}
 		});
