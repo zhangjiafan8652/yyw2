@@ -78,7 +78,7 @@ public class ViewConstants {
 	public static String SETROLEDATAURL = baseurl + "user/roleinfo";
 	
 	public static String WEIBOLOGINURL = baseurl + "/web/oauth/?type=sina&forward_url=sdk";//第三方微博登陆
-	
+	public static String SHIMINGRENZHENG = baseurl + "user/relname/";//实名认证
 	public static String QQLOGINURL = baseurl + "/web/oauth/?type=qq&forward_url=sdk";//第三方qq登陆
 	
 	//https://rest.yayawan.com/web/oauth/?type=testqq&forward_url=sdk

@@ -1,5 +1,6 @@
 package com.yayawan.proxy;
 
+import java.lang.reflect.Method;
 import java.math.BigInteger;
 
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.callback.YYWAnimCallBack;
+import com.yayawan.callback.YYWApiCallback;
 import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWLoginHandleCallback;
 import com.yayawan.callback.YYWPayCallBack;
@@ -719,4 +721,36 @@ public class CommonGameProxy implements YYWGameProxy {
 
 	}
 
+	//是否验证手机
+	public void isVerifyphone() {
+
+		//Yayalog.loger("按下了" + event.getX());
+
+	}
+	
+	//是否实名认证
+	public void doGetVerifiedInfo(Activity arg0,YYWApiCallback myywapicallback) {
+
+			//Yayalog.loger("按下了" + event.getX());
+		Method[] methods;
+		try {
+			methods = Class.forName("com.yayawan.impl.UserManagerImpl")
+					.getMethods();
+			for (int i = 0; i < methods.length; i++) {
+				if (methods[i].getName().equals("doGetVerifiedInfo")) {
+					// com.yayawan.proxy.YYWActivityStub
+					Yayalog.loger(methods[i].getName());
+					Yayalog.loger("有接口doGetVerifiedInfo");
+					UserManagerImpl mani = (UserManagerImpl) this.mUserManager;
+					mani.doGetVerifiedInfo(arg0,myywapicallback);
+
+				}
+				// System.out.println("没有初始化方法");
+			//	Yayalog.loger("UserManagerImpl中没有setdata方法");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -1,13 +1,17 @@
 package com.yayawan.impl;
 
+import java.lang.reflect.Method;
+
 import android.app.Activity;
 
+import com.yayawan.callback.YYWApiCallback;
 import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWUserManagerCallBack;
 import com.yayawan.common.CommonData;
 import com.yayawan.main.YYWMain;
 import com.yayawan.proxy.YYWUserManager;
 import com.yayawan.sdk.bean.User;
+import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.utils.Yayalog;
@@ -140,6 +144,27 @@ public class UserManagerImpl implements YYWUserManager {
 			
 		}
 	
+	}
+	
+	//是否实名认证
+	public void doGetVerifiedInfo(Activity arg0,final YYWApiCallback myywapicallback) {
+
+			//Yayalog.loger("按下了" + event.getX());
+		
+		DgameSdk.doGetVerifiedInfo(arg0, new KgameSdkApiCallBack() {
+			
+			@Override
+			public void onVerifySuccess(String result) {
+				// TODO Auto-generated method stub
+				myywapicallback.onVerifySuccess(result);
+			}
+			
+			@Override
+			public void onVerifyCancel() {
+				// TODO Auto-generated method stub
+				myywapicallback.onVerifyCancel();
+			}
+		});
 	}
 
 }

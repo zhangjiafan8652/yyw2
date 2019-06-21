@@ -1,5 +1,7 @@
 package com.yayawan.sdk.main;
 
+import java.lang.reflect.Method;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,11 +26,14 @@ import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
+import com.yayawan.callback.YYWApiCallback;
 import com.yayawan.common.CommonData;
 import com.yayawan.domain.YYWUser;
+import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.Order;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
+import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
 import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.callback.KgameSdkStartAnimationCallback;
@@ -40,6 +45,7 @@ import com.yayawan.sdk.login.Exit_dialog;
 import com.yayawan.sdk.login.SmallHelpActivity;
 import com.yayawan.sdk.login.Startlogin_dialog;
 import com.yayawan.sdk.login.TipDialog;
+import com.yayawan.sdk.login.VerifyPlayInfo_ho_dialog;
 import com.yayawan.sdk.pay.XiaoMipayActivity;
 import com.yayawan.sdk.utils.LogoWindow;
 import com.yayawan.sdk.xml.MachineFactory;
@@ -69,6 +75,8 @@ public class DgameSdk {
 	public static KgameSdkCallback mCallback;
 
 	public static KgameSdkUpdateCallback mUpdateCallback;
+	
+	public static KgameSdkApiCallBack mSdkApiCallback;
 
 	public static Order mPayOrder; // 订单
 
@@ -784,4 +792,60 @@ public class DgameSdk {
 		textView.setTextColor(Color.RED );
 		rootview.addView(textView);
 	}
+	
+	//是否实名认证
+		public static void doGetVerifiedInfo(final Activity mactivity,KgameSdkApiCallBack myywapicallback) {
+
+			
+			mSdkApiCallback=myywapicallback;
+			//请求查看是否实名认证
+			HttpUtils httpUtils = new HttpUtils();
+			RequestParams requestParams = new RequestParams();
+			requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mactivity));
+			requestParams.addBodyParameter("uid", YYWMain.mUser.uid);
+			requestParams.addBodyParameter("token", YYWMain.mUser.token);
+		
+			Yayalog.loger("app_id", DeviceUtil.getAppid(mactivity));
+			Yayalog.loger("uid", YYWMain.mUser.uid);
+			Yayalog.loger("token", YYWMain.mUser.token);
+		
+			httpUtils.send(HttpMethod.POST, ViewConstants.SHIMINGRENZHENG,requestParams, new RequestCallBack<String>() {
+
+				@Override
+				public void onFailure(HttpException arg0, String result) {
+					// TODO Auto-generated method stub
+					
+					//YYWMain.mPayCallBack.onPayFailed("1", "");
+					mSdkApiCallback.onVerifyCancel();
+				}
+
+				@Override
+				public void onSuccess(ResponseInfo<String> result) {
+					// TODO Auto-generated method stub
+				Yayalog.loger("实名认证返回："+result.result);
+					try {
+						JSONObject jsonObject = new JSONObject(result.result);
+						int optInt = jsonObject.optInt("err_code");
+						if (optInt==11001) {
+							
+							//未实名认证，开启实名认证窗口
+							
+							VerifyPlayInfo_ho_dialog verifyPlayInfo_ho_dialog = new VerifyPlayInfo_ho_dialog(mactivity);
+							verifyPlayInfo_ho_dialog.dialogShow();
+							
+						}else {
+						
+							//实名认证成功
+						}
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						YYWMain.mPayCallBack.onPayFailed("1", "");
+						e.printStackTrace();
+					}
+					
+				}
+			});
+			
+		}
 }
