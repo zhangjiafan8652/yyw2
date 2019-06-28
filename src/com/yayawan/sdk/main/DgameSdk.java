@@ -822,7 +822,7 @@ public class DgameSdk {
 				@Override
 				public void onSuccess(ResponseInfo<String> result) {
 					// TODO Auto-generated method stub
-				Yayalog.loger("实名认证返回："+result.result);
+				Yayalog.loger("实名认证返回DgameSdk："+result.result);
 					try {
 						JSONObject jsonObject = new JSONObject(result.result);
 						int optInt = jsonObject.optInt("err_code");
@@ -835,7 +835,10 @@ public class DgameSdk {
 							
 						}else {
 						
+//							06-24 16:54:40.012: E/yayawanYayalog(3612): 实名认证返回DgameSdk：{"err_code":0,"err_msg":"success","bday":"19920115"}
+
 							//实名认证成功
+							//DgameSdk.mSdkApiCallback.onVerifySuccess(result)
 						}
 						
 					} catch (Exception e) {

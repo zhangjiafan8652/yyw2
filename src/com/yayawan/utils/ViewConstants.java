@@ -10,6 +10,7 @@ import android.util.SparseArray;
 import com.yayawan.common.CommonData;
 import com.yayawan.sdk.bean.PayMethod;
 import com.yayawan.sdk.bean.PayResult;
+import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
 //  6.4 更改閃屏，優化目錄結構
@@ -77,9 +78,12 @@ public class ViewConstants {
 
 	public static String SETROLEDATAURL = baseurl + "user/roleinfo";
 	
-	public static String WEIBOLOGINURL = baseurl + "/web/oauth/?type=sina&forward_url=sdk";//第三方微博登陆
 	public static String SHIMINGRENZHENG = baseurl + "user/relname/";//实名认证
+	
+	public static String WEIBOLOGINURL = baseurl + "/web/oauth/?type=sina&forward_url=sdk";//第三方微博登陆
+	
 	public static String QQLOGINURL = baseurl + "/web/oauth/?type=qq&forward_url=sdk";//第三方qq登陆
+	
 	
 	//https://rest.yayawan.com/web/oauth/?type=testqq&forward_url=sdk
 	

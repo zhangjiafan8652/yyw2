@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.yayawan.sdk.login.AssistantActivity;
 
@@ -45,7 +46,7 @@ public class MyWebViewClient extends WebViewClient {
             }
             return false;
         }
-
+      //  Toast.makeText(mActivity, ""+url, 0).show();
         handleOtherwise(mActivity, url);
         return true;
     }
@@ -86,6 +87,7 @@ public class MyWebViewClient extends WebViewClient {
     private void handleOtherwise(Activity activity, String url) {
        
         if (url.contains("closeconversation")) {
+        	// Toast.makeText(mActivity, ""+url, 0).show();
         	activity.finish();
 		}
     }

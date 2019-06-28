@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.MotionEvent;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
+import com.lidroid.jxutils.http.Jxutilsinit;
 import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
@@ -564,7 +565,8 @@ public class CommonGameProxy implements YYWGameProxy {
 		mActivity = paramActivity;
 		// 进行检查更新
 		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
-
+		//Jxutilsinit.isdebug=true;
+		
 		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
 		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
 		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);

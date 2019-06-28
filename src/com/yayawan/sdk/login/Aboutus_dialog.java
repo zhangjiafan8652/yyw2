@@ -24,6 +24,7 @@ import com.yayawan.utils.ViewConstants;
 
 
 
+
 public class Aboutus_dialog extends Basedialogview {
 
 	public Aboutus_dialog(Activity activity) {

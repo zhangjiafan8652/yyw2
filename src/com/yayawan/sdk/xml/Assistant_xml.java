@@ -64,7 +64,7 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 		
 		baselin.setBackgroundColor(Color.BLUE);
 		wv_mWeiboview = new CornersWebView(mContext);
-		wv_mWeiboview.setBackgroundColor(Color.RED);
+		//wv_mWeiboview.setBackgroundColor(Color.RED);
 		wv_mWeiboview.setLayerType(View.
 
 				LAYER_TYPE_SOFTWARE
