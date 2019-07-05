@@ -83,12 +83,8 @@ public class SmallHelpActivity extends Activity{
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				System.out.println(url);
-                
-				
-			
+				System.out.println(url);		
 				//05-16 19:54:08.336: I/System.out(9157): https://rest.yayawan.com/static/chat/?appid=1129901475&uid=720571744573858273&token=a859b26632107c69c2b8b9fce9cd36d6&username=kk483630479
-
 				if (url.contains("rest.yayawan.com/static/chat")) {
 					Intent intent = new Intent(mActivity,AssistantActivity.class);
 					intent.putExtra("mUrl", url);
