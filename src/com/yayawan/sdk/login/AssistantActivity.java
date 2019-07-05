@@ -59,7 +59,7 @@ public class AssistantActivity extends Activity implements IWebPageView {
         initTitle();
         initWebView();
         Yayalog.loger("开始聊天："+mUrl);
-        webView.loadUrl(mUrl);
+        webView.loadUrl(mUrl+"&k=123");
        // getDataFromBrowser(getIntent());
     }
 
