@@ -138,6 +138,7 @@ public class CommonGameProxy implements YYWGameProxy {
 				public void onLoginSuccess(final YYWUser paramUser,
 						final Object paramObject) {
 					Yayalog.loger("联合渠道登陆成功：" + paramUser.toString());
+					Handle.active_handler(paramActivity);
 					// TODO Auto-generated method stub
 					Handle.login_handler(mActivity, YYWMain.mUser.uid,
 							YYWMain.mUser.userName,
