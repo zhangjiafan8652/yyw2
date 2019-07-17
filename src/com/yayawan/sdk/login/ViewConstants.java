@@ -13,6 +13,7 @@ import com.yayawan.sdk.bean.PayResult;
 import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
+//  6.5 賬號登陸優化
 //  6.4 更改閃屏，優化目錄結構
 //  6.2 更改小助手
 //  6.1 增加了第三方渠道传角色信息
@@ -25,7 +26,7 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "6.4";
+	public static final String SDKVERSION = "6.5";
 	public static  int isshowmanagertip = 1;
 	
 	public static  boolean relname_valid = false;

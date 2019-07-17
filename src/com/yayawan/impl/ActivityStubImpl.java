@@ -3,6 +3,7 @@ package com.yayawan.impl;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.lidroid.jxutils.http.Jxutilsinit;
 import com.yayawan.proxy.YYWActivityStub;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.utils.Handle;
@@ -31,6 +32,9 @@ public class ActivityStubImpl implements YYWActivityStub {
 	@Override
 	public void onCreate(Activity paramActivity) {
 		// TODO Auto-generated method stub
+		
+		//Jxutilsinit.isdebug=true;
+		
 		Yayalog.loger("oncreate");
 		DgameSdk.initSdk(paramActivity);
 		Handle.active_handler(paramActivity);

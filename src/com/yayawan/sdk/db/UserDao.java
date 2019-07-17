@@ -63,9 +63,10 @@ public class UserDao {
 			if (!username.equals("k")) {
 				if (!getUserStatus(username)) {
 					Yayalog.loger("账号密码写入数据库"+username+password);
-					writeUser(username, password, "",1);
+					
+					writeUserlocal(username, password, "");
 					Yayalog.loger("清空sp临时账号");
-					Sputils.putSPstring("username", "k", mContext);
+					//Sputils.putSPstring("username", "k", mContext);
 				}
 				
 			}
@@ -100,21 +101,16 @@ public class UserDao {
 	 */
 	public synchronized void writeUser(String name, String password,
 			String secret) {
-		synSpuser();
-		// 检查有没有sd卡读写权限
-		if (!(PermissionUtils.checkPermission(mContext,
-				Manifest.permission.READ_EXTERNAL_STORAGE) && PermissionUtils
-				.checkPermission(mContext,
-						Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-			Yayalog.loger("sd卡没有权限，将账号密码存sp中");
-			Sputils.putSPstring("username", name, mContext);
-			Sputils.putSPstring("password", password, mContext);
-
-		} else {
-
+		
+			synSpuser();
+			
+			if (!TextUtils.isEmpty(name)) {
+				Sputils.putSPstring("username",name, mContext);
+				Sputils.putSPstring("password", password, mContext);
+			}
 			
 			
-			
+		
 			if (TextUtils.isEmpty(name)) {
 				return;
 			}
@@ -132,9 +128,9 @@ public class UserDao {
 					}
 
 					removeUser(name);
-					writeUser(name, password, secret);
+					
 
-				} else {
+				} 
 
 					if (TextUtils.isEmpty(secret)) {
 
@@ -168,7 +164,7 @@ public class UserDao {
 					}
 					// System.out.println("");
 
-				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -176,22 +172,27 @@ public class UserDao {
 					database.close();
 				}
 			}
-		}
+		
 	}
 
+	
 	/**
-	 * 将当前用户信息保存到数据库 如果数据库中有该用户信息,更新用户密码和登录时间
+	 * 单独用来同步本地账号的
 	 * 
 	 * @param user
 	 */
-	public synchronized void writeUser(String name, String password,
-			String secret,int type) {
+	public synchronized void writeUserlocal(String name, String password,
+			String secret) {
 		
-		// 检查有没有sd卡读写权限
-	
+		//	synSpuser();
+			
+			if (!TextUtils.isEmpty(name)) {
+				Sputils.putSPstring("username",name, mContext);
+				Sputils.putSPstring("password", password, mContext);
+			}
 			
 			
-		Yayalog.loger("数据库存账号密码"+name+password);
+		
 			if (TextUtils.isEmpty(name)) {
 				return;
 			}
@@ -209,9 +210,9 @@ public class UserDao {
 					}
 
 					removeUser(name);
-					writeUser(name, password, secret);
+					
 
-				} else {
+				} 
 
 					if (TextUtils.isEmpty(secret)) {
 
@@ -245,7 +246,7 @@ public class UserDao {
 					}
 					// System.out.println("");
 
-				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -255,7 +256,9 @@ public class UserDao {
 			}
 		
 	}
+
 	
+
 	/**
 	 * 将当前用户信息保存到数据库 如果数据库中有该用户信息,更新用户密码和登录时间
 	 * 
@@ -310,18 +313,19 @@ public class UserDao {
 		
 		synSpuser();
 		
-		ArrayList<String> names = new ArrayList<String>();
-		if (!(PermissionUtils.checkPermission(mContext,
-				Manifest.permission.READ_EXTERNAL_STORAGE) && PermissionUtils
-				.checkPermission(mContext,
-						Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-			Yayalog.loger("sd卡没有权限，将返回sp中的账号");
-			String username = Sputils.getSPstring("username", "k", mContext);
-			if (!username.equals("k")) {
-				names.add(username);
-			}
+		
 
-		} else {
+		
+		ArrayList<String> names = new ArrayList<String>();
+		
+		String username = Sputils.getSPstring("username", "k", mContext);
+		//String password = Sputils.getSPstring("password", "k", mContext);
+		
+		if (!username.equals("k")) {
+			names.add(username);
+		}
+		
+		
 			SQLiteDatabase database = getConnection();
 			Cursor cursor = null;
 
@@ -351,7 +355,7 @@ public class UserDao {
 					database.close();
 				}
 			}
-		}
+		
 
 		return names;
 	}
@@ -365,10 +369,8 @@ public class UserDao {
 	 */
 	public synchronized String getPassword(String name) {
 
-		if (!(PermissionUtils.checkPermission(mContext,
-				Manifest.permission.READ_EXTERNAL_STORAGE) && PermissionUtils
-				.checkPermission(mContext,
-						Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+		String username = Sputils.getSPstring("username", "k", mContext);
+		if (name.equals(username)) {
 			Yayalog.loger("sd卡没有权限，将返回sp中的密码");
 			String password = Sputils.getSPstring("password", "k", mContext);
 			return password;

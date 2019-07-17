@@ -339,6 +339,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 									// TODO Auto-generated method stub
 
 									Utilsjf.stopDialog();
+									DgameSdk.mSdkApiCallback.onVerifyCancel();
 									Toast.makeText(mActivity, "请检查网络是否畅通", 0)
 											.show();
 								}
@@ -358,7 +359,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 										
 										String msg=	(String) jsonObject.optString("err_msg");
 										if (msg.contains("success")) {
-											//DgameSdk.mSdkApiCallback
+											DgameSdk.mSdkApiCallback.onVerifySuccess(result.result);
 											dialogDismiss();
 										}
 									} catch (JSONException e) {
