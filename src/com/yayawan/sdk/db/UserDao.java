@@ -344,7 +344,10 @@ public class UserDao {
 					if (TextUtils.isEmpty(decryptBASE64)) {
 
 					} else {
-						names.add(decryptBASE64);
+						if (!decryptBASE64.equals(username)) {
+							names.add(decryptBASE64);
+						}
+						
 					}
 
 				}

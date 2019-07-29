@@ -24,7 +24,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.yayawan.sdk.xml.GetAssetsutils;
-import com.lidroid.jxutils.BitmapUtils;
+
 
 
 /**
@@ -32,7 +32,7 @@ import com.lidroid.jxutils.BitmapUtils;
  */
 public class MybitmapUtils {
 
-	private static BitmapUtils sHascaheBitmapUtils;
+	//private static BitmapUtils sHascaheBitmapUtils;
 
 	private static MybitmapUtils sMybitmapUtils;
 
@@ -40,7 +40,7 @@ public class MybitmapUtils {
 
 	}
 
-	public static <T extends View> void disPlayHascache(Activity mactivity,
+/*	public static <T extends View> void disPlayHascache(Activity mactivity,
 			T container, String uri) {
 		// if (sHascaheBitmapUtils == null) {
 		BitmapUtils sHascaheBitmapUtils = new BitmapUtils(mactivity);
@@ -51,7 +51,7 @@ public class MybitmapUtils {
 		sHascaheBitmapUtils.configDefaultImageLoadAnimation(alphaAnimation);
 
 		sHascaheBitmapUtils.display(container, uri);
-	}
+	}*/
 
 	/**
 	 * 展示图片,
@@ -65,7 +65,7 @@ public class MybitmapUtils {
 	 * @param defaultimage
 	 *            加载失败默认图片
 	 */
-	public static <T extends View> void displayImage(Activity mActivity,
+/*	public static <T extends View> void displayImage(Activity mActivity,
 			T container, String uri, String defaultimage) {
 		// if (sHascaheBitmapUtils == null) {
 		BitmapUtils bitmapUtils = new BitmapUtils(mActivity);
@@ -82,7 +82,7 @@ public class MybitmapUtils {
 
 		bitmapUtils.display(container, uri);
 	}
-	
+	*/
 	public static Bitmap roundCornerBitmap(Bitmap bitmap) {
 
 		//创建一个和传进来位图一样大小的位图

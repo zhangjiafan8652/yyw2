@@ -2,7 +2,6 @@ package com.yayawan.sdk.utils;
 
 import java.math.BigInteger;
 
-import org.apache.http.HttpEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 

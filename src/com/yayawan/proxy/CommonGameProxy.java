@@ -13,8 +13,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.MotionEvent;
+
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
+
 import com.lidroid.jxutils.http.Jxutilsinit;
 import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;

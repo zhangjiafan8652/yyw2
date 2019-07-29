@@ -279,8 +279,7 @@ public class Exit_dialog extends Basedialogview {
 			settings.setSupportZoom(true); // 支持缩放
 			settings.setBuiltInZoomControls(false); // 启用内置缩放装置
 			settings.setJavaScriptEnabled(true); // 启用JS脚本
-			settings.setCacheMode(WebSettings.LOAD_NO_CACHE);// 关闭webview中缓存
-			
+			settings.setCacheMode(WebSettings.LOAD_NO_CACHE);// 关闭webview中缓存	
 			settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 			Yayalog.loger("ni..."+html);
 			//lv_helpcontent.loadUrl("http://danjiyou.duapp.com/Home/Blog/index");
