@@ -5,11 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +43,8 @@ public class AssistantActivity extends Activity implements IWebPageView {
 
 
 
+    int Navigationheight=0;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +53,14 @@ public class AssistantActivity extends Activity implements IWebPageView {
         //防止输入法遮挡文字。
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         
-        Assistant_xml smallHelp_xml = new Assistant_xml(this);
+        if (checkHasNavigationBar(this)) {
+        	Navigationheight=getNavigationBarHeight(this);
+		}
+        
+        Assistant_xml smallHelp_xml = new Assistant_xml(this,Navigationheight);
+        
+        
+        
 		setContentView(smallHelp_xml.initViewxml());
 		AndroidBug5497Workaround.assistActivity(this);
 		this.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);  
@@ -361,5 +373,47 @@ public class AssistantActivity extends Activity implements IWebPageView {
     public static void loadUrl(Context mContext, String mUrl) {
       
     }
+    
+    
+    /**
+     * 判断是否有NavigationBar
+     *
+     * @param activity
+     * @return
+     */
+    @SuppressLint("NewApi") public static boolean checkHasNavigationBar(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display d = windowManager.getDefaultDisplay();
+
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            d.getRealMetrics(realDisplayMetrics);
+        }
+
+        int realHeight = realDisplayMetrics.heightPixels;
+        int realWidth = realDisplayMetrics.widthPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+    }
+
+    /**
+     * 获得NavigationBar的高度
+     */
+    public static int getNavigationBarHeight(Activity activity) {
+        int result = 0;
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0 && checkHasNavigationBar(activity)) {
+            result = resources.getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
 }
 

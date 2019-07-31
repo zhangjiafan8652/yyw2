@@ -2,6 +2,7 @@ package com.yayawan.sdk.xml;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -25,6 +26,14 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 	private ImageButton iv_mPre;
 	private CornersWebView wv_mWeiboview;
 	
+	private int webviewmaginbottom=0;
+	public int getWebviewmaginbottom() {
+		return webviewmaginbottom;
+	}
+
+	public void setWebviewmaginbottom(int webviewmaginbottom) {
+		this.webviewmaginbottom = webviewmaginbottom;
+	}
 
 	private LinearLayout ll_mPre;
 	private TextView tv_zhuce;
@@ -37,8 +46,13 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 		super(activity);
 		// TODO Auto-generated constructor stub
 	}
+	public Assistant_xml(Activity activity,int mwebviewmaginbottom) {
+		super(activity);
+		// TODO Auto-generated constructor stub
+		this.webviewmaginbottom=mwebviewmaginbottom;
+	}
 
-	@Override
+	@SuppressLint("NewApi") @Override
 	public View initViewxml() {
 
 		// 基类布局
@@ -65,9 +79,7 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 		baselin.setBackgroundColor(Color.BLUE);
 		wv_mWeiboview = new CornersWebView(mContext);
 		//wv_mWeiboview.setBackgroundColor(Color.RED);
-		wv_mWeiboview.setLayerType(View.
-
-				LAYER_TYPE_SOFTWARE
+		wv_mWeiboview.setLayerType(View.LAYER_TYPE_SOFTWARE
 				, null);
 		machineFactory.MachineView(wv_mWeiboview, MATCH_PARENT, MATCH_PARENT,
 					mLinearLayout);
@@ -76,7 +88,7 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 				rl_mLoading = new LinearLayout(mContext);
 				rl_mLoading.setBackgroundColor(Color.WHITE);
 				machineFactory.MachineView(rl_mLoading, MATCH_PARENT, MATCH_PARENT,
-						mLinearLayout);
+						mLinearLayout,4,webviewmaginbottom);
 				rl_mLoading.setGravity(Gravity.CENTER);
 				pb_mLoading = new ProgressBar(mContext);
 				machineFactory.MachineView(pb_mLoading, 50, 50, 0, mLinearLayout, 0,
