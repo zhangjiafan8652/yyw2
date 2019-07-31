@@ -639,8 +639,8 @@ public class Login_ho_dialog extends Basedialogview {
 							if (qqhao.equals("暂无")) {
 								
 							}else {
-								 String url="mqqwpa://im/chat?chat_type=crm&uin="+qqhao+"&version=1&src_type=web&web_src=http:://wpa.b.qq.com";
-
+								// String url="mqqwpa://im/chat?chat_type=crm&uin="+"3003531594"+"&version=1&src_type=web&web_src=http:://wpa.b.qq.com";
+								 String url = "mqqwpa://im/chat?chat_type=wpa&uin=3003531594";
 								//String url="mqqwpa://im/chat?chat_type=wpa&uin="+qqhao;
 								mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
 							}

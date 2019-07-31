@@ -25,7 +25,8 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "6.4";
+	public static final String SDKVERSIONCODE = "66";
+	public static final String SDKVERSION = "6.6";
 	public static  int isshowmanagertip = 1;
 	
 	public static  boolean relname_valid = false;

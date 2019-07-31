@@ -115,6 +115,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	public void login(final Activity paramActivity,
 			final YYWUserCallBack userCallBack) {
 		mActivity = paramActivity;
+		Jxutilsinit.msdkversion=ViewConstants.SDKVERSIONCODE;
 		// YYWMain.mUserCallBack=userCallBack;
 	//	ToastUtil.showSuccess(paramActivity, paramActivity.getClass().getName());
 		// 检测是否调用类
