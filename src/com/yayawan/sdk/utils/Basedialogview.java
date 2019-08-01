@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.other.JFupdateUtils;
+import com.yayawan.sdk.other.JFvipnoticeUtils;
 import com.yayawan.sdk.xml.Basexml;
 import com.yayawan.utils.ViewConstants;
 
@@ -77,6 +79,7 @@ public abstract class Basedialogview extends Basexml {
 
 		if (mUserCallback != null) {
 			mUserCallback.onSuccess(paramUser, paramInt);
+			
 		}
 		mUserCallback = null;
 		// mActivity.finish();

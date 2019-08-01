@@ -126,6 +126,8 @@ public class CommonGameProxy implements YYWGameProxy {
 			Yayalog.loger("Kgamelogin");
 			YYWMain.mUserCallBack = userCallBack;
 			this.mLogin.login(paramActivity, YYWMain.mUserCallBack, "login");
+			
+			
 		} else {
 
 			Yayalog.loger("UNIONlogin");

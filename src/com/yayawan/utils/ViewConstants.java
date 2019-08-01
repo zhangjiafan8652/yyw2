@@ -76,7 +76,9 @@ public class ViewConstants {
 	public static String paytype = baseurl + "data/payinfo";  //在中间件中，支付前请求，支付方式
 
 	public static String NOTICEURL = baseurl + "data/notice";
-
+	
+	public static String VIPNOTICEURL = baseurl + "user/vip_kf_info";//VIP通知
+	//https://rest.yayawan.com/user/vip_kf_info/
 	public static String SETROLEDATAURL = baseurl + "user/roleinfo";
 	
 	public static String SHIMINGRENZHENG = baseurl + "user/relname/";//实名认证
