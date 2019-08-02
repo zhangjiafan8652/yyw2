@@ -37,7 +37,7 @@ import com.yayawan.utils.Sputils;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
-public class Announcevipment_dialog extends Basedialogview {
+public class Updatetip_dialog extends Basedialogview {
 
 	private LinearLayout ll_mPre;
 	private ImageButton iv_mPre;
@@ -50,10 +50,10 @@ public class Announcevipment_dialog extends Basedialogview {
 	private ImageButton ib_mClosebutton;
 	protected static final int SHOWCONTENT = 3;
 
-	public Announcevipment_dialog(Activity activity) {
+	public Updatetip_dialog(Activity activity) {
 		super(activity);
 	}
-	public Announcevipment_dialog(Activity activity,String html) {
+	public Updatetip_dialog(Activity activity,String html) {
 		
 		super(activity);
 		Yayalog.loger("wo"+html);
@@ -329,7 +329,7 @@ public class Announcevipment_dialog extends Basedialogview {
 		settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
 		lv_helpcontent.setVerticalScrollBarEnabled(false);
 		settings.setJavaScriptEnabled(true); // 启用JS脚本
-		lv_helpcontent.loadUrl(html+"&kjiafan=123");
+		lv_helpcontent.loadUrl(html+"&k=123");
 	}
 	
 	

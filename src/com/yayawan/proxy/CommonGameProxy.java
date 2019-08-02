@@ -645,6 +645,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void onActivityResult(Activity paramActivity, int paramInt1,
 			int paramInt2, Intent paramIntent) {
+		JFupdateUtils.onActivityResult(paramActivity, paramInt1, paramInt2, paramIntent);
 		GameApitest.getGameApitestInstants(paramActivity).sendTest(
 				"onActivityResult");
 		this.mStub.onActivityResult(paramActivity, paramInt1, paramInt2,

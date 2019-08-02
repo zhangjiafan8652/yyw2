@@ -1,33 +1,45 @@
 package com.yayawan.sdk.other;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.yayawan.sdk.utils.CircleProgressView;
-import com.yayawan.sdk.utils.ToastUtil;
-import com.yayawan.sdk.utils.UpdateDialog;
-import com.yayawan.utils.DeviceUtil;
-import com.yayawan.utils.ViewConstants;
-import com.yayawan.utils.Yayalog;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
+import com.yayawan.proxy.GameApitest;
+import com.yayawan.sdk.utils.CircleProgressView;
+import com.yayawan.sdk.utils.ToastUtil;
+import com.yayawan.sdk.utils.UpdateDialog;
+import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
+import com.yayawan.utils.Yayalog;
 
 public class JFupdateUtils {
 
@@ -50,6 +62,7 @@ public class JFupdateUtils {
 	private String apkpath = Environment.getExternalStorageDirectory()
 			.getPath() + "/";
 	private static String url;
+	private static File apkfile;
 
 	public JFupdateUtils(Activity mActivity) {
 		this.mActivity = mActivity;
@@ -238,10 +251,7 @@ public class JFupdateUtils {
 				updateProgress_dialog.dialogDismiss();
 				String fileName = apkpath;
 				Uri uri = Uri.fromFile(new File(fileName));
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(uri,
-						"application/vnd.android.package-archive");
-				mActivity.startActivity(intent);
+				installProcess(mActivity,new File(fileName));
 			}
 
 			@Override
@@ -291,5 +301,88 @@ public class JFupdateUtils {
 				+ versioncode + ", versionname=" + versionname + ", apkpath="
 				+ apkpath + "]";
 	}
+
+
+    //安装应用的流程
+    @TargetApi(26)
+	private static void installProcess(final Activity mac,File mapkfile) {
+    	apkfile=mapkfile;
+        File apk = mapkfile;
+        if (!apk.exists()) {
+            return;
+        }
+        boolean haveInstallPermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //先获取是否有安装未知来源应用的权限
+            haveInstallPermission = mac.getPackageManager().canRequestPackageInstalls();
+            if (!haveInstallPermission) {//没有权限
+                AlertDialog.Builder builder = new AlertDialog.Builder(mac);
+                builder.setTitle("安装应用需要打开未知来源权限，请去设置中开启权限");
+                builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            startInstallPermissionSettingActivity(mac);
+                        }
+                    }
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.create().show();
+                return;
+            }
+        }
+        //有权限，开始安装应用程序
+        installApk(apk,mac);
+    }
+
+
+    
+    private static void startInstallPermissionSettingActivity(Activity mac) {
+        Uri packageURI = Uri.parse("package:" + mac.getPackageName());
+        //注意这个是8.0新API
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+        mac.startActivityForResult(intent, 10086);
+    }
+
+    //安装应用
+    private static void installApk(File apk,Activity mac) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
+        } else {//Android7.0之后获取uri要用contentProvider
+            Uri uri = getUriFromFile(mac.getBaseContext(), apk);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mac.getBaseContext().startActivity(intent);
+    }
+
+    public static Uri getUriFromFile(Context context, File file) {
+        Uri imageUri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            imageUri = FileProvider.getUriForFile(context,
+                    "com.yyw.sdk", file);//通过FileProvider创建一个content类型的Uri
+        } else {
+            imageUri = Uri.fromFile(file);
+        }
+        return imageUri;
+    }
+
+	public static void onActivityResult(Activity paramActivity, int requestCode,
+			int resultCode, Intent paramIntent) {
+		if (requestCode == 10086) {
+            installProcess(paramActivity,apkfile);
+        }
+
+	}
+
+  
 
 }
