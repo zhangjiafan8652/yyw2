@@ -1,5 +1,6 @@
 package com.yayawan.proxy;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
 
@@ -110,12 +111,38 @@ public class CommonGameProxy implements YYWGameProxy {
 	}
 
 	public static boolean ISNEWPAY = false;// 是否使用只新登陆,用于控制第三种支付方式
+	
+	
+	public static boolean isHadmsdkverskon(){
+		Field[] declaredFields = Jxutilsinit.class.getDeclaredFields();
+		//Yayalog.loger("jxtuils declaredFields:"+declaredFields.toString());
+		for (int i = 0; i < declaredFields.length; i++) {
+			
+			if (declaredFields[i].toString().contains("msdkversion")) {
+				return true;
+			}
+					
+		}
+		
+			return false;
+		
+	}
+	
+	
 
 	@Override
 	public void login(final Activity paramActivity,
 			final YYWUserCallBack userCallBack) {
+		
+		
+		
 		mActivity = paramActivity;
-		Jxutilsinit.msdkversion=ViewConstants.SDKVERSIONCODE;
+		
+		if (isHadmsdkverskon()) {
+			Yayalog.loger("有sdkversion");
+			Jxutilsinit.msdkversion=ViewConstants.SDKVERSIONCODE;
+		}
+		
 		// YYWMain.mUserCallBack=userCallBack;
 	//	ToastUtil.showSuccess(paramActivity, paramActivity.getClass().getName());
 		// 检测是否调用类
