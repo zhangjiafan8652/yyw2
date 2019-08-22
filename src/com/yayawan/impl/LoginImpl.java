@@ -11,6 +11,7 @@ import com.yayawan.proxy.YYWLoginer;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.other.JFvipnoticeUtils;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.Yayalog;
 
@@ -52,6 +53,16 @@ public class LoginImpl implements YYWLoginer {
 			                    Yayalog.loger("dgame登陆成功："+YYWMain.mUser.token+"  USER:"+user.token+"yywuser："+yywUser.token);
 			                    YYWMain.mUserCallBack.onLoginSuccess(yywUser, "success");
 			                    Handle.login_handler(paramActivity, yywUser.uid,  yywUser.userName);
+			                    
+			                    paramActivity.runOnUiThread(new Runnable() {
+									
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										new JFvipnoticeUtils().getNotice(paramActivity);
+									}
+								});
+				                
 			                }
 			            }
 

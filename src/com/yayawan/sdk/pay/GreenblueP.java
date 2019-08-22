@@ -88,7 +88,7 @@ public class GreenblueP {
 		System.out.println("parseScheme的url：" + url);
 
 		if (url.contains("platformapi/startApp")
-				|| url.contains("platformapi/startapp")) {
+				|| url.contains("platformapi/startapp")|| url.contains("ayclient")) {
 			return true;
 		} else if ((Build.VERSION.SDK_INT > 19)
 				&& (url.contains("platformapi") && url.contains("startapp"))) {

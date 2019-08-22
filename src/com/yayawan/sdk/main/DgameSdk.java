@@ -14,12 +14,15 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jf.permissonutils.Permission_dialog;
+import com.jf.permissonutils.Permission_dialog.PermissionDialogClickCallBack;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
@@ -121,15 +124,16 @@ public class DgameSdk {
 		
 		
 		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-			SuperDialog superDialog = new SuperDialog(paramActivity);
-			superDialog.setTitle("亲爱的玩家");
-			superDialog.setContent("密码将永久加密保存在sd中\r\n请授予sd卡读写权限").setListener(new onDialogClickListener() {
+		
+			Permission_dialog permission_dialog = new Permission_dialog(paramActivity,"permission.png");
+
+	    	permission_dialog.setmPermissionDialogClickCallBack(new PermissionDialogClickCallBack() {
 				
 				@Override
-				public void click(boolean isButtonClick, int position) {
+				public void onClick() {
 					// TODO Auto-generated method stub
 					Yayalog.loger("请求权限对话框按钮按下");
-					PermissionUtils.checkMorePermissions(paramActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
+					PermissionUtils.checkMorePermissions(paramActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE},new PermissionCheckCallBack() {
 						
 						@Override
 						public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
@@ -152,8 +156,13 @@ public class DgameSdk {
 							
 						}
 					});
+				
 				}
-			}).show();
+			});
+			permission_dialog.dialogShow();
+					// TODO Auto-generated method stub
+					
+			
 		}
 		
 		

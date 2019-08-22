@@ -518,27 +518,7 @@ public class LogoWindow {
 		return kx;
 	}
 
-	private int getStatusBarHeight(Activity macActivity) {
-		Class<?> c = null;
-		Object obj = null;
-		Field field = null;
-		int x = 0;
-		try {
-			c = Class.forName("com.android.internal.R$dimen");
-			obj = c.newInstance();
-			field = c.getField("status_bar_height");
-			x = Integer.parseInt(field.get(obj).toString());
-			int dimensionPixelSize = macActivity.getResources()
-					.getDimensionPixelSize(x);
-			System.out.println("状态栏高度" + dimensionPixelSize);
-			return dimensionPixelSize;
-		} catch (Exception e1) {
-			// Log.d(TAG, "get status bar height fail");
-			// e1.printStackTrace();
-			System.out.println("获取状态栏高度失败");
-			return 75;
-		}
-	}
+	
 	
 	
 }
