@@ -1,14 +1,11 @@
 package com.yayawan.sdk.login;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import com.yayawan.main.Dgame;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
-import com.yayawan.sdk.utils.Utilsjf;
+
 import com.yayawan.sdk.xml.SmallHelp_xml;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
@@ -59,7 +56,7 @@ public class SmallHelpActivity extends Activity{
 		webSetting.setAllowFileAccess(true);
 		webSetting.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
 		webSetting.setSupportZoom(true);
-		webSetting.setBuiltInZoomControls(true);
+		webSetting.setBuiltInZoomControls(false);
 		webSetting.setUseWideViewPort(true);
 		webSetting.setSupportMultipleWindows(false);
 		// webSetting.setLoadWithOverviewMode(true);
@@ -79,6 +76,9 @@ public class SmallHelpActivity extends Activity{
 		 AndroidDelegate mandroiddelegate =new AndroidDelegate(this);
 		 wv_mWeiboview.addJavascriptInterface(mandroiddelegate, "androidDelegate");
 		
+		 
+		// webVeiw.getSettings().setBuiltInZoomControls(false);
+		 
 		wv_mWeiboview.setWebViewClient(new WebViewClient() {
 
 			@Override
@@ -168,18 +168,7 @@ case 3:
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
 		
-		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				setResult(020202, intent); //intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle
-				
-				finish();
-			}
-		});
-		
+
 	}
 	@Override
 	protected void onDestroy() {

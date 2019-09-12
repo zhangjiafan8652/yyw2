@@ -112,16 +112,16 @@ public class Handle {
 					@Override
 					public void onFailure(HttpException arg0, String arg1) {
 						// TODO Auto-generated method stub
-
+						Yayalog.loger("kgame激活失败:" + arg1);
 					}
 
 					@Override
 					public void onSuccess(ResponseInfo<String> resz) {
 						// TODO Auto-generated method stub
-
+						Yayalog.loger("kgame激活信息:" + resz.result);
 						try {
 							JSONObject object = new JSONObject(resz.result);
-							Yayalog.loger("kgame激活信息:" + resz.result);
+							//Yayalog.loger("kgame激活信息:" + resz.result);
 							int recode;
 
 							recode = object.getInt("err_code");

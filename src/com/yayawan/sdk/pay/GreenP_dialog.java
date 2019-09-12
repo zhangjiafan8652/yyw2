@@ -31,7 +31,7 @@ import com.yayawan.sdk.utils.AuthNumReceiver;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.Utilsjf;
-import com.yayawan.sdk.utils.AuthNumReceiver.MessageListener;
+
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;

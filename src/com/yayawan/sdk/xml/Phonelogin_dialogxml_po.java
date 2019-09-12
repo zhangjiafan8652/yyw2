@@ -31,7 +31,7 @@ import com.yayawan.sdk.utils.AuthNumReceiver;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.DialogUtil;
-import com.yayawan.sdk.utils.AuthNumReceiver.MessageListener;
+
 
 
 
@@ -321,7 +321,7 @@ public class Phonelogin_dialogxml_po extends Basedialogview {
 	private void initlog() {
 		
 		//System.out.println("开始注册短信广播");
-		onStart();
+	
 		
 		mUserCallback = DgameSdk.mUserCallback;
 
@@ -429,29 +429,5 @@ public class Phonelogin_dialogxml_po extends Basedialogview {
 		mActivity.finish();
 	}
 	
-	/**
-	 * 注册接收短信广播
-	 */
-	public void onStart() {
-		 // 生成广播处理
-        mAuthNumReceiver = new AuthNumReceiver();
-       
-        // 实例化过滤器并设置要过滤的广播
-        IntentFilter intentFilter = new IntentFilter(
-                "android.provider.Telephony.SMS_RECEIVED");
-        intentFilter.setPriority(Integer.MAX_VALUE);
-        // 注册广播
-        mActivity.registerReceiver(mAuthNumReceiver, intentFilter);
-       
-        mAuthNumReceiver.setOnReceivedMessageListener(new MessageListener() {
-
-            @Override
-            public void onReceived(String message) {
-            	//System.out.println("接收到的短信+++++++"+message);
-            	et_mSecurity.setText(message);
-            }
-        });
-		//super.onStart();
-	}
 
 }

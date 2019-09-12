@@ -37,7 +37,7 @@ import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.CounterDown;
 import com.yayawan.sdk.utils.Utilsjf;
-import com.yayawan.sdk.utils.AuthNumReceiver.MessageListener;
+
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
@@ -602,25 +602,6 @@ public class ResetPassword_ho_dialog extends Basedialogview {
 
 	}
 
-	public void onStart() {
-		// 生成广播处理
-		mAuthNumReceiver = new AuthNumReceiver();
-
-		// 实例化过滤器并设置要过滤的广播
-		IntentFilter intentFilter = new IntentFilter(
-				"android.provider.Telephony.SMS_RECEIVED");
-		intentFilter.setPriority(Integer.MAX_VALUE);
-		// 注册广播
-		mActivity.registerReceiver(mAuthNumReceiver, intentFilter);
-
-		mAuthNumReceiver.setOnReceivedMessageListener(new MessageListener() {
-
-			@Override
-			public void onReceived(String message) {
-				et_mSecurity.setText(message);
-			}
-		});
-
-	}
+	
 
 }

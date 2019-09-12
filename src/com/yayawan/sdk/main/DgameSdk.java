@@ -123,7 +123,9 @@ public class DgameSdk {
 		
 		
 		
-		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
+				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_PHONE_STATE))) {
 		
 			Permission_dialog permission_dialog = new Permission_dialog(paramActivity,"permission.png");
 

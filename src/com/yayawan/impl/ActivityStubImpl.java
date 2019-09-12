@@ -33,7 +33,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 	public void onCreate(Activity paramActivity) {
 		// TODO Auto-generated method stub
 		
-		//Jxutilsinit.isdebug=true;
+		Jxutilsinit.isdebug=true;
 		
 		Yayalog.loger("oncreate");
 		DgameSdk.initSdk(paramActivity);
@@ -53,6 +53,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 	@Override
 	public void onPause(Activity paramActivity) {
 
+		//DgameSdk.stop(paramActivity);
 		
 
 		Yayalog.loger("onpause");
@@ -67,7 +68,6 @@ public class ActivityStubImpl implements YYWActivityStub {
 	@Override
 	public void onStop(Activity paramActivity) {
 		// TODO Auto-generated method stub
-		DgameSdk.stop(paramActivity);
 		Yayalog.loger("onstop");
 	}
 
