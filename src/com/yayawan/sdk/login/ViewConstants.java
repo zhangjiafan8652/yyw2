@@ -13,6 +13,7 @@ import com.yayawan.sdk.bean.PayResult;
 import com.yayawan.utils.DeviceUtil;
 
 public class ViewConstants {
+//  6.7 个人中心可以点击空白处关闭，解决关闭个人中心闪退问题
 //  6.6 添加加密
 //  6.5 賬號登陸優化
 //  6.4 更改閃屏，優化目錄結構
@@ -27,7 +28,7 @@ public class ViewConstants {
 //	4.9 修复老微信支付
 //	4.8 增加代金券支付
 //	4.7 删除多余小助手代码
-	public static final String SDKVERSION = "6.6";
+	public static final String SDKVERSION = "6.7";
 	public static  int isshowmanagertip = 1;
 	
 	public static  boolean relname_valid = false;

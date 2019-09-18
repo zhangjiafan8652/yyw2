@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -32,6 +33,14 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 	private ProgressBar pb_mLoading;
 	private Button bt_mReload;
 	private LinearLayout baselin;
+
+	public LinearLayout getBaselin() {
+		return baselin;
+	}
+
+	public void setBaselin(LinearLayout baselin) {
+		this.baselin = baselin;
+	}
 
 	public SmallHelp_xml(Activity activity) {
 		super(activity);
@@ -101,6 +110,8 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		baseLinearLayout.addView(wv_mWeiboview);*/
 		baselin.addView(rl_mLoading);
 		baselin.addView(wv_mWeiboview);
+		
+		
 		baseLinearLayout.addView(baselin);
 		return baseLinearLayout;
 	}

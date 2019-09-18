@@ -46,6 +46,15 @@ public class SmallHelpActivity extends Activity{
 		
 	    wv_mWeiboview = smallHelp_xml.getWv_mWeiboview();
 		mActivity=this;
+		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mActivity.finish();
+			}
+		});
+		
 		rl_mLoading = smallHelp_xml.getRl_mLoading();
 		String uid=AgentApp.mUser.uid+"";
 		String token=AgentApp.mUser.token;
@@ -75,11 +84,7 @@ public class SmallHelpActivity extends Activity{
 		webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 		 AndroidDelegate mandroiddelegate =new AndroidDelegate(this);
 		 wv_mWeiboview.addJavascriptInterface(mandroiddelegate, "androidDelegate");
-		
-		 
-		// webVeiw.getSettings().setBuiltInZoomControls(false);
-		 
-		wv_mWeiboview.setWebViewClient(new WebViewClient() {
+		 wv_mWeiboview.setWebViewClient(new WebViewClient() {
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -122,11 +127,6 @@ public class SmallHelpActivity extends Activity{
 					}
 					return super.shouldOverrideUrlLoading(view, url);
 				}
-				
-				
-				
-				 
-
 			}
 
 
