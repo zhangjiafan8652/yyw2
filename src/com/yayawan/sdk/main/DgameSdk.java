@@ -127,12 +127,12 @@ public class DgameSdk {
 				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_PHONE_STATE))) {
 		
-			Permission_dialog permission_dialog = new Permission_dialog(paramActivity,"permission.png");
+			//Permission_dialog permission_dialog = new Permission_dialog(paramActivity,"permission.png");
 
-	    	permission_dialog.setmPermissionDialogClickCallBack(new PermissionDialogClickCallBack() {
+	    //	permission_dialog.setmPermissionDialogClickCallBack(new PermissionDialogClickCallBack() {
 				
-				@Override
-				public void onClick() {
+			//	@Override
+			//	public void onClick() {
 					// TODO Auto-generated method stub
 					Yayalog.loger("请求权限对话框按钮按下");
 					PermissionUtils.checkMorePermissions(paramActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE},new PermissionCheckCallBack() {
@@ -159,9 +159,9 @@ public class DgameSdk {
 						}
 					});
 				
-				}
-			});
-			permission_dialog.dialogShow();
+			//	}
+			//});
+		//	permission_dialog.dialogShow();
 					// TODO Auto-generated method stub
 					
 			
