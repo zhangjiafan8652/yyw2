@@ -2,6 +2,8 @@ package com.yayawan.sdk.login;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -21,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.yayawan.sdk.webview.AndroidBug5497Workaround;
 import com.yayawan.sdk.webview.IWebPageView;
@@ -154,7 +157,52 @@ public class AssistantActivity extends Activity implements IWebPageView {
         webView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return handleLongImage();
+            	
+            	//Toast.makeText(AssistantActivity.this, "长按了", 0).show();
+            	 WebView.HitTestResult result = ((WebView)v).getHitTestResult();
+                 if (null == result)
+                     return false;
+                 int type = result.getType();
+                 if (type == WebView.HitTestResult.UNKNOWN_TYPE)
+                     return false;
+                 if (type == WebView.HitTestResult.EDIT_TEXT_TYPE) {
+
+                 }
+          
+
+             // 这里可以拦截很多类型，我们只处理图片类型就可以了
+                 switch (type) {
+                     case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
+                         break;
+                     case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
+                         break;
+                     case WebView.HitTestResult.GEO_TYPE: // TODO
+                         break;
+                     case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
+                    	 
+                    	   Toast.makeText(AssistantActivity.this, "链接已经复制", 0).show();
+                    		//Toast.makeText(mActivity, "点击了链接", 0).show();
+                        	
+                        	//获取剪贴板管理器：  
+                        	ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);  
+                        	// 创建普通字符型ClipData  
+                        	ClipData mClipData = ClipData.newPlainText("url", result.getExtra().toString());  
+                        	// 将ClipData内容放到系统剪贴板里。  
+                        	cm.setPrimaryClip(mClipData);  
+                         break;
+                     case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                         break;
+                     case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项
+                         // 获取图片的路径
+                      
+                         break;
+                     default:
+                         break;
+                 }
+           
+                 return true;
+             
+
             }
         });
 

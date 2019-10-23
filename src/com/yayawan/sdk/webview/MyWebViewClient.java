@@ -1,6 +1,9 @@
 package com.yayawan.sdk.webview;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -34,6 +37,9 @@ public class MyWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //        Log.e("jing", "----url:" + url);
+    	
+    
+    	
         if (TextUtils.isEmpty(url)) {
             return false;
         }

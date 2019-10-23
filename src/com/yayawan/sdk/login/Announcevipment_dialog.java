@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yayawan.main.Dgame;
 import com.yayawan.sdk.bean.Question;
@@ -294,8 +295,12 @@ public class Announcevipment_dialog extends Basedialogview {
 				    if (TextUtils.isEmpty(url)) return false;
 		            // 通过webView打开其它app
 		            try {
+		            	
+		            	
+		            	
 		                if (!url.startsWith("http") || !url.startsWith("https") || !url.startsWith("ftp")) {
-		                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		                	    //Toast.makeText(mActivity, "跳转url"+url, 0).show();
+		                		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		                   
 		                       mActivity.startActivity(intent);
 		                       return true;
