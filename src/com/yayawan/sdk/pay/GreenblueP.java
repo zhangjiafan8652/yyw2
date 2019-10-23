@@ -203,12 +203,31 @@ public class GreenblueP {
 	}
 	
 	public void onSuccess(User paramUser, Order paramOrder, int paramInt) {
+		
+		dialogDismiss();
+		
 		if (mPaymentCallback != null) {
 			mPaymentCallback.onSuccess(paramUser, paramOrder, paramInt);
 		}
 		mPaymentCallback = null;
+		
+		Yayalog.loger("充值成功关闭了窗口33333333333");
+		
 		mActivity.finish();
 	}
+	
+	
+	public void dialogDismiss(){
+		if (greenp_dialog!=null) {
+			if (greenp_dialog.dialog!=null) {
+				greenp_dialog.dialog.dismiss();
+				Yayalog.loger("onSuccess 中关闭了窗口");
+			}
+    		
+		}
+	}
+	
+	 GreenP_dialog greenp_dialog=null;
 	
 	// 支付宝支付结果
 		private void bluepayResult(String result) {
@@ -223,11 +242,15 @@ public class GreenblueP {
 			}
 			int err_code=jsonstr.optInt("err_code");
 			String pay_str=jsonstr.optString("url");
+			
+			String billid=jsonstr.optString("billid");
+			AgentApp.mPayOrder.id=billid;
+			
 			if(err_code==0){
 				try {
 					System.out.println(pay_str);
 					
-					GreenP_dialog greenp_dialog = new GreenP_dialog(
+					 greenp_dialog = new GreenP_dialog(
 							mActivity);
 					greenp_dialog.dialogShow();
 					WebView webView = greenp_dialog.getWebview();
@@ -269,6 +292,9 @@ public class GreenblueP {
 			                        return true;
 			                    }
 			                }else if (url.contains("paysuccess")) {
+			                	Yayalog.loger("充值成功关闭了窗口");
+			                	
+			                	
 			                	onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
 			                	 return true;
 			                }else {

@@ -48,7 +48,7 @@ public class ViewConstants {
 
 	public static String baseurl = CommonData.BaseUrl;// 千其域名
 
-	
+	public static String orderstatus = baseurl + "data/order_status/";// 订单状态
 	public static String smallhelp = baseurl + "web/profile";// 小助手个人中心
 	public static String smallhelpgift = baseurl + "web/game_gift";// 小助手个人中心
 	public static String smallhelpcustomer_service = baseurl + "web/customer_service";// 小助手个人中心

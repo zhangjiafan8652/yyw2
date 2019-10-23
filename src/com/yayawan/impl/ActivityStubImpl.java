@@ -131,5 +131,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 		// TODO Auto-generated method stub
 		
 	};
-
+	public static void pSucc(String money,String orderid){
+		
+	}
 }

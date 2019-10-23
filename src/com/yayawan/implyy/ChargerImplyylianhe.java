@@ -31,6 +31,7 @@ import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
 
+import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
 import com.lidroid.jxutils.http.ResponseInfo;
@@ -65,11 +66,11 @@ public class ChargerImplyylianhe implements YYWCharger {
 
 	}
 
-	private String orderId;
+	public String orderId;
 
 	
 
-	private void pay_run(final Activity paramActivity,YYWOrder morder) {
+	private void pay_run(final Activity paramActivity,final YYWOrder morder) {
 
 		Order order2 = new Order();
 
@@ -93,6 +94,7 @@ public class ChargerImplyylianhe implements YYWCharger {
 	                if (YYWMain.mPayCallBack != null) {
 	                    YYWMain.mPayCallBack.onPayCancel("cancel", "");
 	                }
+	                checkOrderStatus(paramActivity,  morder.orderId,morder.money+"");
 	            }
 
 	            @Override
@@ -100,6 +102,7 @@ public class ChargerImplyylianhe implements YYWCharger {
 	                if (YYWMain.mPayCallBack != null) {
 	                    YYWMain.mPayCallBack.onPayFailed("failed", "");
 	                }
+	                checkOrderStatus(paramActivity,  morder.orderId,morder.money+"");
 	            }
 
 	            @Override
@@ -134,7 +137,7 @@ public class ChargerImplyylianhe implements YYWCharger {
 	                    yywOrder.time = order.time;
 	                    yywOrder.transNum = order.transNum;
 	                    
-	                  
+	                    pushQQdata(order.money + "",order.id);
 	                    pushUmengdata(order.money/100+"");
 	                    
 	                    YYWMain.mPayCallBack.onPaySuccess(yywUser, yywOrder, "success");
@@ -151,6 +154,8 @@ public class ChargerImplyylianhe implements YYWCharger {
 						if (YYWMain.mPayCallBack != null) {
 							YYWMain.mPayCallBack.onPayCancel("cancel", "");
 						}
+						
+						checkOrderStatus(paramActivity,  morder.orderId,morder.money+"");
 					}
 
 					@Override
@@ -158,6 +163,7 @@ public class ChargerImplyylianhe implements YYWCharger {
 						if (YYWMain.mPayCallBack != null) {
 							YYWMain.mPayCallBack.onPayFailed("failed", "");
 						}
+						checkOrderStatus(paramActivity,  morder.orderId,morder.money+"");
 					}
 
 					@Override
@@ -191,8 +197,11 @@ public class ChargerImplyylianhe implements YYWCharger {
 							yywOrder.status = order.status;
 							yywOrder.time = order.time;
 							yywOrder.transNum = order.transNum;
-
+							
+							pushQQdata(order.money + "",order.id);
 							pushUmengdata(order.money / 100 + "");
+							
+							
 
 							YYWMain.mPayCallBack.onPaySuccess(yywUser,
 									yywOrder, "success");
@@ -206,7 +215,7 @@ public class ChargerImplyylianhe implements YYWCharger {
 		
 	}
 
-	// 支付成功调用友盟
+	// 支付成功上报
 	public void pushUmengdata(String money) {
 		try {
 			Class<?> subclass = Class
@@ -223,7 +232,77 @@ public class ChargerImplyylianhe implements YYWCharger {
 			Yayalog.loger("未找到ActivityStubImpl");
 		}
 	}
+	
+	// 支付成功调用应用宝上报
+	public static void pushQQdata(String money,String orderid) {
+		
+		Yayalog.loger("pushQQdata+++++++++++++++++++++");
+			try {
+				Class<?> subclass = Class
+						.forName("com.yayawan.impl.ActivityStubImpl");
+				Method[] methods = subclass.getMethods();
+				for (int i = 0; i < methods.length; i++) {
+					Yayalog.loger("methoth："+methods[i]);
+					if (methods[i].toString().contains("pSucc")) {
+						Yayalog.loger("找到了pSucc++++++++++++++++++++++");
+						com.yayawan.impl.ActivityStubImpl.pSucc(money,orderid);
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				Yayalog.loger("未找到pSucc++++++++++++++++++++++");
+			}
+	}
+	
 
+	/**
+	 * 查询订单状态
+	 * @param money
+	 * @param orderid
+	 */
+	public static void checkOrderStatus( Activity paramActivity,final String orderid,final String money){
+		HttpUtils mhttputils=new HttpUtils();
+		
+		RequestParams requestParams = new RequestParams();
+		
+		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(paramActivity));
+		
+		requestParams.addBodyParameter("orderid", orderid);
+		Yayalog.loger("查询订单状态接口");
+		Yayalog.loger("app_id", DeviceUtil.getAppid(paramActivity));
+	
+		Yayalog.loger("orderid", orderid);
+		
+		mhttputils.send(HttpMethod.POST, ViewConstants.orderstatus,requestParams, new RequestCallBack<String>() {
+
+			@Override
+			public void onFailure(HttpException arg0, String arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> arg0) {
+				// TODO Auto-generated method stub
+				String re=arg0.result;
+				Yayalog.loger("查询订单状态返回："+re);
+				try {
+					JSONObject jsonObject = new JSONObject(re);
+					int sta=jsonObject.optInt("status");
+					if (sta==3) {
+						Yayalog.loger("上报订单状态sta："+sta);
+						pushQQdata( money, orderid);
+					}else {
+						Yayalog.loger("上报订单状态为失败："+sta);
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	ProgressDialog progressDialog = null;
 
 	private void progress(Activity paramActivity) {
