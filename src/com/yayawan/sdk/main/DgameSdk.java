@@ -142,14 +142,14 @@ public class DgameSdk {
 							// TODO Auto-generated method stub
 							// 用户之前已拒绝过权限申请
 							//
-							PermissionUtils.requestMorePermissions(paramActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
+							
 						}
 						
 						@Override
 						public void onUserHasAlreadyTurnedDown(String... permission) {
 							// TODO Auto-generated method stub
 							// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
-							PermissionUtils.toAppSetting(paramActivity);
+							
 						}
 						
 						@Override
