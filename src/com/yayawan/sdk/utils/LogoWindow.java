@@ -397,9 +397,9 @@ public class LogoWindow {
 
 		params.x = 0;
 		if (DeviceUtil.isLandscape(mactivity)) {
-			params.y = machSize(360);
+			params.y = machSize(200);
 		} else {
-			params.y = machSize(600);
+			params.y = machSize(700);
 		}
 
 		// 摇一摇监听..分别在oncreate和destory中开始监听和关闭监听

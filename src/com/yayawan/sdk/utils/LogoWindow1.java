@@ -318,11 +318,10 @@ public class LogoWindow1 {
 		params.alpha = (float) 1;
 
 		params.x = 0;
-		if (DeviceUtil.getGameInfo(mactivity, "yayawan_orientation").equals(
-				"landscape")) {
-			params.y = machSize(360);
+		if (DeviceUtil.isLandscape(mactivity)) {
+			params.y = machSize(160);
 		} else {
-			params.y = machSize(600);
+			params.y = machSize(400);
 		}
 
 		// 摇一摇监听..分别在oncreate和destory中开始监听和关闭监听
