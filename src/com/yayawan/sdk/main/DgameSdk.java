@@ -159,10 +159,7 @@ public class DgameSdk {
 						}
 					});
 				
-			//	}
-			//});
-		//	permission_dialog.dialogShow();
-					// TODO Auto-generated method stub
+	
 					
 			
 		}
