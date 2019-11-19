@@ -228,10 +228,7 @@ public class LoginUtils {
 	}
 
 	private void onSuccess(User mUser, int i) {
-		if (mUserCallback != null) {
-			mUserCallback.onSuccess(mUser, i);
-		}
-		mUserCallback = null;
+		DgameSdk.loginSucce(mUser, i);
 
 	}
 

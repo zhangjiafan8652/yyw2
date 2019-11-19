@@ -406,10 +406,7 @@ public class Phonelogin_dialogxml_po extends Basedialogview {
 
 	public void onSuccess(User paramUser, int paramInt) {
 
-		if (mUserCallback != null) {
-			mUserCallback.onSuccess(paramUser, paramInt);
-		}
-		mUserCallback = null;
+		DgameSdk.loginSucce(paramUser, paramInt);
 		mActivity.finish();
 
 	}

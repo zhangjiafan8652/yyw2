@@ -482,29 +482,31 @@ public class Login_ho_dialog extends Basedialogview {
 						public void click(boolean isButtonClick, int position) {
 							// TODO Auto-generated method stub
 							Yayalog.loger("请求权限对话框按钮按下");
-							PermissionUtils.checkMorePermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
-								
-								@Override
-								public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
-									// TODO Auto-generated method stub
-									// 用户之前已拒绝过权限申请
-									//
-									PermissionUtils.requestMorePermissions(mActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
-								}
-								
-								@Override
-								public void onUserHasAlreadyTurnedDown(String... permission) {
-									// TODO Auto-generated method stub
-									// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
-									PermissionUtils.toAppSetting(mActivity);
-								}
-								
-								@Override
-								public void onHasPermission() {
-									// TODO Auto-generated method stub
+							if (!(PermissionUtils.checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+								PermissionUtils.checkMorePermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
 									
-								}
-							});
+									@Override
+									public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
+										// TODO Auto-generated method stub
+										// 用户之前已拒绝过权限申请
+										//
+										//PermissionUtils.requestMorePermissions(paramActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
+									}
+									
+									@Override
+									public void onUserHasAlreadyTurnedDown(String... permission) {
+										// TODO Auto-generated method stub
+										// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+										//PermissionUtils.toAppSetting(paramActivity);
+									}
+									
+									@Override
+									public void onHasPermission() {
+										// TODO Auto-generated method stub
+										
+									}
+								});
+							}
 						}
 					}).show();
 				}else {

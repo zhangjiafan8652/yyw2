@@ -77,11 +77,10 @@ public abstract class Basedialogview extends Basexml {
 
 	public void onSuccess(User paramUser, int paramInt) {
 
-		if (mUserCallback != null) {
-			mUserCallback.onSuccess(paramUser, paramInt);
-			
-		}
-		mUserCallback = null;
+		
+		
+		
+		DgameSdk.loginSucce(paramUser, paramInt);
 		// mActivity.finish();
 
 		for (int i = 0; i < ViewConstants.mDialogs.size(); i++) {

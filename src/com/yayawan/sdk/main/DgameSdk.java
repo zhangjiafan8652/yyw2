@@ -15,6 +15,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.yayawan.domain.YYWUser;
 import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.Order;
+import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
 import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
@@ -51,6 +53,7 @@ import com.yayawan.sdk.login.TipDialog;
 import com.yayawan.sdk.login.VerifyPlayInfo_ho_dialog;
 import com.yayawan.sdk.pay.XiaoMipayActivity;
 import com.yayawan.sdk.utils.LogoWindow;
+import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.MD5;
@@ -123,26 +126,47 @@ public class DgameSdk {
 		
 		
 		
-		if (!(PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
-				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				&&PermissionUtils.checkPermission(paramActivity, Manifest.permission.READ_PHONE_STATE))) {
+	
 		
-			//Permission_dialog permission_dialog = new Permission_dialog(paramActivity,"permission.png");
+		
+		
+		
+		Yayalog.loger("kgamesdklogin");
+		mUserCallback = paramCallback;
+		ViewConstants.mMainActivity = paramActivity;
+		Startlogin_dialog startlogin_dialog = new Startlogin_dialog(
+				paramActivity);
 
-	    //	permission_dialog.setmPermissionDialogClickCallBack(new PermissionDialogClickCallBack() {
-				
-			//	@Override
-			//	public void onClick() {
-					// TODO Auto-generated method stub
+		startlogin_dialog.dialogShow();
+
+	}
+
+	
+	public static void loginSucce(User user,int type){
+		System.out.println("dgamesdk login loginSucce++++++++++");
+		Yayalog.loger("dgamesdk login loginSucce++++++++++");
+//		sys
+		if (mUserCallback!=null) {
+			mUserCallback.onSuccess(user, type);
+			mUserCallback=null;
+		}
+		
+		
+		if (!(PermissionUtils.checkPermission(ViewConstants.mMainActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
+				&&PermissionUtils.checkPermission(ViewConstants.mMainActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				&&PermissionUtils.checkPermission(ViewConstants.mMainActivity, Manifest.permission.READ_PHONE_STATE))) {
+		
+		
 					Yayalog.loger("请求权限对话框按钮按下");
-					PermissionUtils.checkMorePermissions(paramActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE},new PermissionCheckCallBack() {
+					PermissionUtils.checkMorePermissions(ViewConstants.mMainActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE},new PermissionCheckCallBack() {
 						
 						@Override
 						public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
 							// TODO Auto-generated method stub
 							// 用户之前已拒绝过权限申请
 							//
-							
+							//PermissionUtils.requestMorePermissions(ViewConstants.mMainActivity,  new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 1);
+							 ActivityCompat.requestPermissions((Activity) ViewConstants.mMainActivity,  new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 1);
 						}
 						
 						@Override
@@ -165,32 +189,10 @@ public class DgameSdk {
 		}
 		
 		
-		
-		
-		Yayalog.loger("kgamesdklogin");
-		mUserCallback = paramCallback;
-		ViewConstants.mMainActivity = paramActivity;
-		Startlogin_dialog startlogin_dialog = new Startlogin_dialog(
-				paramActivity);
-
-		startlogin_dialog.dialogShow();
-
 	}
-
 	
 	
 	
-	
-	/**
-	 * demo登陸接口
-	 * 
-	 * @param paramActivity
-	 * @param paramCallback
-	 */
-	public static void loginDemo(Activity paramActivity,
-			KgameSdkUserCallback paramCallback) {
-
-	}
 
 	/**
 	 * 支付接口

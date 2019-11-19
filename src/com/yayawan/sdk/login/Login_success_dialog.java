@@ -103,7 +103,8 @@ public class Login_success_dialog extends Basedialogview {
 		super.dialogShow();
 		// onSuccess(mUser, 1);
 		if (mUserCallback != null) {
-			mUserCallback.onSuccess(mUser, 1);
+			DgameSdk.loginSucce(mUser, 1);
+			//mUserCallback.onSuccess(mUser, 1);
 			//qq登录成功后需要把登录对话框隐藏
 			if (ViewConstants.TEMPLOGIN_HO != null) {
 				ViewConstants.TEMPLOGIN_HO.dismiss();
