@@ -148,7 +148,7 @@ public class DgameSdk {
 //		sys
 		if (mUserCallback!=null) {
 			mUserCallback.onSuccess(user, type);
-			mUserCallback=null;
+			
 		}
 		
 		
