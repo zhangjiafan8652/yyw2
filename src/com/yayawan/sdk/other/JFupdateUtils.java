@@ -368,7 +368,7 @@ public class JFupdateUtils {
         Uri imageUri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             imageUri = FileProvider.getUriForFile(context,
-                    "com.yyw.sdk", file);//通过FileProvider创建一个content类型的Uri
+                    context.getPackageName(), file);//通过FileProvider创建一个content类型的Uri
         } else {
             imageUri = Uri.fromFile(file);
         }
