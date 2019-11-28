@@ -32,10 +32,10 @@ import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.login.BaseView;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.pay.xml.Bluep_paymentxml;
 import com.yayawan.sdk.utils.DialogUtil;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Util;
-import com.yayawan.sdk.xml.Bluep_paymentxml;
 import com.yayawan.utils.ViewConstants;
 
 public class Payment_jf extends BaseView implements KgameSdkPaymentCallback {

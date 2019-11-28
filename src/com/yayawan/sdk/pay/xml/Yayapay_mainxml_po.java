@@ -1,4 +1,4 @@
-package com.yayawan.sdk.xml;
+package com.yayawan.sdk.pay.xml;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,6 +21,10 @@ import android.widget.TextView;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.CornersLinearLayout;
+import com.yayawan.sdk.xml.Basexml;
+import com.yayawan.sdk.xml.GetAssetsutils;
+import com.yayawan.sdk.xml.Layoutxml;
+import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;

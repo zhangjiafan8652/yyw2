@@ -37,7 +37,7 @@ import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
-import com.yayawan.sdk.xml.Weibologinxml_po;
+import com.yayawan.sdk.pay.xml.Weibologinxml_po;
 import com.yayawan.utils.ViewConstants;
 
 public class Weibologin_jf extends BaseView implements KgameSdkUserCallback {

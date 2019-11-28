@@ -1,4 +1,4 @@
-package com.yayawan.sdk.xml;
+package com.yayawan.sdk.pay.xml;
 
 
 
@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yayawan.sdk.xml.Basexml;
+import com.yayawan.sdk.xml.GetAssetsutils;
+import com.yayawan.sdk.xml.Layoutxml;
 import com.yayawan.utils.ViewConstants;
 
 public class Yinlianpay_xml_po extends Basexml implements Layoutxml {

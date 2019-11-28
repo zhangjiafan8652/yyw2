@@ -117,8 +117,7 @@ public class Update_xml extends Basexml implements Layoutxml {
 		bt_mok = machineFactory.MachineButton(bt_mok, 0, MATCH_PARENT, 1, "",
 				30, mLinearLayout, 0, 0, 0, 0);
 		bt_mok.setTextColor(Color.WHITE);
-		bt_mok.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-				"yaya_yellowbutton.9.png", "yaya_yellowbutton1.9.png", mActivity));
+		bt_mok.setBackgroundColor(Color.parseColor("#FF5D23"));
 		bt_mok.setGravity(Gravity_CENTER);
 
 		LinearLayout ll_zhanwei = new LinearLayout(mActivity);

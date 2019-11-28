@@ -1,4 +1,8 @@
-package com.yayawan.sdk.xml;
+package com.yayawan.sdk.pay.xml;
+
+import com.yayawan.sdk.xml.Basexml;
+import com.yayawan.sdk.xml.GetAssetsutils;
+import com.yayawan.sdk.xml.Layoutxml;
 
 import android.app.Activity;
 import android.graphics.Color;

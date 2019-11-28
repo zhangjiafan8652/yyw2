@@ -43,6 +43,7 @@ import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.other.JFVivoupdateUtils;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
@@ -260,6 +261,13 @@ public class CommonGameProxy implements YYWGameProxy {
 																	.onLoginSuccess(
 																			YYWMain.mUser,
 																			"onLoginSuccess");
+															//mActivity.getPackageName()
+															//如果包名包含vivo  进行vivo的更新
+															Yayalog.loger("准备vivo的更新"+mActivity.getPackageName());
+															if (mActivity.getPackageName().contains("vivo")) {
+																Yayalog.loger("開始vivo的更新"+mActivity.getPackageName());
+																new JFVivoupdateUtils(mActivity).startUpdate(YYWMain.mUser.yywuid);
+															}
 
 														}
 													});
@@ -277,6 +285,11 @@ public class CommonGameProxy implements YYWGameProxy {
 																	.onLoginSuccess(
 																			yywUser,
 																			"onLoginSuccess");
+															Yayalog.loger("准备vivo的更新"+mActivity.getPackageName());
+															if (mActivity.getPackageName().contains("vivo")) {
+																Yayalog.loger("開始vivo的更新"+mActivity.getPackageName());
+																new JFVivoupdateUtils(mActivity).startUpdate(YYWMain.mUser.yywuid);
+															}
 
 														}
 													});

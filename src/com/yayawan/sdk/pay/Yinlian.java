@@ -28,9 +28,9 @@ import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.login.BaseView;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.pay.xml.Yinlianpay_xml_po;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
-import com.yayawan.sdk.xml.Yinlianpay_xml_po;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 

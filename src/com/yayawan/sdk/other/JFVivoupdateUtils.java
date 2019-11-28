@@ -34,6 +34,8 @@ import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.proxy.GameApitest;
+import com.yayawan.sdk.other.DgameFileProvider;
+import com.yayawan.sdk.other.UpdateProgress_dialog;
 import com.yayawan.sdk.utils.CircleProgressView;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.UpdateDialog;
@@ -41,7 +43,7 @@ import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
-public class JFupdateUtils {
+public class JFVivoupdateUtils {
 
 	private HttpUtils httpUtils;
 	private Activity mActivity;
@@ -58,13 +60,13 @@ public class JFupdateUtils {
 	private String update_time;
 	private String versioncode;
 	private String versionname;
-	JFupdateUtils jFupdateUtils;
+	JFVivoupdateUtils jFupdateUtils;
 	private String apkpath = Environment.getExternalStorageDirectory()
 			.getPath() + "/";
 	private static String url;
 	private static File apkfile;
 
-	public JFupdateUtils(Activity mActivity) {
+	public JFVivoupdateUtils(Activity mActivity) {
 		this.mActivity = mActivity;
 		jFupdateUtils = this;
 	}
@@ -96,7 +98,10 @@ public class JFupdateUtils {
 	}
 
 	// 所有游戏都有这个更新操作。包括丫丫玩。得到参数。先判断url是否有值。有值再执行更新弹框，通过判断status来确定是否强制更新
-	public void startUpdate() {
+	// vivo 商店包更新成广告包的操作
+	public void startUpdate(String uid) {
+		
+		
 		httpUtils = new HttpUtils();
 		if (getVersioncode() == -1) {
 			return;
@@ -107,7 +112,9 @@ public class JFupdateUtils {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
 		requestParams.addBodyParameter("versioncode",
 				DeviceUtil.getVersionCode(mActivity));
-		Yayalog.loger("更新url:" + url);
+		requestParams.addBodyParameter("uid",
+				uid);
+		Yayalog.loger("vivo更新url:" + url+" uid:"+uid + " +app_id:"+DeviceUtil.getAppid(mActivity));
 		httpUtils.send(HttpMethod.POST, "" + url,requestParams,
 				new RequestCallBack<String>() {
 
