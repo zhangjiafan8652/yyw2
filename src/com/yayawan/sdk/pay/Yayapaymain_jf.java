@@ -300,7 +300,7 @@ public class Yayapaymain_jf extends BaseView {
 		rps.addBodyParameter("goods", AgentApp.mPayOrder.goods + "");
 		rps.addBodyParameter("ext", AgentApp.mPayOrder.ext);
 		rps.addBodyParameter("orderid", AgentApp.mPayOrder.orderId);
-		rps.addBodyParameter("appversion", 101+"");
+		rps.addBodyParameter("appversion", 200+"");
 		
 		Yayalog.loger("app_id", DeviceUtil.getAppid(mActivity));
 		Yayalog.loger("uid", AgentApp.mUser.uid + "");

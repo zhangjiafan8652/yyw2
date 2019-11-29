@@ -853,7 +853,7 @@ public class DgameSdk {
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						YYWMain.mPayCallBack.onPayFailed("1", "");
+						mSdkApiCallback.onVerifyCancel();
 						e.printStackTrace();
 					}
 					

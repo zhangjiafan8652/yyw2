@@ -14,7 +14,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
+import com.bun.miitmdid.core.JLibrary;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 
@@ -38,8 +40,10 @@ import com.yayawan.impl.AnimationImpl;
 import com.yayawan.impl.ChargerImpl;
 import com.yayawan.impl.LoginImpl;
 import com.yayawan.impl.UserManagerImpl;
+import com.yayawan.impl.YYApplication;
 import com.yayawan.implyy.ChargerImplyylianhe;
 import com.yayawan.main.YYWMain;
+import com.yayawan.proxy.MiitHelper.AppIdsUpdater;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
@@ -603,12 +607,26 @@ public class CommonGameProxy implements YYWGameProxy {
 	private int loca_login_type;
 
 	public static int REQUEST_CODE_ASK_READ_PHONE_STATE = 3301;
-
+	public static MiitHelper miitHelper;
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(final Activity paramActivity) {
 
 		mActivity = paramActivity;
+		JLibrary.InitEntry(paramActivity);
+		 miitHelper = new MiitHelper(new AppIdsUpdater() {
+				
+				@Override
+				public void OnIdsAvalid(String ids) {
+					// TODO Auto-generated method stub
+					Jxutilsinit.oaid=miitHelper.oaid;
+					//Toast.makeText(paramActivity, "Handle.active_handler======================"+ids, 0).show();
+					Handle.active_handler(paramActivity);
+				}
+			});
+			
+			miitHelper.getDeviceIds(paramActivity);
+		
 		// 进行检查更新
 		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
 		//Jxutilsinit.isdebug=true;
@@ -651,6 +669,11 @@ public class CommonGameProxy implements YYWGameProxy {
 
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
+		if (TextUtils.isEmpty(MiitHelper.oaid)||MiitHelper.oaid.equals("")) {
+			miitHelper.getDeviceIds(paramActivity);
+		}
+		Jxutilsinit.oaid=MiitHelper.oaid;
+		//Toast.makeText(paramActivity, "miitHelperoaid======================Jxutilsinit.oaid"+Jxutilsinit.oaid, 0).show();
 
 	}
 

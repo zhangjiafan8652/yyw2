@@ -1,8 +1,14 @@
 package com.yayawan.impl;
 
 
+
+import com.bun.miitmdid.core.JLibrary;
+import com.bun.miitmdid.core.MdidSdkHelper;
 import com.lidroid.jxutils.http.Jxutilsinit;
 import com.yayawan.proxy.GameApitest;
+
+import com.yayawan.proxy.MiitHelper;
+import com.yayawan.proxy.MiitHelper.AppIdsUpdater;
 import com.yayawan.proxy.YYWApplication;
 import com.yayawan.proxy.YYcontants;
 import com.yayawan.sdk.utils.Util;
@@ -14,11 +20,12 @@ import com.yayawan.utils.Yayalog;
 import android.Manifest;
 import android.app.Application;
 import android.content.Context;
+import android.widget.Toast;
 
 public class YYApplication extends YYWApplication {
 
 	public static Context mContext;
-
+	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -34,10 +41,9 @@ public class YYApplication extends YYWApplication {
 		if (PermissionUtils.checkPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
 			Jxutilsinit.init(getApplicationContext());
 		}
-			
-	
 		
-		System.out.println("YYApplication");
+		
+	
 		GameApitest.getGameApitestInstants(getApplicationContext()).sendTest("YYApplicationoncreate="+Util.getPackageName(getApplicationContext()));
 	}
 
