@@ -145,6 +145,7 @@ public class DgameSdk {
 	public static void loginSucce(User user,int type){
 		System.out.println("dgamesdk login loginSucce++++++++++");
 		Yayalog.loger("dgamesdk login loginSucce++++++++++");
+		
 //		sys
 		if (mUserCallback!=null) {
 			mUserCallback.onSuccess(user, type);

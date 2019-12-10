@@ -49,6 +49,7 @@ public class LogoWindow {
 
 	static Activity mactivity;
 	private int screenHeigh;
+	private int screenwith;
 
 	private static LogoWindow mLogowindow;
 	
@@ -167,14 +168,41 @@ public class LogoWindow {
 	private static ImageView myviewicon;
 	private static RelativeLayout myview;
 	Help_dissmiss_dialog help_dissmiss_dialog;
+	
+	
+		
 	private void createView() {
 
 		Yayalog.loger("兔子oncreate");
 		DisplayMetrics dm = new DisplayMetrics();
 
 		mactivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-		screenHeigh = dm.heightPixels;
+		screenHeigh = dm.widthPixels;
+		screenwith = dm.heightPixels;
+		if (DeviceUtil.isLandscape(mactivity)) {
+			
+			if (screenHeigh<screenwith) {
+				
+			}else {
+				screenHeigh=screenwith;
+			}
+			
+		}else {
+			if (screenHeigh<screenwith) {
+				screenHeigh=screenwith;
+			}else {
+				
+			}
+			try {
+				Yayalog.loger(getStatusBarHeight(mactivity)+"+++++++++++getStatusBarHeight+++++++++");
+				screenHeigh= screenHeigh+getStatusBarHeight(mactivity)+0;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+		
+		
 		wm = ((WindowManager) mactivity.getSystemService("window"));
 		if (myview == null) {
 
@@ -448,6 +476,21 @@ public class LogoWindow {
 		}
 		
 	}
+	
+	// 添加
+		private static int getStatusBarHeight(Context context) {
+			int statusBarHeight = 0;
+			int resourceId=context.getResources().getIdentifier("status_bar_height","dimen","android");
+		
+			if (resourceId>0) {
+				statusBarHeight=	context.getResources().getDimensionPixelSize(resourceId);
+			}
+			
+			return statusBarHeight;
+		
+		}
+
+
 
 	// 添加
 	private static void addView() {

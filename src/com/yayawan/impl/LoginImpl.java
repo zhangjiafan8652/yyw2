@@ -11,6 +11,7 @@ import com.yayawan.proxy.YYWLoginer;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.other.JFnewnoticeUtils;
 import com.yayawan.sdk.other.JFvipnoticeUtils;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.Yayalog;
@@ -60,6 +61,7 @@ public class LoginImpl implements YYWLoginer {
 									public void run() {
 										// TODO Auto-generated method stub
 										new JFvipnoticeUtils().getNotice(paramActivity);
+										new JFnewnoticeUtils().getNotice(paramActivity);
 									}
 								});
 				                
