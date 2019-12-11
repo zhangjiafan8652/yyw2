@@ -443,6 +443,8 @@ public class Register_ho_dialog extends Basedialogview {
 
 					RequestParams rps = new RequestParams();
 					rps.addBodyParameter("type", 2 + "");
+					
+					
 					rps.addBodyParameter("mobile", mPhoneNum);
 					rps.addBodyParameter("uuid", DeviceUtil.getUUID(mActivity));
 					HttpUtils httpUtils = new HttpUtils();
