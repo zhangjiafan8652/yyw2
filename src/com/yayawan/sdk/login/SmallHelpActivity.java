@@ -6,6 +6,7 @@ import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
 
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.SmallHelp_xml;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
@@ -17,10 +18,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -86,6 +89,14 @@ public class SmallHelpActivity extends Activity{
 		 wv_mWeiboview.addJavascriptInterface(mandroiddelegate, "androidDelegate");
 		 wv_mWeiboview.setWebViewClient(new WebViewClient() {
 
+			 
+			 @Override
+			public void onReceivedSslError(WebView view,
+					SslErrorHandler handler, SslError error) {
+				// TODO Auto-generated method stub
+				 MyWebViewClient.onReceivedSslError(view, handler, error, "");
+			}
+			 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				System.out.println(url);		

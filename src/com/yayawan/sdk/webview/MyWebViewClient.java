@@ -1,16 +1,16 @@
 package com.yayawan.sdk.webview;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.yayawan.sdk.login.AssistantActivity;
 
@@ -118,4 +118,36 @@ public class MyWebViewClient extends WebViewClient {
         }
     }
 
+    @Override
+    public void onReceivedSslError(WebView view, SslErrorHandler handler,
+    		SslError error) {
+    	// TODO Auto-generated method stub
+    	onReceivedSslError(view, handler, error,null);
+    }
+    
+    public static void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error,String temp) {
+       // final SslErrorHandler mHandler ;
+       // mHandler= handler;
+   
+    	 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+    	    builder.setMessage("SSL认证失败，是否继续访问？");
+    	    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+    	        @Override
+    	        public void onClick(DialogInterface dialog, int which) {
+    	            handler.proceed();
+    	        }
+    	    });
+    	    
+    	    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+    	        @Override
+    	        public void onClick(DialogInterface dialog, int which) {
+    	            handler.cancel();
+    	        }
+    	    });
+    	    
+    	    AlertDialog dialog = builder.create();
+
+        
+  
+    }
 }

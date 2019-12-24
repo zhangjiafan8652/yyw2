@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.webkit.HttpAuthHandler;
 import android.webkit.JavascriptInterface;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -38,6 +40,7 @@ import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.pay.xml.Weibologinxml_po;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.utils.ViewConstants;
 
 public class Weibologin_jf extends BaseView implements KgameSdkUserCallback {
@@ -157,7 +160,12 @@ public class Weibologin_jf extends BaseView implements KgameSdkUserCallback {
 		wv_mWeiboview.setWebViewClient(new WebViewClient() {
 
 			
-			
+			@Override
+			public void onReceivedSslError(WebView view,
+					SslErrorHandler handler, SslError error) {
+				// TODO Auto-generated method stub
+				MyWebViewClient.onReceivedSslError(view, handler, error, "");
+			}
 			
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {

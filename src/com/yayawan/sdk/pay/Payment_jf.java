@@ -36,6 +36,7 @@ import com.yayawan.sdk.pay.xml.Bluep_paymentxml;
 import com.yayawan.sdk.utils.DialogUtil;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Util;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.utils.ViewConstants;
 
 public class Payment_jf extends BaseView implements KgameSdkPaymentCallback {
@@ -236,6 +237,9 @@ public class Payment_jf extends BaseView implements KgameSdkPaymentCallback {
 		});
 
 		mWebView.setWebViewClient(new WebViewClient() {
+			
+			
+			
 			@Override
 			public void onLoadResource(WebView view, String url) {
 				Log.i("onLoadResource", "onLoadResource:" + url);
@@ -299,7 +303,7 @@ public class Payment_jf extends BaseView implements KgameSdkPaymentCallback {
 			@Override
 			public void onReceivedSslError(WebView view,
 					SslErrorHandler handler, SslError error) {
-				handler.proceed();
+				MyWebViewClient.onReceivedSslError(view, handler, error, "");
 			}
 
 		});

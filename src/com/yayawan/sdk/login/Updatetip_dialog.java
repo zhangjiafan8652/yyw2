@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,6 +32,7 @@ import com.yayawan.sdk.bean.Question;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
@@ -285,6 +288,13 @@ public class Updatetip_dialog extends Basedialogview {
 		
 		lv_helpcontent.setWebViewClient(new WebViewClient() {
 
+			@Override
+			public void onReceivedSslError(WebView view,
+					SslErrorHandler handler, SslError error) {
+				// TODO Auto-generated method stub
+				MyWebViewClient.onReceivedSslError(view, handler, error, "");
+			}
+			
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				

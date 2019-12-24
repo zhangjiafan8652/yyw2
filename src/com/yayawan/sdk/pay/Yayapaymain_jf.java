@@ -16,9 +16,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
@@ -39,6 +41,7 @@ import com.yayawan.sdk.pay.xml.Yayapay_mainxml_po;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.sdk.utils.Utilsjf.PayQuesionCallBack;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
@@ -444,6 +447,13 @@ mActivity.runOnUiThread(new Runnable() {
 
 				webView.loadUrl(pay_str);
 				webView.setWebViewClient(new WebViewClient(){
+					
+					@Override
+					public void onReceivedSslError(WebView view,
+							SslErrorHandler handler, SslError error) {
+						// TODO Auto-generated method stub
+						MyWebViewClient.onReceivedSslError(view, handler, error, "");
+					}
 					
 					@Override
 					public boolean shouldOverrideUrlLoading(WebView view, String url) {

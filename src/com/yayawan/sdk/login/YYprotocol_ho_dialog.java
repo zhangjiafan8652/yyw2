@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.http.SslError;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.webkit.ConsoleMessage;
 import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.RenderPriority;
 import android.webkit.WebStorage;
@@ -34,6 +36,7 @@ import android.widget.Toast;
 
 import com.yayawan.common.CommonData;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
@@ -305,6 +308,14 @@ public class YYprotocol_ho_dialog extends Basedialogview {
 		});
 
 		mContent.setWebViewClient(new WebViewClient() {
+			
+			@Override
+			public void onReceivedSslError(WebView view,
+					SslErrorHandler handler, SslError error) {
+				// TODO Auto-generated method stub
+				MyWebViewClient.onReceivedSslError(view, handler, error, "");
+			}
+			
 			@Override
 			public void onLoadResource(WebView view, String url) {
 				Log.i("onLoadResource", "onLoadResource:" + url);

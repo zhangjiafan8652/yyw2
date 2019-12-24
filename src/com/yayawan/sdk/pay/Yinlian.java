@@ -4,6 +4,7 @@ package com.yayawan.sdk.pay;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -31,6 +33,7 @@ import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.pay.xml.Yinlianpay_xml_po;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
@@ -167,6 +170,13 @@ public class Yinlian extends BaseView implements KgameSdkUserCallback {
 
 		wv_mWeiboview.setWebViewClient(new WebViewClient() {
 
+			@Override
+			public void onReceivedSslError(WebView view,
+					SslErrorHandler handler, SslError error) {
+				// TODO Auto-generated method stub
+				MyWebViewClient.onReceivedSslError(view, handler, error, "");
+			}
+			
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				// TODO Auto-generated method stub

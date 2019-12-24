@@ -14,9 +14,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Utilsjf;
+import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
@@ -256,6 +259,13 @@ public class GreenblueP {
 					WebView webView = greenp_dialog.getWebview();
 					webView.loadUrl(pay_str);
 					webView.setWebViewClient(new WebViewClient(){
+						
+						@Override
+						public void onReceivedSslError(WebView view,
+								SslErrorHandler handler, SslError error) {
+							// TODO Auto-generated method stub
+							MyWebViewClient.onReceivedSslError(view, handler, error, "");
+						}
 						
 						@Override
 						public boolean shouldOverrideUrlLoading(WebView view, String url) {
