@@ -256,9 +256,9 @@ public class Register_ho_dialog extends Basedialogview {
 						bt_mGetsecurity = machineFactory.MachineButton(bt_mGetsecurity, 270,
 								MATCH_PARENT, 0, "获取验证码", 22, mLinearLayout, 20, 0, 0, 0);
 						bt_mGetsecurity.setTextColor(Color.WHITE);
-						bt_mGetsecurity.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-								"yaya1_loginbutton.9.png", "yaya1_loginbutton.png",
-								mActivity));
+						//bt_mGetsecurity.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
+						//		"yaya1_loginbutton.9.png", "yaya1_loginbutton.png",
+						//		mActivity));
 						
 						
 						bt_mGetsecurity.setGravity(Gravity.CENTER);
