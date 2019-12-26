@@ -353,7 +353,7 @@ public class Yayapaymain_jf extends BaseView {
 
 	}
 	//Y币支付返回结果
-	private void yayapayResult(String result){
+	private void yayapayResult(final String result){
 		if (result.contains("success")) {
 			onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
 mActivity.runOnUiThread(new Runnable() {
@@ -370,7 +370,15 @@ mActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					Toast.makeText(mActivity, "Y币余额不足", 0).show();
+					String msg="丫丫币余额不足";
+					try {
+						JSONObject jsonObject = new JSONObject(result);
+						 msg = jsonObject.optString("err_msg");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Toast.makeText(mActivity, msg, 0).show();
 				}
 			});
 			onCancel();

@@ -240,7 +240,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 				MATCH_PARENT, 0, "获取验证码", 32, mLinearLayout, 30, 0, 0, 0);
 		bt_mGetsecurity.setTextColor(Color.WHITE);
 		bt_mGetsecurity.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-				"yaya_bulebutton.9.png", "yaya_bulebutton1.9.png", mActivity));
+				"yaya1_loginbutton.9.png", "yaya1_registerbutton.9.png", mActivity));
 
 		// TODO
 		ll_phone.addView(et_mPhone);

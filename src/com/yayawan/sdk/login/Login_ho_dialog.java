@@ -949,7 +949,7 @@ public class Login_ho_dialog extends Basedialogview {
 	 * 
 	 * @param ll_forgetpassword2
 	 */
-	private void setontoch3(LinearLayout ll_forgetpassword2) {
+/*	private void setontoch3(LinearLayout ll_forgetpassword2) {
 		ll_forgetpassword2.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -985,7 +985,7 @@ public class Login_ho_dialog extends Basedialogview {
 
 			}
 		});
-	}
+	}*/
 
 
 }

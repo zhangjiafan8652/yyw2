@@ -134,6 +134,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
+				DgameSdk.mSdkApiCallback.onVerifyCancel();
 			}
 		});
 		
@@ -280,7 +281,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT,
 				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-		dialog.setCanceledOnTouchOutside(true);
+		dialog.setCanceledOnTouchOutside(false);
 		dialog.getWindow().setBackgroundDrawable(new BitmapDrawable());
 
 		initlogic();

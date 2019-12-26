@@ -81,6 +81,7 @@ public class GetAssetsutils {
 
 	public static Drawable get9DrawableFromAssetsFile(String fileName,
 			Context mconContext) {
+		
 		InputStream stream = null;
 		NinePatchDrawable patchy = null;
 		try {
@@ -199,6 +200,8 @@ public class GetAssetsutils {
 	}
 
 	public static String changeName(String name, Activity mcontext) {
+		
+		name=isqianqi(name, mcontext);
 		// 判断屏幕放向
 		String orientation = DeviceUtil.getOrientation(mcontext);
 		if (orientation == "") {
@@ -220,6 +223,14 @@ public class GetAssetsutils {
 		}
 
 		return name;
+	}
+	
+	public static String isqianqi(String filename,Activity mcontext){
+		if (DeviceUtil.isQianqi(mcontext)) {
+			return filename;	
+		}else {
+			return "qianguo_"+filename;
+		}
 	}
 
 }

@@ -612,6 +612,9 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void onCreate(final Activity paramActivity) {
 
+		//初始化千骐千果sdk
+		CommonData.initCommonData(paramActivity);
+		
 		mActivity = paramActivity;
 		JLibrary.InitEntry(paramActivity);
 		 miitHelper = new MiitHelper(new AppIdsUpdater() {

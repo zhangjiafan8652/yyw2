@@ -40,6 +40,8 @@ public class DeviceUtil {
 	private static final String YAYAWAN_HELPER = "yayawan_helper";
 
 	private static final String ISLANDSCAPE = "isLandscape";
+	
+	private static final String ISQIANQI = "isqianqi";
 
 	private static final String ISDEBUG = "isdebug";
 	private static final String YAYAWAN_ORIENTATION = "yayawan_orientation";
@@ -421,6 +423,18 @@ public class DeviceUtil {
 		return dataInfo.getBoolean(ISLANDSCAPE);
 	}
 
+	
+	/**
+	 * 是否千骐
+	 * 
+	 * @param paramContext
+	 * @return
+	 */
+	public static boolean isQianqi(Context paramContext) {
+		return CommonData.isqianqi;
+	}
+
+	
 	/**
 	 * 判断是否debug模式
 	 * 

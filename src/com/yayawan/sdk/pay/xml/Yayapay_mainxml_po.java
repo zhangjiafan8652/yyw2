@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.CornersLinearLayout;
@@ -207,7 +208,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		ll_moneyitem.addView(tv_mMoney1);
 		ll_moneyitem.addView(tv_mMoney);
 
-		TextView tv_fastpay = markView("请选择支付方式：如支付失败，请换种支付方式("+ViewConstants.SDKVERSION+"):");
+		TextView tv_fastpay = markView("请选择支付方式：如支付失败，请换种支付方式("+CommonData.SDKVERSION+"):");
 
 		// 创建每种支付的布局
 		rl_mBluep = createItemView("支付宝支付", "yaya_zhifu.png",
