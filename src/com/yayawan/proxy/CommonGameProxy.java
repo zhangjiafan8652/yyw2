@@ -612,9 +612,15 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void onCreate(final Activity paramActivity) {
 
+		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
+		//Jxutilsinit.isdebug=true;
+		
+		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
+		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
+		
 		//初始化千骐千果sdk
 		CommonData.initCommonData(paramActivity);
-		
+		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
 		mActivity = paramActivity;
 		JLibrary.InitEntry(paramActivity);
 		 miitHelper = new MiitHelper(new AppIdsUpdater() {
@@ -631,12 +637,7 @@ public class CommonGameProxy implements YYWGameProxy {
 			miitHelper.getDeviceIds(paramActivity);
 		
 		// 进行检查更新
-		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
-		//Jxutilsinit.isdebug=true;
-		
-		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
-		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
-		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
+	
 
 	
 
@@ -732,7 +733,8 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void initSdk(Activity paramActivity) {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("initSdk");
-
+		//初始化千骐千果sdk
+		CommonData.initCommonData(paramActivity);
 		// 为了兼容老sdk判断是否有初始化方法再执行
 		this.mStub.initSdk(paramActivity);
 	}

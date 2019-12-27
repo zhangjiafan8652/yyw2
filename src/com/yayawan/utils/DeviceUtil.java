@@ -25,7 +25,7 @@ import com.yayawan.sdk.bean.PayMethod;
 
 public class DeviceUtil {
 
-	private static final String APP_ID = CommonData.sdkid;
+	private static  String APP_ID = CommonData.sdkid;
 
 	private static final String GAME_ID = "yayawan_game_id";
 
@@ -238,10 +238,10 @@ public class DeviceUtil {
 		}
 		Bundle dataInfo = getMetaDataInfo(paramContext);
 		if (((dataInfo = getMetaDataInfo(paramContext)) == null)
-				|| (dataInfo.get(APP_ID) == null)) {
+				|| (dataInfo.get(CommonData.sdkid) == null)) {
 			throw new IllegalArgumentException("must set the appid");
 		}
-		return dataInfo.getString(APP_ID).replace("kk", "");
+		return dataInfo.getString(CommonData.sdkid).replace("kk", "");
 	}
 
 	/**
@@ -251,15 +251,17 @@ public class DeviceUtil {
 	 * @return
 	 */
 	public static String getAppid(Context paramContext) {
+		
+		Yayalog.loger("准备获取的appidtag："+CommonData.sdkid);
 		if (appid != null) {
 			return appid;
 		}
 		Bundle dataInfo = getMetaDataInfo(paramContext);
 		if (((dataInfo = getMetaDataInfo(paramContext)) == null)
-				|| (dataInfo.get(APP_ID) == null)) {
+				|| (dataInfo.get(CommonData.sdkid) == null)) {
 			throw new IllegalArgumentException("must set the app_id");
 		}
-		return dataInfo.getString(APP_ID).replace("kk", "");
+		return dataInfo.getString(CommonData.sdkid).replace("kk", "");
 	}
 
 	/**

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -134,7 +135,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				DgameSdk.mSdkApiCallback.onVerifyCancel();
+				verifyCancel();
 			}
 		});
 		
@@ -283,10 +284,22 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 
 		dialog.setCanceledOnTouchOutside(false);
 		dialog.getWindow().setBackgroundDrawable(new BitmapDrawable());
+		dialog.setOnDismissListener(new OnDismissListener() {
+			
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				if (!isverify) {
+					verifyCancel();
+				}
+			}
+		});
 
 		initlogic();
 	}
 
+	
+	public static boolean isverify=false;
 	private void initlogic() {
 		
 		
@@ -340,7 +353,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 									// TODO Auto-generated method stub
 
 									Utilsjf.stopDialog();
-									DgameSdk.mSdkApiCallback.onVerifyCancel();
+									verifyCancel();
 									Toast.makeText(mActivity, "请检查网络是否畅通", 0)
 											.show();
 								}
@@ -360,6 +373,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 										
 										String msg=	(String) jsonObject.optString("err_msg");
 										if (msg.contains("success")) {
+											isverify=true;
 											DgameSdk.mSdkApiCallback.onVerifySuccess(result.result);
 											dialogDismiss();
 										}
@@ -445,5 +459,11 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 	        return matches;
 	    }
 
-
+	  
+	  public  void verifyCancel(){
+		 if (DgameSdk.mSdkApiCallback!=null) {
+			 DgameSdk.mSdkApiCallback.onVerifyCancel();
+			 DgameSdk.mSdkApiCallback=null;
+		} 
+	  }
 }
