@@ -121,17 +121,17 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		// ViewConstants.getHoldActivityWith(mContext)全局的所有窗口化activity的宽
 
 		machineFactory.MachineView(rl_title,
-				ViewConstants.getHoldActivityWith(mContext), 96, mLinearLayout);
+				ViewConstants.getHoldActivityWith(mContext), 144, mLinearLayout);
 		rl_title.setBackgroundColor(Color.parseColor("#3385FF"));
 
 		ll_mPre = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_mPre, 96, MATCH_PARENT, 0,
+		machineFactory.MachineView(ll_mPre, 144, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_RIGHT);
 		ll_mPre.setGravity(Gravity_CENTER);
 		ll_mPre.setClickable(true);
 		// 返回上一层的图片
 		iv_mPre = new ImageButton(mContext);
-		machineFactory.MachineView(iv_mPre, 45, 45, 0, mLinearLayout, 0, 0, 0,
+		machineFactory.MachineView(iv_mPre, 67, 67, 0, mLinearLayout, 0, 0, 0,
 				0, 0);
 
 		iv_mPre.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile(
@@ -143,13 +143,13 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		// 注册textview
 		TextView tv_zhuce = new TextView(mContext);
 		machineFactory.MachineTextView(tv_zhuce, MATCH_PARENT, MATCH_PARENT, 0,
-				"充值", 40, mRelativeLayout, 0, 0, 0, 0);
+				"充值", 60, mRelativeLayout, 0, 0, 0, 0);
 		tv_zhuce.setTextColor(Color.parseColor("#ffffff"));
 		tv_zhuce.setGravity(Gravity_CENTER);
 
 		tv_mHelp = new TextView(mContext);
 		machineFactory.MachineTextView(tv_mHelp, WRAP_CONTENT, MATCH_PARENT, 0,
-				"帮助", 28, mRelativeLayout, 20, 0, 20, 0,
+				"帮助", 42, mRelativeLayout, 30, 0, 30, 0,
 				RelativeLayout.ALIGN_PARENT_LEFT);
 		tv_mHelp.setTextColor(Color.parseColor("#fffffa"));
 		tv_mHelp.setGravity(Gravity_CENTER);
@@ -163,7 +163,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
 		ScrollView sv_mContent = new ScrollView(mContext);
 		machineFactory.MachineView(sv_mContent, MATCH_PARENT,
-				ViewConstants.getHoldActivityHeight(mContext) - 96,
+				ViewConstants.getHoldActivityHeight(mContext) - 144,
 				mLinearLayout);
 
 		LinearLayout ll_mContent = new LinearLayout(mContext);
@@ -174,14 +174,14 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
 		// 顶部金额的条目
 		LinearLayout ll_moneyitem = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_moneyitem, MATCH_PARENT, 100,
+		machineFactory.MachineView(ll_moneyitem, MATCH_PARENT, 150,
 				mLinearLayout);
 		ll_moneyitem.setOrientation(LinearLayout.HORIZONTAL);
 
 		// 多少元宝
 		tv_mYuanbao = new TextView(mContext);
 		machineFactory.MachineTextView(tv_mYuanbao, 0, MATCH_PARENT, 1,
-				"300元宝", 32, mLinearLayout, 0, 0, 20, 0);
+				"300元宝", 48, mLinearLayout, 0, 0, 30, 0);
 		tv_mYuanbao.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 		// tv_mYuanbao.setGravity(Gravity.RIGHT);
 
@@ -193,11 +193,11 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		// 金额多少
 		tv_mMoney1 = new TextView(mContext);
 		machineFactory.MachineTextView(tv_mMoney1, WRAP_CONTENT, MATCH_PARENT,
-				0, "金额:￥", 32, mLinearLayout, 20, 0, 0, 0);
+				0, "金额:￥", 48, mLinearLayout, 30, 0, 0, 0);
 		tv_mMoney1.setGravity(Gravity.CENTER_VERTICAL);
 
 		tv_mMoney = new TextView(mContext);
-		machineFactory.MachineTextView(tv_mMoney, 0, MATCH_PARENT, 1, "", 32,
+		machineFactory.MachineTextView(tv_mMoney, 0, MATCH_PARENT, 1, "", 48,
 				mLinearLayout, 0, 0, 0, 0);
 		tv_mMoney.setGravity(Gravity.CENTER_VERTICAL);
 		tv_mMoney.setTextColor(Color.parseColor("#ff9900"));
@@ -302,12 +302,12 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 			int paytype) {
 		RelativeLayout relativeLayout = new RelativeLayout(mContext);
 
-		machineFactory.MachineView(relativeLayout, 300, 100, 0, "GridLayout",
-				15, 15, 0, 0, 0);
+		machineFactory.MachineView(relativeLayout, 450, 150, 0, "GridLayout",
+				22, 22, 0, 0, 0);
 		relativeLayout.setGravity(Gravity_CENTER);
 
 		ImageView iv_payicon = new ImageView(mContext);
-		machineFactory.MachineView(iv_payicon, 60, MATCH_PARENT, 0,
+		machineFactory.MachineView(iv_payicon, 90, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_LEFT);
 		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				iconname, mActivity));
@@ -322,7 +322,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		
 	
 		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
-				0, name, 22, mRelativeLayout, 90, 0, 0, 0);
+				0, name, 33, mRelativeLayout, 100, 0, 0, 0);
 		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
 		// TODO
 		relativeLayout.addView(iv_payicon);
@@ -349,12 +349,12 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 			int paytype) {
 		RelativeLayout relativeLayout = new RelativeLayout(mContext);
 
-		machineFactory.MachineView(relativeLayout, 300, 100, 0, "GridLayout",
-				15, 15, 0, 0, 0);
+		machineFactory.MachineView(relativeLayout, 450, 150, 0, "GridLayout",
+				22, 22, 0, 0, 0);
 		relativeLayout.setGravity(Gravity_CENTER);
 
 		ImageView iv_payicon = new ImageView(mContext);
-		machineFactory.MachineView(iv_payicon, 60, MATCH_PARENT, 0,
+		machineFactory.MachineView(iv_payicon, 90, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_LEFT);
 		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				iconname, mActivity));
@@ -363,7 +363,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		name = name + "      ";
 	
 		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
-				0, name, 22, mRelativeLayout, 90, 0, 0, 0);
+				0, name, 33, mRelativeLayout, 135, 0, 0, 0);
 		
 		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
 		
@@ -372,7 +372,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		
 		String nametip =  "可获得丫丫玩盒子积分";
 		machineFactory.MachineTextView(tv_tip, WRAP_CONTENT, MATCH_PARENT,
-				0, nametip, 12, mRelativeLayout, 40, 75, 0, 0);
+				0, nametip, 18, mRelativeLayout, 60, 107, 0, 0);
 		
 		tv_tip.setGravity(Gravity.CENTER_VERTICAL);
 		tv_tip.setTextColor(Color.parseColor("#2B2B2B"));
@@ -390,8 +390,8 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 
 	private TextView markView(String name) {
 		TextView textview = new TextView(mContext);
-		machineFactory.MachineTextView(textview, MATCH_PARENT, 70, 0, name, 20,
-				mLinearLayout, 20, 0, 0, 0);
+		machineFactory.MachineTextView(textview, MATCH_PARENT, 105, 0, name, 30,
+				mLinearLayout, 30, 0, 0, 0);
 		textview.setTextColor(Color.parseColor("#737373"));
 		textview.setGravity(Gravity.CENTER_VERTICAL);
 		return textview;

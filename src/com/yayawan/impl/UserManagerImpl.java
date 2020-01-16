@@ -139,10 +139,10 @@ public class UserManagerImpl implements YYWUserManager {
 		
 		Yayalog.loger("调用了impl中的usermanagerimpl中的setdata方法");
 	
-		if (Integer.parseInt(ext)==1) {
+		//if (Integer.parseInt(ext)==1) {
 			DgameSdk.setRoleData(paramActivity, roleId, roleName, roleLevel, zoneId, zoneName,YYWMain.mUser.token,YYWMain.mUser.uid);
 			
-		}
+	//	}
 	
 	}
 	

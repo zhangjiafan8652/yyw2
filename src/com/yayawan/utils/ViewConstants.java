@@ -156,8 +156,8 @@ public class ViewConstants {
 	// public static String USER_FIRST_PASSWORD_SAVE=;
 
 	public static int getHoldActivityHeight(Context mContext) {
-		int ho_height = 650;
-		int po_height = 850;
+		int ho_height = 975;
+		int po_height = 1275;
 		int height = 0;
 		// 判断横竖屏
 		String orientation = DeviceUtil.getOrientation(mContext);
@@ -172,9 +172,9 @@ public class ViewConstants {
 	}
 
 	public static int getHoldActivityWith(Context mContext) {
-		int ho_with = 1080;
+		int ho_with = 1620;
 
-		int po_with = 650;
+		int po_with = 975;
 
 		int with = 0;
 		// 判断横竖屏

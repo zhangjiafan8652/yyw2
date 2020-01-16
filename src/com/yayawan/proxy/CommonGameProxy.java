@@ -542,6 +542,9 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void anim(Activity paramActivity, YYWAnimCallBack animCallback) {
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("anim");
+		//初始化千骐千果sdk
+		CommonData.initCommonData(paramActivity);
+		
 		YYWMain.mAnimCallBack = animCallback;
 		this.mAnimation.anim(paramActivity);
 
@@ -772,6 +775,9 @@ public class CommonGameProxy implements YYWGameProxy {
 		// TODO Auto-generated method stub
 		GameApitest.getGameApitestInstants(paramActivity).sendTest(
 				"launchActivityOnCreate");
+		
+		
+		
 		this.mStub.launchActivityOnCreate(paramActivity);
 	}
 

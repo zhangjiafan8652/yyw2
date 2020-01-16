@@ -90,7 +90,7 @@ public class Login_success_dialog extends Basedialogview {
 
 	private void startlogin() {
 
-		Login_ho_dialog login_ho_dialog = new Login_ho_dialog(mActivity);
+		Login_dialog login_ho_dialog = new Login_dialog(mActivity);
 		login_ho_dialog.dialogShow();
 
 	}
@@ -126,10 +126,10 @@ public class Login_success_dialog extends Basedialogview {
 	public void createDialog(Activity mActivity) {
 		dialog = new Dialog(mContext);
 
-		int ho_height = 100;
-		int ho_with = 1000;
-		int po_height = 100;
-		int po_with = 600;
+		int ho_height = 150;
+		int ho_with = 1500;
+		int po_height = 150;
+		int po_with = 900;
 
 		int height = 0;
 		int with = 0;
@@ -145,18 +145,18 @@ public class Login_success_dialog extends Basedialogview {
 
 			height = ho_height;
 			with = ho_with;
-			bt_with = 240;
-			bt_textsize = 32;
-			tv_textsize = 36;
-			maginbut = 500;
+			bt_with = 360;
+			bt_textsize = 48;
+			tv_textsize = 54;
+			maginbut = 750;
 		} else if ("portrait".equals(orientation)) {
 
 			height = po_height;
 			with = po_with;
-			bt_with = 180;
-			bt_textsize = 28;
-			tv_textsize = 32;
-			maginbut = 900;
+			bt_with = 270;
+			bt_textsize = 42;
+			tv_textsize = 48;
+			maginbut = 1350;
 		}
 
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -195,8 +195,8 @@ public class Login_success_dialog extends Basedialogview {
 		ll_textline.addView(tv_userid);
 
 		bt_change = new Button(mActivity);
-		machineFactory.MachineButton(bt_change, bt_with, 80, 0, "切换账号",
-				bt_textsize, mLinearLayout, 0, 0, 10, 0);
+		machineFactory.MachineButton(bt_change, bt_with, 120, 0, "切换账号",
+				bt_textsize, mLinearLayout, 0, 0, 15, 0);
 		bt_change.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya_greenbut.9.png", mContext));
 		bt_change.setTextColor(Color.WHITE);

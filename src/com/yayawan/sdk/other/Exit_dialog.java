@@ -34,24 +34,24 @@ public class Exit_dialog extends Basedialogview {
 		baselin = new LinearLayout(mContext);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
-		machineFactory.MachineView(baselin, 550, 300, "LinearLayout");
+		machineFactory.MachineView(baselin, 837, 450, "LinearLayout");
 		baselin.setBackgroundColor(Color.TRANSPARENT);
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 
 		// 中间内容
 		RelativeLayout rl_content = new RelativeLayout(mContext);
-		machineFactory.MachineView(rl_content, 550, 300, mLinearLayout);
+		machineFactory.MachineView(rl_content, 837, 450, mLinearLayout);
 		rl_content.setBackgroundColor(Color.rgb(57, 162,227));
 
 		
 		
 	
 		Button bt_cancel = new Button(mActivity);
-		machineFactory.MachineButton(bt_cancel, 150, 60, 0, "取消", 32, mRelativeLayout, machSize(400), machSize(300), 0, 0);
+		machineFactory.MachineButton(bt_cancel, 225, 90, 0, "取消", 48, mRelativeLayout, machSize(600), machSize(450), 0, 0);
 		bt_cancel.setBackgroundColor(Color.parseColor("#ee5d7c"));
 		
 		Button bt_ok = new Button(mActivity);
-		machineFactory.MachineButton(bt_ok, 150, 60,  0, "退出", 0, mRelativeLayout, machSize(70), machSize(350), 0, 0);
+		machineFactory.MachineButton(bt_ok, 225, 90,  0, "退出", 0, mRelativeLayout, machSize(105), machSize(525), 0, 0);
 		rl_content.setBackgroundColor(Color.parseColor("#000000"));
 		
 		

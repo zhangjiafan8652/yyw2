@@ -40,6 +40,12 @@ import com.yayawan.utils.ViewConstants;
 
 import com.yayawan.utils.Yayalog;
 
+/**
+ * 
+ * 开始启动的时候
+ * @author zjf
+ *
+ */
 public class Startlogin_dialog extends Basedialogview {
 
 	private ImageView iv_loading;
@@ -105,7 +111,7 @@ public class Startlogin_dialog extends Basedialogview {
 		iv_loading = new ImageView(mActivity);
 		machineFactory.MachineView(iv_loading, 100, 100, mLinearLayout, 1, 10);
 		iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_loading(1).png", mActivity));
+				"yaya_loading.png", mActivity));
 
 		RotateAnimation rotateAnimation = new RotateAnimation(0, 359,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -262,7 +268,7 @@ public class Startlogin_dialog extends Basedialogview {
 	private void startlogin() {
 
 		dialogDismiss();
-		Login_ho_dialog login_ho_dialog = new Login_ho_dialog(mActivity);
+		Login_dialog login_ho_dialog = new Login_dialog(mActivity);
 		login_ho_dialog.dialogShow();
 
 	}
@@ -272,7 +278,7 @@ public class Startlogin_dialog extends Basedialogview {
 
 		dialogDismiss();
 	
-		new AcountRegister(mActivity).acountRregister();
+		new AcountQuickRegister(mActivity).acountRregister();
 
 		
 

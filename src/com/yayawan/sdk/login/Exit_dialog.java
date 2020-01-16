@@ -88,17 +88,17 @@ public class Exit_dialog extends Basedialogview {
 		int ho_height ;
 		int po_height ;
 		if (YYcontants.ISDEBUG) {
-			 ho_height = 628;
-			 po_height = 628;
+			 ho_height = 942;
+			 po_height = 942;
 		}else {
-			 ho_height = 384;			
-			 po_height = 384;
+			 ho_height = 580;			
+			 po_height = 580;
 		}
 		
 	
-		int ho_with = 628;
+		int ho_with = 942;
 		
-		int po_with = 628;
+		int po_with = 942;
 
 		int height = 0;
 		int with = 0;
@@ -135,18 +135,18 @@ public class Exit_dialog extends Basedialogview {
 
 	
 		mTextView=new TextView(mActivity);
-		machineFactory.MachineTextView(mTextView, MATCH_PARENT, 528, 0, "", 18, mLinearLayout, 0, 0, 0, 0);
+		machineFactory.MachineTextView(mTextView, MATCH_PARENT, 780, 0, "", 27, mLinearLayout, 0, 0, 0, 0);
 
 		// webview
 		lv_helpcontent = new WebView(mActivity);
-		machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, 300,
+		machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, 450,
 				0, mLinearLayout, 0, 0, 0, 0, 100);
 		
 
 		// button的退出
 				bt_mlogin = new Button(mActivity);
-				bt_mlogin = machineFactory.MachineButton(bt_mlogin, MATCH_PARENT, 84, 1,
-						"退出游戏", 25, mLinearLayout, 0, 0, 0, 0);
+				bt_mlogin = machineFactory.MachineButton(bt_mlogin, MATCH_PARENT, 150, 1,
+						"退出游戏", 40, mLinearLayout, 0, 0, 0, 0);
 				bt_mlogin.setTextColor(Color.WHITE);
 				bt_mlogin.setBackgroundColor(Color.BLACK);
 				bt_mlogin.setPadding(0, 0, 0, 0);

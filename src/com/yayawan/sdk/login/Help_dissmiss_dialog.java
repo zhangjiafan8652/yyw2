@@ -112,20 +112,20 @@ public class Help_dissmiss_dialog extends Basedialogview {
 
 		} else if ("landscape".equals(orientation)) {
 
-			height = machSize(130);
-			with = 1280;
-			bt_with = 200;
-			bt_textsize = 28;
-			tv_textsize = 36;
-			maginbut = 500;
+			height = machSize(195);
+			with = 1920;
+			bt_with = 300;
+			bt_textsize = 42;
+			tv_textsize = 48;
+			maginbut = 750;
 		} else if ("portrait".equals(orientation)) {
 
-			height = machSize(150);
-			with = 720;
-			bt_with = 200;
-			bt_textsize = 28;
-			tv_textsize = 32;
-			maginbut = 900;
+			height = machSize(225);
+			with = 1080;
+			bt_with = 300;
+			bt_textsize = 42;
+			tv_textsize = 48;
+			maginbut = 1350;
 		}
 		int screenheight=0;
 		if (DeviceUtil.isLandscape(mActivity)) {
@@ -180,8 +180,8 @@ public class Help_dissmiss_dialog extends Basedialogview {
 	
 
 		bt_change = new Button(mActivity);
-		machineFactory.MachineButton(bt_change, bt_with, 80, 0, "不再提示",
-				bt_textsize, mLinearLayout, 20, 0, 0, 0);
+		machineFactory.MachineButton(bt_change, bt_with, 120, 0, "不再提示",
+				bt_textsize, mLinearLayout, 30, 0, 0, 0);
 		bt_change.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya_greenbut.9.png", mContext));
 		bt_change.setTextColor(Color.WHITE);

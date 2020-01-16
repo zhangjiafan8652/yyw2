@@ -1,11 +1,15 @@
 package com.yayawan.impl;
 
+import android.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.lidroid.jxutils.http.Jxutilsinit;
 import com.yayawan.proxy.YYWActivityStub;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.Yayalog;
 
@@ -38,8 +42,15 @@ public class ActivityStubImpl implements YYWActivityStub {
 		Yayalog.loger("oncreate");
 		DgameSdk.initSdk(paramActivity);
 		Handle.active_handler(paramActivity);
-		
-
+//		ViewGroup rootview=(ViewGroup) paramActivity.getWindow().getDecorView();
+//		ImageView imageView = new ImageView(paramActivity);
+//		  ViewGroup.LayoutParams  lp = imageView.getLayoutParams();
+//	        lp.width =150;
+//	        lp.height =150; 
+//	        imageView.setLayoutParams(lp);
+//	        imageView.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+//					"yaya1_acountmanagericon_nosdk.png", paramActivity));
+		//paramActivity.addContentView(view, params)
 	}
 
 	@Override

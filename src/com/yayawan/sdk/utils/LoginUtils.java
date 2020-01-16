@@ -17,7 +17,7 @@ import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
 import com.yayawan.sdk.db.UserDao;
-import com.yayawan.sdk.login.Login_ho_dialog;
+import com.yayawan.sdk.login.Login_dialog;
 import com.yayawan.sdk.login.Login_success_dialog;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
@@ -222,7 +222,7 @@ public class LoginUtils {
 			dialog.dialogDismiss();
 		}
 
-		Login_ho_dialog login_ho_dialog = new Login_ho_dialog(mActivity);
+		Login_dialog login_ho_dialog = new Login_dialog(mActivity);
 		login_ho_dialog.dialogShow();
 
 	}

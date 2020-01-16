@@ -819,7 +819,7 @@ public class DgameSdk {
 			Yayalog.loger("app_id", DeviceUtil.getAppid(mactivity));
 			Yayalog.loger("uid", YYWMain.mUser.uid);
 			Yayalog.loger("token", YYWMain.mUser.token);
-		
+			Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
 			httpUtils.send(HttpMethod.POST, ViewConstants.SHIMINGRENZHENG,requestParams, new RequestCallBack<String>() {
 
 				@Override

@@ -103,7 +103,7 @@ public class DisplayUtils {
 	 */
 	public static int dealWihtSize(int size, Activity activity) {
 
-		float widthPx = 720;
+		float widthPx = 1080;
 
 		
 
@@ -121,13 +121,13 @@ public class DisplayUtils {
 
 		// Log.e("前size", size+"++++++++++++++");
 		// Log.e("widthPx", widthPx + "++++++++++++++");
-		if (widthPx == 720) {
+		if (widthPx == 1080) {
 			return size;
 		}
 		/*if (widthPx>=1080) {
 			widthPx=1080;
 		}*/
-		float bili = 720 / widthPx;
+		float bili = 1080 / widthPx;
 		// Log.e("bili", bili+"++++++++++++++");
 		int resize = (int) ((size / bili) + 0.5);
 		// Log.e("后size", resize+"++++++++++++++");

@@ -42,7 +42,7 @@ public class Toastxml_po extends Basexml implements Layoutxml {
 		rl_title.setBackgroundColor(Color.TRANSPARENT);
 
 		LinearLayout ll_content = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_content, 250, 250, 0, mRelativeLayout, 0,
+		machineFactory.MachineView(ll_content, 375, 375, 0, mRelativeLayout, 0,
 				0, 0, 0, RelativeLayout.CENTER_IN_PARENT);
 		ll_content.setOrientation(LinearLayout.VERTICAL);
 		ll_content.setGravity(Gravity_CENTER);
@@ -50,11 +50,11 @@ public class Toastxml_po extends Basexml implements Layoutxml {
 				.getDrawableFromAssetsFile("yaya_toast_background.png", mActivity));
 
 		iv_imageview = new ImageView(mContext);
-		machineFactory.MachineView(iv_imageview, 80, 80, mLinearLayout);
+		machineFactory.MachineView(iv_imageview, 120, 120, mLinearLayout);
 
 		tv_message = new TextView(mContext);
 		machineFactory.MachineTextView(tv_message, MATCH_PARENT, WRAP_CONTENT,
-				0, "", 28, mLinearLayout, 0, 25, 0, 0);
+				0, "", 42, mLinearLayout, 0, 37, 0, 0);
 		tv_message.setGravity(Gravity_CENTER);
 
 		ll_content.addView(iv_imageview);

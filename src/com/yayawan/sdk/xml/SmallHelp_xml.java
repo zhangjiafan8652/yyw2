@@ -57,21 +57,21 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		baseLinearLayout.setBackgroundColor(Color.TRANSPARENT);
 		baseLinearLayout.setLayoutParams(layoutParams);
 		baseLinearLayout.setOrientation(LinearLayout.VERTICAL);
-		baseLinearLayout.setGravity(Gravity.CENTER);
+		baseLinearLayout.setGravity(Gravity.LEFT);
 
 		
-		int height = 560;
-		int with = 630;
+		int height = -1;
+		int with = 1344;
 		
 		baselin = new LinearLayout(mActivity);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
-		machineFactory.MachineView(baselin, with, height,
+		machineFactory.MachineView(baselin, with, MATCH_PARENT,
 				mLinearLayout);
 		//baselin.setBackgroundDrawable(GetAssetsutils
 			//	.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
 		//baselin.setPadding(10, 0, 10, 10);
-		baselin.setGravity(Gravity.CENTER);
+		baselin.setGravity(Gravity.LEFT);
 		
 		wv_mWeiboview = new CornersWebView(mContext);
 		

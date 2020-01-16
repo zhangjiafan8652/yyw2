@@ -61,10 +61,10 @@ public class Announcement_dialog extends Basedialogview {
 
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		int ho_height = 650;
-		int ho_with = 650;
-		int po_height = 650;
-		int po_with = 650;
+		int ho_height = 975;
+		int ho_with = 975;
+		int po_height = 975;
+		int po_with = 975;
 
 		int height = 0;
 		int with = 0;
@@ -99,17 +99,17 @@ public class Announcement_dialog extends Basedialogview {
 
 		// 标题栏
 		RelativeLayout rl_title = new RelativeLayout(mContext);
-		machineFactory.MachineView(rl_title, MATCH_PARENT, 96, mLinearLayout);
+		machineFactory.MachineView(rl_title, MATCH_PARENT, 144, mLinearLayout);
 		rl_title.setBackgroundColor(Color.parseColor("#999999"));
 
 		ll_mPre = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_mPre, 96, MATCH_PARENT, 0,
+		machineFactory.MachineView(ll_mPre, 144, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_VERTICAL);
 		ll_mPre.setGravity(Gravity_CENTER);
 		ll_mPre.setClickable(true);
 		// 返回上一层的图片
 		iv_mPre = new ImageButton(mContext);
-		machineFactory.MachineView(iv_mPre, 40, 40, 0, mLinearLayout, 0, 0, 0,
+		machineFactory.MachineView(iv_mPre, 60, 60, 0, mLinearLayout, 0, 0, 0,
 				0, RelativeLayout.CENTER_VERTICAL);
 		iv_mPre.setClickable(false);
 		/*
@@ -132,7 +132,7 @@ public class Announcement_dialog extends Basedialogview {
 		// 注册textview
 		TextView tv_zhuce = new TextView(mContext);
 		machineFactory.MachineTextView(tv_zhuce, MATCH_PARENT, MATCH_PARENT, 0,
-				"游戏公告", 38, mLinearLayout, 0, 0, 0, 0);
+				"游戏公告", 57, mLinearLayout, 0, 0, 0, 0);
 		tv_zhuce.setTextColor(Color.WHITE);
 		tv_zhuce.setGravity(Gravity_CENTER);
 
@@ -141,7 +141,7 @@ public class Announcement_dialog extends Basedialogview {
 		rl_title.addView(tv_zhuce);
 
 		pb_mPb = new ProgressBar(mActivity);
-		machineFactory.MachineView(pb_mPb, 40, 40, mLinearLayout, 2, 400);
+		machineFactory.MachineView(pb_mPb, 60, 60, mLinearLayout, 2, 600);
 
 		// 帮助的列表内容
 		lv_helpcontent = new WebView(mActivity);
@@ -152,7 +152,7 @@ public class Announcement_dialog extends Basedialogview {
 		
 		// 下次不提示
 		LinearLayout ll_clause = new LinearLayout(mActivity);
-		machineFactory.MachineView(ll_clause, MATCH_PARENT, 40, mLinearLayout,
+		machineFactory.MachineView(ll_clause, MATCH_PARENT, 60, mLinearLayout,
 				0, 0);
 		ll_clause.setGravity(Gravity.CENTER_VERTICAL);
 		
@@ -163,7 +163,7 @@ public class Announcement_dialog extends Basedialogview {
 		
 		// 关闭按钮
 				ib_mClosebutton = new ImageButton(mActivity);
-				machineFactory.MachineView(ib_mClosebutton, 40, 40, mLinearLayout, 2, 5);
+				machineFactory.MachineView(ib_mClosebutton, 60, 60, mLinearLayout, 2, 7);
 				//ib_mClosebutton.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				ib_mClosebutton.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 						"yaya_xsishi.png", mActivity));
@@ -181,8 +181,8 @@ public class Announcement_dialog extends Basedialogview {
 		
 		// 不再提示
 		ib_mAgreedbox = new ImageButton(mActivity);
-		machineFactory.MachineView(ib_mAgreedbox,  38, 38, 0, mLinearLayout, 10,
-				5,0,0, 0);
+		machineFactory.MachineView(ib_mAgreedbox,  57, 57, 0, mLinearLayout, 15,
+				7,0,0, 0);
 		ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_checkedbox.png", mActivity));
 		ib_mAgreedbox.setBackgroundDrawable(null);
@@ -192,8 +192,8 @@ public class Announcement_dialog extends Basedialogview {
 
 		// 不再提示
 		ib_mNotAgreedbox = new ImageButton(mActivity);
-		machineFactory.MachineView(ib_mNotAgreedbox, 38, 38, 0, mLinearLayout, 10,
-				5,0,0, 0);
+		machineFactory.MachineView(ib_mNotAgreedbox, 57, 57, 0, mLinearLayout, 15,
+				7,0,0, 0);
 		ib_mNotAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_checkbox.png", mActivity));
 		ib_mNotAgreedbox.setBackgroundDrawable(null);
@@ -201,7 +201,7 @@ public class Announcement_dialog extends Basedialogview {
 
 		TextView tv_agree = new TextView(mActivity);
 		machineFactory.MachineTextView(tv_agree, WRAP_CONTENT, MATCH_PARENT, 0,
-				"不再提示", 22, mLinearLayout, 4, 0, 0, 2);
+				"不再提示", 33, mLinearLayout, 6, 0, 0, 2);
 		tv_agree.setTextColor(Color.parseColor("#b4b4b4"));
 		tv_agree.setGravity(Gravity.CENTER_VERTICAL);
 		

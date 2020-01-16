@@ -217,10 +217,10 @@ public class GetAssetsutils {
 
 		// Log.e("前size", size+"++++++++++++++");
 		// Log.e("widthPx", widthPx + "++++++++++++++");
-		if (widthPx > 720&&name.endsWith(".png")) {
-			name = name.substring(0, name.indexOf(".png")) + "1080.png";
-
-		}
+//		if (widthPx > 720&&name.endsWith(".png")) {
+//			name = name.substring(0, name.indexOf(".png")) + "1080.png";
+//
+//		}
 
 		return name;
 	}

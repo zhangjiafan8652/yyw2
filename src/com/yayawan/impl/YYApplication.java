@@ -5,6 +5,7 @@ package com.yayawan.impl;
 import com.bun.miitmdid.core.JLibrary;
 import com.bun.miitmdid.core.MdidSdkHelper;
 import com.lidroid.jxutils.http.Jxutilsinit;
+import com.yayawan.common.CommonData;
 import com.yayawan.proxy.GameApitest;
 
 import com.yayawan.proxy.MiitHelper;
@@ -32,11 +33,11 @@ public class YYApplication extends YYWApplication {
 		super.onCreate();
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
 		
-		
+		//初始化千骐千果sdk
+				
+		//CommonData.initCommonData(getApplicationContext());
 		mContext = getApplicationContext();
-		
-		
-		
+	
 			
 		if (PermissionUtils.checkPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
 			Jxutilsinit.init(getApplicationContext());

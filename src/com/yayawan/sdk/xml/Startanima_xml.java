@@ -39,11 +39,11 @@ public class Startanima_xml extends Basexml implements Layoutxml {
 		if (orientation == "") {
 
 		} else if ("landscape".equals(orientation)) {
-			oneheight=80;
-			twoheight=200;
+			oneheight=120;
+			twoheight=300;
 		} else if ("portrait".equals(orientation)) {
-			oneheight=250;
-			twoheight=450;
+			oneheight=375;
+			twoheight=675;
 		}
 
 		linearLayout.setBackgroundColor(Color.WHITE);
@@ -62,7 +62,7 @@ public class Startanima_xml extends Basexml implements Layoutxml {
 		int height = wm.getDefaultDisplay().getHeight();
 
 		iv_loading = new ImageView(mContext);
-		machineFactory.MachineView(iv_loading, 500, 500, 0, mLinearLayout, 0,
+		machineFactory.MachineView(iv_loading, 750, 750, 0, mLinearLayout, 0,
 				oneheight, 0, 0, 100);
 
 		// System.out.println(DisplayUtils.getHeightPx(mActivity)+"+++++++++++++");

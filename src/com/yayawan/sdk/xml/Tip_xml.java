@@ -66,29 +66,29 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		baselin = new LinearLayout(mActivity);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
-		machineFactory.MachineView(baselin, 550, 450, "LinearLayout");
+		machineFactory.MachineView(baselin, 825, 675, "LinearLayout");
 		baselin.setBackgroundColor(Color.WHITE);
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 
 		// 中间内容
 		RelativeLayout rl_content = new RelativeLayout(mActivity);
-		machineFactory.MachineView(rl_content, 550, 450, mLinearLayout);
+		machineFactory.MachineView(rl_content, 825, 675, mLinearLayout);
 		rl_content.setBackgroundColor(Color.WHITE);
 
 		// 标题栏
 		LinearLayout rl_title = new LinearLayout(mContext);
-		machineFactory.MachineView(rl_title, MATCH_PARENT, 76, mRelativeLayout);
+		machineFactory.MachineView(rl_title, MATCH_PARENT, 114, mRelativeLayout);
 		//rl_title.setBackgroundColor(Color.parseColor("#999999"));
 		rl_title.setOrientation(LinearLayout.VERTICAL);
 		
 		ll_mPre = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_mPre, 76, MATCH_PARENT, 0,
+		machineFactory.MachineView(ll_mPre, 114, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_VERTICAL);
 		ll_mPre.setGravity(Gravity_CENTER);
 		ll_mPre.setClickable(true);
 		// 返回上一层的图片
 		iv_mPre = new ImageButton(mContext);
-		machineFactory.MachineView(iv_mPre, 40, 40, 0, mLinearLayout, 0, 0, 0,
+		machineFactory.MachineView(iv_mPre, 60, 60, 0, mLinearLayout, 0, 0, 0,
 				0, RelativeLayout.CENTER_VERTICAL);
 		iv_mPre.setClickable(false);
 
@@ -99,15 +99,15 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		
 
 		tv_titile = new TextView(mContext);
-		machineFactory.MachineTextView(tv_titile, MATCH_PARENT, 70, 0,
-				"提示", 28, mLinearLayout, 0, 0, 0, 0);
+		machineFactory.MachineTextView(tv_titile, MATCH_PARENT, 105, 0,
+				"提示", 42, mLinearLayout, 0, 0, 0, 0);
 		tv_titile.setTextColor(Color.parseColor("#f8b551"));
 		tv_titile.setGravity(Gravity_CENTER);
 		
 		// 内容
 		TextView tv_line = new TextView(mContext);
 		machineFactory.MachineTextView(tv_line, MATCH_PARENT, 2, 0,
-				"", 28, mLinearLayout, 0, 0, 0, 0);
+				"", 42, mLinearLayout, 0, 0, 0, 0);
 		tv_line.setBackgroundColor(Color.parseColor("#f8b551"));
 		tv_line.setGravity(Gravity_CENTER);
 
@@ -117,26 +117,26 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		rl_title.addView(tv_line);
 
 		ScrollView sv_content = new ScrollView(mContext);
-		machineFactory.MachineView(sv_content, 550, 260, "LinearLayout");
+		machineFactory.MachineView(sv_content, 825, 390, "LinearLayout");
 		LinearLayout ll_message = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_message, 550, 260, "LinearLayout");
+		machineFactory.MachineView(ll_message, 825, 390, "LinearLayout");
 		ll_message.setOrientation(LinearLayout.VERTICAL);
 		// 中间内容
 		LinearLayout ll_content = new LinearLayout(mActivity);
-		machineFactory.MachineView(ll_content, 550, 450, "LinearLayout");
+		machineFactory.MachineView(ll_content, 825, 675, "LinearLayout");
 		ll_content.setBackgroundColor(Color.WHITE);
 		ll_content.setGravity(Gravity.CENTER);
 		ll_content.setOrientation(LinearLayout.VERTICAL);
 
 		tv_message = new TextView(mContext);
-		machineFactory.MachineTextView(tv_message, MATCH_PARENT, 0, 1, "", 28,
-				mLinearLayout, 20, 5, 10, 0);
+		machineFactory.MachineTextView(tv_message, MATCH_PARENT, 0, 1, "", 42,
+				mLinearLayout, 30, 7, 15, 0);
 
 		// but 的lin
 
 		ll_mBut = new LinearLayout(mActivity);
 		ll_mBut = (LinearLayout) machineFactory.MachineView(ll_mBut,
-				MATCH_PARENT, 80, 0, mLinearLayout, 20, 20, 20, 30, 100);
+				MATCH_PARENT, 120, 0, mLinearLayout, 30, 30, 30, 45, 100);
 
 		bt_mok = new Button(mActivity);
 		bt_mok = machineFactory.MachineButton(bt_mok, 0, MATCH_PARENT, 1, "",
@@ -147,7 +147,7 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		bt_mok.setGravity(Gravity_CENTER);
 
 		LinearLayout ll_zhanwei = new LinearLayout(mActivity);
-		ll_zhanwei = (LinearLayout) machineFactory.MachineView(ll_zhanwei, 20,
+		ll_zhanwei = (LinearLayout) machineFactory.MachineView(ll_zhanwei, 30,
 				MATCH_PARENT, mLinearLayout);
 
 		// button的登录按钮
@@ -173,9 +173,7 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		ll_content.addView(sv_content);
 		//ll_content.addView(tv_message);
 		ll_content.addView(ll_mBut);
-
 		//rl_content.addView(rl_title);
-		
 		//rl_content.addView(sv_content);
 		rl_content.addView(ll_content);
 		baselin.addView(rl_content);

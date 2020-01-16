@@ -330,7 +330,7 @@ public class Weibologin_jf extends BaseView implements KgameSdkUserCallback {
 			@Override
 			public void onClick(View v) {
 
-				Login_ho_dialog login_ho_dialog = new Login_ho_dialog(ViewConstants.mMainActivity);
+				Login_dialog login_ho_dialog = new Login_dialog(ViewConstants.mMainActivity);
 				login_ho_dialog.dialogShow();
 
 				mActivity.finish();

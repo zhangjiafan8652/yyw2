@@ -54,17 +54,17 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 		baseLinearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 		// 标题栏
 		RelativeLayout rl_title = new RelativeLayout(mContext);
-		machineFactory.MachineView(rl_title, MATCH_PARENT, 96, mLinearLayout);
+		machineFactory.MachineView(rl_title, MATCH_PARENT, 144, mLinearLayout);
 		rl_title.setBackgroundColor(Color.parseColor("#999999"));
 
 		ll_mPre = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_mPre, 96, MATCH_PARENT, 0,
+		machineFactory.MachineView(ll_mPre, 144, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_VERTICAL);
 		ll_mPre.setGravity(Gravity_CENTER);
 		ll_mPre.setClickable(true);
 		// 返回上一层的图片
 		iv_mPre = new ImageButton(mContext);
-		machineFactory.MachineView(iv_mPre, 40, 40, 0, mLinearLayout, 0, 0, 0,
+		machineFactory.MachineView(iv_mPre, 60, 60, 0, mLinearLayout, 0, 0, 0,
 				0, 0);
 		/*
 		 * iv_mPre.setImageDrawable(GetAssetsutils.getDrawableFromAssetsFile(
@@ -86,13 +86,13 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 		// 注册textview
 		TextView tv_zhuce = new TextView(mContext);
 		machineFactory.MachineTextView(tv_zhuce, MATCH_PARENT, MATCH_PARENT, 0,
-				"付款", 40, mRelativeLayout, 0, 0, 0, 0);
+				"付款", 60, mRelativeLayout, 0, 0, 0, 0);
 		tv_zhuce.setTextColor(Color.WHITE);
 		tv_zhuce.setGravity(Gravity_CENTER);
 
 		tv_mHelp = new TextView(mContext);
 		machineFactory.MachineTextView(tv_mHelp, WRAP_CONTENT, MATCH_PARENT, 0,
-				"帮助", 36, mRelativeLayout, 0, 0, 20, 0,
+				"帮助", 54, mRelativeLayout, 0, 0, 30, 0,
 				RelativeLayout.ALIGN_PARENT_RIGHT);
 		tv_mHelp.setTextColor(Color.parseColor("#267fc4"));
 		tv_mHelp.setGravity(Gravity_CENTER);
@@ -108,14 +108,14 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 				mLinearLayout);
 
 		LinearLayout ll_leftitem = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_leftitem, 250, MATCH_PARENT,
+		machineFactory.MachineView(ll_leftitem, 370, MATCH_PARENT,
 				mLinearLayout);
 		ll_leftitem.setOrientation(LinearLayout.VERTICAL);
 
 		// 多少元宝
 		tv_mYuanbao = new TextView(mContext);
-		machineFactory.MachineTextView(tv_mYuanbao, MATCH_PARENT, 140, 0,
-				"300元宝", 32, mLinearLayout, 0, 0, 20, 0);
+		machineFactory.MachineTextView(tv_mYuanbao, MATCH_PARENT, 210, 0,
+				"300元宝", 48, mLinearLayout, 0, 0, 30, 0);
 		tv_mYuanbao.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 		// tv_mYuanbao.setGravity(Gravity.RIGHT);
 
@@ -126,8 +126,8 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 
 		// 金额多少
 		tv_mMoney = new TextView(mContext);
-		machineFactory.MachineTextView(tv_mMoney, MATCH_PARENT, 140, 0, "金额:￥30",
-				32, mLinearLayout, 20, 0, 0, 0);
+		machineFactory.MachineTextView(tv_mMoney, MATCH_PARENT, 210, 0, "金额:￥30",
+				48, mLinearLayout, 30, 0, 0, 0);
 		tv_mMoney.setGravity(Gravity.CENTER_VERTICAL);
 
 		// TODO
@@ -138,7 +138,7 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 		
 
 		ScrollView sv_mContent = new ScrollView(mContext);
-		machineFactory.MachineView(sv_mContent, 720, MATCH_PARENT,
+		machineFactory.MachineView(sv_mContent, 1080, MATCH_PARENT,
 				mLinearLayout);
 
 		LinearLayout ll_mContent = new LinearLayout(mContext);
@@ -205,11 +205,11 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 
 	private RelativeLayout createItemView(String name, String iconname) {
 		RelativeLayout relativeLayout = new RelativeLayout(mContext);
-		machineFactory.MachineView(relativeLayout, MATCH_PARENT, 100,
-				mLinearLayout, 1, 20);
+		machineFactory.MachineView(relativeLayout, MATCH_PARENT, 150,
+				mLinearLayout, 1, 30);
 
 		ImageView iv_payicon = new ImageView(mContext);
-		machineFactory.MachineView(iv_payicon, 60, MATCH_PARENT, 0,
+		machineFactory.MachineView(iv_payicon, 90, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_VERTICAL);
 		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				iconname, mActivity));
@@ -217,13 +217,13 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 		TextView tv_bluepay = new TextView(mContext);
 
 		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
-				0, name, 30, mRelativeLayout, 90, 0, 0, 0);
+				0, name, 45, mRelativeLayout, 135, 0, 0, 0);
 		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
 
 		ImageView iv_next_icon = new ImageView(mContext);
 		android.widget.RelativeLayout.LayoutParams rlp = new android.widget.RelativeLayout.LayoutParams(
-				machSize(40), MATCH_PARENT);
-		rlp.setMargins(0, 0, machSize(30), 0);
+				machSize(60), MATCH_PARENT);
+		rlp.setMargins(0, 0, machSize(45), 0);
 		rlp.addRule(RelativeLayout.CENTER_VERTICAL);
 		rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		iv_next_icon.setLayoutParams(rlp);
@@ -240,8 +240,8 @@ public class Yayapay_mainxml_ho extends Basexml implements Layoutxml {
 
 	private TextView markView(String name) {
 		TextView textview = new TextView(mContext);
-		machineFactory.MachineTextView(textview, MATCH_PARENT, 70, 0, name, 30,
-				mLinearLayout, 20, 0, 0, 0);
+		machineFactory.MachineTextView(textview, MATCH_PARENT, 105, 0, name, 45,
+				mLinearLayout, 30, 0, 0, 0);
 		textview.setGravity(Gravity.CENTER_VERTICAL);
 		return textview;
 	}

@@ -208,7 +208,7 @@ public class LogoWindow {
 
 			 myview = new RelativeLayout(mactivity);
 			 LayoutParams layoutParams = new LinearLayout.LayoutParams(-2,
-						machSize(100));
+						machSize(150));
 			 layoutParams.setMargins(0, 0, 0, 0);
 			 myview.setLayoutParams(layoutParams);
 			
@@ -227,8 +227,8 @@ public class LogoWindow {
 			myviewiconmanager = new ImageView(mactivity);
 			// 创建时设置view的正常参数
 		
-			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(100),
-					machSize(100)));
+			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(150),
+					machSize(150)));
 
 			if (DgameSdk.sdktype==1) {
 				//半透明隐藏图标

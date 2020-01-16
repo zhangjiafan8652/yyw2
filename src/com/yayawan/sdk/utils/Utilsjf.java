@@ -122,13 +122,13 @@ public class Utilsjf {
 		baselin = new LinearLayout(mContext);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mContext);
-		machineFactory.MachineView(baselin, 450, 150, "LinearLayout");
+		machineFactory.MachineView(baselin, 675, 225, "LinearLayout");
 		baselin.setBackgroundColor(Color.TRANSPARENT);
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 
 		// 中间内容
 		LinearLayout ll_content = new LinearLayout(mContext);
-		machineFactory.MachineView(ll_content, 450, 150, 0, mRelativeLayout, 0,
+		machineFactory.MachineView(ll_content, 675, 225, 0, mRelativeLayout, 0,
 				0, 0, 0, 100);
 		// ll_content.setBackgroundColor(Color.WHITE);
 		ll_content.setBackgroundDrawable(GetAssetsutils
@@ -136,11 +136,11 @@ public class Utilsjf {
 		ll_content.setGravity(Gravity.CENTER_VERTICAL);
 
 		iv_loading = new ImageView(mContext);
-		machineFactory.MachineView(iv_loading, 100, 100, mLinearLayout, 1, 10);
+		machineFactory.MachineView(iv_loading, 150, 150, mLinearLayout, 1, 15);
 		iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_loading(1).png", mContext));
+				"yaya_loading.png", mContext));
 
-		RotateAnimation rotateAnimation = new RotateAnimation(0, 359,
+		RotateAnimation rotateAnimation = new RotateAnimation(0, 540,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 		rotateAnimation.setRepeatCount(-1);
@@ -153,7 +153,7 @@ public class Utilsjf {
 
 		tv_message = new TextView(mContext);
 		machineFactory.MachineTextView(tv_message, MATCH_PARENT, WRAP_CONTENT,
-				0, "", 36, mLinearLayout, 10, 0, 0, 0);
+				0, "", 54, mLinearLayout, 15, 0, 0, 0);
 		tv_message.setTextColor(Color.parseColor("#666666"));
 		tv_message.setText(message);
 		// TODO

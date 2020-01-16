@@ -503,7 +503,7 @@ public class MachineFactory {
 	private int machSize(int size) {
 
 		int dealWihtSize = DisplayUtils.dealWihtSize(size, mActivity);
-
+		//Yayalog.loger("原来：" +size+" 现在："+dealWihtSize);
 		return dealWihtSize;
 	}
 
