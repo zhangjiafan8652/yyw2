@@ -194,7 +194,7 @@ public class Updatetip_dialog extends Basedialogview {
 		machineFactory.MachineView(ib_mAgreedbox,  38, 38, 0, mLinearLayout, 10,
 				5,0,0, 0);
 		ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_checkedbox.png", mActivity));
+				"yaya_checkedboxyellow.png", mActivity));
 		ib_mAgreedbox.setBackgroundDrawable(null);
 		ib_mAgreedbox.setVisibility(View.GONE);
 		Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);

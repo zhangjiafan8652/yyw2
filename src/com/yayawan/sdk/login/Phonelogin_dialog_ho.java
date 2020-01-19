@@ -229,7 +229,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 		// 手机号码输入框
 		et_mPhone = new EditText(mContext);
 		machineFactory.MachineEditText(et_mPhone, 360, MATCH_PARENT, 0,
-				"请输入手机号", 32, mLinearLayout, 0, 6, 0, 0);
+				"请输入手机号", 34, mLinearLayout, 0, 6, 0, 0);
 		et_mPhone.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mContext));
 		et_mPhone.setPadding(machSize(20), 0, 0, 0);
@@ -249,7 +249,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 		// 验证码输入框
 		et_mSecurity = new EditText(mContext);
 		machineFactory.MachineEditText(et_mSecurity, MATCH_PARENT, 96, 0,
-				"请输入验证码", 32, mLinearLayout, 20, 30, 20, 0);
+				"请输入验证码", 34, mLinearLayout, 20, 30, 20, 0);
 		et_mSecurity.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mContext));
 		et_mSecurity.setPadding(machSize(20), 0, 0, 0);

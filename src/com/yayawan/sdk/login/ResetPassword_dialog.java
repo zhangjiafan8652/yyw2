@@ -288,7 +288,7 @@ public class ResetPassword_dialog extends Basedialogview {
 		// username的edtext
 		et_mPhone = new EditText(mActivity);
 		et_mPhone = machineFactory.MachineEditText(et_mPhone, 0, 95, 1,
-						"请输入手机号", 28, mLinearLayout, 0, 4, 0, 0);
+						"请输入手机号", 34, mLinearLayout, 0, 4, 0, 0);
 		et_mPhone.setTextColor(Color.BLACK);
 		et_mPhone.setHintTextColor(Color.parseColor("#b4b4b4"));
 		et_mPhone.setBackgroundColor(Color.TRANSPARENT);
@@ -327,7 +327,7 @@ public class ResetPassword_dialog extends Basedialogview {
 		// username的edtext
 		et_mSecurity = new EditText(mActivity);
 						et_mSecurity = machineFactory.MachineEditText(et_mSecurity, 0, 135, 1,
-								"请输入验证码", 28, mLinearLayout, 0, 4, 0, 0);
+								"请输入验证码", 34, mLinearLayout, 0, 4, 0, 0);
 						et_mSecurity.setTextColor(Color.BLACK);
 						et_mSecurity.setHintTextColor(Color.parseColor("#b4b4b4"));
 						et_mSecurity.setBackgroundColor(Color.TRANSPARENT);
@@ -370,7 +370,7 @@ public class ResetPassword_dialog extends Basedialogview {
 								// username的edtext
 						et_mNewpassword = new EditText(mActivity);
 						et_mNewpassword = machineFactory.MachineEditText(et_mNewpassword, 0, 135, 1,
-										"请设置密码（6-20位字母或者数字）", 28, mLinearLayout, 0, 4, 0, 0);
+										"请设置密码（6-20位字母或者数字）", 34, mLinearLayout, 0, 4, 0, 0);
 						et_mNewpassword.setTextColor(Color.BLACK);
 						et_mNewpassword.setHintTextColor(Color.parseColor("#b4b4b4"));
 						et_mNewpassword.setBackgroundColor(Color.TRANSPARENT);

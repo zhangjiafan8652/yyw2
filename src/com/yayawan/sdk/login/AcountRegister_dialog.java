@@ -178,7 +178,7 @@ public class AcountRegister_dialog extends Basedialogview {
 		// username的edtext
 		et_mUser = new EditText(mActivity);
 		et_mUser = machineFactory.MachineEditText(et_mUser, 0, 95, 1,
-						"用户名：6-8位数字或者字母", 28, mLinearLayout, 0, 4, 0, 0);
+						"用户名：6-8位数字或者字母", 34, mLinearLayout, 0, 4, 0, 0);
 		et_mUser.setTextColor(Color.BLACK);
 		et_mUser.setHintTextColor(Color.parseColor("#b4b4b4"));
 		et_mUser.setBackgroundColor(Color.TRANSPARENT);
@@ -215,7 +215,7 @@ public class AcountRegister_dialog extends Basedialogview {
 		// username的edtext
 		et_mPassword = new EditText(mActivity);
 		et_mPassword = machineFactory.MachineEditText(et_mPassword, 0, 135, 1,
-								"请输入验证码", 28, mLinearLayout, 0, 4, 0, 0);
+								"请输入验证码", 34, mLinearLayout, 0, 4, 0, 0);
 		et_mPassword.setTextColor(Color.BLACK);
 		et_mPassword.setHintTextColor(Color.parseColor("#b4b4b4"));
 		et_mPassword.setBackgroundColor(Color.TRANSPARENT);
@@ -245,7 +245,7 @@ public class AcountRegister_dialog extends Basedialogview {
 								// username的edtext
 						et_mRePassword = new EditText(mActivity);
 						et_mRePassword = machineFactory.MachineEditText(et_mRePassword, 0, 135, 1,
-										"请设置密码（6-20位字母或者数字）", 28, mLinearLayout, 0, 4, 0, 0);
+										"请设置密码（6-20位字母或者数字）", 34, mLinearLayout, 0, 4, 0, 0);
 						et_mRePassword.setTextColor(Color.BLACK);
 						et_mRePassword.setHintTextColor(Color.parseColor("#b4b4b4"));
 						et_mRePassword.setBackgroundColor(Color.TRANSPARENT);

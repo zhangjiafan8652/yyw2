@@ -90,8 +90,8 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		
-		int height = 560;
-		int with = 630;
+		int height = 840;
+		int with = 945;
 
 		baselin = new LinearLayout(mActivity);
 		baselin.setOrientation(LinearLayout.VERTICAL);
@@ -112,17 +112,17 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 		// 标题栏
 		RelativeLayout rl_title = new RelativeLayout(mActivity);
 		machineFactory.MachineView(rl_title,
-				MATCH_PARENT, 78, 0, mLinearLayout, 35, 28, 35, 0, 100);
+				MATCH_PARENT, 117, 0, mLinearLayout, 52, 42, 52, 0, 100);
 		rl_title.setBackgroundColor(Color.parseColor("#ffffff"));
 
 		ll_mPre = new LinearLayout(mActivity);
-		machineFactory.MachineView(ll_mPre, 46, MATCH_PARENT, 0,
+		machineFactory.MachineView(ll_mPre, 69, MATCH_PARENT, 0,
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.CENTER_VERTICAL);
 		ll_mPre.setGravity(Gravity_CENTER);
 		ll_mPre.setClickable(true);
 		// 返回上一层的图片
 		iv_mPre = new ImageButton(mActivity);
-		machineFactory.MachineView(iv_mPre, 46, 46, 0, mLinearLayout, 0, 0, 0,
+		machineFactory.MachineView(iv_mPre, 69, 69, 0, mLinearLayout, 0, 0, 0,
 				0, RelativeLayout.CENTER_VERTICAL);
 		iv_mPre.setClickable(false);
 
@@ -143,7 +143,7 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 		// 注册textview
 		TextView tv_zhuce = new TextView(mActivity);
 		machineFactory.MachineTextView(tv_zhuce, MATCH_PARENT, MATCH_PARENT, 0,
-				"实名认证", 44, mLinearLayout, 0, 0, 0, 0);
+				"实名认证", 66, mLinearLayout, 0, 0, 0, 0);
 		tv_zhuce.setTextColor(Color.parseColor("#c05011"));
 		tv_zhuce.setGravity(Gravity_CENTER);
 
@@ -154,14 +154,14 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 		// 中间内容层
 				LinearLayout ll_content1 = new LinearLayout(mActivity);
 				ll_content1 = (LinearLayout) machineFactory.MachineView(ll_content1,
-						height, MATCH_PARENT, 0, mLinearLayout, 35, 0, 35, 0,
+						height, MATCH_PARENT, 0, mLinearLayout, 52, 0, 52, 0,
 						LinearLayout.VERTICAL);
 				ll_content1.setOrientation(LinearLayout.VERTICAL);
 		
 		// 身份证号码输入列
 		LinearLayout ll_phone = new LinearLayout(mActivity);
 		ll_phone = (LinearLayout) machineFactory.MachineView(ll_phone,
-				MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+				MATCH_PARENT, 97, 0, "LinearLayout", 0, 45, 0, 0, 100);
 
 		ll_phone.setBackgroundDrawable(GetAssetsutils
 						.get9DrawableFromAssetsFile("yaya1_biankuan.9.png", mActivity));
@@ -170,15 +170,15 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 
 				// username 的icon
 				iv_mUn_icon = new ImageView(mActivity);
-				iv_mUn_icon = (ImageView) machineFactory.MachineView(iv_mUn_icon, 30,
-						30, 0, mLinearLayout, 20, 0, 0, 0, 100);
+				iv_mUn_icon = (ImageView) machineFactory.MachineView(iv_mUn_icon, 45,
+						45, 0, mLinearLayout, 30, 0, 0, 0, 100);
 				iv_mUn_icon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 						"yaya1_phoneicon.png", mActivity));
 
 				// username的edtext
 				et_mPhone = new EditText(mActivity);
 				et_mPhone = machineFactory.MachineEditText(et_mPhone, 0, MATCH_PARENT, 1,
-						"请输入身份证", 22, mLinearLayout, 0, 4, 0, 0);
+						"请输入身份证", 33, mLinearLayout, 0,6, 0, 0);
 				et_mPhone.setTextColor(Color.BLACK);
 				et_mPhone.setHintTextColor(Color.parseColor("#b4b4b4"));
 				et_mPhone.setBackgroundColor(Color.TRANSPARENT);
@@ -193,12 +193,12 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 				//名字输入列	
 				LinearLayout ll_mSecurityandbutton = new LinearLayout(mActivity);
 				ll_mSecurityandbutton = (LinearLayout) machineFactory.MachineView(ll_mSecurityandbutton,
-						MATCH_PARENT, 65, 0, "LinearLayout", 0, 30, 0, 0, 100);
+						MATCH_PARENT, 97, 0, "LinearLayout", 0, 45, 0, 0, 100);
 
 				// 设置验证码输入框和获取验证码button
 				LinearLayout ll_mSecurity = new LinearLayout(mActivity);
 				ll_mSecurity = (LinearLayout) machineFactory.MachineView(ll_mSecurity,
-						270, 65, 0, "LinearLayout", 0, 0, 0, 0, 100);
+						405, 97, 0, "LinearLayout", 0, 0, 0, 0, 100);
 				ll_mSecurity.setOrientation(LinearLayout.HORIZONTAL);
 				
 				ll_mSecurity.setBackgroundDrawable(GetAssetsutils
@@ -208,15 +208,15 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 
 						// username 的icon
 				iv_mSecurity_icon = new ImageView(mActivity);
-				iv_mSecurity_icon = (ImageView) machineFactory.MachineView(iv_mSecurity_icon, 30,
-								30, 0, mLinearLayout, 20, 0, 0, 0, 100);
+				iv_mSecurity_icon = (ImageView) machineFactory.MachineView(iv_mSecurity_icon, 45,
+								45, 0, mLinearLayout, 30, 0, 0, 0, 100);
 				iv_mSecurity_icon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 								"yaya1_codeicon.png", mActivity));
 
 						// username的edtext
 						et_mUsername = new EditText(mActivity);
 						et_mUsername = machineFactory.MachineEditText(et_mUsername, 0, MATCH_PARENT, 1,
-								"请输入姓名", 22, mLinearLayout, 0, 4, 0, 0);
+								"请输入姓名", 33, mLinearLayout, 0, 6, 0, 0);
 						et_mUsername.setTextColor(Color.BLACK);
 						et_mUsername.setHintTextColor(Color.parseColor("#b4b4b4"));
 						et_mUsername.setBackgroundColor(Color.TRANSPARENT);
@@ -227,8 +227,8 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 						
 						// 获取验证码按钮
 						bt_mGetsecurity = new Button(mActivity);
-						bt_mGetsecurity = machineFactory.MachineButton(bt_mGetsecurity, 270,
-								MATCH_PARENT, 0, "获取验证码", 22, mLinearLayout, 20, 0, 0, 0);
+						bt_mGetsecurity = machineFactory.MachineButton(bt_mGetsecurity, 405,
+								MATCH_PARENT, 0, "获取验证码", 33, mLinearLayout, 30, 0, 0, 0);
 						bt_mGetsecurity.setTextColor(Color.WHITE);
 						bt_mGetsecurity.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
 								"yaya1_loginbutton.9.png", "yaya1_loginbutton.9.png",
@@ -244,8 +244,8 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 		
 		// 确定按钮
 		bt_mOk = new Button(mActivity);
-		machineFactory.MachineButton(bt_mOk, MATCH_PARENT, 78, 0, "确定", 36,
-				mLinearLayout, 0, 50, 0, 0);
+		machineFactory.MachineButton(bt_mOk, MATCH_PARENT, 117, 0, "确定", 54,
+				mLinearLayout, 0, 75, 0, 0);
 		bt_mOk.setTextColor(Color.WHITE);
 		bt_mOk.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
 				"yaya1_loginbutton.9.png", "yaya1_loginbutton.9.png",

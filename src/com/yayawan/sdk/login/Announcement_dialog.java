@@ -38,9 +38,9 @@ public class Announcement_dialog extends Basedialogview {
 	private ProgressBar pb_mPb;
 	private ArrayList<Question> mQuestionList;
 	private String html;
-	private ImageButton ib_mAgreedbox;
-	private ImageButton ib_mNotAgreedbox;
-	private ImageButton ib_mClosebutton;
+	private ImageView ib_mAgreedbox;
+	private ImageView ib_mNotAgreedbox;
+	private ImageView ib_mClosebutton;
 	protected static final int SHOWCONTENT = 3;
 
 	public Announcement_dialog(Activity activity) {
@@ -61,10 +61,10 @@ public class Announcement_dialog extends Basedialogview {
 
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		int ho_height = 975;
-		int ho_with = 975;
-		int po_height = 975;
-		int po_with = 975;
+		int ho_height = 900;
+		int ho_with = 900;
+		int po_height = 900;
+		int po_with = 900;
 
 		int height = 0;
 		int with = 0;
@@ -162,11 +162,11 @@ public class Announcement_dialog extends Basedialogview {
 		//new ImageView(context)
 		
 		// 关闭按钮
-				ib_mClosebutton = new ImageButton(mActivity);
+				ib_mClosebutton = new ImageView(mActivity);
 				machineFactory.MachineView(ib_mClosebutton, 60, 60, mLinearLayout, 2, 7);
 				//ib_mClosebutton.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				ib_mClosebutton.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-						"yaya_xsishi.png", mActivity));
+						"yaya_x.png", mActivity));
 				ib_mClosebutton.setBackgroundDrawable(null);
 			
 				ib_mClosebutton.setOnClickListener(new OnClickListener() {
@@ -180,19 +180,19 @@ public class Announcement_dialog extends Basedialogview {
 		
 		
 		// 不再提示
-		ib_mAgreedbox = new ImageButton(mActivity);
-		machineFactory.MachineView(ib_mAgreedbox,  57, 57, 0, mLinearLayout, 15,
+		ib_mAgreedbox = new ImageView(mActivity);
+		machineFactory.MachineView(ib_mAgreedbox,  50, 50, 0, mLinearLayout, 15,
 				7,0,0, 0);
 		ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_checkedbox.png", mActivity));
+				"yaya_checkedboxyellow.png", mActivity));
 		ib_mAgreedbox.setBackgroundDrawable(null);
 		ib_mAgreedbox.setVisibility(View.GONE);
 		Sputils.putSPint(ViewConstants.SP_ISVIEWYAYAWANDOWNLOADBOXNOTICE, 1, mActivity);
 		//ib_mAgreedbox.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
 		// 不再提示
-		ib_mNotAgreedbox = new ImageButton(mActivity);
-		machineFactory.MachineView(ib_mNotAgreedbox, 57, 57, 0, mLinearLayout, 15,
+		ib_mNotAgreedbox = new ImageView(mActivity);
+		machineFactory.MachineView(ib_mNotAgreedbox, 50, 50, 0, mLinearLayout, 15,
 				7,0,0, 0);
 		ib_mNotAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_checkbox.png", mActivity));
@@ -201,7 +201,7 @@ public class Announcement_dialog extends Basedialogview {
 
 		TextView tv_agree = new TextView(mActivity);
 		machineFactory.MachineTextView(tv_agree, WRAP_CONTENT, MATCH_PARENT, 0,
-				"不再提示", 33, mLinearLayout, 6, 0, 0, 2);
+				"不再提示", 33, mLinearLayout, 6,5, 0, 2);
 		tv_agree.setTextColor(Color.parseColor("#b4b4b4"));
 		tv_agree.setGravity(Gravity.CENTER_VERTICAL);
 		

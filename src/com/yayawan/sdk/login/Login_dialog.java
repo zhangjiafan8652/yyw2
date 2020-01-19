@@ -190,7 +190,7 @@ public class Login_dialog extends Basedialogview {
 		// username的edtext
 		et_mUn = new EditText(mActivity);
 		et_mUn = machineFactory.MachineEditText(et_mUn, 0, 140, 1,
-				"请输入用户名", 30, mLinearLayout, 0, 6, 0, 0);
+				"请输入用户名", 34, mLinearLayout, 0, 6, 0, 0);
 		et_mUn.setTextColor(Color.BLACK);
 		et_mUn.setBackgroundColor(Color.TRANSPARENT);
 
@@ -235,7 +235,7 @@ public class Login_dialog extends Basedialogview {
 		// password的edtext
 		et_mPs = new EditText(mActivity);
 		et_mPs = machineFactory.MachineEditText(et_mPs, 0, 140, 1,
-				"请输入密码", 30, mLinearLayout, 0, 0, 0, 0);
+				"请输入密码", 34, mLinearLayout, 0, 0, 0, 0);
 		et_mPs.setBackgroundColor(Color.TRANSPARENT);
 		et_mPs.setTextColor(Color.BLACK);
 		et_mPs.setInputType(InputType.TYPE_CLASS_TEXT

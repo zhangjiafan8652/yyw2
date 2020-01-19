@@ -54,14 +54,14 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		// 上面空白部分
 		LinearLayout onelinearLayout = new LinearLayout(mContext);
 		machineFactory.MachineView(onelinearLayout,
-				ViewConstants.getHoldActivityWith(mContext), 100, 0,
+				ViewConstants.getHoldActivityWith(mContext), 150, 0,
 				mLinearLayout);
 		onelinearLayout.setBackgroundColor(Color.WHITE);
 		onelinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		onelinearLayout.setGravity(Gravity_CENTER);
 		
 		TextView mtitileView = new TextView(mContext);
-		machineFactory.MachineTextView(mtitileView,MATCH_PARENT , MATCH_PARENT, 0, "确认支付方式", 28, mLinearLayout, 0, 0, 0, 0);
+		machineFactory.MachineTextView(mtitileView,MATCH_PARENT , MATCH_PARENT, 0, "确认支付方式", 32, mLinearLayout, 0, 0, 0, 0);
 		mtitileView.setText("确认支付方式");
 		mtitileView.setTextColor(Color.BLACK);
 		mtitileView.setGravity(Gravity_CENTER);
@@ -70,8 +70,8 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		
 		
 		ImageView iv_pre = new ImageView(mContext);
-		machineFactory.MachineView(iv_pre, 40, 40, 0, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_pre, 60, 60, 0, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_pre.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_x.png", mActivity));
@@ -92,20 +92,20 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		
 		LinearLayout twolinearLayout = new LinearLayout(mContext);
 		machineFactory.MachineView(twolinearLayout,
-				ViewConstants.getHoldActivityWith(mContext), 200, 0,
+				ViewConstants.getHoldActivityWith(mContext), 300, 0,
 				mLinearLayout);
 		twolinearLayout.setBackgroundColor(Color.parseColor("#f5f5f5"));
 		twolinearLayout.setOrientation(LinearLayout.VERTICAL);
 		twolinearLayout.setGravity(Gravity_CENTER);
 		
 		mgoodnameView = new TextView(mContext);
-		machineFactory.MachineTextView(mgoodnameView,MATCH_PARENT , 40, 0, "", 25, mLinearLayout, 0, 40, 0, 0);
+		machineFactory.MachineTextView(mgoodnameView,MATCH_PARENT , 60, 0, "", 37, mLinearLayout, 0, 60, 0, 0);
 		mgoodnameView.setText("元宝");
 		mgoodnameView.setTextColor(Color.BLACK);
 		mgoodnameView.setGravity(Gravity.CENTER);
 		
 		mgoodmoneyView = new TextView(mContext);
-		machineFactory.MachineTextView(mgoodmoneyView,MATCH_PARENT , 60, 0, "", 48, mLinearLayout, 0, 0, 5, 0);
+		machineFactory.MachineTextView(mgoodmoneyView,MATCH_PARENT , 90, 0, "", 72, mLinearLayout, 0, 0, 7, 0);
 		mgoodmoneyView.setText("￥6.00");
 		mgoodmoneyView.setTextColor(Color.BLACK);
 		mgoodmoneyView.setGravity(Gravity_CENTER);
@@ -117,7 +117,7 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		
 		LinearLayout threelinearLayout = new LinearLayout(mContext);
 		machineFactory.MachineView(threelinearLayout,
-				ViewConstants.getHoldActivityWith(mContext), 320, 0,
+				ViewConstants.getHoldActivityWith(mContext), 480, 0,
 				mLinearLayout);
 		threelinearLayout.setBackgroundColor(Color.parseColor("#f4f4fd"));
 		threelinearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -125,36 +125,36 @@ public class YingYongBaoPayxml extends Basexml implements Layoutxml {
 		
 		
 		iv_qqpay = new ImageView(mContext);
-		machineFactory.MachineView(iv_qqpay, 0, 280, 1, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_qqpay, 0, 420, 1, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_qqpay.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_yingyongbao_qqpay.png", mActivity));
 		
 		iv_qbipay = new ImageView(mContext);
-		machineFactory.MachineView(iv_qbipay, 0, 280, 1, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_qbipay, 0, 420, 1, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_qbipay.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_yingyongbao_qbipay.png", mActivity));
 		
 		iv_greenp2 = new ImageView(mContext);
-		machineFactory.MachineView(iv_greenp2, 0, 280, 1, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_greenp2, 0, 420, 1, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_greenp2.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_yingyongbao_greenp.png", mActivity));
 		
 		iv_shoujipay = new ImageView(mContext);
-		machineFactory.MachineView(iv_shoujipay, 0, 280, 1, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_shoujipay, 0, 420, 1, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_shoujipay.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_yingyongbao_shoujipay.png", mActivity));
 		
 		iv_bluepay = new ImageView(mContext);
-		machineFactory.MachineView(iv_bluepay, 0, 280, 1, mLinearLayout,
-				20, 0, 20, 0, 100);
+		machineFactory.MachineView(iv_bluepay, 0, 420, 1, mLinearLayout,
+				30, 0, 30, 0, 100);
 		// machineFactory.MachineView(iv_greenp, 160, 160, 0, mLinearLayout);
 		iv_bluepay.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				"yaya_yingyongbao_bluepay.png", mActivity));

@@ -786,10 +786,11 @@ public class DgameSdk {
 
 		intent.putExtra("type", ViewConstants.ACCOUNTMANAGER);
 		mactivity.startActivityForResult(intent,10020);
+		//mactivity.overridePendingTransition(enterAnim, exitAnim)
 	}
 	
 	/**
-	 * 
+	 *  kkkkkk
 	 * @param mactivity
 	 * @param i
 	 */

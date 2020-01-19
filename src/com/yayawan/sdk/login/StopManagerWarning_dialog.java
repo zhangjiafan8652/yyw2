@@ -156,7 +156,7 @@ public class StopManagerWarning_dialog extends Basedialogview {
 		ib_mAgreedbox = new ImageView(mActivity);
 		machineFactory.MachineView(ib_mAgreedbox, 35, 35, mLinearLayout, 2, 0);
 		ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-				"yaya_checkedbox.png", mActivity));
+				"yaya_checkedboxyellow.png", mActivity));
 		
 		ib_mAgreedbox.setVisibility(View.GONE);
 		

@@ -60,14 +60,23 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		baseLinearLayout.setGravity(Gravity.LEFT);
 
 		
-		int height = -1;
+		int height = 1344;
 		int with = 1344;
+		if (DeviceUtil.isLandscape(mActivity)) {
+			 with = 1344;
+			 height=-1;
+		}else {
+			 with = -1;
+			  height = 1344;
+		}
+		
 		
 		baselin = new LinearLayout(mActivity);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
 		machineFactory.MachineView(baselin, with, MATCH_PARENT,
 				mLinearLayout);
+		baselin.setBackgroundColor(Color.TRANSPARENT);
 		//baselin.setBackgroundDrawable(GetAssetsutils
 			//	.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png",mActivity));
 		//baselin.setPadding(10, 0, 10, 10);

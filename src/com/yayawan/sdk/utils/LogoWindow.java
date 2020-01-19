@@ -219,7 +219,7 @@ public class LogoWindow {
 			//小助手icon
 			
 			myviewicon.setLayoutParams(new RelativeLayout.LayoutParams(-2,
-					machSize(100)));
+					machSize(150)));
 
 			
 		
@@ -227,8 +227,8 @@ public class LogoWindow {
 			myviewiconmanager = new ImageView(mactivity);
 			// 创建时设置view的正常参数
 		
-			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(150),
-					machSize(150)));
+			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(200),
+					machSize(200)));
 
 			if (DgameSdk.sdktype==1) {
 				//半透明隐藏图标

@@ -503,8 +503,10 @@ public class CommonGameProxy implements YYWGameProxy {
 		switch (login_type) {
 		case 0:
 			Yayalog.loger("CommonGameProxy:" + "kgame支付");
-			this.mCharger.pay(paramActivity, YYWMain.mOrder,
-					YYWMain.mPayCallBack);
+			this.mCharger.pay(paramActivity, YYWMain.mOrder,YYWMain.mPayCallBack);
+			//this.mCharger = new ChargerImplyylianhe();
+			//this.mCharger.pay(paramActivity, YYWMain.mOrder,
+				//	YYWMain.mPayCallBack);
 			break;
 
 		case 1:
