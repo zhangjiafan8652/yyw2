@@ -330,13 +330,30 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 					
 					Utilsjf.creDialogpro(mActivity, "正在实名认证...");
 					RequestParams rps = new RequestParams();
-					rps.addBodyParameter("app_id",
-							DeviceUtil.getAppid(mActivity));
+					if (ViewConstants.ISKGAME) {
+						
+						//请求查看是否实名认证
+						
+						
+						rps.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
+						rps.addBodyParameter("uid", YYWMain.mUser.uid);
+						rps.addBodyParameter("token", YYWMain.mUser.token);
 					
-				//	rps.addBodyParameter("app_id", DeviceUtil.getAppid(mactivity));
-					rps.addBodyParameter("uid", YYWMain.mUser.uid);
-					rps.addBodyParameter("token", YYWMain.mUser.token);
+						Yayalog.loger("app_id", DeviceUtil.getAppid(mActivity));
+						Yayalog.loger("uid", YYWMain.mUser.uid);
+						Yayalog.loger("token", YYWMain.mUser.token);
+						Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
 					
+					}else {
+						Yayalog.loger("渠道实名认证");
+						rps.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
+						rps.addBodyParameter("uid", AgentApp.mUser.uid+"");
+						rps.addBodyParameter("token", AgentApp.mUser.token);
+						
+						Yayalog.loger("uid", AgentApp.mUser.uid+"");
+						Yayalog.loger("token", AgentApp.mUser.token);
+						Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
+					}
 					
 					rps.addBodyParameter("relname", mUsername);
 					rps.addBodyParameter("creditno", mIdCard);

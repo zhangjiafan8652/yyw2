@@ -103,6 +103,7 @@ public class Login_dialog extends Basedialogview {
 	private LinearLayout ll_mFind;
 	private Button bt_mCustomerService;
 	private Button bt_mFindPassWord;
+	private Button bt_mPhoneLogin;
 	
 	@SuppressLint("NewApi") @SuppressWarnings("deprecation")
 	@Override
@@ -305,10 +306,10 @@ public class Login_dialog extends Basedialogview {
 		//找回密码列
 		ll_mFind = new LinearLayout(mActivity);
 		ll_mFind = (LinearLayout) machineFactory.MachineView(ll_mFind,
-				MATCH_PARENT, 135, 0, mLinearLayout, 0, 80, 0, 0, 100);
+				MATCH_PARENT, 135, 0, mLinearLayout, 0, 70, 0, 0, 100);
 		ll_mFind.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png", mActivity));
-		// 横版手机登录按钮
+		// 联系客服
 		bt_mCustomerService = new Button(mActivity);
 		bt_mCustomerService = machineFactory.MachineButton(bt_mCustomerService,245,
 				85, 0, "", 32, mLinearLayout, 46, 20, 0, 0);
@@ -317,14 +318,26 @@ public class Login_dialog extends Basedialogview {
 		bt_mCustomerService.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_lianxikefu.png", mActivity));
 		
 		bt_mCustomerService.setGravity(Gravity_CENTER);
+		
+		
+		
+		bt_mPhoneLogin = new Button(mActivity);
+		bt_mPhoneLogin = machineFactory.MachineButton(bt_mPhoneLogin,245,
+				85, 0, "", 32, mLinearLayout, 92, 20, 0, 0);
+		bt_mPhoneLogin.setTextColor(Color.WHITE);
+		//yaya1_lianxikefu.png
+		bt_mPhoneLogin.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_btphonelogin.png", mActivity));
+		
+		bt_mPhoneLogin.setGravity(Gravity_CENTER);
+		
 
 		LinearLayout ll_zhanwei2 = new LinearLayout(mActivity);
 		ll_zhanwei2 = (LinearLayout) machineFactory.MachineView(ll_zhanwei2, 415,
 				MATCH_PARENT, mLinearLayout);
-		// button的登录按钮
+		// button的找回密码
 		bt_mFindPassWord = new Button(mActivity);
 		bt_mFindPassWord = machineFactory.MachineButton(bt_mFindPassWord,245, 80, 0,
-				"", 32, mLinearLayout, 0, 20, 46, 0);
+				"", 32, mLinearLayout, 90, 20, 0, 0);
 		bt_mFindPassWord.setTextColor(Color.WHITE);
 		bt_mFindPassWord.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_findpassword.png", mActivity));
 		
@@ -332,8 +345,10 @@ public class Login_dialog extends Basedialogview {
 
 		// TODO
 		ll_mFind.addView(bt_mCustomerService);
-		ll_mFind.addView(ll_zhanwei2);
+		
 		ll_mFind.addView(bt_mFindPassWord);
+		
+		ll_mFind.addView(bt_mPhoneLogin);
 		
 		
 		
@@ -357,8 +372,8 @@ public class Login_dialog extends Basedialogview {
 		// 下拉选择历史账户
 		lv_mHistoryuser = new ListView(mActivity);
 		machineFactory.MachineView(lv_mHistoryuser, 700, WRAP_CONTENT, 0,
-				"RelativeLayout", 20, 200, 20, 0,
-				RelativeLayout.CENTER_HORIZONTAL);
+				"RelativeLayout", 210, 320, 20, 0,
+				RelativeLayout.ALIGN_PARENT_LEFT);
 		lv_mHistoryuser.setVisibility(View.GONE);
 
 		rl_content.addView(ll_content);
@@ -431,44 +446,11 @@ public class Login_dialog extends Basedialogview {
 				// TODO Auto-generated method stub
 				
 				if (!(PermissionUtils.checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-					SuperDialog superDialog = new SuperDialog(mActivity);
-					if (DeviceUtil.isLandscape(mActivity)) {
-						superDialog.setAspectRatio(0.8f);
-					}
-					superDialog.setTitle("亲爱的玩家");
-					superDialog.setContent("请授予储存卡读写权限\r\n 读取储存卡中保存的账号密码\r\n 授权后重新打开游戏").setListener(new onDialogClickListener() {
-						
-						@Override
-						public void click(boolean isButtonClick, int position) {
-							// TODO Auto-generated method stub
-							Yayalog.loger("请求权限对话框按钮按下");
-							if (!(PermissionUtils.checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-								PermissionUtils.checkMorePermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},new PermissionCheckCallBack() {
-									
-									@Override
-									public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
-										// TODO Auto-generated method stub
-										// 用户之前已拒绝过权限申请
-										//
-										//PermissionUtils.requestMorePermissions(paramActivity, permission, PermissionUtils.READ_EXTERNAL_STORAGE);
-									}
-									
-									@Override
-									public void onUserHasAlreadyTurnedDown(String... permission) {
-										// TODO Auto-generated method stub
-										// 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
-										//PermissionUtils.toAppSetting(paramActivity);
-									}
-									
-									@Override
-									public void onHasPermission() {
-										// TODO Auto-generated method stub
-										
-									}
-								});
-							}
-						}
-					}).show();
+					PermissionUtils.requestPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE);
+					
+					ResetPassword_dialog resetPassword_ho_dialog = new ResetPassword_dialog(
+							mActivity);
+					resetPassword_ho_dialog.dialogShow();
 				}else {
 					ResetPassword_dialog resetPassword_ho_dialog = new ResetPassword_dialog(
 							mActivity);
@@ -617,19 +599,13 @@ public class Login_dialog extends Basedialogview {
 			@Override
 			public void onClick(View v) {
 				ViewConstants.logintype=2;
-				//如果是空sdk 则没有手机注册
-				if (DgameSdk.sdktype==1) {
-					
-					AcountRegister_dialog acountRegister_ho_dialog = new AcountRegister_dialog(
-							mActivity);
-					acountRegister_ho_dialog.dialogShow();
-				}else{
+				
 					ViewConstants.logintype=2;
 					Register_Phone_dialog register_ho_dialog = new Register_Phone_dialog(
 							mActivity);
 					register_ho_dialog.dialogShow();
 					
-				}
+				
 				
 				
 
@@ -637,7 +613,23 @@ public class Login_dialog extends Basedialogview {
 			}
 		});
 		
-	
+		//验证码登陆
+		bt_mPhoneLogin.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//如果是空sdk 则没有手机注册
+				
+					
+					VirificationPhonelogin_dialog register_ho_dialog = new VirificationPhonelogin_dialog(
+							mActivity);
+					register_ho_dialog.dialogShow();
+					
+				
+				
+			}
+		});
 
 	}
 

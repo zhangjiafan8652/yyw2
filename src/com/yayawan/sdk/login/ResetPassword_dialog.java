@@ -346,7 +346,7 @@ public class ResetPassword_dialog extends Basedialogview {
 						
 						
 						bt_mGetsecurity.setGravity(Gravity.CENTER);
-						
+						bt_mGetsecurity.setPadding(0, 0, 0, 0);
 				
 						ll_mSecurityandbutton.addView(ll_mSecurity);
 						ll_mSecurityandbutton.addView(bt_mGetsecurity);
@@ -409,7 +409,7 @@ public class ResetPassword_dialog extends Basedialogview {
 		//找回密码列
 		rl_mFind = new RelativeLayout(mActivity);
 		rl_mFind = (RelativeLayout) machineFactory.MachineView(rl_mFind,
-				MATCH_PARENT, 135, 0, mLinearLayout, 0, 40, 0, 0, 100);
+				MATCH_PARENT, 130, 0, mLinearLayout, 0, 21, 0, 0, 100);
 		rl_mFind.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png", mActivity));
 		
@@ -424,7 +424,7 @@ public class ResetPassword_dialog extends Basedialogview {
 
 				TextView tv_agree = new TextView(mActivity);
 				machineFactory.MachineTextView(tv_agree, MATCH_PARENT, MATCH_PARENT, 0,
-						"自动注册的密码以图片形式保存在储存中,无绑定手机，请联系客服", 28, mLinearLayout, 6, 0, 0, 0);
+						"自动注册的账号密码以图片形式保存在手机相册中，无绑定手机的，请您联系客服处理。", 24, mLinearLayout, 6, 0, 0, 0);
 				tv_agree.setTextColor(Color.parseColor("#b4b4b4"));
 				tv_agree.setGravity(Gravity.CENTER_VERTICAL);
 				tv_agree.setClickable(true);

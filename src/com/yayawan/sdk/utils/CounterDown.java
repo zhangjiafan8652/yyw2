@@ -4,6 +4,7 @@ import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.utils.Yayalog;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -36,9 +37,8 @@ public class CounterDown {
 						countertime = countertime - 1000;
 						mView.setText("重新获取(" + ((countertime / 1000))
 								+ ")");
-						mView.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-								"yaya1_acountregisterbutton.9.png", "yaya1_acountregisterbutton.9.png",
-								mActivity));
+						
+						
 						mHandler.sendEmptyMessageDelayed(111, 1000);
 					}
 				} else {
@@ -46,10 +46,9 @@ public class CounterDown {
 					if (mView != null) {
 						mView.setEnabled(true);
 						mCanstart=true;
-						mView.setText("获取验证码");
-						mView.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-								"yaya1_loginbutton.9.png", "yaya1_loginbutton.9.png",
-								mActivity));
+						mView.setText("");
+						mView.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_getverifycodebutton.png", mActivity));
+						
 					}
 				}
 				break;
@@ -78,6 +77,9 @@ public class CounterDown {
 			mView.setEnabled(true);
 			mCanstart=true;
 		} else {
+			mView.setText("重新获取(" + countertime / 1000 + ")");
+			mView.setBackgroundDrawable(null);
+			mView.setBackgroundColor(Color.GRAY);
 			mView.setEnabled(false);
 			mCanstart=false;
 		}
@@ -90,6 +92,9 @@ public class CounterDown {
 			mView.setEnabled(false);
 			mCanstart=false;
 			mView.setText("重新获取(" + countertime / 1000 + ")");
+			mView.setBackgroundDrawable(null);
+			
+			mView.setBackgroundColor(Color.GRAY);
 			mHandler.sendEmptyMessageDelayed(111, 1000);
 		}
 		

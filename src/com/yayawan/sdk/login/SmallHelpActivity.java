@@ -1,6 +1,7 @@
 package com.yayawan.sdk.login;
 
 
+import com.kkgame.kkgamelib.R;
 import com.yayawan.main.Dgame;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
@@ -49,14 +50,27 @@ public class SmallHelpActivity extends Activity{
 		
 	    wv_mWeiboview = smallHelp_xml.getWv_mWeiboview();
 		mActivity=this;
-		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				mActivity.finish();
-			}
-		});
+//		smallHelp_xml.getBaseLinearLayout().setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				mActivity.finish();
+//				if (DeviceUtil.isDebug(mActivity)) {
+//					
+//				}else {
+//					if (DeviceUtil.isLandscape(mActivity)) {
+//					//	mActivity.overridePendingTransition(android.R.anim.slide_in_left, R.anim.yaya_slide_out_left);
+//						
+//					}else {
+//					//	mActivity.overridePendingTransition(R.anim.yaya_slide_in_up, R.anim.yaya_slide_out_down);
+//						
+//					}
+//					
+//				}
+//				//mActivity.overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+//			}
+//		});
 		
 		rl_mLoading = smallHelp_xml.getRl_mLoading();
 		String uid=AgentApp.mUser.uid+"";

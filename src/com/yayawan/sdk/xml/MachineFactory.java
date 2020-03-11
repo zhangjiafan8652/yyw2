@@ -356,6 +356,7 @@ public class MachineFactory {
 			view.setLayoutParams(rlp);
 
 		}
+		view.setPadding(0, 0, 0, 0);
 		view.setTextColor(Color.BLACK);
 		return view;
 	}

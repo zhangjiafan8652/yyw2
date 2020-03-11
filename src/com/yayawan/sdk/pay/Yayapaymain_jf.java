@@ -137,16 +137,16 @@ public class Yayapaymain_jf extends BaseView {
 		
 		//如果是 千果sdk  隐藏 代金券和Y币支付
 		
-				if (CommonData.sdkid.contains("qianqi")) {
+		if (CommonData.sdkid.contains("qianqi")) {
 					
-				}else {
-					rl_mlYaya.setVisibility(View.GONE);
-					rl_mlDaijinjuan.setVisibility(View.GONE);
-				}
+		}else {
+			rl_mlYaya.setVisibility(View.GONE);
+			rl_mlDaijinjuan.setVisibility(View.GONE);
+		}
 				
 		
 		// 微信插件支付
-	//	rl_mWxpluin = mThisview.getRl_mWxpluin();
+
 		// 先把视图隐藏，后面逻辑部分会进行有选择显示
 		tv_mHelp = mThisview.getTv_mHelp();
 		tv_mHelp.setOnClickListener(new OnClickListener() {

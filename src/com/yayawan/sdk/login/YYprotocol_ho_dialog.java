@@ -103,9 +103,8 @@ public class YYprotocol_ho_dialog extends Basedialogview {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		
-		int height = 560;
-		int with = 630;
-
+		int height = 842;
+		int with = 1000;
 		baselin = new LinearLayout(mActivity);
 		baselin.setOrientation(LinearLayout.VERTICAL);
 		MachineFactory machineFactory = new MachineFactory(mActivity);
@@ -174,7 +173,7 @@ public class YYprotocol_ho_dialog extends Basedialogview {
 		wv_mWebview = new WebView(mActivity);
 		machineFactory.MachineView(wv_mWebview, MATCH_PARENT, MATCH_PARENT,
 				mLinearLayout);
-
+		ll_content1.setPadding(20, 0, 20, 0);
 		pb_mLoading = new ProgressBar(mActivity);
 		machineFactory.MachineView(pb_mLoading, 80, 80, 0, mLinearLayout, 0, 0,
 				0, 0, RelativeLayout.CENTER_IN_PARENT);

@@ -36,6 +36,7 @@ import com.yayawan.sdk.utils.AuthNumReceiver;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.CounterDown;
+import com.yayawan.sdk.utils.LoginUtils;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
 
@@ -52,7 +53,7 @@ import com.lidroid.jxutils.http.ResponseInfo;
 import com.lidroid.jxutils.http.callback.RequestCallBack;
 import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 
-public class Register_Phone_dialog extends Basedialogview {
+public class VirificationPhonelogin_dialog extends Basedialogview {
 
 	private LinearLayout ll_mPre;
 	private ImageView iv_mPre;
@@ -79,9 +80,9 @@ public class Register_Phone_dialog extends Basedialogview {
 	private ImageView iv_mSecurity_icon;
 	private ImageView iv_mPassword_icon;
 	private LinearLayout ll_mTitelimage;
-	private RelativeLayout rl_mFind;
-
-	public Register_Phone_dialog(Activity activity) {
+	
+	private VirificationPhonelogin_dialog mPhonelogin_dialog_ho;
+	public VirificationPhonelogin_dialog(Activity activity) {
 		super(activity);
 	}
 
@@ -146,13 +147,13 @@ public class Register_Phone_dialog extends Basedialogview {
 		
 		// 头部icon
 		ImageView iv_icon = new ImageView(mActivity);
-		machineFactory.MachineView(iv_icon,520, 150, 0, mRelativeLayout, 440, 20, 0,
+		machineFactory.MachineView(iv_icon,540, 100, 0, mRelativeLayout, 440, 20, 0,
 				0, RelativeLayout.CENTER_VERTICAL);
 		
 		//如果是sdktpye为1的话，就隐藏背景
 		
 		iv_icon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-					"yaya1_register.png", mActivity));		
+					"yaya1_virificationtitleicon.png", mActivity));		
 		
 		// TODO
 		rl_title.addView(iv_icon);
@@ -238,12 +239,11 @@ public class Register_Phone_dialog extends Basedialogview {
 						// 获取验证码按钮
 						bt_mGetsecurity = new Button(mActivity);
 						bt_mGetsecurity = machineFactory.MachineButton(bt_mGetsecurity, 224,
-								68, 0, "", 28, mLinearLayout, 20, 30, 0, 0);
+								68, 0, "", 24, mLinearLayout, 20, 30, 0, 0);
 						bt_mGetsecurity.setTextColor(Color.WHITE);
+						bt_mGetsecurity.setPadding(0, 0, 0, 0);
 						bt_mGetsecurity.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_getverifycodebutton.png", mActivity));
 						
-						
-						bt_mGetsecurity.setPadding(0, 0, 0, 0);
 						bt_mGetsecurity.setGravity(Gravity.CENTER);
 						
 				
@@ -251,180 +251,33 @@ public class Register_Phone_dialog extends Basedialogview {
 						ll_mSecurityandbutton.addView(bt_mGetsecurity);
 			
 
-						// 密码输入列
-						LinearLayout ll_mPassword = new LinearLayout(mActivity);
-						ll_mPassword = (LinearLayout) machineFactory.MachineView(ll_mPassword,
-								MATCH_PARENT,120, 0, "LinearLayout", 20, 15, 20, 0, 100);
-						ll_mPassword.setBackgroundDrawable(GetAssetsutils
-								.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png", mActivity));
-						ll_mPassword.setGravity(Gravity.CENTER);
 
-								// username 的icon
-						iv_mPassword_icon = new ImageView(mActivity);
-						iv_mPassword_icon = (ImageView) machineFactory.MachineView(iv_mPassword_icon, 235,
-								120, 0, mLinearLayout, 20, 0, 0, 0, 100);
-						iv_mPassword_icon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-										"yaya1_setphoneregisterpassword.png", mActivity));
-
-								// username的edtext
-								et_mPassword = new EditText(mActivity);
-								et_mPassword = machineFactory.MachineEditText(et_mPassword, 0, 135, 1,
-										"请设置密码（6-20位字母或者数字）", 34, mLinearLayout, 0, 4, 0, 0);
-								et_mPassword.setTextColor(Color.BLACK);
-								et_mPassword.setHintTextColor(Color.parseColor("#b4b4b4"));
-								et_mPassword.setBackgroundColor(Color.TRANSPARENT);
-
-							
-
-								// TODO
-								ll_mPassword.addView(iv_mPassword_icon);
-								ll_mPassword.addView(et_mPassword);
-						
-
-		
-
-		
-		
 	
 
 		// 确定按钮
 	
 		bt_mOk = new Button(mActivity);
 		bt_mOk = machineFactory.MachineButton(bt_mOk, 380,
-				120, 0, "", 32, mLinearLayout, 306, 20, 0, 0);
+				120, 0, "", 32, mLinearLayout, 306, 80, 0, 0);
 		bt_mOk.setTextColor(Color.WHITE);
 		//yaya1_register.png
-		bt_mOk.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya1_registerbut.png", mActivity));
+		bt_mOk.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile("yaya_virificationloginbutton.png", mActivity));
 		
 		bt_mOk.setGravity(Gravity_CENTER);
 		
 		
-		
-		
-		
-		//========================================================
-		
 
-		//找回密码列
-		rl_mFind = new RelativeLayout(mActivity);
-		rl_mFind = (RelativeLayout) machineFactory.MachineView(rl_mFind,
-				MATCH_PARENT, 130, 0, mLinearLayout, 0, 21, 0, 0, 100);
-		rl_mFind.setBackgroundDrawable(GetAssetsutils
-				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png", mActivity));
-		// 横版手机登录按钮
-		
-		// 条款
-				LinearLayout ll_clause = new LinearLayout(mActivity);
-				machineFactory.MachineView(ll_clause, 450, MATCH_PARENT, mRelativeLayout,
-						4, 0);
-				ll_clause.setGravity(Gravity.CENTER_VERTICAL);
-
-				// 同意服务条款
-				ib_mAgreedbox = new ImageView(mActivity);
-				machineFactory.MachineView(ib_mAgreedbox, 70, 70, mLinearLayout, 2, 0);
-				ib_mAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-						"yaya_checkedbox.png", mActivity));
-				ib_mAgreedbox.setBackgroundDrawable(null);
-
-				// 不同意服务条款
-				ib_mNotAgreedbox = new ImageView(mActivity);
-				machineFactory.MachineView(ib_mNotAgreedbox, 70, 70, mLinearLayout, 2,
-						0);
-				ib_mNotAgreedbox.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-						"yaya_uncheckedbox.png", mActivity));
-				ib_mNotAgreedbox.setBackgroundDrawable(null);
-				ib_mNotAgreedbox.setVisibility(View.GONE);
-				
-
-				TextView tv_agree = new TextView(mActivity);
-				machineFactory.MachineTextView(tv_agree, MATCH_PARENT, MATCH_PARENT, 0,
-						"同意《用户协议》", 32, mLinearLayout, 6, 0, 0, 0);
-				tv_agree.setTextColor(Color.parseColor("#b4b4b4"));
-				tv_agree.setGravity(Gravity.CENTER_VERTICAL);
-				tv_agree.setClickable(true);
-				tv_agree.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						YYprotocol_ho_dialog yYprotocol_ho_dialog = new YYprotocol_ho_dialog(
-								mActivity);
-						yYprotocol_ho_dialog.dialogShow();
-					}
-				});
-
-		// TODO
-		ll_clause.addView(ib_mAgreedbox);
-		ll_clause.addView(ib_mNotAgreedbox);
-		ll_clause.addView(tv_agree);
-		ib_mAgreedbox.setClickable(true);
-		ib_mAgreedbox.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ib_mAgreedbox.setVisibility(View.GONE);
-				ib_mNotAgreedbox.setVisibility(View.VISIBLE);
-			}
-		});
-		ib_mNotAgreedbox.setClickable(true);
-		ib_mNotAgreedbox.setOnClickListener(new OnClickListener() {
-
-					@Override
-				public void onClick(View v) {
-					ib_mNotAgreedbox.setVisibility(View.GONE);
-					ib_mAgreedbox.setVisibility(View.VISIBLE);
-				}
-			});
-				
-		
-		
-
-		LinearLayout ll_zhanwei2 = new LinearLayout(mActivity);
-		ll_zhanwei2 = (LinearLayout) machineFactory.MachineView(ll_zhanwei2, 270,
-				MATCH_PARENT, mRelativeLayout);
-		// button的登录按钮
-		// 用戶名注冊
-		bt_mAccountRegister = new Button(mActivity);
-		machineFactory.MachineButton(bt_mAccountRegister, 235, 80, 0, "", 28,
-				mRelativeLayout, 720, 20, 0, 0);
-		bt_mAccountRegister.setTextColor(Color.WHITE);
-		
-		bt_mAccountRegister.setBackgroundDrawable(GetAssetsutils.getDrawableFromAssetsFile(
-				"yaya1_acountregisterbutton.png", mActivity));
-		bt_mAccountRegister.setGravity(Gravity_CENTER);
-		// 点击事件..点击打开账号注册窗口
-		bt_mAccountRegister.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				AcountRegister_dialog acountRegister_ho_dialog = new AcountRegister_dialog(
-						mActivity);
-				acountRegister_ho_dialog.dialogShow();
-			}
-		});
-
-		// TODO
-		rl_mFind.addView(ll_clause);
-		rl_mFind.addView(ll_zhanwei2);
-		rl_mFind.addView(bt_mAccountRegister);
-		
-		
-		
-		
-		//========================================================
-		
-		//========================================================
-		
 		
 		// TODO
 		ll_content1.addView(ll_phone);
 		ll_content1.addView(ll_mSecurityandbutton);
-		ll_content1.addView(ll_mPassword);
+		//ll_content1.addView(ll_mPassword);
 		//ll_content1.addView(ll_clause);
 		
 		// ll_content1.addView(ll_clause);
 		ll_content1.addView(bt_mOk);
 		
-		ll_content1.addView(rl_mFind);
+		//ll_content1.addView(rl_mFind);
 
 		ll_content.addView(rl_title);
 
@@ -466,11 +319,7 @@ public class Register_Phone_dialog extends Basedialogview {
 
 				mPhoneNum = et_mPhone.getText().toString().trim();
 				
-				  if (ib_mAgreedbox.getVisibility() == View.GONE) {
-				  Toast.makeText(mActivity, "请同意服务协议", Toast.LENGTH_SHORT)
-				  .show(); 
-				  return;
-				  }
+				
 				 
 				if (mPhoneNum.equals("")) {
 					Toast.makeText(mActivity, "手机号不能为空", Toast.LENGTH_SHORT)
@@ -483,12 +332,13 @@ public class Register_Phone_dialog extends Basedialogview {
 					Utilsjf.creDialogpro(mActivity, "正在获取验证码...");
 
 					RequestParams rps = new RequestParams();
-					rps.addBodyParameter("type", 2 + "");
+					rps.addBodyParameter("type", 3 + "");
 					
 					
 					rps.addBodyParameter("mobile", mPhoneNum);
 					rps.addBodyParameter("uuid", DeviceUtil.getUUID(mActivity));
 					HttpUtils httpUtils = new HttpUtils();
+					
 					httpUtils.send(HttpMethod.POST, ViewConstants.getphonecode,
 							rps, new RequestCallBack<String>() {
 
@@ -506,7 +356,8 @@ public class Register_Phone_dialog extends Basedialogview {
 										ResponseInfo<String> result) {
 									// TODO Auto-generated method stub
 									Utilsjf.stopDialog();
-									
+									mCountDown.startCounter();
+								
 									Yayalog.loger(result.result);
 									try {
 										JSONObject jsonObject = new JSONObject(result.result);
@@ -532,85 +383,34 @@ public class Register_Phone_dialog extends Basedialogview {
 				}
 			}
 		});
-
+		mPhonelogin_dialog_ho=this;
 		// 获取到验证码后点击注册
 
 		bt_mOk.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				
 				mPhoneNum = et_mPhone.getText().toString().trim();
 				mCode = et_mSecurity.getText().toString().trim();
-				mPassword = et_mPassword.getText().toString().trim();
 				if (mPhoneNum.equals("")) {
-					Toast.makeText(mActivity, "手机号不能为空", Toast.LENGTH_SHORT)
+					Toast.makeText(mContext, "手机号不能为空", Toast.LENGTH_SHORT)
 							.show();
 				} else if (mPhoneNum.length() < 11) {
-					Toast.makeText(mActivity, "手机号不能小于11位", Toast.LENGTH_SHORT)
+					Toast.makeText(mContext, "手机号不能小于11位", Toast.LENGTH_SHORT)
 							.show();
 				} else if (mCode.equals("")) {
-					Toast.makeText(mActivity, "请输入验证码", Toast.LENGTH_SHORT)
+					Toast.makeText(mContext, "请输入验证码", Toast.LENGTH_SHORT)
 							.show();
 				} else {
-					Utilsjf.creDialogpro(mActivity, "正在登录...");
 					// 验证码登录
-					RequestParams rps = new RequestParams();
-					rps.addBodyParameter("app_id",
-							DeviceUtil.getAppid(mActivity));
-					rps.addBodyParameter("imei", DeviceUtil.getIMEI(mActivity));
-					rps.addBodyParameter("mobile", mPhoneNum);
-					rps.addBodyParameter("password", mPassword);
-					rps.addBodyParameter("code", mCode);
+					// 网络访问要在线程中
+					//Utilsjf.creDialogpro(mActivity, "正在认证中...");
+					ViewConstants.logintype=1;
+					LoginUtils loginUtils = new LoginUtils(mActivity,
+							mPhonelogin_dialog_ho, 0);
+					loginUtils.loginByVirification(mPhoneNum, mCode);
 
-					HttpUtils httpUtils = new HttpUtils();
-					httpUtils.send(HttpMethod.POST,
-							ViewConstants.phoneregister, rps,
-							new RequestCallBack<String>() {
-
-								@Override
-								public void onFailure(HttpException arg0,
-										String arg1) {
-									// TODO Auto-generated method stub
-									Utilsjf.stopDialog();
-									Toast.makeText(mActivity, "注册失败，请检查网络是否畅通",
-											0).show();
-								}
-
-								@Override
-								public void onSuccess(
-										ResponseInfo<String> result) {
-									// TODO Auto-generated method stub
-									Utilsjf.stopDialog();
-
-									Yayalog.loger("手机注册结果" + result.result);
-									Toast.makeText(mActivity, "注册成功", 0).show();
-
-									User user = parserPhoneRegisterResult(result.result);
-									if (user == null) {
-										return;
-									}
-									AgentApp.mUser = user;
-									Yayalog.loger("手机注册结果"
-											+ AgentApp.mUser.toString());
-									// System.out.println("手机注册接口返回数据"+loginuser.secret);
-									// 将base64加密的用户信息保存到数据库
-									UserDao.getInstance(mActivity).writeUser(
-											user.userName, user.password,
-											user.secret);
-									// System.out.println("手机得到的账号密码是0"+loginuser);
-									user.password = "";
-									user.secret = "";
-									// 开启悬浮窗服务
-									// YayaWan.init(mActivity);
-
-									allDismiss();
-
-									Login_success_dialog login_success_dialog = new Login_success_dialog(
-											mActivity);
-									login_success_dialog.dialogShow();
-								}
-
-							});
 				}
 			}
 		});

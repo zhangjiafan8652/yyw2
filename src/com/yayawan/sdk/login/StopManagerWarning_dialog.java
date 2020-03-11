@@ -136,7 +136,7 @@ public class StopManagerWarning_dialog extends Basedialogview {
 		//提示
 		tv_tip = new TextView(mActivity);
 		machineFactory.MachineTextView(tv_tip, WRAP_CONTENT,
-				WRAP_CONTENT, 0, "浮标隐藏后，摇一摇设备可重新显示浮标。是否隐藏？", 20, mRelativeLayout, 0, 0, 0, 0,
+				WRAP_CONTENT, 0, "浮标隐藏后，摇一摇设备可重新显示浮标。是否隐藏？", 22, mRelativeLayout, 0, 0, 0, 0,
 				RelativeLayout.ALIGN_PARENT_RIGHT);
 		tv_tip.setTextColor(Color.parseColor("#000000"));
 		
@@ -219,6 +219,7 @@ public class StopManagerWarning_dialog extends Basedialogview {
 				bt_mPhonelogin.setTextColor(Color.parseColor("#0F5FA5"));
 				bt_mPhonelogin.setGravity(Gravity_CENTER);
 				bt_mPhonelogin.setBackgroundDrawable(null);
+				bt_mPhonelogin.setPadding(0, 0, 0, 0);
 				LinearLayout ll_zhanwei = new LinearLayout(mActivity);
 				ll_zhanwei = (LinearLayout) machineFactory.MachineView(ll_zhanwei, 40,
 						MATCH_PARENT, mLinearLayout);
@@ -228,6 +229,7 @@ public class StopManagerWarning_dialog extends Basedialogview {
 				bt_mlogin = machineFactory.MachineButton(bt_mlogin, 0, MATCH_PARENT, 1,
 						"隐藏", 32, mLinearLayout, 0, 0, 0, 0);
 				bt_mlogin.setBackgroundDrawable(null);
+				bt_mlogin.setPadding(0, 0, 0, 0);
 				bt_mlogin.setTextColor(Color.parseColor("#0F5FA5"));
 				bt_mlogin.setGravity(Gravity_CENTER);
 

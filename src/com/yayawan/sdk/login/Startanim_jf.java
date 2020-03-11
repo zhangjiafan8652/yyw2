@@ -14,6 +14,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.callback.KgameSdkStartAnimationCallback;
 import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.main.DgameSdk;
@@ -98,8 +100,13 @@ public class Startanim_jf extends BaseView {
 					"yaya_ani_kongbai.png", mActivity));
 		
 		}else {
-			iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-					"yaya_ani.png", mActivity));
+			if (CommonData.isqianqi) {
+				iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+						"yaya_qianguo_ani.png", mActivity));
+			}else {
+				
+			}
+			
 		}
 		
 		

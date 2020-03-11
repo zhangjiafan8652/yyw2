@@ -1,5 +1,8 @@
 package com.yayawan.sdk.login;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,6 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.jxutils.HttpUtils;
+import com.lidroid.jxutils.exception.HttpException;
+import com.lidroid.jxutils.http.RequestParams;
+import com.lidroid.jxutils.http.ResponseInfo;
+import com.lidroid.jxutils.http.callback.RequestCallBack;
+import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.sdk.bean.Result;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkUserCallback;
@@ -32,11 +41,14 @@ import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Basedialogview;
 import com.yayawan.sdk.utils.CodeCountDown;
 import com.yayawan.sdk.utils.CounterDown;
+import com.yayawan.sdk.utils.LoginUtils;
 import com.yayawan.sdk.utils.Utilsjf;
 
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.ViewConstants;
+import com.yayawan.utils.Yayalog;
 
 
 
@@ -51,7 +63,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 	private static final int AUTHCODE = 5;
 	protected static final int ERROR = 11;
 	protected static final int LOGINSECURITYRESULT = 8;
-
+	private Phonelogin_dialog_ho Phonelogin_dialog_ho;
 	private Handler mHandler = new Handler() {
 
 		private CodeCountDown mCodeCountDown;
@@ -298,7 +310,7 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 		// System.out.println("我进来那短信了");
 		// 设置短信填充
 		
-
+		Phonelogin_dialog_ho=this;
 		mUserCallback = DgameSdk.mUserCallback;
 
 		mCountDown = CounterDown.getInstance(mActivity);
@@ -319,6 +331,55 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 				} else {
 					Utilsjf.creDialogpro(mActivity, "正在获取验证码...");
 			
+					//Utilsjf.creDialogpro(mActivity, "正在获取验证码...");
+
+					RequestParams rps = new RequestParams();
+					rps.addBodyParameter("type", 4 + "");
+					
+					
+					rps.addBodyParameter("mobile", mPhoneNum);
+					rps.addBodyParameter("uuid", DeviceUtil.getUUID(mActivity));
+					HttpUtils httpUtils = new HttpUtils();
+					httpUtils.send(HttpMethod.POST, ViewConstants.getphonecode,
+							rps, new RequestCallBack<String>() {
+
+								@Override
+								public void onFailure(HttpException arg0,
+										String arg1) {
+									// TODO Auto-generated method stub
+									Utilsjf.stopDialog();
+									Toast.makeText(mActivity, "验证码发送失败，请检查网络",
+											0).show();
+								}
+
+								@Override
+								public void onSuccess(
+										ResponseInfo<String> result) {
+									// TODO Auto-generated method stub
+									Utilsjf.stopDialog();
+									
+									Yayalog.loger(result.result);
+									try {
+										JSONObject jsonObject = new JSONObject(result.result);
+										String errmsg = jsonObject.getString("err_msg");
+										if (errmsg.equals("success")) {
+											mCountDown.startCounter();
+											Toast.makeText(mActivity, "验证码已经发送", 0)
+											.show();
+										}else{
+											Toast.makeText(mActivity, errmsg, 0)
+											.show();
+										}
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									
+
+								}
+							});
+					
 				}
 			}
 		});
@@ -344,24 +405,10 @@ public class Phonelogin_dialog_ho extends Basedialogview {
 					// 验证码登录
 					// 网络访问要在线程中
 					Utilsjf.creDialogpro(mActivity, "正在认证中...");
-				/*	new Thread() {
-
-						@Override
-						public void run() {
-
-							try {
-								User user = ObtainData.loginSecurity(mActivity,
-										mPhoneNum, mCode);
-								Message message = new Message();
-								message.obj = user;
-								message.what = LOGINSECURITYRESULT;
-								mHandler.sendMessage(message);
-							} catch (Exception e) {
-								mHandler.sendEmptyMessage(ERROR);
-								e.printStackTrace();
-							}
-						}
-					}.start();*/
+					ViewConstants.logintype=1;
+					LoginUtils loginUtils = new LoginUtils(mActivity,
+							Phonelogin_dialog_ho, 0);
+					loginUtils.loginByVirification(mPhoneNum, mCode);
 
 				}
 			}

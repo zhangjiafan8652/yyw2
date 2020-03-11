@@ -61,6 +61,8 @@ public class ViewConstants {
 	public static String acountregister = baseurl + "user/register";// 账号注册
 
 	public static String loginurl = baseurl + "user/login";// 登录接口
+	
+	public static String smsloginurl = baseurl + "user/sms_login";// 验证码登陆接口
 	//
 	public static String resetpassword = baseurl + "user/forget";// 找回密码
 

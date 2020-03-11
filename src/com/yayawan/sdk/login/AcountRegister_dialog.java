@@ -137,7 +137,7 @@ public class AcountRegister_dialog extends Basedialogview {
 		
 		// 头部icon
 		ImageView iv_icon = new ImageView(mActivity);
-		machineFactory.MachineView(iv_icon,540, 100, 0, mRelativeLayout, 440, 20, 0,
+		machineFactory.MachineView(iv_icon,520, 150, 0, mRelativeLayout, 440, 20, 0,
 				0, RelativeLayout.CENTER_VERTICAL);
 		
 		//如果是sdktpye为1的话，就隐藏背景
@@ -284,7 +284,7 @@ public class AcountRegister_dialog extends Basedialogview {
 		//找回密码列
 		rl_mFind = new RelativeLayout(mActivity);
 		rl_mFind = (RelativeLayout) machineFactory.MachineView(rl_mFind,
-				MATCH_PARENT, 135, 0, mLinearLayout, 0, 40, 0, 0, 100);
+				MATCH_PARENT, 130, 0, mLinearLayout, 0, 21, 0, 0, 100);
 		rl_mFind.setBackgroundDrawable(GetAssetsutils
 				.get9DrawableFromAssetsFile("yaya1_sdkbackground.9.png", mActivity));
 		// 横版手机登录按钮

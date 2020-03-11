@@ -162,6 +162,91 @@ public class LoginUtils {
 				});
 
 	}
+	
+	
+	
+	/**
+	 * 用户名密码登录
+	 * 
+	 * @param name
+	 * @param password
+	 */
+	public void loginByVirification(final String mobile, final String code) {
+		// 输入的用户名和密码符合要求
+		// Utilsjf.creDialogpro(mActivity, "正在登陆...");
+		// 网络访问要在线程中
+		
+		if (LOGINTYPE != STARTLOGIN) {
+			Utilsjf.creDialogpro(mActivity, "正在玩命登录...");
+		}
+		RequestParams rps = new RequestParams();
+		rps.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
+		rps.addBodyParameter("mobile", mobile);
+		rps.addBodyParameter("code", code);
+		HttpUtils httpUtils = new HttpUtils();
+		
+		
+		httpUtils.send(HttpMethod.POST, ViewConstants.smsloginurl, rps,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						// TODO Auto-generated method stub
+						Utilsjf.stopDialog();
+						dialog.dialogDismiss();
+						mUserCallback.onError(1);
+						Toast.makeText(mActivity, "登陆失败，请检查网络是否畅通", 0).show();
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> result) {
+						// TODO Auto-generated method stub
+						
+						Utilsjf.stopDialog();
+						Yayalog.loger("登陆结果" + result.result);
+						
+						
+							
+						
+
+						try {
+							
+				
+							JSONObject jsonObject = new JSONObject(result.result);
+							int errcode;
+							errcode = jsonObject.getInt("err_code");
+						
+							if (errcode==11011) {
+								String errstring=jsonObject.getString("err_msg");
+								Toast.makeText(mActivity, errstring, 0).show();
+							}else {
+								dialog.dialogDismiss();
+								User user = parserLoginResult(result.result);
+								if (user == null) {
+									mUserCallback.onError(1);
+								}
+								AgentApp.mUser = user;
+								dialog.onSuccess(user, 0);
+							Login_success_dialog login_success_dialog = new Login_success_dialog(
+									mActivity);
+							login_success_dialog.dialogShow();
+							}
+							
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							//Sputils.putSPint("ischanageacount", 0,
+								//	ViewConstants.mMainActivity);
+							//mUserCallback.onError(1);
+							//mUserCallback.onLogout();
+						}
+
+						
+					}
+
+				});
+
+	}
+	
 
 	private User parserLoginResult(String result) {
 		// TODO Auto-generated method stub

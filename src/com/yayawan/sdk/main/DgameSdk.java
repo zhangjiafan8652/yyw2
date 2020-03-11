@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.Manifest;
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.jf.permissonutils.Permission_dialog;
 import com.jf.permissonutils.Permission_dialog.PermissionDialogClickCallBack;
+import com.kkgame.kkgamelib.R;
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
@@ -122,15 +125,7 @@ public class DgameSdk {
 			KgameSdkUserCallback paramCallback) {
 		
 		
-		
-		
-		
-		
-	
-		
-		
-		
-		
+
 		Yayalog.loger("kgamesdklogin");
 		mUserCallback = paramCallback;
 		ViewConstants.mMainActivity = paramActivity;
@@ -497,6 +492,7 @@ public class DgameSdk {
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
+		
 		ViewConstants.ISKGAME=true;
 		
 	}
@@ -732,7 +728,7 @@ public class DgameSdk {
 
 					dialog.show();
 			
-		}else {
+		}else if (CommonData.isqianqi){
 			 Exit_dialog exit_dialog = new Exit_dialog(activitiy, "这个废弃",new ExitdialogCallBack() {
 					
 					@Override
@@ -743,6 +739,30 @@ public class DgameSdk {
 					}
 				});
 				exit_dialog.dialogShow();
+		}else {
+			Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
+
+					.setMessage("是否退出游戏？")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+									onexit.onSuccess(null, 1);
+									
+								}
+							})
+							.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+								}
+							}). create();
+
+					dialog.show();
 		}
 		
 				//dialog.show();
@@ -786,6 +806,21 @@ public class DgameSdk {
 
 		intent.putExtra("type", ViewConstants.ACCOUNTMANAGER);
 		mactivity.startActivityForResult(intent,10020);
+		
+		if (DeviceUtil.isDebug(mactivity)) {
+			
+		}else {
+			if (DeviceUtil.isLandscape(mactivity)) {
+			//	mactivity.overridePendingTransition(android.R.anim.slide_in_left, R.anim.yaya_slide_out_left);
+				
+			}else {
+			//	mactivity.overridePendingTransition(R.anim.yaya_slide_in_up, R.anim.yaya_slide_in_up);
+				
+			}
+			
+		}
+		
+		//mactivity.overridePendingTransition(android.R.anim.slide_in_left,R.anim.slide_out_left );
 		//mactivity.overridePendingTransition(enterAnim, exitAnim)
 	}
 	
@@ -807,20 +842,36 @@ public class DgameSdk {
 	
 	//是否实名认证
 	public static void doGetVerifiedInfo(final Activity mactivity,KgameSdkApiCallBack myywapicallback) {
-
-			
-			mSdkApiCallback=myywapicallback;
-			//请求查看是否实名认证
 			HttpUtils httpUtils = new HttpUtils();
 			RequestParams requestParams = new RequestParams();
-			requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mactivity));
-			requestParams.addBodyParameter("uid", YYWMain.mUser.uid);
-			requestParams.addBodyParameter("token", YYWMain.mUser.token);
+			mSdkApiCallback=myywapicallback;
+			if (ViewConstants.ISKGAME) {
+				
+				//请求查看是否实名认证
+				
+				
+				requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mactivity));
+				requestParams.addBodyParameter("uid", YYWMain.mUser.uid);
+				requestParams.addBodyParameter("token", YYWMain.mUser.token);
+			
+				Yayalog.loger("app_id", DeviceUtil.getAppid(mactivity));
+				Yayalog.loger("uid", YYWMain.mUser.uid);
+				Yayalog.loger("token", YYWMain.mUser.token);
+				Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
+			
+			}else {
+				Yayalog.loger("渠道实名认证");
+				requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mactivity));
+				requestParams.addBodyParameter("uid", AgentApp.mUser.uid+"");
+				requestParams.addBodyParameter("token", AgentApp.mUser.token);
+				
+			
+				Yayalog.loger("app_id", DeviceUtil.getAppid(mactivity));
+				Yayalog.loger("uid", YYWMain.mUser.uid);
+				Yayalog.loger("token", YYWMain.mUser.token);
+				Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
+			}
 		
-			Yayalog.loger("app_id", DeviceUtil.getAppid(mactivity));
-			Yayalog.loger("uid", YYWMain.mUser.uid);
-			Yayalog.loger("token", YYWMain.mUser.token);
-			Yayalog.loger("url",  ViewConstants.SHIMINGRENZHENG);
 			httpUtils.send(HttpMethod.POST, ViewConstants.SHIMINGRENZHENG,requestParams, new RequestCallBack<String>() {
 
 				@Override
@@ -861,6 +912,8 @@ public class DgameSdk {
 					
 				}
 			});
+			
+			
 			
 		}
 }

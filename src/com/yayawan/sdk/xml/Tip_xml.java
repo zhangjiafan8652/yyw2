@@ -132,7 +132,7 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		machineFactory.MachineTextView(tv_message, MATCH_PARENT, 0, 1, "", 42,
 				mLinearLayout, 30, 7, 15, 0);
 
-		// but 的lin
+		// 确定按钮
 
 		ll_mBut = new LinearLayout(mActivity);
 		ll_mBut = (LinearLayout) machineFactory.MachineView(ll_mBut,
@@ -140,8 +140,9 @@ public class Tip_xml extends Basexml implements Layoutxml {
 
 		bt_mok = new Button(mActivity);
 		bt_mok = machineFactory.MachineButton(bt_mok, 0, MATCH_PARENT, 1, "",
-				30, mLinearLayout, 0, 0, 0, 0);
+				40, mLinearLayout, 0, 0, 0, 0);
 		bt_mok.setTextColor(Color.WHITE);
+		bt_mok.setPadding(0, 0, 0, 0);
 		bt_mok.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
 				"yaya_yellowbutton.9.png", "yaya_yellowbutton1.9.png", mActivity));
 		bt_mok.setGravity(Gravity_CENTER);
@@ -150,15 +151,14 @@ public class Tip_xml extends Basexml implements Layoutxml {
 		ll_zhanwei = (LinearLayout) machineFactory.MachineView(ll_zhanwei, 30,
 				MATCH_PARENT, mLinearLayout);
 
-		// button的登录按钮
+		// 取消按钮
 		bt_mCancel = new Button(mActivity);
 		
 		bt_mCancel = machineFactory.MachineButton(bt_mCancel, 0, MATCH_PARENT,
-				1, "", 30, mLinearLayout, 0, 0, 0, 0);
+				1, "", 40, mLinearLayout, 0, 0, 0, 0);
 		bt_mCancel.setTextColor(Color.WHITE);
-		/*bt_mCancel.setBackgroundDrawable(GetAssetsutils.crSelectordraw(
-				"yaya_yellowbutton.9.png", "yaya_yellowbutton1.9.png",
-				mActivity));*/
+		bt_mCancel.setPadding(0, 0, 0, 0);
+	
 		bt_mCancel.setBackgroundColor(Color.parseColor("#66B1FF"));
 		bt_mCancel.setGravity(Gravity_CENTER);
 

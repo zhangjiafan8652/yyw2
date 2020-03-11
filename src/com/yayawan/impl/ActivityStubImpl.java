@@ -42,15 +42,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 		Yayalog.loger("oncreate");
 		DgameSdk.initSdk(paramActivity);
 		Handle.active_handler(paramActivity);
-//		ViewGroup rootview=(ViewGroup) paramActivity.getWindow().getDecorView();
-//		ImageView imageView = new ImageView(paramActivity);
-//		  ViewGroup.LayoutParams  lp = imageView.getLayoutParams();
-//	        lp.width =150;
-//	        lp.height =150; 
-//	        imageView.setLayoutParams(lp);
-//	        imageView.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-//					"yaya1_acountmanagericon_nosdk.png", paramActivity));
-		//paramActivity.addContentView(view, params)
+
 	}
 
 	@Override
@@ -79,6 +71,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 	@Override
 	public void onStop(Activity paramActivity) {
 		// TODO Auto-generated method stub
+		DgameSdk.stop(paramActivity);
 		Yayalog.loger("onstop");
 	}
 

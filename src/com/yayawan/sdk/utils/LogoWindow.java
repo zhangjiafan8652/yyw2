@@ -4,24 +4,32 @@ import java.lang.reflect.Field;
 
 import javax.crypto.spec.IvParameterSpec;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.opengl.Visibility;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.yayawan.common.CommonData;
 import com.yayawan.sdk.login.Help_dissmiss_dialog;
 import com.yayawan.sdk.login.StopManagerWarning_dialog;
 import com.yayawan.sdk.login.StopManagerWarning_dialog.StopManagerWarningLinstener;
@@ -50,7 +58,7 @@ public class LogoWindow {
 	static Activity mactivity;
 	private int screenHeigh;
 	private int screenwith;
-
+	private int myviewsize;
 	private static LogoWindow mLogowindow;
 	
 	private static boolean iscanyingcang =true;
@@ -61,11 +69,20 @@ public class LogoWindow {
 	public static String img_icon_nosdk="yaya1_acountmanagericon_nosdk.png";
 	
 	public static String img_icon_nosdk_ban="yaya1_acountmanagericontouming_nosdk.png";
+	
+	public static int windowwith=150;
 
 	public static LogoWindow getInstants(Activity mactivity) {
 		if (mLogowindow == null) {
 			Yayalog.loger("重新new了mlogowindow");
-
+			if (CommonData.isqianqi) {
+				
+			}else {
+				Yayalog.loger("yaya1_qianguo_acountmanagericon+++++++++++++++++++++");
+				  img_icon_sdk="yaya1_qianguo_acountmanagericon.png";
+					
+					 img_icon_sdk_ban="yaya1_qianguo_acountmanagericontouming.png";
+			}
 			mLogowindow = new LogoWindow(mactivity);
 
 		} else {
@@ -108,7 +125,7 @@ public class LogoWindow {
 				}
 			case 523:
 				
-				
+				//隐藏窗口逻辑
 				if (iscanyingcang) {
 					params.x = 0;
 					params.y = 100;
@@ -130,7 +147,7 @@ public class LogoWindow {
 					}
 					
 					
-					myviewiconmanager.setVisibility(View.GONE);
+				//	myviewiconmanager.setVisibility(View.GONE);
 					
 				}
 				
@@ -138,9 +155,7 @@ public class LogoWindow {
 				
 				
 			case 521:
-				// createView();
-				//Yayalog.loger("我在接到了消息：hasWindowFocus"
-				//		+ mactivity.hasWindowFocus() + "hasview:" + hasview);
+				//挂载了 窗口，再添加view，否则会闪退
 				if (mactivity.hasWindowFocus() && !hasview) {
 					addView();
 					Yayalog.loger("mactivity.hasWindowFocus()+添加了view");
@@ -164,7 +179,7 @@ public class LogoWindow {
 	private boolean ishelpshow = false;
 
 	private ShakeListener shakeListener;
-	private static ImageView myviewiconmanager;
+	//private static ImageView myviewiconmanager;
 	private static ImageView myviewicon;
 	private static RelativeLayout myview;
 	Help_dissmiss_dialog help_dissmiss_dialog;
@@ -173,63 +188,32 @@ public class LogoWindow {
 		
 	private void createView() {
 
-		Yayalog.loger("兔子oncreate");
-		DisplayMetrics dm = new DisplayMetrics();
-
-		mactivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-		screenHeigh = dm.widthPixels;
-		screenwith = dm.heightPixels;
-		if (DeviceUtil.isLandscape(mactivity)) {
-			
-			if (screenHeigh<screenwith) {
-				
-			}else {
-				screenHeigh=screenwith;
-			}
-			
-		}else {
-			if (screenHeigh<screenwith) {
-				screenHeigh=screenwith;
-			}else {
-				
-			}
-			try {
-				Yayalog.loger(getStatusBarHeight(mactivity)+"+++++++++++getStatusBarHeight+++++++++");
-				screenHeigh= screenHeigh+getStatusBarHeight(mactivity)+0;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-		}
+		Yayalog.loger("小助手初始化oncreate");
+		//获取屏幕宽高
+		screenHeigh = getScreenheight(mactivity);
+		screenwith = getScreenWith(mactivity);
 		
+		Yayalog.loger("screenHeigh:"+screenHeigh +"screenwith"+screenwith);
+		
+	
 		
 		wm = ((WindowManager) mactivity.getSystemService("window"));
 		if (myview == null) {
 
 			 myview = new RelativeLayout(mactivity);
-			 LayoutParams layoutParams = new LinearLayout.LayoutParams(-2,
-						machSize(150));
+			// myview.setBackgroundColor(Color.RED);
+			 LayoutParams layoutParams = new LinearLayout.LayoutParams(machSize(windowwith),
+						machSize(windowwith));
 			 layoutParams.setMargins(0, 0, 0, 0);
 			 myview.setLayoutParams(layoutParams);
 			
 			myviewicon = new ImageView(mactivity);
 			// 创建时设置view的正常参数
-		
-			
 			//小助手icon
 			
-			myviewicon.setLayoutParams(new RelativeLayout.LayoutParams(-2,
-					machSize(150)));
-
-			
-		
-			//整个小助手
-			myviewiconmanager = new ImageView(mactivity);
-			// 创建时设置view的正常参数
-		
-			myviewiconmanager.setLayoutParams(new LinearLayout.LayoutParams(machSize(200),
-					machSize(200)));
-
+			myviewicon.setLayoutParams(new RelativeLayout.LayoutParams(machSize(windowwith),
+					machSize(windowwith)));
+	
 			if (DgameSdk.sdktype==1) {
 				//半透明隐藏图标
 				myviewicon.setImageBitmap(GetAssetsutils
@@ -241,73 +225,76 @@ public class LogoWindow {
 						img_icon_sdk, mactivity));
 				
 			}
-		
+			myviewicon.setScaleType(ScaleType.FIT_START);
 			myview.addView(myviewicon);
 			
 			myview.setOnTouchListener(new OnTouchListener() {
 
-				float x;
-				float y;
 
-				private float mTouchX;
-				private float mTouchY;
+				private float mdownTempRawX;
+				private float mdownTempRawY;
+	
 
-				private float mTempX;
-				private float mTempY;
-				private float mdownTempX;
-				private float mdownTempY;
-				private long ontouchtime;
-
+				private float  mMoveTempRawX ;
+				private float  mMoveTempRawY ;
+				
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					// TODO Auto-generated method stub
 					
 					iscanyingcang=false;
 					
-					x = event.getRawX();
-					y = event.getRawY(); // statusBarHeight是系统状态栏的高度
+					myviewsize=myview.getWidth();
+				
 
 					switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN: // 捕获手指触摸按下动作
-						// 获取相对View的坐标，即以此View左上角为原点
-						mTouchX = event.getX();
-						mTouchY = event.getY();
-
-						mdownTempX = event.getRawX();
-						mdownTempY = event.getRawY();
-
-						ontouchtime = System.currentTimeMillis();
-						
-
-						
-						if (DgameSdk.sdktype==1) {
-							//半透明隐藏图标
-							myviewicon.setImageBitmap(GetAssetsutils
-									.getImageFromAssetsFile(img_icon_nosdk,
-											mactivity));
-						}else {
-							//半透明隐藏图标
-							myviewicon.setImageBitmap(GetAssetsutils
-									.getImageFromAssetsFile(img_icon_sdk,
-											mactivity));
-							
-						}
-						
-						
+						// 获取手指按下坐标，以屏幕左上角为基准
+						mdownTempRawX = event.getRawX();
+						mdownTempRawY = event.getRawY();
+			
 						break;
 
 					case MotionEvent.ACTION_MOVE: // 捕获手指触摸移动动作
 
-						updateViewPosition();
-
+					
 						int distance_x = (int) event.getRawX()
-								- (int) mdownTempX;
+								- (int) mdownTempRawX;
 						int distance_y = (int) event.getRawY()
-								- (int) mdownTempY;
+								- (int) mdownTempRawY;
+						
+						mMoveTempRawX=event.getRawX();
+						mMoveTempRawY=event.getRawY();
+	
+						//移动10像素，则显示出完整图标
+						if (Math.abs(distance_x) > 5){
+							if (DgameSdk.sdktype==1) {
+								//不透明图标
+								myviewicon.setImageBitmap(GetAssetsutils
+										.getImageFromAssetsFile(img_icon_nosdk,
+												mactivity));
+							}else {
+								//不透明图标
+								myviewicon.setImageBitmap(GetAssetsutils
+										.getImageFromAssetsFile(img_icon_sdk,
+												mactivity));
+								
+							}
+							
+						}
+						//移动15像素更新图标位置
+						if (Math.abs(distance_x) > 15 
+								) {
 
-						if (Math.abs(distance_x) > 60
-								&& Math.abs(distance_y) > 60) {
+							updateViewPosition();
+							
+					
+						}
+						//移动超过xx像素显示 是否隐藏图标提示
+						if (Math.abs(distance_x) > (myviewsize/2) 
+								&& Math.abs(distance_y) > (myviewsize/2)) {
 
+							
 							if (!ishelpshow) {
 
 								 help_dissmiss_dialog = new Help_dissmiss_dialog(mactivity);
@@ -326,29 +313,55 @@ public class LogoWindow {
 						
 						int rawx=(int) event.getRawX();
 						int rawy=(int) event.getRawY();
-						distance_x = (int) event.getRawX() - (int) mdownTempX;
-						distance_y = (int) event.getRawY() - (int) mdownTempY;
+						distance_x = (int) event.getRawX() - (int) mdownTempRawX;
+						distance_y = (int) event.getRawY() - (int) mdownTempRawY;
+						//移动10像素，则显示出完整图标
+						if (Math.abs(distance_x) > 5){
+							if (DgameSdk.sdktype==1) {
+								//半透明隐藏图标
+								myviewicon.setImageBitmap(GetAssetsutils
+										.getImageFromAssetsFile(img_icon_nosdk,
+												mactivity));
+							}else {
+								//半透明隐藏图标
+								myviewicon.setImageBitmap(GetAssetsutils
+										.getImageFromAssetsFile(img_icon_sdk,
+												mactivity));
+								
+							}
+							
+						}
 						
-						
+						//点击效果
 						if (Math.abs(distance_x) <= 70
 								&& Math.abs(distance_y) <= 70) {
 
 						
 								int tempx=(int) event.getX();
 								Yayalog.loger("打开账户");
+								if (DgameSdk.sdktype==1) {
+									//不透明图标
+									myviewicon.setImageBitmap(GetAssetsutils
+											.getImageFromAssetsFile(img_icon_nosdk,
+													mactivity));
+								}else {
+									//不透明图标
+									myviewicon.setImageBitmap(GetAssetsutils
+											.getImageFromAssetsFile(img_icon_sdk,
+													mactivity));
+									
+								}
 								onClick(1);
-						
-							
-			
+					
 						} else {
 							
-							if ((rawy > (DisplayUtils.getHeightPx(mactivity)-machSize(200)))&&(rawx > machSize(100))) {
+							if ((rawy > (DisplayUtils.getHeightPx(mactivity)-machSize(150)))&&(rawx > machSize(100))) {
 								
-								   //关闭小助手
+								   //打开关闭小助手提示
 									gotoStopManager();
 								
-							} else if (event.getRawX() < machSize(150)) {
-								updateViewPosition1();
+							} else if (event.getRawX() < (windowwith/2)) {
+								//updateViewPosition1();
 							}else {
 								mhandler.sendEmptyMessageDelayed(523, 500);
 							}
@@ -363,48 +376,14 @@ public class LogoWindow {
 					}
 					return true;
 				}
-
+				//更新小助手位置
 				private void updateViewPosition() {
-
-					params.x = (int) (x - mTouchX);
-
-					params.y = (int) (screenHeigh - y - mTouchY);
+				
+					params.x = (int) mMoveTempRawX-(myviewsize/2);
+					//Yayalog.loger("screenHeigh:"+screenHeigh+myview.getWidth());
+					params.y = (int) (screenHeigh-mMoveTempRawY-((myviewsize/2)));
 
 					wm.updateViewLayout(myview, params);
-
-				}
-
-				private void updateViewPosition1() {
-
-					params.x = 0;
-
-					params.y = (int) (screenHeigh - y - mTouchY);
-
-					// myview.setX(-machSize(30));
-					// myview.setRotation(50);
-					// myview.setAlpha(100);
-					Yayalog.loger("我要更新ui去隐藏了" +
-							"");
-					wm.updateViewLayout(myview, params);
-					//myview.setBackgroundColor(Color.GRAY);
-					
-					
-					if (DgameSdk.sdktype==1) {
-						//半透明隐藏图标
-						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile(img_icon_nosdk_ban,
-										mactivity));
-					}else {
-						//半透明隐藏图标
-						
-						myviewicon.setImageBitmap(GetAssetsutils
-								.getImageFromAssetsFile(img_icon_sdk_ban,
-										mactivity));
-						
-					}
-					
-					myviewiconmanager.setVisibility(View.GONE);
-					// myview.startAnimation(alphaAnimation);
 
 				}
 
@@ -425,7 +404,7 @@ public class LogoWindow {
 
 		params.x = 0;
 		if (DeviceUtil.isLandscape(mactivity)) {
-			params.y = machSize(200);
+			params.y = machSize(windowwith);
 		} else {
 			params.y = machSize(700);
 		}
@@ -505,6 +484,8 @@ public class LogoWindow {
 		// YayaWan.stop(mactivity);
 		// 打开选择窗口
 		 DgameSdk.accountManager(mactivity,i);
+		 
+		// mhandler.sendEmptyMessageDelayed(523, 3000);
 	}
 
 	public void start() {
@@ -518,6 +499,46 @@ public class LogoWindow {
 
 	}
 
+	@SuppressLint("NewApi") public static int getScreenheight(Activity mactivity){
+		WindowManager windowManager = (WindowManager) mactivity.getApplication().getSystemService(Context.WINDOW_SERVICE);
+		Display display = windowManager.getDefaultDisplay();
+		Point outPoint = new Point();
+		if (Build.VERSION.SDK_INT >= 19) {
+			// 可能有虚拟按键的情况
+			display.getRealSize(outPoint);
+		} else {
+			// 不可能有虚拟按键
+			display.getSize(outPoint);
+		}
+		int mRealSizeWidth;//手机屏幕真实宽度
+		int mRealSizeHeight;//手机屏幕真实高度
+		mRealSizeHeight = outPoint.y;
+		mRealSizeWidth = outPoint.x;
+		return mRealSizeHeight;
+
+	}
+	
+	@SuppressLint("NewApi") public static int getScreenWith(Activity mactivity){
+		WindowManager windowManager = (WindowManager) mactivity.getApplication().getSystemService(Context.WINDOW_SERVICE);
+		Display display = windowManager.getDefaultDisplay();
+		Point outPoint = new Point();
+		if (Build.VERSION.SDK_INT >= 19) {
+			// 可能有虚拟按键的情况
+			display.getRealSize(outPoint);
+		} else {
+			// 不可能有虚拟按键
+			display.getSize(outPoint);
+		}
+		int mRealSizeWidth;//手机屏幕真实宽度
+		int mRealSizeHeight;//手机屏幕真实高度
+		mRealSizeHeight = outPoint.y;
+		mRealSizeWidth = outPoint.x;
+		return mRealSizeWidth;
+
+	}
+	
+	
+	
 	public static boolean hasview = false;
 
 	public void Stop() {

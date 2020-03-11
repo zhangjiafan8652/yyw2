@@ -226,11 +226,7 @@ public class GetAssetsutils {
 	}
 	
 	public static String isqianqi(String filename,Activity mcontext){
-		if (DeviceUtil.isQianqi(mcontext)) {
-			return filename;	
-		}else {
-			return "qianguo_"+filename;
-		}
+		return filename;
 	}
 
 }

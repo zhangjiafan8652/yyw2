@@ -679,7 +679,13 @@ public class CommonGameProxy implements YYWGameProxy {
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
 		if (TextUtils.isEmpty(MiitHelper.oaid)||MiitHelper.oaid.equals("")) {
-			miitHelper.getDeviceIds(paramActivity);
+			try {
+				miitHelper.getDeviceIds(paramActivity);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
 		Jxutilsinit.oaid=MiitHelper.oaid;
 		//Toast.makeText(paramActivity, "miitHelperoaid======================Jxutilsinit.oaid"+Jxutilsinit.oaid, 0).show();
