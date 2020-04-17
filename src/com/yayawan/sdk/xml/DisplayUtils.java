@@ -109,18 +109,25 @@ public class DisplayUtils {
 
 		// 判断屏幕放向
 		String orientation = DeviceUtil.getOrientation(activity);
-		
-		if (DeviceUtil.isLandscape(activity)) {
-
-			widthPx = getHeightPx(activity);
-		} else  {
-			   // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		int height =getHeightPx(activity);
+		int with =getWidthPx(activity);
+		if (height>with) {
 			widthPx = getWidthPx(activity);
-
+		}else {
+			widthPx = getHeightPx(activity);
 		}
+		//if (DeviceUtil.isLandscape(activity)) {
+
+		//	widthPx = getHeightPx(activity);
+		//} else  {
+			   // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		//	widthPx = getWidthPx(activity);
+
+//		}
 
 		// Log.e("前size", size+"++++++++++++++");
 		// Log.e("widthPx", widthPx + "++++++++++++++");
+		//1920
 		if (widthPx == 1080) {
 			return size;
 		}

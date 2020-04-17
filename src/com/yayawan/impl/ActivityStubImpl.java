@@ -1,5 +1,7 @@
 package com.yayawan.impl;
 
+
+
 import android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +38,7 @@ public class ActivityStubImpl implements YYWActivityStub {
 	@Override
 	public void onCreate(Activity paramActivity) {
 		// TODO Auto-generated method stub
-		
+		// x.Ext.init(paramActivity.getApplication());
 		Jxutilsinit.isdebug=true;
 		
 		Yayalog.loger("oncreate");

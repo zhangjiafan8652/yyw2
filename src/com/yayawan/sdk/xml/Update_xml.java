@@ -119,6 +119,7 @@ public class Update_xml extends Basexml implements Layoutxml {
 		bt_mok.setTextColor(Color.WHITE);
 		bt_mok.setBackgroundColor(Color.parseColor("#FF5D23"));
 		bt_mok.setGravity(Gravity_CENTER);
+		bt_mok.setPadding(0, 0, 0, 0);
 
 		LinearLayout ll_zhanwei = new LinearLayout(mActivity);
 		ll_zhanwei = (LinearLayout) machineFactory.MachineView(ll_zhanwei, 20,
@@ -135,6 +136,7 @@ public class Update_xml extends Basexml implements Layoutxml {
 				mActivity));*/
 		bt_mCancel.setBackgroundColor(Color.GRAY);
 		bt_mCancel.setGravity(Gravity_CENTER);
+		bt_mCancel.setPadding(0, 0, 0, 0);
 
 		// TODO
 		ll_mBut.addView(bt_mok);

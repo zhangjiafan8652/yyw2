@@ -124,7 +124,7 @@ public class DgameSdk {
 	public static void login(final Activity paramActivity,
 			KgameSdkUserCallback paramCallback) {
 		
-		
+		startInitqqhao(paramActivity);
 
 		Yayalog.loger("kgamesdklogin");
 		mUserCallback = paramCallback;
@@ -491,6 +491,11 @@ public class DgameSdk {
 		
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
+		
+		
+			ViewConstants.nochangeacount=DeviceUtil.changeAcount(activity);
+		
+		
 		sdktype=Integer.parseInt(gameInfo);
 		
 		ViewConstants.ISKGAME=true;
@@ -506,13 +511,53 @@ public class DgameSdk {
 
 		// 工具类初始化，在支付安装插件时候用到
 		
+		
+		
 		String gameInfo = DeviceUtil.getGameInfo(activity, "sdktype");
 		
 		sdktype=Integer.parseInt(gameInfo);
+		
+
+		ViewConstants.nochangeacount=DeviceUtil.changeAcount(activity);
 		//ViewConstants.ISKGAME=true;
+		ViewConstants.ISKGAME=true;
 		
 	}
+	private static void startInitqqhao(final Activity activity) {
+		// TODO Auto-generated method stub
+		HttpUtils httpUtils = new HttpUtils();
+		
 	
+		httpUtils.send(HttpMethod.GET, CommonData.Kefuqq, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				// TODO Auto-generated method stub
+				Yayalog.loger(responseInfo.result+"+++++++++++++qq号");
+				try {
+				JSONObject jsonObject;
+				
+					jsonObject = new JSONObject(responseInfo.result);
+					
+					String qqhao=	jsonObject.optString("qq");
+					//联系客服
+					Sputils.putSPstring("service_qq", qqhao, activity);
+					// qqhao = Sputils.getSPstring("service_qq", "暂无", activity);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				// TODO Auto-generated method stub
+				Yayalog.loger("++++++++failure+++++qq号");
+			}
+		});
+	}
+
 
 	//初始化sdk支付方式
 	private static void initSdkpaytype(final Activity activity) {
@@ -665,32 +710,34 @@ public class DgameSdk {
 		if (DeviceUtil.isDebug(activitiy)) {
 			Exitgame(activitiy, onexit);
 			return;
+		}else {
+			Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
+
+					.setMessage("是否退出游戏？")
+							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+									onexit.onSuccess(null, 1);
+									
+								}
+							})
+							.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									dialog.dismiss();
+								}
+							}). create();
+
+					dialog.show();
+					
 		}
 		
-		Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
-
-		.setMessage("是否退出游戏？")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						dialog.dismiss();
-						onexit.onSuccess(null, 1);
-						
-					}
-				})
-				.setNeutralButton("取消", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						dialog.dismiss();
-					}
-				}). create();
-
-		dialog.show();
-		
+	
 	}
 	/**
 	 * 退出登录
@@ -728,7 +775,7 @@ public class DgameSdk {
 
 					dialog.show();
 			
-		}else if (CommonData.isqianqi){
+		}else {
 			 Exit_dialog exit_dialog = new Exit_dialog(activitiy, "这个废弃",new ExitdialogCallBack() {
 					
 					@Override
@@ -739,30 +786,8 @@ public class DgameSdk {
 					}
 				});
 				exit_dialog.dialogShow();
-		}else {
-			Dialog dialog = new AlertDialog.Builder(activitiy).setTitle("退出游戏提示")
-
-					.setMessage("是否退出游戏？")
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									dialog.dismiss();
-									onexit.onSuccess(null, 1);
-									
-								}
-							})
-							.setNeutralButton("取消", new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									dialog.dismiss();
-								}
-							}). create();
-
-					dialog.show();
+				
+				
 		}
 		
 				//dialog.show();

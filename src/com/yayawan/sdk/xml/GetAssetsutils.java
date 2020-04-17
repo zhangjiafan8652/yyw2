@@ -203,24 +203,8 @@ public class GetAssetsutils {
 		
 		name=isqianqi(name, mcontext);
 		// 判断屏幕放向
-		String orientation = DeviceUtil.getOrientation(mcontext);
-		if (orientation == "") {
+	
 
-		} else if ("landscape".equals(orientation)) {
-
-			widthPx = DisplayUtils.getHeightPx(mcontext);
-		} else if ("portrait".equals(orientation)) {
-			// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			widthPx = DisplayUtils.getWidthPx(mcontext);
-
-		}
-
-		// Log.e("前size", size+"++++++++++++++");
-		// Log.e("widthPx", widthPx + "++++++++++++++");
-//		if (widthPx > 720&&name.endsWith(".png")) {
-//			name = name.substring(0, name.indexOf(".png")) + "1080.png";
-//
-//		}
 
 		return name;
 	}

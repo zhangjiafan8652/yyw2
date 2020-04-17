@@ -2,6 +2,9 @@ package com.yayawan.sdk.login;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -41,7 +44,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kkgame.kkgamelib.R;
+import com.lidroid.jxutils.HttpUtils;
+import com.lidroid.jxutils.exception.HttpException;
+import com.lidroid.jxutils.http.RequestParams;
+import com.lidroid.jxutils.http.ResponseInfo;
+import com.lidroid.jxutils.http.callback.RequestCallBack;
+import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
 import com.yayawan.common.CommonData;
+import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
@@ -99,7 +109,7 @@ public class Login_dialog extends Basedialogview {
 	private TextView tv_contactcustomerservice;
 	private RelativeLayout rl_contactcustomerservice;
 	public static boolean isshowdialog;
-	String qqhao;
+	public static String qqhao;
 	private LinearLayout ll_mFind;
 	private Button bt_mCustomerService;
 	private Button bt_mFindPassWord;
@@ -543,6 +553,9 @@ public class Login_dialog extends Basedialogview {
 					}
 				});
 		
+		
+		
+		
 		//联系客服
 		 qqhao = Sputils.getSPstring("service_qq", "暂无", mActivity);
 		 
@@ -559,6 +572,7 @@ public class Login_dialog extends Basedialogview {
 						 // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
 				        ClipboardManager cm = (ClipboardManager)mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
 				        // 将文本内容放到系统剪贴板里。
+				        
 				        cm.setText(qqhao1);
 				        Toast.makeText(mActivity, "客服qq："+qqhao1+"复制成功，请到qq中添加好友", Toast.LENGTH_LONG).show();
 						
@@ -598,7 +612,7 @@ public class Login_dialog extends Basedialogview {
 
 			@Override
 			public void onClick(View v) {
-				ViewConstants.logintype=2;
+			
 				
 					ViewConstants.logintype=2;
 					Register_Phone_dialog register_ho_dialog = new Register_Phone_dialog(
@@ -632,6 +646,7 @@ public class Login_dialog extends Basedialogview {
 		});
 
 	}
+
 
 	/**
 	 * 加载数据库历史用户记录
@@ -847,48 +862,7 @@ public class Login_dialog extends Basedialogview {
 		});
 	}
 
-	/**
-	 * qq登录
-	 * 
-	 * @param ll_forgetpassword2
-	 */
-/*	private void setontoch3(LinearLayout ll_forgetpassword2) {
-		ll_forgetpassword2.setOnTouchListener(new OnTouchListener() {
 
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					iv_qqlogin.setImageDrawable(GetAssetsutils
-							.getDrawableFromAssetsFile("yaya_qqlogin1.png",
-									mActivity));
-					break;
-				case MotionEvent.ACTION_UP:
-					iv_qqlogin.setImageDrawable(GetAssetsutils
-							.getDrawableFromAssetsFile("yaya_qqlogin.png",
-									mActivity));
-					// Log.e("舍不得离我而去", "111");
-					Intent intent = new Intent(mActivity,
-							BaseLogin_Activity.class);
-					intent.putExtra("url",
-							"https://rest.yayawan.com/web/oauth/?type=qq&forward_url=sdk");
-					intent.putExtra("type", 4);
-					intent.putExtra("screen", 1);
-					mActivity.startActivity(intent);
-					//mActivity.finish();
-					dialog.dismiss();
-					ViewConstants.TEMPLOGIN_HO = dialog;
-
-					break;
-
-				default:
-					break;
-				}
-				return true;
-
-			}
-		});
-	}*/
 
 
 }

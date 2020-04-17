@@ -33,6 +33,8 @@ public class Help_listviewitem extends Basexml implements Layoutxml {
 		new android.widget.AbsListView.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 		/*linearLayout=(LinearLayout) machineFactory.MachineView(linearLayout, MATCH_PARENT, MATCH_PARENT,0,
 				mRelativeLayout);*/
+		
+	
 		linearLayout.setBackgroundColor(Color.WHITE);
 		linearLayout.setGravity(Gravity.CENTER_VERTICAL);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);

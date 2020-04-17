@@ -59,14 +59,14 @@ public class JFupdateUtils {
 	private String versioncode;
 	private String versionname;
 	JFupdateUtils jFupdateUtils;
-	private String apkpath = Environment.getExternalStorageDirectory()
-			.getPath() + "/";
+	private String apkpath ="";
 	private static String url;
 	private static File apkfile;
 
-	public JFupdateUtils(Activity mActivity) {
-		this.mActivity = mActivity;
+	public JFupdateUtils(Activity mactivity) {
+		this.mActivity = mactivity;
 		jFupdateUtils = this;
+		apkpath=mactivity.getExternalFilesDir(null)+ "/";
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class JFupdateUtils {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
 		requestParams.addBodyParameter("versioncode",
 				DeviceUtil.getVersionCode(mActivity));
-		Yayalog.loger("更新url:" + url);
+		Yayalog.loger("更新url:" + url +" "+DeviceUtil.getAppid(mActivity)+" "+DeviceUtil.getVersionCode(mActivity));
 		httpUtils.send(HttpMethod.POST, "" + url,requestParams,
 				new RequestCallBack<String>() {
 
@@ -133,8 +133,9 @@ public class JFupdateUtils {
 
 							int k = full_url.lastIndexOf("/");
 							String apkname = full_url.substring(k + 1);
-
+							//Yayalog.loger("存放app的path:" + url);
 							apkpath = apkpath + apkname;
+							Yayalog.loger("存放app的path:" + apkpath);
 							Updatedialog(full_url);
 						}
 
@@ -257,7 +258,7 @@ public class JFupdateUtils {
 			public void onFailure(HttpException error, String msg) {
 				// TODO Auto-generated method stub
 				Yayalog.loger("下载失败" + msg);
-				ToastUtil.showError(mActivity, "下载失败,请检查网络");
+				ToastUtil.showError(mActivity, "下载失败,请检查网络"+msg);
 				updateProgress_dialog.dialogDismiss();
 			}
 
@@ -285,6 +286,8 @@ public class JFupdateUtils {
 				updateProgress_dialog.dialogShow();
 
 			}
+
+		
 		});
 	}
 

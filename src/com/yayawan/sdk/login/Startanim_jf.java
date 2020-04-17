@@ -102,9 +102,10 @@ public class Startanim_jf extends BaseView {
 		}else {
 			if (CommonData.isqianqi) {
 				iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
-						"yaya_qianguo_ani.png", mActivity));
+						"yaya_ani.png", mActivity));
 			}else {
-				
+				iv_loading.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+						"yaya_qianguo_ani.png", mActivity));
 			}
 			
 		}
@@ -147,7 +148,7 @@ public class Startanim_jf extends BaseView {
 							
 						}
 					});
-					mHandler.sendEmptyMessageDelayed(ANIMERROR,200);
+					mHandler.sendEmptyMessageDelayed(ANIMERROR,600);
 				}
 			}
 		}.start();

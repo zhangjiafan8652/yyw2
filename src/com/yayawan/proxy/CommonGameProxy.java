@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
 
 
 import android.annotation.SuppressLint;
@@ -158,7 +159,7 @@ public class CommonGameProxy implements YYWGameProxy {
 			Yayalog.loger("Kgamelogin");
 			YYWMain.mUserCallBack = userCallBack;
 			this.mLogin.login(paramActivity, YYWMain.mUserCallBack, "login");
-			
+		
 			
 		} else {
 
@@ -617,8 +618,16 @@ public class CommonGameProxy implements YYWGameProxy {
 	@Override
 	public void onCreate(final Activity paramActivity) {
 
+		Jxutilsinit.oncreate(paramActivity);
+		
+		
 		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
-		//Jxutilsinit.isdebug=true;
+		if (DeviceUtil.isDebug(paramActivity)) {
+			Jxutilsinit.isdebug=true;
+		}else {
+			Jxutilsinit.isdebug=false;
+		}
+		
 		
 		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
 		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);

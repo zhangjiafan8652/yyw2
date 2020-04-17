@@ -2,6 +2,7 @@ package com.yayawan.sdk.login;
 
 
 import com.kkgame.kkgamelib.R;
+import com.yayawan.common.CommonData;
 import com.yayawan.main.Dgame;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
@@ -31,6 +32,7 @@ import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class SmallHelpActivity extends Activity{
 
@@ -133,20 +135,29 @@ public class SmallHelpActivity extends Activity{
 					}
 					
 					if (url.contains("changeuser")) {
-						//切换账号
-						AgentApp.mUser = null;
-						// ViewConstants.HADLOGOUT = true;
-						Sputils.putSPint("ischanageacount", 0,
-								ViewConstants.mMainActivity);
-						if (DgameSdk.mUserCallback!=null) {
-							DgameSdk.mUserCallback.onLogout();
+						
+						if (ViewConstants.nochangeacount) {
+							Toast.makeText(mActivity, "切换账号，请退出游戏后，重新登陆", Toast.LENGTH_LONG).show();
+							return true;
 						}else {
-							Dgame.getInstance().logout(ViewConstants.mMainActivity);
+							//切换账号
+							AgentApp.mUser = null;
+							// ViewConstants.HADLOGOUT = true;
+							Sputils.putSPint("ischanageacount", 0,
+									ViewConstants.mMainActivity);
+							if (DgameSdk.mUserCallback!=null) {
+								DgameSdk.mUserCallback.onLogout();
+							}else {
+								Dgame.getInstance().logout(ViewConstants.mMainActivity);
+							}
+							
+							ViewConstants.mDialogs.clear();
+							
+							finish();
 						}
 						
-						ViewConstants.mDialogs.clear();
 						
-						finish();
+					
 					}else {
 						wv_mWeiboview.loadUrl(url);
 					}
@@ -169,19 +180,33 @@ public class SmallHelpActivity extends Activity{
 			 url=ViewConstants.smallhelp+"?uid="+uid+"&token="+token+"&appid="+appid;
 			break;
 			
-case 2:
-	 url=ViewConstants.smallhelpgift+"?uid="+uid+"&token="+token+"&appid="+appid;	
+		case 2:
+			url=ViewConstants.smallhelpgift+"?uid="+uid+"&token="+token+"&appid="+appid;	
 			break;
-case 3:
-	 url=ViewConstants.smallhelpcustomer_service+"?uid="+uid+"&token="+token+"&appid="+appid;
-	break;
+		case 3:
+			url=ViewConstants.smallhelpcustomer_service+"?uid="+uid+"&token="+token+"&appid="+appid;
+			break;
 
 		default:
 			break;
 		}
 		
 		if (DgameSdk.sdktype==1) {
-			url=url+"&nocompayinfo=1";
+			if (CommonData.isqianqi) {
+				url=url+"&nocompayinfo=1";
+			}else {
+				//千果第二个空白sdk
+				String gameInfo = DeviceUtil.getGameInfo(mActivity, "qianguosdktype");
+				if (gameInfo.endsWith("1")) {
+					String qqhao=  Sputils.getSPstring("service_qq", "暂无", mActivity);
+					url=url+"&nocompayinfo=1&qianguoemptysdk=true&qq="+qqhao;
+					Yayalog.loger(url);
+				}else {
+					url=url+"&nocompayinfo=1";
+				}
+				
+			}
+			
 		}else {
 		
 		}

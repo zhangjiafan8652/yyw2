@@ -69,7 +69,9 @@ public class LogoWindow {
 	public static String img_icon_nosdk="yaya1_acountmanagericon_nosdk.png";
 	
 	public static String img_icon_nosdk_ban="yaya1_acountmanagericontouming_nosdk.png";
+	public static String img_icon_qianguo3sdk="img_icon_qianguo3sdk.png";
 	
+	public static String img_icon_qianguo3ban="img_icon_qianguo3ban.png";
 	public static int windowwith=150;
 
 	public static LogoWindow getInstants(Activity mactivity) {
@@ -78,10 +80,33 @@ public class LogoWindow {
 			if (CommonData.isqianqi) {
 				
 			}else {
-				Yayalog.loger("yaya1_qianguo_acountmanagericon+++++++++++++++++++++");
-				  img_icon_sdk="yaya1_qianguo_acountmanagericon.png";
+				
 					
-					 img_icon_sdk_ban="yaya1_qianguo_acountmanagericontouming.png";
+				Yayalog.loger("yaya1_qianguo_acountmanagericon+++++++++++++++++++++");
+				
+				
+				
+				img_icon_sdk="yaya1_qianguo_acountmanagericon.png";
+					
+				img_icon_sdk_ban="yaya1_qianguo_acountmanagericontouming.png";
+				
+				if (CommonData.isqianqi) {
+					
+				}else {
+					//千果第二个空白sdk
+					String gameInfo = DeviceUtil.getGameInfo(mactivity, "qianguosdktype");
+					
+					if (gameInfo.endsWith("1")) {
+						img_icon_nosdk=img_icon_qianguo3sdk;
+						img_icon_nosdk_ban=img_icon_qianguo3ban;
+					}else {
+						
+					}
+					
+				}
+				
+						
+					
 			}
 			mLogowindow = new LogoWindow(mactivity);
 
@@ -128,7 +153,7 @@ public class LogoWindow {
 				//隐藏窗口逻辑
 				if (iscanyingcang) {
 					params.x = 0;
-					params.y = 100;
+					//params.y = 100;
 					Yayalog.loger("我要更新ui去隐藏了" +
 							"");
 					wm.updateViewLayout(myview, params);
@@ -202,6 +227,7 @@ public class LogoWindow {
 
 			 myview = new RelativeLayout(mactivity);
 			// myview.setBackgroundColor(Color.RED);
+			 Yayalog.loger("小助手大小："+machSize(windowwith) +" 是否横屏"+DeviceUtil.isLandscape(mactivity) );
 			 LayoutParams layoutParams = new LinearLayout.LayoutParams(machSize(windowwith),
 						machSize(windowwith));
 			 layoutParams.setMargins(0, 0, 0, 0);
