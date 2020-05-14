@@ -137,12 +137,9 @@ public class Yayapaymain_jf extends BaseView {
 		
 		//如果是 千果sdk  隐藏 代金券和Y币支付
 		
-		if (CommonData.sdkid.contains("qianqi")) {
-					
-		}else {
-			rl_mlYaya.setVisibility(View.GONE);
-			rl_mlDaijinjuan.setVisibility(View.GONE);
-		}
+		
+
+		
 				
 		
 		// 微信插件支付
@@ -165,7 +162,7 @@ public class Yayapaymain_jf extends BaseView {
 	public void logic() {
 		payclickcontrol = false;
 		mPaymentCallback = DgameSdk.mPaymentCallback;
-
+		//rl_mBluep.setVisibility(View.GONE);
 		// TODO 支付宝支付
 		rl_mBluep.setOnClickListener(new OnClickListener() {
 
@@ -361,7 +358,7 @@ mActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					Toast.makeText(mActivity, "Y币支付成功", 0).show();
+					Toast.makeText(mActivity, "平台币支付成功", 0).show();
 				}
 			});
 		}else {
@@ -370,7 +367,7 @@ mActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					String msg="丫丫币余额不足";
+					String msg="平台币余额不足";
 					try {
 						JSONObject jsonObject = new JSONObject(result);
 						 msg = jsonObject.optString("err_msg");
@@ -388,7 +385,7 @@ mActivity.runOnUiThread(new Runnable() {
 	private void daijinjuanpayResult(final String result){
 		if (result.contains("success")) {
 			onSuccess(AgentApp.mUser, AgentApp.mPayOrder, 1);
-mActivity.runOnUiThread(new Runnable() {
+          mActivity.runOnUiThread(new Runnable() {
 				
 				@Override
 				public void run() {

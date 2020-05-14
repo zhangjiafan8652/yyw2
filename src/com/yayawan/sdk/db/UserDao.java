@@ -109,7 +109,9 @@ public class UserDao {
 				Sputils.putSPstring("password", password, mContext);
 			}
 			
-			
+			if (PermissionUtils.checkPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+	    		return;
+	    	}
 		
 			if (TextUtils.isEmpty(name)) {
 				return;

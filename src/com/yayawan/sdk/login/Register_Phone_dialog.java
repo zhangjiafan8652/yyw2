@@ -583,7 +583,7 @@ public class Register_Phone_dialog extends Basedialogview {
 									Utilsjf.stopDialog();
 
 									Yayalog.loger("手机注册结果" + result.result);
-									Toast.makeText(mActivity, "注册成功", 0).show();
+									//Toast.makeText(mActivity, "注册成功", 0).show();
 
 									User user = parserPhoneRegisterResult(result.result);
 									if (user == null) {

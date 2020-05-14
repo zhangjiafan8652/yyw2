@@ -107,6 +107,11 @@ public class JFupdateUtils {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(mActivity));
 		requestParams.addBodyParameter("versioncode",
 				DeviceUtil.getVersionCode(mActivity));
+		//调试模式自动获取当前游戏链接测试更新 debug=autodebug
+		if (DeviceUtil.isDebug(mActivity)) {
+			requestParams.addBodyParameter("debug",
+					"autodebug");
+		}
 		Yayalog.loger("更新url:" + url +" "+DeviceUtil.getAppid(mActivity)+" "+DeviceUtil.getVersionCode(mActivity));
 		httpUtils.send(HttpMethod.POST, "" + url,requestParams,
 				new RequestCallBack<String>() {
@@ -353,6 +358,7 @@ public class JFupdateUtils {
 
     //安装应用
     private static void installApk(File apk,Activity mac) {
+    	
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
@@ -366,6 +372,29 @@ public class JFupdateUtils {
         mac.getBaseContext().startActivity(intent);
     }
 
+    private Context context;
+    
+    public  void install(String file){
+    	File file2 = new File(file);
+    	installApk2(file2);
+    }
+    //安装应用
+    private  void installApk2(File apk) {
+    	
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
+        } else {//Android7.0之后获取uri要用contentProvider
+            Uri uri = getUriFromFile(context, apk);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    
     public static Uri getUriFromFile(Context context, File file) {
         Uri imageUri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

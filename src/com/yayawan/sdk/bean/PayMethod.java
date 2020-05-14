@@ -14,8 +14,30 @@ public class PayMethod {
     public String reason;
     public int status;
     public int discount;
+    public int per;
+    public String icon;
+    public String sub_text;
     
-    public PayMethod() {
+    public int getPer() {
+		return per;
+	}
+	public void setPer(int per) {
+		this.per = per;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public String getSub_text() {
+		return sub_text;
+	}
+	public void setSub_text(String sub_text) {
+		this.sub_text = sub_text;
+	}
+	public PayMethod() {
         super();
         
     }

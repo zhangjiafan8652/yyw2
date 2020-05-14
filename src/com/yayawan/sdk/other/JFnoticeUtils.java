@@ -127,6 +127,11 @@ public class JFnoticeUtils {
 				};
 				String pingjie = "app_id=" + DeviceUtil.getAppid(mActicity);
 				Yayalog.loger(ViewConstants.NOTICEURL + "/?" + pingjie);
+				
+				//调试模式自动获取当前游戏链接测试更新 debug=autodebug
+				if (DeviceUtil.isDebug(mActicity)) {
+					 pingjie = "app_id=" + DeviceUtil.getAppid(mActicity)+"&debug=autodebug";
+				}
 				yibuhttputils.runHttp(ViewConstants.NOTICEURL + "/?" + pingjie, "",
 						Yibuhttputils.GETMETHOD, "");
 			} catch (Exception e) {

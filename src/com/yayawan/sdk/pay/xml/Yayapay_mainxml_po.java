@@ -217,7 +217,7 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 				DeviceUtil.YINLIAN);
 
 
-		rl_mYaya = createyayabiItemView("Y币支付", "yaya_yayabi.png",
+		rl_mYaya = createyayabiItemView("平台币支付", "yaya_yayabi.png",
 				DeviceUtil.YAYABICODE);
 		rl_mWxpay = createItemView("微信支付", "yaya_greenp.png",
 				DeviceUtil.WXPAYCODE);
@@ -311,11 +311,11 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_LEFT);
 		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
 				iconname, mActivity));
-
+		
 		TextView tv_bluepay = new TextView(mContext);
 	
 		if (paytype==DeviceUtil.YAYABICODE) {
-			name = name + "      \n丫丫币支付赠送积分";
+			name = name + "      \n平台币支付赠送积分";
 		}else {
 			name = name + "      ";
 		}
@@ -333,6 +333,57 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 		return relativeLayout;
 
 	}
+	
+	
+	/**
+	 * 创建一个支付item布局
+	 * 
+	 * @param name
+	 *            支付名字
+	 * @param iconname
+	 *            icon名字
+	 * @param paytype
+	 *            支付方式id 用来判断是否九五折
+	 * @return
+	 */
+	private RelativeLayout createItemView(String name, String iconname,
+			int paytype,String iconurl,String subertext,String per) {
+		RelativeLayout relativeLayout = new RelativeLayout(mContext);
+
+		machineFactory.MachineView(relativeLayout, 450, 150, 0, "GridLayout",
+				22, 22, 0, 0, 0);
+		relativeLayout.setGravity(Gravity_CENTER);
+
+		ImageView iv_payicon = new ImageView(mContext);
+		machineFactory.MachineView(iv_payicon, 90, MATCH_PARENT, 0,
+				mRelativeLayout, 0, 0, 0, 0, RelativeLayout.ALIGN_PARENT_LEFT);
+		iv_payicon.setImageBitmap(GetAssetsutils.getImageFromAssetsFile(
+				iconname, mActivity));
+		
+		TextView tv_bluepay = new TextView(mContext);
+	
+		if (paytype==DeviceUtil.YAYABICODE) {
+			name = name + "      \n平台币支付赠送积分";
+		}else {
+			name = name + "      ";
+		}
+		
+	
+		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
+				0, name, 33, mRelativeLayout, 100, 0, 0, 0);
+		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
+		// TODO
+		relativeLayout.addView(iv_payicon);
+		relativeLayout.addView(tv_bluepay);
+
+		relativeLayout.setBackground(GetAssetsutils.get9DrawableFromAssetsFile(
+				"yaya_paynormal_bg.9.png", mContext));
+		return relativeLayout;
+
+	}
+	
+	
+	
 	
 	/**
 	 * 创建一个丫丫币支付item布局
@@ -360,17 +411,17 @@ public class Yayapay_mainxml_po extends Basexml implements Layoutxml {
 				iconname, mActivity));
 
 		TextView tv_bluepay = new TextView(mContext);
-		name = name + "      ";
+		name = name + "";
 	
 		machineFactory.MachineTextView(tv_bluepay, WRAP_CONTENT, MATCH_PARENT,
-				0, name, 33, mRelativeLayout, 135, 0, 0, 0);
+				0, name, 33, mRelativeLayout, 110, 0, 0, 0);
 		
 		tv_bluepay.setGravity(Gravity.CENTER_VERTICAL);
 		
 		
 		TextView tv_tip = new TextView(mContext);
 		
-		String nametip =  "可获得丫丫玩盒子积分";
+		String nametip =  "       可获得积分";
 		machineFactory.MachineTextView(tv_tip, WRAP_CONTENT, MATCH_PARENT,
 				0, nametip, 18, mRelativeLayout, 60, 107, 0, 0);
 		

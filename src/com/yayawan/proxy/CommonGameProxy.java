@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.bun.miitmdid.core.JLibrary;
+
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 
@@ -622,6 +623,9 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 		
 		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
+		
+		new VersionnumberView(paramActivity);
+		
 		if (DeviceUtil.isDebug(paramActivity)) {
 			Jxutilsinit.isdebug=true;
 		}else {
@@ -652,7 +656,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 		// 进行检查更新
 	
-
+		
 	
 
 		// 获取公告
@@ -668,6 +672,10 @@ public class CommonGameProxy implements YYWGameProxy {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		
+		
+		
 		mStub.onCreate(paramActivity);
 
 	}

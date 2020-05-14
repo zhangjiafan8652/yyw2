@@ -1,6 +1,7 @@
 package com.yayawan.sdk.main;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ import com.yayawan.domain.YYWUser;
 import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.main.YYWMain;
 import com.yayawan.sdk.bean.Order;
+import com.yayawan.sdk.bean.PayMethod;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.ExitdialogCallBack;
 import com.yayawan.sdk.callback.KgameSdkApiCallBack;
@@ -558,6 +560,8 @@ public class DgameSdk {
 		});
 	}
 
+	
+	public static ArrayList<PayMethod> paymethods;
 
 	//初始化sdk支付方式
 	private static void initSdkpaytype(final Activity activity) {
@@ -592,10 +596,20 @@ public class DgameSdk {
 						JSONObject data=jsonObject.getJSONObject("data");
 						int toggleint =data.optInt("toggle");
 						JSONArray allpaytypearray =data.optJSONArray("all_paytype");
+						paymethods=new ArrayList<PayMethod>();
 						for (int i = 0; i < allpaytypearray.length(); i++) {
+							PayMethod payMethod = new PayMethod();
+							
 							JSONObject paytyp=allpaytypearray.getJSONObject(i);
-						    String paylib=	MD5.MD5(paytyp.optString("lib"));
+						    
+							String paylib=	MD5.MD5(paytyp.optString("lib"));
 						    String payid=	paytyp.optString("id");
+						    
+						    payMethod.setPayName(paytyp.optString("name"));
+						    payMethod.setPer(Integer.parseInt(paytyp.optString("per")));
+						    payMethod.setIcon(paytyp.optString("icon"));
+						    payMethod.setSub_text(paytyp.optString("sub_text"));
+						  //  paymethods.add(payMethod);
 						//	System.out.println(paylib+":"+MD5.MD5(paylib));
 							//System.out.println("CommonData.bluepmd5string:"+CommonData.bluepmd5string);
 						    if (paylib.equals(CommonData.bluepmd5string)) {
@@ -612,6 +626,7 @@ public class DgameSdk {
 								CommonData.DAIJINJUANPAY=Integer.parseInt(payid);
 								//Yayalog.loger("设置支付方式CommonData.bluepmd5string："+payid);
 							}
+						    
 						}
 						
 					}else {
