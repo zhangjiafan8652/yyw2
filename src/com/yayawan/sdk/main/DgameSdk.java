@@ -465,6 +465,7 @@ public class DgameSdk {
 		Yayalog.loger("zone_id",zoneId);
 		Yayalog.loger("zone_name", zoneName);
 		Yayalog.loger("zone_name", ViewConstants.SETROLEDATAURL);
+		
 		httpUtils.send(HttpMethod.POST, ViewConstants.SETROLEDATAURL, requestParams, new RequestCallBack<String>() {
 
 			@Override

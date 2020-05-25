@@ -640,19 +640,37 @@ public class CommonGameProxy implements YYWGameProxy {
 		CommonData.initCommonData(paramActivity);
 		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
 		mActivity = paramActivity;
-		JLibrary.InitEntry(paramActivity);
-		 miitHelper = new MiitHelper(new AppIdsUpdater() {
+		
+		
+		
+		try {
+		
+			if (android.os.Build.VERSION.SDK_INT>26) {
 				
-				@Override
-				public void OnIdsAvalid(String ids) {
-					// TODO Auto-generated method stub
-					Jxutilsinit.oaid=miitHelper.oaid;
-					//Toast.makeText(paramActivity, "Handle.active_handler======================"+ids, 0).show();
-					Handle.active_handler(paramActivity);
-				}
-			});
 			
-			miitHelper.getDeviceIds(paramActivity);
+		
+			JLibrary.InitEntry(paramActivity);
+			 miitHelper = new MiitHelper(new AppIdsUpdater() {
+					
+					@Override
+					public void OnIdsAvalid(String ids) {
+						// TODO Auto-generated method stub
+						Jxutilsinit.oaid=miitHelper.oaid;
+						//Toast.makeText(paramActivity, "Handle.active_handler======================"+ids, 0).show();
+						Handle.active_handler(paramActivity);
+					}
+				});
+				
+				miitHelper.getDeviceIds(paramActivity);
+		
+			}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			Yayalog.loger("当前sdk 获取oaid id 异常：" );
+		}
+		
+	
 		
 		// 进行检查更新
 	
@@ -695,6 +713,8 @@ public class CommonGameProxy implements YYWGameProxy {
 
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
+		if (android.os.Build.VERSION.SDK_INT>26) {
+		
 		if (TextUtils.isEmpty(MiitHelper.oaid)||MiitHelper.oaid.equals("")) {
 			try {
 				miitHelper.getDeviceIds(paramActivity);
@@ -706,7 +726,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		}
 		Jxutilsinit.oaid=MiitHelper.oaid;
 		//Toast.makeText(paramActivity, "miitHelperoaid======================Jxutilsinit.oaid"+Jxutilsinit.oaid, 0).show();
-
+		}
 	}
 
 	@Override

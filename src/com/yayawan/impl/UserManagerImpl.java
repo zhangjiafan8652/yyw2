@@ -13,6 +13,7 @@ import com.yayawan.proxy.YYWUserManager;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
+import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.utils.Yayalog;
 
@@ -140,9 +141,11 @@ public class UserManagerImpl implements YYWUserManager {
 		Yayalog.loger("调用了impl中的usermanagerimpl中的setdata方法");
 	
 		//if (Integer.parseInt(ext)==1) {
-			DgameSdk.setRoleData(paramActivity, roleId, roleName, roleLevel, zoneId, zoneName,YYWMain.mUser.token,YYWMain.mUser.uid);
-			
+					
 	//	}
+		
+		DgameSdk.setRoleData(paramActivity, roleId, roleName, roleLevel, zoneId, zoneName,  AgentApp.mUser.token,  AgentApp.mUser.uid+"", ext);
+
 	
 	}
 	
