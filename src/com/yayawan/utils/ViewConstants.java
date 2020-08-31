@@ -77,7 +77,9 @@ public class ViewConstants {
 	public static String unionmakeorder = baseurl + "data/pay_handler";// 联合渠道下单
 	
 	public static String paytype = baseurl + "data/payinfo";  //在中间件中，支付前请求，支付方式
-
+	
+	public static String errmsgurl = baseurl + "side/sdk_log_received/";  //上报错误日志
+	
 	public static String NOTICEURL = baseurl + "data/notice";
 	
 	public static String VIPNOTICEURL = baseurl + "user/vip_kf_info";//VIP通知

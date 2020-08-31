@@ -12,9 +12,11 @@ public class Basexml {
 	protected static String mRelativeLayout="RelativeLayout";
 	
 	protected static int Gravity_CENTER=Gravity.CENTER;
+	
 	public  Context mContext;
 	public  Activity mActivity;
 	protected MachineFactory machineFactory;
+	
 	public Basexml(Activity activity) {
 		this.mContext=activity;
 		this.mActivity=activity;

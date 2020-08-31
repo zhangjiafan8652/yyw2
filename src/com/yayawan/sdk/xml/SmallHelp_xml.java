@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yayawan.sdk.utils.CornersWebView;
+import com.yayawan.sdk.webview.AdvancedWebView;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 
@@ -32,7 +33,7 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 
 	private RelativeLayout baseLinearLayout;
 	private ImageButton iv_mPre;
-	private WebView wv_mWeiboview;
+	private AdvancedWebView wv_mWeiboview;
 	
 
 	private LinearLayout ll_mPre;
@@ -119,13 +120,15 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		//baselin.setPadding(10, 0, 10, 10);
 		baselin.setGravity(Gravity.LEFT);
 		
-		wv_mWeiboview = new WebView(mContext);
+		wv_mWeiboview = new AdvancedWebView(mContext);
 		
 		wv_mWeiboview.setLayerType(View.
 
 				LAYER_TYPE_SOFTWARE
 				, null);
 		wv_mWeiboview.setHorizontalScrollBarEnabled(false);
+		wv_mWeiboview.setBackgroundColor(Color.parseColor("#22ffffff")); // 设置背景色
+	//	wv_mWeiboview.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
 		machineFactory.MachineView(wv_mWeiboview, with, height,
 					mLinearLayout);
 		//wv_mWeiboview.setRadius(10, 10, 10, 10);
@@ -373,11 +376,11 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		this.iv_mPre = iv_mPre;
 	}
 
-	public WebView getWv_mWeiboview() {
+	public AdvancedWebView getWv_mWeiboview() {
 		return wv_mWeiboview;
 	}
 
-	public void setWv_mWeiboview(CornersWebView wv_mWeiboview) {
+	public void setWv_mWeiboview(AdvancedWebView wv_mWeiboview) {
 		this.wv_mWeiboview = wv_mWeiboview;
 	}
 

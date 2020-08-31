@@ -17,4 +17,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    
+    <!--activity设置背景-->
+<style name="myTransparent" parent="@android:style/Theme.Translucent.NoTitleBar">
+   
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item> <!-- 无标题 -->
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:backgroundDimEnabled">true</item><!-- 半透明 -->
+</style>
 </resources>

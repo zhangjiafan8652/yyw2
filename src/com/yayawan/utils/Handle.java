@@ -105,7 +105,7 @@ public class Handle {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(context));
 		requestParams.addBodyParameter("imei", DeviceUtil.getIMEI(context));
 		requestParams.addBodyParameter("uuid", DeviceUtil.getUUID(context));
-		requestParams.addBodyParameter("cdata",getCopy(context));
+		//requestParams.addBodyParameter("cdata",getCopy(context));
 		requestParams.addBodyParameter("cur_ver",
 				DeviceUtil.getVersionCode(context));
 		Yayalog.loger(DeviceUtil.getAppid(context)+","+DeviceUtil.getIMEI(context)+","+DeviceUtil.getVersionCode(context));
@@ -163,7 +163,7 @@ public class Handle {
             // 从数据集中获取（粘贴）第一条文本数据
             return clipData.getItemAt(0).getText().toString();
         }
-        return "";
+        return "k";
     }
 
 	

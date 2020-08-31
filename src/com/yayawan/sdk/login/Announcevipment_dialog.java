@@ -33,6 +33,7 @@ import com.yayawan.sdk.bean.Question;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.webview.AdvancedWebView;
 import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
@@ -45,7 +46,7 @@ public class Announcevipment_dialog extends Basedialogview {
 
 	private LinearLayout ll_mPre;
 	private ImageButton iv_mPre;
-	private WebView lv_helpcontent;
+	private AdvancedWebView lv_helpcontent;
 	private ProgressBar pb_mPb;
 	private ArrayList<Question> mQuestionList;
 	private String html;
@@ -155,7 +156,7 @@ public class Announcevipment_dialog extends Basedialogview {
 		machineFactory.MachineView(pb_mPb, 60, 60, mLinearLayout, 2, 600);
 
 		// 帮助的列表内容
-		lv_helpcontent = new WebView(mActivity);
+		lv_helpcontent = new AdvancedWebView(mActivity);
 		machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, MATCH_PARENT,
 				0, mLinearLayout, 0, 0, 0, 0, 100);
 		

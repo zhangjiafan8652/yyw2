@@ -2,18 +2,12 @@ package com.yayawan.implyy;
 
 import java.lang.reflect.Method;
 import java.math.BigInteger;
-import java.net.URL;
-import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
-
 import com.yayawan.callback.YYWPayCallBack;
 import com.yayawan.domain.YYWOrder;
 import com.yayawan.domain.YYWUser;
@@ -24,13 +18,9 @@ import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkPaymentCallback;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
-import com.yayawan.sdk.utils.CryptoUtil;
-import com.yayawan.sdk.utils.RSACoder;
 import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
-
-
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
 import com.lidroid.jxutils.http.RequestParams;
@@ -89,7 +79,12 @@ public class ChargerImplyylianhe implements YYWCharger {
 		if (DeviceUtil.isXiaomi(paramActivity)) {
 			DgameSdk.GreenblueP(paramActivity, order2, 1,new KgameSdkPaymentCallback() {
 
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void onCancel() {
 	                if (YYWMain.mPayCallBack != null) {
 	                    YYWMain.mPayCallBack.onPayCancel("cancel", "");
@@ -148,6 +143,11 @@ public class ChargerImplyylianhe implements YYWCharger {
 		}else {
 		DgameSdk.payment(paramActivity, order2, false,
 				new KgameSdkPaymentCallback() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void onCancel() {
@@ -303,36 +303,5 @@ public class ChargerImplyylianhe implements YYWCharger {
 		});
 	}
 	
-	ProgressDialog progressDialog = null;
-
-	private void progress(Activity paramActivity) {
-		progressDialog = new ProgressDialog(paramActivity);
-		// 设置进度条风格，风格为圆形，旋转的
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		// 设置ProgressDialog 标题
-		// progressDialog.setTitle("提示");
-		// 设置ProgressDialog 提示信息
-		progressDialog.setMessage("订单处理中");
-		// 设置ProgressDialog 标题图标
-		// progressDialog.setIcon(R.drawable.a);
-		// 设置ProgressDialog 的进度条是否不明确
-		progressDialog.setIndeterminate(true);
-		// 设置ProgressDialog 是否可以按退回按键取消
-		progressDialog.setCancelable(false);
-		// 设置ProgressDialog 的一个Button
-		// progressDialog.setButton("确定", new SureButtonListener());
-		// 让ProgressDialog显示
-		try {
-			progressDialog.show();
-		} catch (Exception e) {
-
-		}
-	}
-
-	private void disprogress() {
-		if (progressDialog != null) {
-			if (progressDialog.isShowing())
-				progressDialog.dismiss();
-		}
-	}
+	
 }

@@ -1,11 +1,22 @@
 package com.yayawan.sdk.login;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,12 +31,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yayawan.sdk.bean.Question;
 import com.yayawan.sdk.utils.Basedialogview;
+import com.yayawan.sdk.webview.AdvancedWebView;
 import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.PermissionUtils;
 import com.yayawan.utils.Sputils;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
@@ -34,21 +48,25 @@ public class Announcement_dialog extends Basedialogview {
 
 	private LinearLayout ll_mPre;
 	private ImageButton iv_mPre;
-	private WebView lv_helpcontent;
+	private AdvancedWebView lv_helpcontent;
 	private ProgressBar pb_mPb;
 	private ArrayList<Question> mQuestionList;
 	private String html;
 	private ImageView ib_mAgreedbox;
 	private ImageView ib_mNotAgreedbox;
 	private ImageView ib_mClosebutton;
+	
+	private Activity mActivity;
 	protected static final int SHOWCONTENT = 3;
 
 	public Announcement_dialog(Activity activity) {
 		super(activity);
+		mActivity=activity;
 	}
 	public Announcement_dialog(Activity activity,String html) {
 		
 		super(activity);
+		mActivity=activity;
 		Yayalog.loger("wo"+html);
 		this.html=html;
 		initlogic();
@@ -144,7 +162,7 @@ public class Announcement_dialog extends Basedialogview {
 		machineFactory.MachineView(pb_mPb, 60, 60, mLinearLayout, 2, 600);
 
 		// 帮助的列表内容
-		lv_helpcontent = new WebView(mActivity);
+		lv_helpcontent = new AdvancedWebView(mActivity);
 		machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, MATCH_PARENT,
 				0, mLinearLayout, 0, 0, 0, 0, 100);
 		
@@ -279,9 +297,117 @@ public class Announcement_dialog extends Basedialogview {
 		//lv_helpcontent.loadUrl("http://danjiyou.duapp.com/Home/Blog/index");
 		settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
 		lv_helpcontent.setVerticalScrollBarEnabled(false);
+		lv_helpcontent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+            	System.out.println("chang anle");
+            	WebView.HitTestResult result = lv_helpcontent.getHitTestResult();
+                if (null == result)
+                    return false;
+                int type = result.getType();
+                switch (type) {
+                    case WebView.HitTestResult.EDIT_TEXT_TYPE: // 选中的文字类型
+                        break;
+                    case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
+                        break;
+                    case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
+                        break;
+                    case WebView.HitTestResult.GEO_TYPE: // 　地图类型
+                        break;
+                    case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
+                        break;
+                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE: // 带有链接的图片类型
+                    case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项
+                    	imgurl = result.getExtra();
+//                        if (mOnSelectItemListener != null && url != null && URLUtil.isValidUrl(url)) {
+//                            mOnSelectItemListener.onSelected(touchX, touchY, result.getType(), url);
+//                        }
+                    	   if (!(PermissionUtils.checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)&&PermissionUtils.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+								PermissionUtils.requestPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE);
+								
+								
+							}else {
+								try {
+									 new SaveImage().execute();
+										
+								} catch (Exception e) {
+									// TODO: handle exception
+								}
+								
+							}
+                       
+                        return true;
+                    case WebView.HitTestResult.UNKNOWN_TYPE: //未知
+                        break;
+                }
+               
+            	
+				return true;
+                }
+            });
 		lv_helpcontent.loadData(html, "text/html; charset=UTF-8", null);
 	}
 	
-	
+	private String imgurl = "";
+
+    /***
+     * 功能：用线程保存图片
+     *
+     * @author wangyp
+     */
+    private class SaveImage extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String result = "";
+            System.out.println(imgurl);
+            try {
+                String sdcard = Environment.getDownloadCacheDirectory().toString();
+                File file = new File(sdcard + "/Download");
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+                int idx = imgurl.lastIndexOf(".");
+                String ext = imgurl.substring(idx);
+                file = new File(sdcard + "/Download/" + new Date().getTime()+".jpg" );
+                InputStream inputStream = null;
+                URL url = new URL(imgurl);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(20000);
+                if (conn.getResponseCode() == 200) {
+                    inputStream = conn.getInputStream();
+                }
+                byte[] buffer = new byte[4096];
+                int len = 0;
+                FileOutputStream outStream = new FileOutputStream(file);
+                while ((len = inputStream.read(buffer)) != -1) {
+                    outStream.write(buffer, 0, len);
+                }
+                outStream.close();
+                result = "图片已保存至：" + file.getAbsolutePath();
+                mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                mActivity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Toast.makeText(mActivity, "图片已经保存到相册", 0).show();
+					}
+				});
+                System.out.println(result);
+                Yayalog.loger(result);
+            } catch (Exception e) {
+                result = "保存失败！" + e.getLocalizedMessage();
+                Yayalog.loger(result);
+                System.out.println(result);
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+           // showToast(result);
+        }
+    }
 
 }

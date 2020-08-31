@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.yayawan.common.CommonData;
@@ -57,7 +59,7 @@ public class Exit_dialog extends Basedialogview {
 		Yayalog.loger("wo"+html);
 		this.html=html;
 		mExitdialogcallback=mexitdialogcallback;
-		textlog="测试顺序：打开游戏，登陆，支付，按home键回到手机桌面，再点开游戏，点击小助手，点击切换账号，用新账号登陆，最后按返回键，把检查结果截图。"+"\r\n"+"\r\n";
+		//textlog="测试顺序：打开游戏，登陆，支付，按home键回到手机桌面，再点开游戏，点击小助手，点击切换账号，用新账号登陆，最后按返回键，把检查结果截图。"+"\r\n"+"\r\n";
 		
 		initlogic();
 		
@@ -124,6 +126,7 @@ public class Exit_dialog extends Basedialogview {
 		baselin.setGravity(Gravity.CENTER_VERTICAL);
 
 		// 中间内容
+		
 		LinearLayout ll_content = new LinearLayout(mContext);
 		machineFactory.MachineView(ll_content, with, height, mLinearLayout, 2,
 				0);
@@ -132,16 +135,21 @@ public class Exit_dialog extends Basedialogview {
 		ll_content.setOrientation(LinearLayout.VERTICAL);
 
 
-
+		
+		
 	
 		mTextView=new TextView(mActivity);
-		machineFactory.MachineTextView(mTextView, MATCH_PARENT, 780, 0, "", 27, mLinearLayout, 0, 0, 0, 0);
+		machineFactory.MachineTextView(mTextView, MATCH_PARENT, MATCH_PARENT, 0, "", 27, mLinearLayout, 0, 0, 0, 0);
 
 		// webview
 		lv_helpcontent = new WebView(mActivity);
-		machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, 450,
-				0, mLinearLayout, 0, 0, 0, 0, 100);
-		
+		if (YYcontants.ISDEBUG) {
+			machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, 750,
+					0, mLinearLayout, 0, 0, 0, 0, 100);
+		}else {
+			machineFactory.MachineView(lv_helpcontent, MATCH_PARENT, 450,
+					0, mLinearLayout, 0, 0, 0, 0, 100);
+		}
 
 		// button的退出
 				bt_mlogin = new Button(mActivity);
@@ -162,17 +170,25 @@ public class Exit_dialog extends Basedialogview {
 				});
 		
 		//ll_content.addView(rl_title);
-		if (YYcontants.ISDEBUG) {
-			ll_content.addView(mTextView);
-		}else {
+//		if (YYcontants.ISDEBUG) {
+//			ll_content.addView(sl_content);
+//			sll_content.addView(mTextView);
+//			
+//			//ll_content.addView(bt_mlogin);
+//
+//			// baselin.addView(rl_title);
+//			baselin.addView(ll_content);
+//			baselin.addView(bt_mlogin);
+//		}else {
 			ll_content.addView(lv_helpcontent);
-		}
+			ll_content.addView(bt_mlogin);
+
+			// baselin.addView(rl_title);
+			baselin.addView(ll_content);
+	//	}
 				
 		
-		ll_content.addView(bt_mlogin);
-
-		// baselin.addView(rl_title);
-		baselin.addView(ll_content);
+		
 
 		dialog.setContentView(baselin);
 
@@ -198,82 +214,105 @@ public class Exit_dialog extends Basedialogview {
 	}
 
 	
- static String textlog="测试顺序：打开游戏，登陆，支付，按home键回到手机桌面，再点开游戏，点击小助手，点击切换账号，用新账号登陆，最后按返回键，把检查结果截图。"+"\r\n"+"\r\n";
-	
+ static String textlog="测试顺序：打开游戏，登陆，支付，按home键回到手机桌面，再点开游戏，点击小助手，点击切换账号，用新账号登陆，最后按返回键，把检查结果截图和游戏包一起提交给我们。<hr/> "+"\r\n";
+ String standard = "<html> \n" +
+         "<head> \n" +
+         "<style type=\"text/css\"> \n" +
+         "body {font-size:10px;}\n" +
+         "</style> \n" +
+         "</head> \n" +
+         "<body>" +
+         " <meta name=\"content-type\" content=\"text/html; charset=utf-8\"><meta http-equlv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
+         +" neirong "+
+         "</body>" +
+         "</html>";
+
 	private void initlogic() {
 		if (YYcontants.ISDEBUG) {
 			String localtestlog =Sputils.getSPstring(getPackageName(mContext), "", mContext);
-			textlog=textlog+" 测试结果"+"\r\n";
+			textlog=textlog+" 测试结果 （窗口可下滑）<hr/>"+"\r\n";
 			if (localtestlog.contains("YYApplicationoncreate="+Util.getPackageName(mActivity))) {
-				textlog=textlog+"Application="+Util.getPackageName(mActivity)+": 接口测试通过"+"\r\n";
+				textlog=textlog+"Application="+Util.getPackageName(mActivity)+": 接口测试通过<hr/> "+" \r\n";
 			}else {
-				textlog=textlog+"Application: 接口测试不通过（请检查是否接入application接口）"+"\r\n";
+				textlog=textlog+"Application: 接口测试不通过（请检查是否接入application接口）<hr/> "+" \r\n";
 			}
 			
 			if (localtestlog.contains("launchActivityOnCreate")) {
-				textlog=textlog+"launchActivityOnCreate: 接口测试通过"+"\r\n";
+				textlog=textlog+"launchActivityOnCreate: 接口测试通过 <hr/> "+" \r\n";
 			}else {
-				textlog=textlog+"launchActivityOnCreate: 接口测试不通过（非必要接口，如果游戏启动项为主游戏acitivity则不需要接入）"+"\r\n";
+				textlog=textlog+"launchActivityOnCreate: 接口测试不通过（非必要接口，如果游戏启动项为主游戏acitivity则不需要接入）<hr/> "+"\r\n";
 			}
 			
 			if (localtestlog.contains("anim")) {
-				textlog=textlog+"anim: 接口测试通过"+"\r\n";
+				textlog=textlog+"anim: 接口测试通过 <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"anim: 接口测试不通过（闪屏未接入）"+"\r\n";
+				textlog=textlog+"anim: 接口测试不通过（闪屏未接入）<hr/> "+"\r\n";
 			}
 			
 			if (localtestlog.contains("initSdk")) {
-				textlog=textlog+"initSdk: 接口测试通过"+"\r\n";
+				textlog=textlog+"initSdk: 接口测试通过 <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"initSdk: 接口测试不通过"+"\r\n";
+				textlog=textlog+"initSdk: 接口测试不通过(请检查是否调用初始化接口) <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("onCreate")) {
-				textlog=textlog+"onCreate: 接口测试通过"+"\r\n";
+				textlog=textlog+"onCreate: 接口测试通过 <hr/>"+"\r\n";
 			}else {
-				textlog=textlog+"onCreate: 接口测试不通过"+"\r\n";
+				textlog=textlog+"onCreate: 接口测试不通过(请检查是否调用初始化接口) <hr/>"+"\r\n";
 			}
 			if (localtestlog.contains("onResume")) {
-				textlog=textlog+"onResume: 接口测试通过"+"\r\n";
+				textlog=textlog+"onResume: 接口测试通过  <hr/>"+"\r\n";
 			}else {
-				textlog=textlog+"onResume: 接口测试不通过"+"\r\n";
+				textlog=textlog+"onResume: 接口测试不通过  <hr/>"+"\r\n";
 			}
 			if (localtestlog.contains("onPause")) {
-				textlog=textlog+"onPause: 接口测试通过"+"\r\n";
+				textlog=textlog+"onPause: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"onPause: 接口测试不通过"+"\r\n";
+				textlog=textlog+"onPause: 接口测试不通过  <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("onStop")) {
-				textlog=textlog+"onStop: 接口测试通过"+"\r\n";
+				textlog=textlog+"onStop: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"onStop: 接口测试不通过（测试顺序不对，没有按home键返回桌面或者没有接入）"+"\r\n";
+				textlog=textlog+"onStop: 接口测试不通过（测试顺序不对，没有按home键返回桌面或者没有接入） <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("onRestart")) {
-				textlog=textlog+"onRestart: 接口测试通过"+"\r\n";
+				textlog=textlog+"onRestart: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"onRestart: 接口测试不通过（测试顺序不对，没有按home键返回桌面或者没有接入）"+"\r\n";
+				textlog=textlog+"onRestart: 接口测试不通过（测试顺序不对，没有按home键返回桌面或者没有接入） <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("pay")) {
-				textlog=textlog+"pay: 接口测试通过"+"\r\n";
+				textlog=textlog+"pay: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"pay: 接口测试不通过"+"\r\n";
+				textlog=textlog+"pay: 接口测试不通过 <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("exit")) {
-				textlog=textlog+"exit: 接口测试通过"+"\r\n";
+				textlog=textlog+"exit: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"exit: 接口测试不通过"+"\r\n";
+				textlog=textlog+"exit: 接口测试不通过  <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("logout")) {
-				textlog=textlog+"logout: 接口测试通过"+"\r\n";
+				textlog=textlog+"logout: 接口测试通过  <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"logout: 接口测试不通过（非必要接口。游戏内自己的切换账号按钮，如果游戏内没有，则无需接入）"+"\r\n";
+				textlog=textlog+"logout: 接口测试不通过（非必要接口。游戏内自己的切换账号按钮，如果游戏内没有，则无需接入） <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("setData")) {
 				textlog=textlog+"玩家数据: "+YYWMain.mRole.toString();
 			}else {
-				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口）"+"\r\n";
+				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口） <hr/> "+"\r\n";
 			}
 			textlog=textlog+localtestlog;
-			mTextView.setText(textlog);
+		//	mTextView.setText(textlog);
+			WebSettings settings = lv_helpcontent.getSettings();
+			settings.setSupportZoom(true); // 支持缩放
+			settings.setBuiltInZoomControls(false); // 启用内置缩放装置
+			settings.setJavaScriptEnabled(true); // 启用JS脚本
+			settings.setCacheMode(WebSettings.LOAD_NO_CACHE);// 关闭webview中缓存	
+			settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+			settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
+			Yayalog.loger("ni..."+html);
+			String zuizhongneirong=standard.replace("neirong", textlog);
+			System.out.println(zuizhongneirong);
+			//lv_helpcontent.loadData(Html.fromHtml(zuizhongneirong).toString(), "text/html; charset=UTF-8", null);
+			lv_helpcontent.loadDataWithBaseURL(null, zuizhongneirong, "text/html","UTF-8", null);
 		}else {
 			WebSettings settings = lv_helpcontent.getSettings();
 			settings.setSupportZoom(true); // 支持缩放
@@ -284,13 +323,18 @@ public class Exit_dialog extends Basedialogview {
 			Yayalog.loger("ni..."+html);
 			//lv_helpcontent.loadUrl("http://danjiyou.duapp.com/Home/Blog/index");
 			settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
+			if (YYcontants.ISDEBUG) {
+				lv_helpcontent.loadData(textlog, mimeType, enCoding);
+			}else {
+				lv_helpcontent.loadUrl(CommonData.exiturl);
+			}
 			
-			lv_helpcontent.loadUrl(CommonData.exiturl);
 		}
 		
 		//lv_helpcontent.loadData(html, "text/html; charset=UTF-8", null);
 	}
-	
+	String mimeType = "text/html";
+	String enCoding = "utf-8";
 	 /**
      * 获取应用程序名称
      */

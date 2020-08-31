@@ -108,9 +108,7 @@ public class Assistant_xml extends Basexml implements Layoutxml {
 				rl_mLoading.addView(bt_mReload);
 
 				
-		/*baseLinearLayout.addView(rl_mLoading);
-		baseLinearLayout.addView(wv_mWeiboview);*/
-		//baselin.addView(rl_mLoading);
+	
 		baselin.addView(wv_mWeiboview);
 		baseLinearLayout.addView(baselin);
 		return baseLinearLayout;

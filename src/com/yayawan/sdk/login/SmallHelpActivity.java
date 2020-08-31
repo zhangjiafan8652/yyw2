@@ -8,6 +8,7 @@ import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
 
+import com.yayawan.sdk.webview.AdvancedWebView;
 import com.yayawan.sdk.webview.MyWebViewClient;
 import com.yayawan.sdk.xml.SmallHelp_xml;
 import com.yayawan.utils.DeviceUtil;
@@ -38,7 +39,7 @@ public class SmallHelpActivity extends Activity{
 
 	
 	private LinearLayout rl_mLoading;
-	 WebView wv_mWeiboview;
+	 AdvancedWebView wv_mWeiboview;
 	public Activity mActivity;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -206,5 +207,10 @@ public class SmallHelpActivity extends Activity{
 		wv_mWeiboview.destroy();
 	}
 	
-	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		wv_mWeiboview.onActivityResult(requestCode, resultCode, data);
+	}
 }

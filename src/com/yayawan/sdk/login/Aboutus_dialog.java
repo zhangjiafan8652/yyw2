@@ -32,6 +32,7 @@ public class Aboutus_dialog extends Basedialogview {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void createDialog(final Activity mActivity) {
 		dialog = new Dialog(mContext);
@@ -134,7 +135,7 @@ public class Aboutus_dialog extends Basedialogview {
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							Toast.makeText(mActivity, "检测到无qq应用，请手动添加qq客服为好友", 0).show();
+							Toast.makeText(mActivity, "检测到无qq应用，请手动添加qq客服为好友", Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -197,9 +198,7 @@ public class Aboutus_dialog extends Basedialogview {
 		dialogWindow.setAttributes(lp);
 		dialog.setCanceledOnTouchOutside(false);
 
-		android.widget.RelativeLayout.LayoutParams ap2 = new android.widget.RelativeLayout.LayoutParams(
-				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT,
-				android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+	
 
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setBackgroundDrawable(new BitmapDrawable());

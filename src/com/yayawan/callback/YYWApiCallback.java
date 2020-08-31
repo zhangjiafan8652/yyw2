@@ -1,7 +1,5 @@
 package com.yayawan.callback;
 
-import com.yayawan.domain.YYWOrder;
-import com.yayawan.domain.YYWUser;
 
 public interface YYWApiCallback {
 

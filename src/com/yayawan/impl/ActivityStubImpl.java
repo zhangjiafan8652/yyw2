@@ -2,16 +2,16 @@ package com.yayawan.impl;
 
 
 
-import android.R;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.lidroid.jxutils.http.Jxutilsinit;
+import com.yayawan.impl.MiitHelper.AppIdsUpdater;
 import com.yayawan.proxy.YYWActivityStub;
 import com.yayawan.sdk.main.DgameSdk;
-import com.yayawan.sdk.xml.GetAssetsutils;
+
+import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Handle;
 import com.yayawan.utils.Yayalog;
 
@@ -34,9 +34,9 @@ public class ActivityStubImpl implements YYWActivityStub {
 	public void launcherOnNewIntent(Intent intent){
 			
 	}
-	
+	private MiitHelper miitHelper;
 	@Override
-	public void onCreate(Activity paramActivity) {
+	public void onCreate(final Activity paramActivity) {
 		// TODO Auto-generated method stub
 		// x.Ext.init(paramActivity.getApplication());
 		Jxutilsinit.isdebug=true;
@@ -44,7 +44,45 @@ public class ActivityStubImpl implements YYWActivityStub {
 		Yayalog.loger("oncreate");
 		DgameSdk.initSdk(paramActivity);
 		Handle.active_handler(paramActivity);
+    	try {
+    		
+			if (android.os.Build.VERSION.SDK_INT>=28) {
+				
+			
+	
+//			
 
+				
+				 miitHelper = new MiitHelper(new AppIdsUpdater() {
+					
+					@Override
+					public void OnIdsAvalid(final String ids) {
+						// TODO Auto-generated method stub
+						Jxutilsinit.oaid=ids;
+						//Toast.makeText(paramActivity, "Handle.active_handler======================"+ids, 0).show();
+						if (DeviceUtil.isDebug(paramActivity)) {
+							paramActivity.runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									Toast.makeText(paramActivity, "一步结果======================"+ids, 0).show();
+								}
+							});
+						}
+					
+						Handle.active_handler(paramActivity);
+					}
+				});
+				
+				miitHelper.getDeviceIds(paramActivity);
+				
+			}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			Yayalog.loger("当前sdk 获取oaid id 异常：" );
+		}
 	}
 
 	@Override

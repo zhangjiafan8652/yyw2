@@ -17,7 +17,8 @@ import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.bun.miitmdid.core.JLibrary;
+
+
 
 import com.lidroid.jxutils.HttpUtils;
 import com.lidroid.jxutils.exception.HttpException;
@@ -45,8 +46,9 @@ import com.yayawan.impl.UserManagerImpl;
 import com.yayawan.impl.YYApplication;
 import com.yayawan.implyy.ChargerImplyylianhe;
 import com.yayawan.main.YYWMain;
-import com.yayawan.proxy.MiitHelper.AppIdsUpdater;
+
 import com.yayawan.sdk.bean.User;
+import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFVivoupdateUtils;
@@ -154,7 +156,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	//	ToastUtil.showSuccess(paramActivity, paramActivity.getClass().getName());
 		// 检测是否调用类
 		GameApitest.getGameApitestInstants(paramActivity).sendTest("login");
-
+		//如果是自己sdk 则直接调用sdk登陆
 		if (ViewConstants.ISKGAME) {
 			Yayalog.loger("kgame登陆成功不再获取uid" );
 			Yayalog.loger("Kgamelogin");
@@ -163,7 +165,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 			
 		} else {
-
+			//如果是渠道的sdk 需要拿到渠道的uid 再到后台获取自家的uid
 			Yayalog.loger("UNIONlogin");
 			YYWMain.mUserCallBack = new YYWUserCallBack() {
 
@@ -506,9 +508,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		case 0:
 			Yayalog.loger("CommonGameProxy:" + "kgame支付");
 			this.mCharger.pay(paramActivity, YYWMain.mOrder,YYWMain.mPayCallBack);
-			//this.mCharger = new ChargerImplyylianhe();
-			//this.mCharger.pay(paramActivity, YYWMain.mOrder,
-				//	YYWMain.mPayCallBack);
+		
 			break;
 
 		case 1:
@@ -519,9 +519,7 @@ public class CommonGameProxy implements YYWGameProxy {
 					YYWMain.mPayCallBack);
 
 			break;
-		case 2:
 
-			break;
 
 		default:
 			break;
@@ -563,6 +561,9 @@ public class CommonGameProxy implements YYWGameProxy {
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName);
 		// 设置临时的角色等级。用作支付时候判断是否切换支付
+		if (TextUtils.isEmpty(roleLevel)) {
+			roleLevel="1";
+		}
 		templevel = Integer.parseInt(roleLevel);
 		this.mUserManager.setRoleData(paramActivity);
 	}
@@ -573,6 +574,9 @@ public class CommonGameProxy implements YYWGameProxy {
 			String ext) {
 
 		// 设置临时的角色等级。用作支付时候判断是否切换支付
+		if (TextUtils.isEmpty(roleLevel)) {
+			roleLevel="1";
+		}
 		templevel = Integer.parseInt(roleLevel);
 		
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
@@ -614,63 +618,42 @@ public class CommonGameProxy implements YYWGameProxy {
 	private int loca_login_type;
 
 	public static int REQUEST_CODE_ASK_READ_PHONE_STATE = 3301;
-	public static MiitHelper miitHelper;
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(final Activity paramActivity) {
 
+		//网络请求框架初始化
+		
 		Jxutilsinit.oncreate(paramActivity);
-		
-		
-		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
-		
-		new VersionnumberView(paramActivity);
-		
 		if (DeviceUtil.isDebug(paramActivity)) {
 			Jxutilsinit.isdebug=true;
 		}else {
 			Jxutilsinit.isdebug=false;
 		}
 		
+		//设置全局调试模式
+		YYcontants.ISDEBUG = DeviceUtil.isDebug(paramActivity);
 		
-		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));// 设置是否打log
+		// 闪版号信息
+		new VersionnumberView(paramActivity);
+		
+		// 设置是否打log
+		Yayalog.setCanlog(DeviceUtil.isDebug(paramActivity));
 		System.out.println("是否可以打印yayalog：" + Yayalog.canlog);
 		
-		//初始化千骐千果sdk
+		//初始化千骐千果sdk 获取链接等
 		CommonData.initCommonData(paramActivity);
+		
 		Yayalog.loger("当前sdk版本：" + CommonData.SDKVERSION);
 		mActivity = paramActivity;
 		
 		
 		
-		try {
 		
-			if (android.os.Build.VERSION.SDK_INT>26) {
-				
-			
 		
-			JLibrary.InitEntry(paramActivity);
-			 miitHelper = new MiitHelper(new AppIdsUpdater() {
-					
-					@Override
-					public void OnIdsAvalid(String ids) {
-						// TODO Auto-generated method stub
-						Jxutilsinit.oaid=miitHelper.oaid;
-						//Toast.makeText(paramActivity, "Handle.active_handler======================"+ids, 0).show();
-						Handle.active_handler(paramActivity);
-					}
-				});
-				
-				miitHelper.getDeviceIds(paramActivity);
+		//Toast.makeText(paramActivity, "Handle.active_handler==========android.os.Build.VERSION.SDK_INT============"+android.os.Build.VERSION.SDK_INT+"+"+Jxutilsinit.oaid, 1).show();
 		
-			}
-				
-		} catch (Exception e) {
-			// TODO: handle exception
-			Yayalog.loger("当前sdk 获取oaid id 异常：" );
-		}
-		
-	
 		
 		// 进行检查更新
 	
@@ -691,9 +674,6 @@ public class CommonGameProxy implements YYWGameProxy {
 			// TODO: handle exception
 		}
 		
-		
-		
-		
 		mStub.onCreate(paramActivity);
 
 	}
@@ -713,20 +693,8 @@ public class CommonGameProxy implements YYWGameProxy {
 
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
-		if (android.os.Build.VERSION.SDK_INT>26) {
-		
-		if (TextUtils.isEmpty(MiitHelper.oaid)||MiitHelper.oaid.equals("")) {
-			try {
-				miitHelper.getDeviceIds(paramActivity);
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-		}
-		Jxutilsinit.oaid=MiitHelper.oaid;
-		//Toast.makeText(paramActivity, "miitHelperoaid======================Jxutilsinit.oaid"+Jxutilsinit.oaid, 0).show();
-		}
+	
+	
 	}
 
 	@Override
@@ -857,28 +825,49 @@ public class CommonGameProxy implements YYWGameProxy {
 	}
 	
 	//是否实名认证
-	public void doGetVerifiedInfo(Activity arg0,YYWApiCallback myywapicallback) {
+	public void doGetVerifiedInfo(Activity arg0,final YYWApiCallback myywapicallback) {
 
 			//Yayalog.loger("按下了" + event.getX());
-		Method[] methods;
-		try {
-			methods = Class.forName("com.yayawan.impl.UserManagerImpl")
-					.getMethods();
-			for (int i = 0; i < methods.length; i++) {
-				if (methods[i].getName().equals("doGetVerifiedInfo")) {
-					// com.yayawan.proxy.YYWActivityStub
-					Yayalog.loger(methods[i].getName());
-					Yayalog.loger("有接口doGetVerifiedInfo");
-					UserManagerImpl mani = (UserManagerImpl) this.mUserManager;
-					mani.doGetVerifiedInfo(arg0,myywapicallback);
-
+		
+		if (ViewConstants.ISKGAME) {
+			DgameSdk.doGetVerifiedInfo(arg0, new KgameSdkApiCallBack() {
+				
+				@Override
+				public void onVerifySuccess(String result) {
+					// TODO Auto-generated method stub
+					myywapicallback.onVerifySuccess(result);
 				}
-				// System.out.println("没有初始化方法");
-			//	Yayalog.loger("UserManagerImpl中没有setdata方法");
+				
+				@Override
+				public void onVerifyCancel() {
+					// TODO Auto-generated method stub
+					myywapicallback.onVerifyCancel();
+				}
+			});
+		}else {
+			Method[] methods;
+			try {
+				methods = Class.forName("com.yayawan.impl.UserManagerImpl")
+						.getMethods();
+				for (int i = 0; i < methods.length; i++) {
+					if (methods[i].getName().equals("doGetVerifiedInfo")) {
+						// com.yayawan.proxy.YYWActivityStub
+						Yayalog.loger(methods[i].getName());
+						Yayalog.loger("有接口doGetVerifiedInfo");
+						UserManagerImpl mani = (UserManagerImpl) this.mUserManager;
+						mani.doGetVerifiedInfo(arg0,myywapicallback);
+
+					}
+					// System.out.println("没有初始化方法");
+				//	Yayalog.loger("UserManagerImpl中没有setdata方法");
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
+		
+		
 	}
 }

@@ -28,7 +28,16 @@ public class UpdateDialog extends Dialog {
 	private Button mSubmit;
 
 	private Button mCancel;
+	private TextView mTitletv;
 
+	public TextView getmTitletv() {
+		return mTitletv;
+	}
+
+	public void setmTitle(String message) {
+		mTitletv.setText(message);
+	}
+	
 	private Activity mActivity;
 
 	public UpdateDialog(Context context) {
@@ -49,7 +58,7 @@ public class UpdateDialog extends Dialog {
 		mMessage = update_xml.getTv_message();
 		mSubmit = update_xml.getBt_mok();
 		mCancel = update_xml.getBt_mCancel();
-
+		mTitletv= update_xml.getTv_zhuce();
 		setContentView(view);
 
 		// 设置window属性

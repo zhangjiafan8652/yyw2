@@ -207,6 +207,19 @@ public class DgameSdk {
 			return;
 		}
 		Yayalog.loger("kgamesdk:payment");
+		
+		try {
+			if (!DeviceUtil.getGameInfo(paramActivity, "payneedrelname").equals("yes")) {
+				gotoPayment( paramActivity,  paramOrder,
+						 issinglepay,  paramCallback);
+				return;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Yayalog.loger("没有设置 payneedrelname");
+		}
+		
+		
 		//如果没有实名认证，则需要实名认证
 		if (!ViewConstants.relname_valid) {
 			
@@ -222,6 +235,7 @@ public class DgameSdk {
 			  
 			  if (istiprenzheng.equals("yes")) {
 				  
+				  System.err.println("istiprenzheng.equals(yes)");
 				  
 				  gotoPayment( paramActivity,  paramOrder,
 							 issinglepay,  paramCallback);
@@ -230,6 +244,7 @@ public class DgameSdk {
 			  	  Sputils.putSPstring("istiprenzheng", "yes", paramActivity);
 			  	  tipDialogShow(paramActivity, paramOrder, issinglepay,
 							paramCallback);
+			  	 System.err.println("istiprenzheng.equals(no)");
 				 
 				}
 				

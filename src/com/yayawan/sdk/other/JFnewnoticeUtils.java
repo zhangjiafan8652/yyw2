@@ -88,7 +88,7 @@ public class JFnewnoticeUtils {
 				String pingjie = "app_id=" + DeviceUtil.getAppid(mActicity)+"&uid="+uid+"&token="+token;
 				//调试模式自动获取当前游戏链接测试更新 debug=autodebug
 				if (DeviceUtil.isDebug(mActicity)) {
-					 pingjie = "app_id=" + DeviceUtil.getAppid(mActicity)+"&debug=autodebug";
+					 pingjie = "app_id=" + DeviceUtil.getAppid(mActicity)+"&debug=autodebug"+"&uid="+uid;
 				}
 				Yayalog.loger(ViewConstants.NOTICEURL + "/?" + pingjie);
 				yibuhttputils.runHttp(ViewConstants.NOTICEURL + "/?" + pingjie, "",

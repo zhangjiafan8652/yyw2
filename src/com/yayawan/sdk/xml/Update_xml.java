@@ -27,8 +27,16 @@ public class Update_xml extends Basexml implements Layoutxml {
 
 	private LinearLayout ll_mPre;
 
-	private ImageButton iv_mPre;
+	public TextView getTv_zhuce() {
+		return tv_zhuce;
+	}
 
+	public void setTv_zhuce(TextView tv_zhuce) {
+		this.tv_zhuce = tv_zhuce;
+	}
+
+	private ImageButton iv_mPre;
+	private TextView tv_zhuce;
 	public Update_xml(Activity activity) {
 		super(activity);
 		// TODO Auto-generated constructor stub
@@ -73,7 +81,7 @@ public class Update_xml extends Basexml implements Layoutxml {
 		
 
 		// 注册textview
-		TextView tv_zhuce = new TextView(mContext);
+		 tv_zhuce = new TextView(mContext);
 		machineFactory.MachineTextView(tv_zhuce, MATCH_PARENT, 70, 0,
 				"更新提示", 28, mLinearLayout, 0, 0, 0, 0);
 		tv_zhuce.setTextColor(Color.parseColor("#f8b551"));
@@ -160,6 +168,10 @@ public class Update_xml extends Basexml implements Layoutxml {
 
 	public LinearLayout getLl_mBut() {
 		return ll_mBut;
+	}
+	
+	public void setTitle(String title) {
+		tv_zhuce.setText(title);
 	}
 
 	public void setLl_mBut(LinearLayout ll_mBut) {

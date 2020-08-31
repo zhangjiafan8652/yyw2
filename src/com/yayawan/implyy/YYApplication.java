@@ -1,11 +1,13 @@
 package com.yayawan.implyy;
 
 
+
 import com.yayawan.proxy.YYWApplication;
 
-import android.app.Application;
+
 import android.content.Context;
 
+@Deprecated
 public class YYApplication extends YYWApplication {
 
 	public static Context mContext;
@@ -16,6 +18,8 @@ public class YYApplication extends YYWApplication {
 		super.onCreate();
 		mContext = getApplicationContext();
 		// System.out.println("YYApplication");
+		
+	
 	}
 
 	public static Context getmContext() {
