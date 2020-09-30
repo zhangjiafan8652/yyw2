@@ -16,6 +16,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.graphics.drawable.StateListDrawable;
 
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.Yayalog;
 
 public class GetAssetsutils {
 
@@ -96,7 +97,7 @@ public class GetAssetsutils {
 			patchy = new NinePatchDrawable(bitmap, chunk,
 					new Rect(), null);
 		}else{
-			System.out.println(fileName+"不是.9图片");
+			Yayalog.loger(fileName+"不是.9图片");
 		}
 		
 		} catch (Exception e) {

@@ -658,7 +658,7 @@ public class Login_dialog extends Basedialogview {
 		}
 		mNames = UserDao.getInstance(mActivity).getUsers();
 		
-		 System.out.println("wuuuuuuuuuuuuu"+mNames.size()+"mna:"+mNames.toString());
+		 //System.out.println("wuuuuuuuuuuuuu"+mNames.size()+"mna:"+mNames.toString());
 		// 默认选择列表中的第一项进行输入框填充
 		if (mNames != null && mNames.size() > 0) {
 

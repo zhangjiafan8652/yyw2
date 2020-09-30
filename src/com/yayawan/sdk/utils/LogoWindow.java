@@ -451,7 +451,7 @@ public class LogoWindow {
 	StopManagerWarning_dialog mStopManagerWarning_dialog;
 	protected void gotoStopManager() {
 		// TODO Auto-generated method stub
-		System.out.println("gotoStopManager");
+		Yayalog.loger("gotoStopManager");
 		if (ViewConstants.isshowmanagertip==1) {
 			
 			 mStopManagerWarning_dialog=	new StopManagerWarning_dialog(mactivity);

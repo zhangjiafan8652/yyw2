@@ -102,7 +102,7 @@ public class EllipsizingTextView extends TextView {
 			Layout layout = createWorkingLayout(workingText);
 			if (layout.getLineCount() > maxLines) {
 
-				System.out.println(layout.getLineCount() + "\t" + maxLines);
+				
 				workingText = fullText.substring(0,
 						layout.getLineEnd(maxLines - 1)).trim();
 				Layout layout2 = createWorkingLayout(workingText + ELLIPSIS);

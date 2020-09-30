@@ -88,7 +88,7 @@ public class GreenblueP {
 	}
 
 	public boolean parseScheme(String url) {
-		System.out.println("parseScheme的url：" + url);
+		Yayalog.loger("parseScheme的url：" + url);
 
 		if (url.contains("platformapi/startApp")
 				|| url.contains("platformapi/startapp")|| url.contains("ayclient")) {
@@ -235,7 +235,7 @@ public class GreenblueP {
 	// 支付宝支付结果
 		private void bluepayResult(String result) {
 			// TODO Auto-generated method stub
-			System.out.println(result);
+			Yayalog.loger(result);
 			JSONObject jsonstr = null;
 			try {
 				jsonstr = new JSONObject(result);
@@ -287,7 +287,7 @@ public class GreenblueP {
 			                    return true;
 			                }else if (parseScheme(url)) {
 			                    try {
-			                    	System.out.println("准备跳转kkkkkurl："+url);
+			                    	Yayalog.loger("准备跳转kkkkkurl："+url);
 			                        Intent intent;
 			                        intent = Intent.parseUri(url,
 			                                Intent.URI_INTENT_SCHEME);
@@ -327,7 +327,7 @@ public class GreenblueP {
 						});
 				
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					//System.out.println(e.toString());
 					mActivity.runOnUiThread(new Runnable() {
 
 						@Override

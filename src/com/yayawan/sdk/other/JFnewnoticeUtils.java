@@ -13,6 +13,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 
+import com.bun.lib.sysParamters;
 import com.yayawan.sdk.login.Announcement_dialog;
 import com.yayawan.sdk.login.Announcevipment_dialog;
 import com.yayawan.sdk.login.StringConstants;
@@ -31,6 +32,9 @@ public class JFnewnoticeUtils {
 	 String data;
 
 	
+	 
+	 
+	 
 	/**
 	 * 获取公告信息，如果有公告则弹出公告，如果无公告就啥事都没有，一定要在主线程运行
 	 * 
@@ -42,7 +46,7 @@ public class JFnewnoticeUtils {
 		  
 				
 			
-			Yayalog.loger("获取登陆后公告：" + ViewConstants.NOTICEURL);
+			Yayalog.loger("获取登陆角色后公告：" + ViewConstants.NOTICEURL);
 			try {
 				Yibuhttputils yibuhttputils = new Yibuhttputils() {
 
@@ -50,6 +54,7 @@ public class JFnewnoticeUtils {
 					public void sucee(final String responseInfo) {
 						// TODO Auto-generated method stub
 						Yayalog.loger("获取vip公告返回：" + responseInfo);
+						
 						JSONObject jsonObject = null;
 						try {
 							jsonObject = new JSONObject(responseInfo);
@@ -91,6 +96,7 @@ public class JFnewnoticeUtils {
 					 pingjie = "app_id=" + DeviceUtil.getAppid(mActicity)+"&debug=autodebug"+"&uid="+uid;
 				}
 				Yayalog.loger(ViewConstants.NOTICEURL + "/?" + pingjie);
+				System.out.println(ViewConstants.NOTICEURL + "/?" + pingjie);
 				yibuhttputils.runHttp(ViewConstants.NOTICEURL + "/?" + pingjie, "",
 						Yibuhttputils.GETMETHOD, "");
 			} catch (Exception e) {

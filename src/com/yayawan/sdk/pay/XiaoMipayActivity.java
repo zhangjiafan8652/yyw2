@@ -10,6 +10,7 @@ import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.pay.XiaomiPayxml.XiaomiPayListener;
 import com.yayawan.sdk.pay.YingYongBaoPayxml.YingyongbaoListener;
 import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.Yayalog;
 
 public class XiaoMipayActivity extends Activity {
 
@@ -18,7 +19,7 @@ public class XiaoMipayActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		System.out.println(DeviceUtil.getUnionid(this));
+		Yayalog.loger(DeviceUtil.getUnionid(this));
 		if (DeviceUtil.getUnionid(this).equals("2958292331")) {
 			StartYingBaoPay();
 		}else{
@@ -36,7 +37,7 @@ public class XiaoMipayActivity extends Activity {
 			@Override
 			public void onGoToPay(int selectpaytype) {
 				// TODO Auto-generated method stub
-				System.out.println(selectpaytype);
+				
 				if (selectpaytype==xiaomiPayxml.BLUEP) {
 					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.BLUEP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();
@@ -59,7 +60,7 @@ public class XiaoMipayActivity extends Activity {
 	
 	YingYongBaoPayxml yingyongbaoPayxml ;
 	private void StartYingBaoPay() {
-		System.out.println("StartYingBaoPay");
+		Yayalog.loger("StartYingBaoPay");
 		// TODO Auto-generated method stub
 		 yingyongbaoPayxml = new YingYongBaoPayxml(this);
 			//View initViewxml = new XiaomiPayxml(this).initViewxml();
@@ -76,7 +77,7 @@ public class XiaoMipayActivity extends Activity {
 			@Override
 			public void onGoToPay(int selectpaytype) {
 				// TODO Auto-generated method stub
-				System.out.println(selectpaytype);
+				
 				if (selectpaytype==yingyongbaoPayxml.BLUEP) {
 					GreenblueP greenbluePay = new GreenblueP(XiaoMipayActivity.this, AgentApp.mPayOrder,CommonData.BLUEP , DgameSdk.mPaymentCallback);
 					greenbluePay.greenP();

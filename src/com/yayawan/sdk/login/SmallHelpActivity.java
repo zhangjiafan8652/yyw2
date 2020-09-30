@@ -7,6 +7,7 @@ import com.yayawan.main.Dgame;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.utils.AndroidDelegate;
+import com.yayawan.sdk.utils.KeyBoardListener;
 
 import com.yayawan.sdk.webview.AdvancedWebView;
 import com.yayawan.sdk.webview.MyWebViewClient;
@@ -26,6 +27,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -46,6 +48,8 @@ public class SmallHelpActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+			    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		SmallHelp_xml smallHelp_xml = new SmallHelp_xml(this);
 		setContentView(smallHelp_xml.initViewxml());
 		
@@ -60,6 +64,8 @@ public class SmallHelpActivity extends Activity{
 		String appid=DeviceUtil.getAppid(this);
 		
 		String url=ViewConstants.smallhelp+"?uid="+uid+"&token="+token+"&appid="+appid;
+		
+		
 		WebSettings webSetting = wv_mWeiboview.getSettings();
 		webSetting.setAllowFileAccess(true);
 		webSetting.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
@@ -95,7 +101,7 @@ public class SmallHelpActivity extends Activity{
 			 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				System.out.println(url);		
+				//System.out.println(url);		
 				//05-16 19:54:08.336: I/System.out(9157): https://rest.yayawan.com/static/chat/?appid=1129901475&uid=720571744573858273&token=a859b26632107c69c2b8b9fce9cd36d6&username=kk483630479
 				if (url.contains("static/chat")) {
 					Intent intent = new Intent(mActivity,AssistantActivity.class);
@@ -191,6 +197,9 @@ public class SmallHelpActivity extends Activity{
 		
 		}
 		
+		if (DeviceUtil.getAppid(mActivity).endsWith("702666197")) {
+			url=url+"&testchat=1";
+		}
 		wv_mWeiboview.loadUrl(url);
 		//rl_mLoading.setVisibility(View.GONE);
 		Yayalog.loger(url);
@@ -198,7 +207,7 @@ public class SmallHelpActivity extends Activity{
 		//关闭android p的对话框
 		DeviceUtil.closeAndroidPDialog();
 		
-
+		KeyBoardListener.getInstance(this).init(wv_mWeiboview);
 	}
 	@Override
 	protected void onDestroy() {

@@ -52,6 +52,7 @@ import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.other.JFVivoupdateUtils;
+import com.yayawan.sdk.other.JFnewnoticeUtils;
 import com.yayawan.sdk.other.JFnoticeUtils;
 import com.yayawan.sdk.other.JFupdateUtils;
 import com.yayawan.sdk.pay.GreenblueP;
@@ -148,8 +149,8 @@ public class CommonGameProxy implements YYWGameProxy {
 		mActivity = paramActivity;
 		
 		if (isHadmsdkverskon()) {
-			Yayalog.loger("有sdkversion");
-			Jxutilsinit.msdkversion=ViewConstants.SDKVERSIONCODE;
+			Yayalog.loger("有sdkversion"+CommonData.SDKVERSION);
+			Jxutilsinit.msdkversion=CommonData.SDKVERSION;
 		}
 		
 		// YYWMain.mUserCallBack=userCallBack;
@@ -430,14 +431,14 @@ public class CommonGameProxy implements YYWGameProxy {
 					@Override
 					public void onFailure(HttpException arg0, String result) {
 						// TODO Auto-generated method stub
-						System.out.println("支付请求失败：" + result);
+						//System.out.println("支付请求失败：" + result);
 						YYWMain.mPayCallBack.onPayFailed("1", "");
 					}
 
 					@Override
 					public void onSuccess(ResponseInfo<String> result) {
 						// TODO Auto-generated method stub
-						System.out.println("支付请求成功：" + result.result);
+						//System.out.println("支付请求成功：" + result.result);
 						try {
 							JSONObject jsonObject = new JSONObject(
 									result.result);
@@ -500,7 +501,7 @@ public class CommonGameProxy implements YYWGameProxy {
 	}
 
 	public static void sys(String name, String val) {
-		System.out.println(name + ":" + val);
+		//System.out.println(name + ":" + val);
 	}
 
 	public void gotoPay(Activity paramActivity, int login_type) {
@@ -568,10 +569,16 @@ public class CommonGameProxy implements YYWGameProxy {
 		this.mUserManager.setRoleData(paramActivity);
 	}
 
+	
+	//public static boolean isshowvipnotice=false;
+	
 	// 3.15版兼容角色信息接口
-	public void setData(Activity paramActivity, String roleId, String roleName,
+	public void setData(final Activity paramActivity, String roleId, String roleName,
 			String roleLevel, String zoneId, String zoneName, String roleCTime,
 			String ext) {
+		
+		Yayalog.loger(" setdata1");
+		GameApitest.getGameApitestInstants(paramActivity).setTestRoleData(roleId, roleName, roleLevel, zoneId, zoneName,  "===",  "===", ext);
 
 		// 设置临时的角色等级。用作支付时候判断是否切换支付
 		if (TextUtils.isEmpty(roleLevel)) {
@@ -579,15 +586,21 @@ public class CommonGameProxy implements YYWGameProxy {
 		}
 		templevel = Integer.parseInt(roleLevel);
 		
+	
+		
 		YYWMain.mRole = new YYWRole(roleId, roleName, roleLevel, zoneId,
 				zoneName, roleCTime, ext);
 
 		
 		
-			Yayalog.loger("yingyongbao setdata1");
+		Yayalog.loger(" setdata1");
 		if (ViewConstants.ISKGAME) {
-				
+			
+			
+			
+			
 		}else {
+				//渠道	设置角色信息接口
 				DgameSdk.setRoleData(paramActivity, roleId,
 						roleName, roleLevel,
 						zoneId, zoneName,YYWMain.mUser.yywtoken,YYWMain.mUser.yywuid,ext);
@@ -603,8 +616,7 @@ public class CommonGameProxy implements YYWGameProxy {
 		
 		
 		
-		GameApitest.getGameApitestInstants(paramActivity).sendTest(
-				"setData玩家数据：" + YYWMain.mRole.toString());
+	
 
 	}
 
@@ -669,7 +681,7 @@ public class CommonGameProxy implements YYWGameProxy {
 
 		// recordPoint(paramActivity);
 		try {
-			GameApitest.sendTest2(paramActivity);
+			//GameApitest.sendTest2(paramActivity);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -195,7 +195,7 @@ public abstract class Yibuhttputils {
 			conn.setUseCaches(false);
 
 			int responseCode = conn.getResponseCode();
-			System.out.println("++++++++返回的状态吗+++++++++" + responseCode);
+			Yayalog.loger("++++++++返回的状态吗+++++++++" + responseCode);
 			// connection.getErrorStream();
 			if (responseCode == 400) {
 				reader = new BufferedReader(new InputStreamReader(
@@ -209,7 +209,7 @@ public abstract class Yibuhttputils {
 
 			String line = "";
 
-			System.out.println("Contents of post request start");
+			Yayalog.loger("Contents of post request start");
 
 			while ((line = reader.readLine()) != null) {
 				// line = new String(line.getBytes(), "utf-8");

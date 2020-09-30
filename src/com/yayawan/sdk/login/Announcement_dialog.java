@@ -300,7 +300,7 @@ public class Announcement_dialog extends Basedialogview {
 		lv_helpcontent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-            	System.out.println("chang anle");
+            	//System.out.println("chang anle");
             	WebView.HitTestResult result = lv_helpcontent.getHitTestResult();
                 if (null == result)
                     return false;
@@ -359,7 +359,7 @@ public class Announcement_dialog extends Basedialogview {
         @Override
         protected String doInBackground(String... params) {
             String result = "";
-            System.out.println(imgurl);
+            //System.out.println(imgurl);
             try {
                 String sdcard = Environment.getDownloadCacheDirectory().toString();
                 File file = new File(sdcard + "/Download");
@@ -394,12 +394,12 @@ public class Announcement_dialog extends Basedialogview {
 						Toast.makeText(mActivity, "图片已经保存到相册", 0).show();
 					}
 				});
-                System.out.println(result);
+                //System.out.println(result);
                 Yayalog.loger(result);
             } catch (Exception e) {
                 result = "保存失败！" + e.getLocalizedMessage();
                 Yayalog.loger(result);
-                System.out.println(result);
+                //System.out.println(result);
             }
             return result;
         }

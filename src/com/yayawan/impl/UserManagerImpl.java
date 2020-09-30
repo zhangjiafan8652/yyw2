@@ -9,12 +9,14 @@ import com.yayawan.callback.YYWExitCallback;
 import com.yayawan.callback.YYWUserManagerCallBack;
 import com.yayawan.common.CommonData;
 import com.yayawan.main.YYWMain;
+import com.yayawan.proxy.GameApitest;
 import com.yayawan.proxy.YYWUserManager;
 import com.yayawan.sdk.bean.User;
 import com.yayawan.sdk.callback.KgameSdkApiCallBack;
 import com.yayawan.sdk.callback.KgameSdkCallback;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
+import com.yayawan.sdk.other.JFnewnoticeUtils;
 import com.yayawan.utils.Yayalog;
 
 public class UserManagerImpl implements YYWUserManager {
@@ -132,18 +134,50 @@ public class UserManagerImpl implements YYWUserManager {
 				YYWMain.mRole.getRoleName(), YYWMain.mRole.getRoleLevel(),
 				YYWMain.mRole.getZoneId(), YYWMain.mRole.getZoneName());
 	}
-
+	public static boolean isareadyshow=false;
 	// 3.15版兼容角色信息接口
-	public void setData(Activity paramActivity, String roleId, String roleName,
+	public void setData(final Activity paramActivity, String roleId, String roleName,
 			String roleLevel, String zoneId, String zoneName, String roleCTime,
 			String ext) {
 		
 		Yayalog.loger("调用了impl中的usermanagerimpl中的setdata方法");
-	
-		//if (Integer.parseInt(ext)==1) {
-					
-	//	}
+		int tempext=Integer.parseInt(ext);
+		//防止某些游戏没有接入角色登陆接口， 后续调用角色升级接口的时候也请求一遍vip公告	
+		if (tempext==1) {
+			
+				
+				  paramActivity.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							
+							new JFnewnoticeUtils().getNotice(paramActivity);
+							isareadyshow=true;
+						}
+					});
+				
+			
+		}
 		
+		if (tempext==3) {
+			if (!isareadyshow) {
+				
+				  paramActivity.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+						
+							new JFnewnoticeUtils().getNotice(paramActivity);
+							isareadyshow=true;
+						}
+					});
+				
+			}
+		}
+			
+	
 		DgameSdk.setRoleData(paramActivity, roleId, roleName, roleLevel, zoneId, zoneName,  AgentApp.mUser.token,  AgentApp.mUser.uid+"", ext);
 
 	

@@ -3,6 +3,7 @@ package com.yayawan.proxy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONException;
@@ -41,7 +42,10 @@ public class GameApitest {
 	public static Context mContext;
 
 	public static String TestFilePath = "test";
+	
 
+	public static HashMap<String, String> mTestdatas = new HashMap<String, String>();
+	
 	public static String DB_DIRPATH = Environment.getExternalStorageDirectory()
 			.getPath()
 			+ File.separator
@@ -114,7 +118,7 @@ public class GameApitest {
 		}
 		tempstring = tempstring + "—temp-" + type;
 
-			
+		mTestdatas.put(type, "true");
 		
 		//	FileIOUtils.writeFileFromString(DB_DIRPATH, type + "\r\n", true);
 
@@ -122,7 +126,8 @@ public class GameApitest {
 			
 			if (!TextUtils.isEmpty(appPackageName)) {
 				Yayalog.loger("测试write："+tempstring+"nowtype:"+type);
-				Sputils.putSPstring(appPackageName, tempstring, mContext);
+				
+				//Sputils.putSPstring(appPackageName, tempstring, mContext);
 				
 				
 			}else {
@@ -139,80 +144,12 @@ public class GameApitest {
 
 	public void sendTest(String type, String value) {
 
-		if (YYcontants.ISDEBUG) {
-			File file = new File(DB_DIRPATH);
-
-			if (file.exists()) {
-				FileIOUtils
-						.writeFileFromString(DB_DIRPATH, type + "\r\n", true);
-
-			}
-		}
+		
+		mTestdatas.put(type, value);
 
 	}
 	
-	public static void sendTest2(final Activity mactivity){
-		
-		String appPackageName = getPackageName(mactivity);
-		System.out.println("123          "+appPackageName);
-		if (!appPackageName.contains("yayawan")||!appPackageName.contains("yyw")) {
-			return;
-		}
-		
-		
-		if (isContentYaboxApp(mactivity.getPackageManager())) {
-			Yayalog.loger("安装过丫丫玩盒子：");
-			return;
-		}
-		String time=Sputils.getSPstring("ceshitime", "1000", mactivity);
-		long nowtime= System.currentTimeMillis()-  Long.parseLong(time);
-		//System.out.println(nowtime);
-		if (nowtime<(3600000*12)) {
-			//System.out.println("不发送调试信息");
-			return;
-		}
-		Sputils.putSPstring("ceshitime", System.currentTimeMillis()+"", mactivity);
-		//Sputils.putSPstring("ceshitime", System.currentTimeMillis()+"", mactivity);
-		HttpUtils httpUtils = new HttpUtils();
-		RequestParams requestParams = new RequestParams();
-		requestParams.addBodyParameter("ip", "ceshi");
 	
-		httpUtils.send(HttpMethod.POST, "http://web.txtgame.top/web/Ceshi/getcode",requestParams, new RequestCallBack<String>() {
-
-			@Override
-			public void onFailure(HttpException arg0, String result) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-			@SuppressLint("NewApi") 
-			public void onSuccess(ResponseInfo<String> result) {
-				// TODO Auto-generated method stub
-				
-				try {
-				
-					
-					JSONObject jsonObject = new JSONObject(result.result);
-					String optInt = jsonObject.optString("ceshiresult");
-					//System.out.println("ceshi"+optInt);
-					if (optInt.endsWith("ceshi")) {
-						return;
-					}
-					 ClipboardManager cm = (ClipboardManager) mactivity.getSystemService(Context.CLIPBOARD_SERVICE);
-				        
-				     cm.setText(optInt);
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
-	}
 	
     /**
      * [获取应用程序版本名称信息]
@@ -254,5 +191,15 @@ public class GameApitest {
         }
         return false;
     }
+
+	public void setTestRoleData(String roleId,
+			String roleName, String roleLevel, String zoneId, String zoneName,String token,String uid,String type) {
+		// TODO Auto-generated method stub
+	
+		String rolestring= "roleId:"+roleId+" roleName:"+ roleName +" roleLevel:"+  roleLevel+" zoneId:"+zoneId  +" zoneName:"+  zoneName+" token:"+ token+" uid:"+ uid+" type:"+ type;
+		
+		mTestdatas.put("roleinfo"+type, rolestring);
+		tempstring = tempstring + "—temp-" + type;
+	}
 
 }

@@ -126,6 +126,12 @@ public class DgameSdk {
 	public static void login(final Activity paramActivity,
 			KgameSdkUserCallback paramCallback) {
 		
+		int sdkVersion = paramActivity.getApplicationInfo().targetSdkVersion;
+		if (sdkVersion>26) {
+			Toast.makeText(paramActivity, "当前sdk版本要求targetsdkversion=26 请检查配置信息，再调试。", 1).show();
+			return;
+		}
+		
 		startInitqqhao(paramActivity);
 
 		Yayalog.loger("kgamesdklogin");
@@ -140,7 +146,7 @@ public class DgameSdk {
 
 	
 	public static void loginSucce(User user,int type){
-		System.out.println("dgamesdk login loginSucce++++++++++");
+		//System.out.println("dgamesdk login loginSucce++++++++++");
 		Yayalog.loger("dgamesdk login loginSucce++++++++++");
 		
 //		sys

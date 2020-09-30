@@ -197,7 +197,7 @@ public class Yinlian extends BaseView implements KgameSdkUserCallback {
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				System.out.println(url);
+				
 				if (url.startsWith("yayapayment://success?status=0")) {
 					// KgameSdk.mPaymentCallback.onSuccess(paramUser, paramOrder,
 					// paramInt);

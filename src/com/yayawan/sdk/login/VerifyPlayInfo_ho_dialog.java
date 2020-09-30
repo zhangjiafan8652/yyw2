@@ -460,14 +460,14 @@ public class VerifyPlayInfo_ho_dialog extends Basedialogview {
 	                    if (idCardY[idCardMod].toUpperCase().equals(String.valueOf(idCardLast).toUpperCase())) {
 	                        return true;
 	                    } else {
-	                        System.out.println("身份证最后一位:" + String.valueOf(idCardLast).toUpperCase() + 
-	                                "错误,正确的应该是:" + idCardY[idCardMod].toUpperCase());
+	                        //System.out.println("身份证最后一位:" + String.valueOf(idCardLast).toUpperCase() + 
+	                          //      "错误,正确的应该是:" + idCardY[idCardMod].toUpperCase());
 	                        return false;
 	                    }
 
 	                } catch (Exception e) {
 	                    e.printStackTrace();
-	                    System.out.println("异常:" + IDNumber);
+	                   // System.out.println("异常:" + IDNumber);
 	                    return false;
 	                }
 	            }

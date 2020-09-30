@@ -417,7 +417,7 @@ mActivity.runOnUiThread(new Runnable() {
 	// 支付宝支付结果
 	private void bluepayResult(String result) {
 		// TODO Auto-generated method stub
-		System.out.println(result);
+		Yayalog.loger(result);
 		JSONObject jsonstr = null;
 		try {
 			jsonstr = new JSONObject(result);
@@ -434,7 +434,7 @@ mActivity.runOnUiThread(new Runnable() {
 	
 		if(err_code==0){
 			try {
-				System.out.println(pay_str);
+				//System.out.println(pay_str);
 				
 				GreenP_dialog greenp_dialog = new GreenP_dialog(
 						mActivity);
@@ -483,7 +483,7 @@ mActivity.runOnUiThread(new Runnable() {
 		                    return true;
 		                }else if (parseScheme(url)) {
 		                    try {
-		                    	System.out.println("准备xxxurl："+url);
+		                    	
 		                        Intent intent;
 		                        intent = Intent.parseUri(url,
 		                                Intent.URI_INTENT_SCHEME);
@@ -521,7 +521,7 @@ mActivity.runOnUiThread(new Runnable() {
 					});
 			
 			} catch (Exception e) {
-				System.out.println(e.toString());
+				
 				mActivity.runOnUiThread(new Runnable() {
 
 					@Override
@@ -658,7 +658,7 @@ mActivity.runOnUiThread(new Runnable() {
 		Yayalog.loger(pay_str);
 		if (isGreenAvilible()) {
 			try {
-				System.out.println(pay_str);
+				
 				Uri uri = Uri.parse(pay_str);
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
@@ -736,7 +736,7 @@ mActivity.runOnUiThread(new Runnable() {
 	
 	
 	public boolean parseScheme(String url) {
-		System.out.println("parseScheme的url："+url);
+	
 		
 	    if (url.contains("platformapi/startApp")||url.contains("platformapi/startapp")) {
 	        return true;

@@ -58,7 +58,7 @@ public class BaseLogin_Activity extends Activity {
 		Intent intent = this.getIntent();
 		type = intent.getIntExtra("type", 0);
 
-		System.out.println(type);
+		//System.out.println(type);
 		switch (type) {
 		case ViewConstants.STARTANIMATION:
 			mBaseview = new Startanim_jf(this);

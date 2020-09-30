@@ -146,7 +146,7 @@ public class UserDao {
 
 						Object[] bindArgs = { CryptoUtil.encryptBASE64(name),
 								CryptoUtil.encryptBASE64(password), new Date() };
-						System.out.println(sql + bindArgs[2]);
+						//System.out.println(sql + bindArgs[2]);
 						database.execSQL(sql, bindArgs);
 
 					} else {
@@ -228,7 +228,7 @@ public class UserDao {
 
 						Object[] bindArgs = { CryptoUtil.encryptBASE64(name),
 								CryptoUtil.encryptBASE64(password), new Date() };
-						System.out.println(sql + bindArgs[2]);
+					//	System.out.println(sql + bindArgs[2]);
 						database.execSQL(sql, bindArgs);
 
 					} else {

@@ -420,12 +420,12 @@ public class LogoWindow1 {
 			x = Integer.parseInt(field.get(obj).toString());
 			int dimensionPixelSize = macActivity.getResources()
 					.getDimensionPixelSize(x);
-			System.out.println("状态栏高度" + dimensionPixelSize);
+			Yayalog.loger("状态栏高度" + dimensionPixelSize);
 			return dimensionPixelSize;
 		} catch (Exception e1) {
 			// Log.d(TAG, "get status bar height fail");
 			// e1.printStackTrace();
-			System.out.println("获取状态栏高度失败");
+			Yayalog.loger("获取状态栏高度失败");
 			return 75;
 		}
 	}

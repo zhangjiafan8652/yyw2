@@ -217,7 +217,7 @@ public class Weibologin_jf extends BaseView implements KgameSdkUserCallback {
 					
 					User mUser = new User(username, new BigInteger(uid), token,
 							1, "", 0 + money);
-					System.out.println(mUser.toString());
+					//System.out.println(mUser.toString());
 					// 将用户信息保存到全局变量
 					AgentApp.mUser = mUser;
 

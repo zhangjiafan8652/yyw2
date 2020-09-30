@@ -228,8 +228,19 @@ public class Exit_dialog extends Basedialogview {
          "</html>";
 
 	private void initlogic() {
+		textlog="测试顺序：打开游戏，登陆，支付，按home键回到手机桌面，再点开游戏，点击小助手，点击切换账号，用新账号登陆，最后按返回键，把检查结果截图和游戏包一起提交给我们。<hr/> "+"\r\n";
+		 
 		if (YYcontants.ISDEBUG) {
-			String localtestlog =Sputils.getSPstring(getPackageName(mContext), "", mContext);
+			
+			String localtestlog ="";
+			for (String key  : GameApitest.mTestdatas.keySet()) {
+				
+				Yayalog.loger("key::::::::"+key+"         value:"+ GameApitest.mTestdatas.get(key));
+				localtestlog=localtestlog+""+"key::"+key+"  value:"+ GameApitest.mTestdatas.get(key);
+				
+			}
+			
+			//String localtestlog =Sputils.getSPstring(getPackageName(mContext), "", mContext);
 			textlog=textlog+" 测试结果 （窗口可下滑）<hr/>"+"\r\n";
 			if (localtestlog.contains("YYApplicationoncreate="+Util.getPackageName(mActivity))) {
 				textlog=textlog+"Application="+Util.getPackageName(mActivity)+": 接口测试通过<hr/> "+" \r\n";
@@ -294,13 +305,29 @@ public class Exit_dialog extends Basedialogview {
 			}else {
 				textlog=textlog+"logout: 接口测试不通过（非必要接口。游戏内自己的切换账号按钮，如果游戏内没有，则无需接入） <hr/> "+"\r\n";
 			}
-			if (localtestlog.contains("setData")) {
-				textlog=textlog+"玩家数据: "+YYWMain.mRole.toString();
+//			if (localtestlog.contains("setData")) {
+//				textlog=textlog+"玩家数据: "+YYWMain.mRole.toString();
+//			}else {
+//				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口） <hr/> "+"\r\n";
+//			}
+			
+			if (localtestlog.contains("roleinfo1")) {
+				textlog=textlog+"玩家数据1: "+GameApitest.mTestdatas.get("roleinfo1")+" <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"玩家数据: 接口测试不通过（请检查是否接入玩家数据接口） <hr/> "+"\r\n";
+				textlog=textlog+"角色登陆数据: 接口测试不通过（请检查是否调用setdata中ext=1的接口） <hr/> "+"\r\n";
 			}
-			textlog=textlog+localtestlog;
-		//	mTextView.setText(textlog);
+			if (localtestlog.contains("roleinfo2")) {
+				textlog=textlog+"玩家数据2: "+GameApitest.mTestdatas.get("roleinfo2")+" <hr/> "+"\r\n";
+			}else {
+				textlog=textlog+"角色创建数据: 接口测试不通过（请检查是否调用setdata中ext=2的接口） <hr/> "+"\r\n";
+			}
+			if (localtestlog.contains("roleinfo3")) {
+				textlog=textlog+"玩家数据3: "+GameApitest.mTestdatas.get("roleinfo3")+" <hr/> "+"\r\n";
+			}else {
+				textlog=textlog+"角色升级数据: 接口测试不通过（请检查是否调用setdata中ext=3的接口） <hr/> "+"\r\n";
+			}
+			//textlog=textlog+localtestlog;
+		
 			WebSettings settings = lv_helpcontent.getSettings();
 			settings.setSupportZoom(true); // 支持缩放
 			settings.setBuiltInZoomControls(false); // 启用内置缩放装置
@@ -310,7 +337,7 @@ public class Exit_dialog extends Basedialogview {
 			settings.setDefaultTextEncodingName("utf-8"); //设置文本编码
 			Yayalog.loger("ni..."+html);
 			String zuizhongneirong=standard.replace("neirong", textlog);
-			System.out.println(zuizhongneirong);
+			//System.out.println(zuizhongneirong);
 			//lv_helpcontent.loadData(Html.fromHtml(zuizhongneirong).toString(), "text/html; charset=UTF-8", null);
 			lv_helpcontent.loadDataWithBaseURL(null, zuizhongneirong, "text/html","UTF-8", null);
 		}else {

@@ -55,15 +55,7 @@ public class LoginImpl implements YYWLoginer {
 			                    YYWMain.mUserCallBack.onLoginSuccess(yywUser, "success");
 			                    Handle.login_handler(paramActivity, yywUser.uid,  yywUser.userName);
 			                    
-			                    paramActivity.runOnUiThread(new Runnable() {
-									
-									@Override
-									public void run() {
-										// TODO Auto-generated method stub
-									
-										new JFnewnoticeUtils().getNotice(paramActivity);
-									}
-								});
+			                  
 				                
 			                }
 			            }

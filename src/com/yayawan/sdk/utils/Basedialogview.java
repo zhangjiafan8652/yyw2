@@ -112,7 +112,7 @@ public abstract class Basedialogview extends Basexml {
 
 	public void onLogout() {
 		if (mUserCallback != null) {
-			System.out.println("我调用了logout方法");
+			
 			mUserCallback.onLogout();
 		}
 		mUserCallback = null;

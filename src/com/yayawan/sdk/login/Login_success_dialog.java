@@ -250,7 +250,7 @@ public class Login_success_dialog extends Basedialogview {
 			public void onClick(View v) {
 
 				//YayaWan.stop(ViewConstants.mMainActivity);
-				System.out.println("点击这里了");
+				//System.out.println("点击这里了");
 				
 				AgentApp.mUser = null;
 				dialogDismiss();

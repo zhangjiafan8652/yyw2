@@ -70,7 +70,7 @@ public class GameApi {
 			@Override
 			public void onLoginSuccess(YYWUser user, Object arg1) {
 				// TODO Auto-generated method stub
-				System.out.println("登陆成功");
+				//System.out.println("登陆成功");
 				JSONObject userjson = new JSONObject();
 				try {
 					

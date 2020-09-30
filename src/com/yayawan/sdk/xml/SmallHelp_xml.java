@@ -69,6 +69,8 @@ public class SmallHelp_xml extends Basexml implements Layoutxml {
 		}else {
 			 with = -1;
 			 height = 1344;
+			 
+			// height = 1644;
 		}
 		// 基类布局
 		baseLinearLayout = new RelativeLayout(mContext);
