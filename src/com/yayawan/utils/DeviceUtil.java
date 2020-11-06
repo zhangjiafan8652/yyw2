@@ -113,7 +113,7 @@ public class DeviceUtil {
 		}
 		//return dataInfo.getString(YAYAWAN_ORIENTATION);
 	}
-
+	
 	/**
 	 * 获取支付方式 初始化链接网络时候获取了支付方式列表
 	 * 
@@ -203,6 +203,22 @@ public class DeviceUtil {
 		
 		
 	}
+	
+	/**
+	 * 获取是否取消自动登陆信息
+	 * 
+	 * @param paramContext
+	 * @return
+	 */
+	public static boolean getIsAutoLogin(Context paramContext) {
+		
+		Bundle dataInfo = getMetaDataInfo(paramContext);
+		
+		return dataInfo.getBoolean("isautologin",true);
+	
+		
+	}
+	
 	
 	/**
 	 * 获取非必须参数

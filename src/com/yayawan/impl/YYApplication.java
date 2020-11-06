@@ -32,6 +32,7 @@ public class YYApplication extends YYWApplication {
 		super.onCreate();
 		
 		YYcontants.ISDEBUG=DeviceUtil.isDebug(this);
+		
 		CrashHandler.getInstance().init(this);
 		//初始化千骐千果sdk
 				

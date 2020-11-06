@@ -319,12 +319,12 @@ public class Exit_dialog extends Basedialogview {
 			if (localtestlog.contains("roleinfo2")) {
 				textlog=textlog+"玩家数据2: "+GameApitest.mTestdatas.get("roleinfo2")+" <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"角色创建数据: 接口测试不通过（请检查是否调用setdata中ext=2的接口） <hr/> "+"\r\n";
+				textlog=textlog+"角色创建数据: 接口测试不通过（请确定已经创建角色 或者 检查是否调用setdata中ext=2的接口） <hr/> "+"\r\n";
 			}
 			if (localtestlog.contains("roleinfo3")) {
 				textlog=textlog+"玩家数据3: "+GameApitest.mTestdatas.get("roleinfo3")+" <hr/> "+"\r\n";
 			}else {
-				textlog=textlog+"角色升级数据: 接口测试不通过（请检查是否调用setdata中ext=3的接口） <hr/> "+"\r\n";
+				textlog=textlog+"角色升级数据: 接口测试不通过（请确定角色是否升级 或 检查是否调用setdata中ext=3的接口） <hr/> "+"\r\n";
 			}
 			//textlog=textlog+localtestlog;
 		

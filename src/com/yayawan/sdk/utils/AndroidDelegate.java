@@ -16,15 +16,28 @@ import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 
+import com.lidroid.jxutils.HttpUtils;
+import com.lidroid.jxutils.exception.HttpException;
+import com.lidroid.jxutils.http.RequestParams;
+import com.lidroid.jxutils.http.ResponseInfo;
+import com.lidroid.jxutils.http.callback.RequestCallBack;
+import com.lidroid.jxutils.http.client.HttpRequest.HttpMethod;
+import com.yayawan.common.CommonData;
+import com.yayawan.main.YYWMain;
+import com.yayawan.sdk.bean.PayMethod;
 import com.yayawan.sdk.login.SmallHelpActivity;
+import com.yayawan.utils.DeviceUtil;
+import com.yayawan.utils.MD5;
 import com.yayawan.utils.ViewConstants;
 import com.yayawan.utils.Yayalog;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,8 +46,8 @@ import java.util.List;
 
 public class AndroidDelegate {
    
-    private SmallHelpActivity mActivity;
-    public AndroidDelegate (SmallHelpActivity mactivity){
+    private Activity mActivity;
+    public AndroidDelegate (Activity mactivity){
         mActivity=mactivity;
     }
    
@@ -85,6 +98,67 @@ public class AndroidDelegate {
     }
     //window.androidDelegate.ClickImg(this.url);
  
+    @JavascriptInterface
+    public String getGameInfo(String key){
+    	
+    	return DeviceUtil.getGameInfo(mActivity,key);
+    }
+    
+    @JavascriptInterface
+    public String getAppid(){
+    	
+    	return  DeviceUtil.getAppid(mActivity);
+    }
+    
+    @JavascriptInterface
+    public String getUid(){
+    	
+    	return  YYWMain.mUser.uid;
+    }
+    
+    @JavascriptInterface
+    public String getToken(){
+    	
+    	return  YYWMain.mUser.token;
+    }
+    
+    @JavascriptInterface
+    public String httpPost(String url,String parm){
+        Yayalog.loger("qq号:"+url+"...parm:"+parm);
+
+        
+        JSONObject mjson=  new JSONObject(parm);
+        Iterator<String> keys = mjson.keys();
+
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams requestParams = new RequestParams();
+        
+        while (keys.hasNext()) {  
+        	String str = keys.next(); 
+        	requestParams.addBodyParameter(str,mjson.getString(str));
+        	//System.out.println(str);  
+        } 
+      
+        
+		
+
+	
+		httpUtils.send(HttpMethod.POST, url,requestParams, new RequestCallBack<String>() {
+
+			@Override
+			public void onFailure(HttpException arg0, String result) {
+				// TODO Auto-generated method stub
+				
+				YYWMain.mPayCallBack.onPayFailed("1", "");
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> result) {
+				// TODO Auto-generated method stub
+			}
+
+        return  "";
+    }
 
    
 

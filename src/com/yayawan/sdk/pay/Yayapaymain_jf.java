@@ -38,6 +38,7 @@ import com.yayawan.sdk.login.BaseView;
 import com.yayawan.sdk.main.AgentApp;
 import com.yayawan.sdk.main.DgameSdk;
 import com.yayawan.sdk.pay.xml.Yayapay_mainxml_po;
+import com.yayawan.sdk.pay.xml.Yayapay_mainxml_po;
 import com.yayawan.sdk.utils.ToastUtil;
 import com.yayawan.sdk.utils.Utilsjf;
 import com.yayawan.sdk.utils.Utilsjf.PayQuesionCallBack;
@@ -65,11 +66,6 @@ public class Yayapaymain_jf extends BaseView {
 	private TextView tv_mHelp;
 	private LinearLayout ll_mPre;
 	private RelativeLayout rl_mlDaijinjuan;
-	
-
-
-
-	
 
 	public Yayapaymain_jf(Activity mContext) {
 		super(mContext);

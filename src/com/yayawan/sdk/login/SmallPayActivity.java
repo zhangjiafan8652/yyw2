@@ -37,7 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class SmallHelpActivity extends Activity{
+public class SmallPayActivity extends Activity{
 
 	
 	private LinearLayout rl_mLoading;
@@ -177,30 +177,10 @@ public class SmallHelpActivity extends Activity{
 			break;
 		}
 		
-		if (DgameSdk.sdktype==1) {
-			if (CommonData.isqianqi) {
-				url=url+"&nocompayinfo=1";
-			}else {
-				//千果第二个空白sdk
-				String gameInfo = DeviceUtil.getGameInfo(mActivity, "qianguosdktype");
-				if (gameInfo.endsWith("1")) {
-					String qqhao=  Sputils.getSPstring("service_qq", "暂无", mActivity);
-					url=url+"&nocompayinfo=1&qianguoemptysdk=true&qq="+qqhao;
-					Yayalog.loger(url);
-				}else {
-					url=url+"&nocompayinfo=1";
-				}
-				
-			}
-			
-		}else {
 		
-		}
 		
-		if (DeviceUtil.getAppid(mActivity).endsWith("702666197")) {
-			url=url+"&testchat=1";
-		}
-		wv_mWeiboview.loadUrl(url);
+		wv_mWeiboview.loadUrl("file:///android_asset/sdkh5ui/pay/index.html");
+		//wv_mWeiboview.loadUrl(url);
 		//rl_mLoading.setVisibility(View.GONE);
 		Yayalog.loger(url);
 		

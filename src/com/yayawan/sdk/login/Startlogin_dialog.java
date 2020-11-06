@@ -34,6 +34,7 @@ import com.yayawan.sdk.xml.GetAssetsutils;
 import com.yayawan.sdk.xml.MachineFactory;
 
 
+import com.yayawan.utils.DeviceUtil;
 import com.yayawan.utils.Sputils;
 
 import com.yayawan.utils.ViewConstants;
@@ -187,6 +188,15 @@ public class Startlogin_dialog extends Basedialogview {
 			return;
 		}
 
+		//判断是否自动登陆
+		if (!DeviceUtil.getIsAutoLogin(mActivity)) {
+			startlogin();
+			Yayalog.loger("getIsAutoLoginstartlgin。"+DeviceUtil.getIsAutoLogin(mActivity));
+			return;
+		}else {
+			Yayalog.loger("getIsAutoLogin。");
+		}
+		
 		mNames = new ArrayList<String>();
 		initDBData();
 

@@ -53,6 +53,7 @@ import com.yayawan.sdk.db.UserDao;
 import com.yayawan.sdk.login.BaseLogin_Activity;
 import com.yayawan.sdk.login.Exit_dialog;
 import com.yayawan.sdk.login.SmallHelpActivity;
+import com.yayawan.sdk.login.SmallPayActivity;
 import com.yayawan.sdk.login.Startlogin_dialog;
 import com.yayawan.sdk.login.TipDialog;
 import com.yayawan.sdk.login.VerifyPlayInfo_ho_dialog;
@@ -593,7 +594,7 @@ public class DgameSdk {
 		requestParams.addBodyParameter("app_id", DeviceUtil.getAppid(activity));
 		requestParams.addBodyParameter("uid", YYWMain.mUser.uid);
 		requestParams.addBodyParameter("token", YYWMain.mUser.token);
-	
+		Yayalog.loger("url", ViewConstants.paytype);
 		Yayalog.loger("app_id", DeviceUtil.getAppid(activity));
 		Yayalog.loger("uid", YYWMain.mUser.uid);
 		Yayalog.loger("token", YYWMain.mUser.token);
@@ -655,9 +656,15 @@ public class DgameSdk {
 					
 						
 					}
-					intent = new Intent(activity, BaseLogin_Activity.class);
+//					intent = new Intent(activity, BaseLogin_Activity.class);
+//					intent.putExtra("type", ViewConstants.YAYAPAYMAIN);
+//					activity.startActivity(intent);
+					
+					
+					intent = new Intent(activity, SmallPayActivity.class);
 					intent.putExtra("type", ViewConstants.YAYAPAYMAIN);
 					activity.startActivity(intent);
+					
 					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

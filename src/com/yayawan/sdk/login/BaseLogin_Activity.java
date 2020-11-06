@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import com.yayawan.sdk.pay.Payment_jf;
 import com.yayawan.sdk.pay.Yayapaymain_jf;
+import com.yayawan.sdk.pay.Yayapaymain_jf;
 import com.yayawan.sdk.pay.Yinlian;
 
 import com.yayawan.utils.DeviceUtil;
